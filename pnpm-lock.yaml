@@ -221,9 +221,6 @@ importers:
       vaul:
         specifier: ^1.1.2
         version: 1.1.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      vite-plugin-alias:
-        specifier: ^0.1.1
-        version: 0.1.1(eslint@8.57.0)(typescript@5.5.4)
       zod:
         specifier: ^3.24.4
         version: 3.24.4
@@ -5470,9 +5467,6 @@ packages:
     resolution: {integrity: sha512-LdsW4pxj0Ot69FAoXZ1yTnA9bjGohr2yNBU7QKRxpz8ITSkhuDl6h3zS/tvgz4qrNjeRnvrWeXQ8ZF7Um4W00Q==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
-
-  vite-plugin-alias@0.1.1:
-    resolution: {integrity: sha512-AKbpfif8wkBo1pLHlv+nRKbxWZ+9AOLIztxJclgF6AUI3W7B7pHYiHFbb1rZmHOeZQ5+lsDYinMc/QNVNy7Jpw==}
 
   vite@4.4.9:
     resolution: {integrity: sha512-2mbUn2LlUmNASWwSCNSJ/EG2HuSRTnVNaydp6vMCm5VIqJsjMfbIWtbH2kDuwUVW5mMUKKZvGPX/rqeqVvv1XA==}
@@ -11089,19 +11083,6 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-alias@0.1.1(eslint@8.57.0)(typescript@5.5.4):
-    dependencies:
-      '@antfu/eslint-config': 0.43.1(eslint@8.57.0)(typescript@5.5.4)
-      chokidar: 3.6.0
-      comment-json: 4.2.5
-      consola: 3.2.3
-      fast-glob: 3.3.2
-      unbuild: 2.0.0(typescript@5.5.4)
-      vite: 4.4.9
-    transitivePeerDependencies:
-      - '@types/node'
-      - eslint
-      - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
       - jest
       - less
