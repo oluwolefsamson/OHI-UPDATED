@@ -28,8 +28,19 @@ function Home() {
   const hero = config.hero ?? landingPageDefaults.hero;
   const about = config.about ?? landingPageDefaults.about;
   const gallery = config.gallery ?? landingPageDefaults.gallery;
-  const heroImages = hero.images ?? landingPageDefaults.hero.images;
   const heroSlides = hero.slides ?? landingPageDefaults.hero.slides;
+  const defaultHeroImages = {
+    hero1: landingPageDefaults.hero.slides[0]?.image,
+    hero2: landingPageDefaults.hero.slides[1]?.image,
+    hero3: landingPageDefaults.hero.slides[2]?.image,
+    hero4: landingPageDefaults.hero.slides[3]?.image,
+    hero5: landingPageDefaults.hero.slides[4]?.image,
+  };
+  const heroImages = {
+    ...defaultHeroImages,
+    ...(hero.images ?? {}),
+  };
+  const heroSlideFallbacks = landingPageDefaults.hero.slides.map((slide) => slide.image);
 
   const [activeSlide, setActiveSlide] = useState(0);
   const heroFrames = heroSlides;
@@ -120,7 +131,7 @@ function Home() {
         <div className="absolute inset-0">
           <FallbackImage
             src={currentSlide.image}
-            fallback={landingPageDefaults.hero.slides[0].image}
+            fallback={heroSlideFallbacks[0]}
             alt={currentSlide.title}
             className="h-full w-full object-cover opacity-50"
           />
@@ -427,7 +438,7 @@ function Home() {
                 <article className="flex h-full min-h-[460px] flex-col overflow-hidden bg-white shadow-[0_12px_24px_rgba(15,23,42,0.14)]">
                   <FallbackImage
                     src={story.image}
-                    fallback={landingPageDefaults.hero.images.hero1}
+                    fallback={heroSlideFallbacks[0]}
                     alt={story.name}
                     className="h-64 w-full object-cover sm:h-72 lg:h-80"
                   />
@@ -551,7 +562,7 @@ function Home() {
             <div className="relative h-[220px] overflow-hidden rounded-[10px] bg-black shadow-[0_16px_38px_rgba(0,0,0,0.4)]">
               <FallbackImage
                 src={heroImages.hero2}
-                fallback={landingPageDefaults.hero.images.hero2}
+                fallback={heroSlideFallbacks[1]}
                 alt="OHI video preview"
                 className="h-full w-full object-cover opacity-95"
               />
