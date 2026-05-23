@@ -48,12 +48,10 @@ export default function ContactForm() {
 
   return (
     <section className="relative overflow-hidden px-6 py-16 text-foreground lg:px-8 lg:py-20">
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,#fffaf0_0%,#fcf6ea_28%,#f7f0e2_100%)]" />
-
       <div className="container mx-auto">
         <div className="grid items-stretch gap-8 lg:grid-cols-[0.92fr_1.08fr]">
-          <Card className="overflow-hidden border-[#e8dcc8] bg-white shadow-[0_28px_80px_rgba(15,23,42,0.12)]">
-            <div className="relative min-h-[520px] bg-slate-950">
+          <Card className="overflow-hidden border-[#e8dcc8] bg-white shadow-[0_28px_80px_rgba(15,23,42,0.12)] lg:min-h-[720px]">
+            <div className="relative h-full min-h-[520px] bg-slate-950 lg:min-h-[720px]">
               {!imageLoaded && (
                 <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-muted via-muted/60 to-muted" />
               )}
@@ -61,7 +59,7 @@ export default function ContactForm() {
                 src={contactFormImg}
                 alt="Contact OHI social media illustration"
                 onLoad={() => setImageLoaded(true)}
-                className={`h-full min-h-[520px] w-full object-cover transition-opacity duration-300 ${
+                className={`h-full min-h-[520px] w-full object-cover transition-opacity duration-300 lg:min-h-[720px] ${
                   imageLoaded ? "opacity-100" : "opacity-0"
                 }`}
               />
@@ -69,7 +67,7 @@ export default function ContactForm() {
             </div>
           </Card>
 
-          <Card className="border-[#e8dcc8] bg-white shadow-[0_28px_80px_rgba(15,23,42,0.12)]">
+          <Card className="border-[#e8dcc8] bg-white shadow-[0_28px_80px_rgba(15,23,42,0.12)] lg:min-h-[640px]">
             <CardHeader className="space-y-3 border-b border-[#e8dcc8]/80 pb-6">
               <div className="space-y-2">
                 <CardTitle className="font-display text-3xl font-semibold tracking-[-0.03em] text-[#173145]">

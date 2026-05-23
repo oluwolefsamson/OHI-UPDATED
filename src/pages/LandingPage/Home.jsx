@@ -197,14 +197,14 @@ function Home() {
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {cardItems.map((item) => (
               <Reveal key={item.title}>
-                <article className="overflow-hidden bg-white shadow-[0_12px_26px_rgba(15,23,42,0.14)]">
-                  <img src={item.image} alt={item.title} className="h-32 w-full object-cover" />
-                  <div className="p-3">
+                <article className="flex h-full min-h-[420px] flex-col overflow-hidden bg-white shadow-[0_12px_26px_rgba(15,23,42,0.14)]">
+                  <img src={item.image} alt={item.title} className="h-56 w-full object-cover" />
+                  <div className="flex flex-1 flex-col p-4">
                     <h3 className="text-sm font-medium text-[#2e3135]">{item.title}</h3>
-                    <p className="mt-2 text-xs leading-5 text-[#4e4e4e]">{item.description}</p>
+                    <p className="mt-3 text-xs leading-5 text-[#4e4e4e]">{item.description}</p>
                     <Link
                       to={item.href}
-                      className="mt-4 inline-flex text-xs font-semibold text-[#e97a2f] transition hover:text-[#c86216]"
+                      className="mt-auto inline-flex text-xs font-semibold text-[#e97a2f] transition hover:text-[#c86216]"
                     >
                       Learn More
                     </Link>
@@ -367,14 +367,14 @@ function Home() {
               },
             ].map((item) => (
               <Reveal key={item.title}>
-                <article className="overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_10px_24px_rgba(15,23,42,0.12)]">
-                  <img src={item.image} alt={item.title} className="h-36 w-full object-cover" />
-                  <div className="p-4">
+                <article className="flex h-full min-h-[460px] flex-col overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_10px_24px_rgba(15,23,42,0.12)]">
+                  <img src={item.image} alt={item.title} className="h-60 w-full object-cover" />
+                  <div className="flex flex-1 flex-col p-4">
                     <h3 className="text-sm font-bold leading-5 text-[#a75f1a]">{item.title}</h3>
                     <p className="mt-3 text-xs leading-5 text-[#54565a]">{item.description}</p>
                     <Link
                       to="/contact"
-                      className="mt-4 inline-flex h-7 items-center justify-center bg-[linear-gradient(180deg,#f58e1b_0%,#d76418_100%)] px-4 text-[11px] font-semibold text-white"
+                      className="mt-auto inline-flex h-7 items-center justify-center bg-[linear-gradient(180deg,#f58e1b_0%,#d76418_100%)] px-4 text-[11px] font-semibold text-white"
                     >
                       Learn More
                     </Link>
@@ -401,14 +401,18 @@ function Home() {
           <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {storytellers.map((story) => (
               <Reveal key={story.name}>
-                <article className="overflow-hidden bg-white shadow-[0_12px_24px_rgba(15,23,42,0.14)]">
-                  <img src={story.image} alt={story.name} className="h-28 w-full object-cover" />
-                  <div className="p-3">
+                <article className="flex h-full min-h-[460px] flex-col overflow-hidden bg-white shadow-[0_12px_24px_rgba(15,23,42,0.14)]">
+                  <img
+                    src={story.image}
+                    alt={story.name}
+                    className="h-64 w-full object-cover sm:h-72 lg:h-80"
+                  />
+                  <div className="flex flex-1 flex-col p-4">
                     <p className="text-[10px] uppercase tracking-[0.22em] text-[#b16a18]">
                       African storyteller
                     </p>
-                    <h3 className="mt-2 text-sm font-semibold text-[#2f3135]">{story.name}</h3>
-                    <p className="mt-1 text-[11px] text-[#7b7b7b]">{story.role}</p>
+                    <h3 className="mt-3 text-sm font-semibold text-[#2f3135]">{story.name}</h3>
+                    <p className="mt-2 text-[11px] text-[#7b7b7b]">{story.role}</p>
                   </div>
                 </article>
               </Reveal>

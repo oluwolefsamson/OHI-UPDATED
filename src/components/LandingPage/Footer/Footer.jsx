@@ -81,12 +81,27 @@ const Footer = () => {
 
             <div className="mt-5 space-y-4 text-sm leading-7 text-white/84">
               <p>
-                AFRICA HQ: Suite 9 Shema Office Complex, Ahmadu Bello Way, Jahi, Abuja.
+                Location: Mendong MAETUR - Yaounde, Cameroon.
               </p>
-              <p>USA: 440 #12 Logan Place Newport News, VA 23601</p>
               <p>
-                ART &amp; CRAFT VILLAGE: Suite A22, Plot No. 1519, Cadastral Zone A00,
-                Central Area, Abuja
+                Phone:{" "}
+                <a
+                  href="tel:+237671646331"
+                  className="font-semibold text-white transition hover:text-[#f6b14c]"
+                >
+                  (+237) 671 646 331
+                </a>
+              </p>
+              <p>
+                WhatsApp:{" "}
+                <a
+                  href="https://wa.me/237691377313"
+                  className="font-semibold text-white transition hover:text-[#f6b14c]"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  (+237) 691 377 313
+                </a>
               </p>
               <p>
                 Email:{" "}
@@ -98,12 +113,12 @@ const Footer = () => {
                 </a>
               </p>
               <p>
-                Tel:{" "}
+                Alternate Email:{" "}
                 <a
-                  href="tel:+2348181222333"
+                  href="mailto:fbanns1@gmail.com"
                   className="font-semibold text-white transition hover:text-[#f6b14c]"
                 >
-                  +234 818 122 23 33
+                  fbanns1@gmail.com
                 </a>
               </p>
             </div>

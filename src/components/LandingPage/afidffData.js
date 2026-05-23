@@ -1,3 +1,6 @@
+import profileHeroMountain from "../../assets/images/profile-hero-mountain.jpg";
+import gallery11 from "../../assets/images/Gallery/gallery-11.jpeg";
+
 export const publicMenuSections = [
   {
     label: "About",
@@ -12,7 +15,7 @@ export const publicMenuSections = [
   {
     label: "Programmes",
     href: "/services",
-    heroImage: "/src/assets/images/profile-hero-mountain.jpg",
+    heroImage: profileHeroMountain,
     items: [
       { label: "Services", href: "/services" },
       { label: "Approach", href: "/approach" },
@@ -22,7 +25,7 @@ export const publicMenuSections = [
   {
     label: "Documentaries",
     href: "/portfolio",
-    heroImage: "/src/assets/images/Gallery/gallery-11.jpeg",
+    heroImage: gallery11,
     items: [
       { label: "Documentaries", href: "/portfolio" },
       { label: "Who We Serve", href: "/who-we-serve" },

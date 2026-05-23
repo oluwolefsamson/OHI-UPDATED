@@ -21,7 +21,7 @@ export default function ProfilePageShell({
 }) {
   return (
     <>
-      <section className="hero__section pt-[18px]">
+      <section className="hero__section">
         <div
           className={`relative w-full overflow-hidden rounded-none ${
             heroVariant === "minimal"
@@ -38,7 +38,7 @@ export default function ProfilePageShell({
               />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,15,0.18)_0%,rgba(8,10,15,0.58)_56%,rgba(8,10,15,0.84)_100%)]" />
               <div className="absolute inset-x-0 top-0 h-2 bg-[#f59e0b]" />
-              <div className="relative container mx-auto min-h-[440px] px-4 pb-20 pt-28 sm:min-h-[500px] sm:px-5 lg:min-h-[540px] lg:px-20 lg:pb-28 lg:pt-32">
+              <div className="relative container mx-auto flex min-h-[440px] px-4 pb-20 pt-28 sm:min-h-[500px] sm:px-5 lg:min-h-[540px] lg:px-20 lg:pb-28 lg:pt-32">
                 <div className="grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-end">
                   <div className={`max-w-4xl ${heroContentClassName}`.trim()}>
                     <Reveal delay={0.04}>
@@ -119,7 +119,7 @@ export default function ProfilePageShell({
               <div className="absolute inset-x-0 top-0 h-2 bg-[#f59e0b]" />
 
               <div className="relative z-10 flex min-h-[460px] flex-col justify-center py-8 lg:min-h-[540px] lg:py-10">
-                <div className="container">
+                <div className="container h-full">
                   <div className="grid gap-8 lg:grid-cols-[1.06fr_0.94fr] lg:items-end">
                     <div className="max-w-2xl">
                     {eyebrow ? (
@@ -196,11 +196,11 @@ export default function ProfilePageShell({
         </div>
       </section>
 
-      <div className="bg-[linear-gradient(180deg,#fffaf0_0%,#fcf6ea_28%,#f7f0e2_100%)]">
+      {children ? (
         <div className="container mx-auto px-4 pb-20 pt-8 sm:px-5 lg:px-20">
           <div className="space-y-16">{children}</div>
         </div>
-      </div>
+      ) : null}
     </>
   );
 }

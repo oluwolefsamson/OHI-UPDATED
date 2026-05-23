@@ -2,20 +2,33 @@ import React from "react";
 import ProfilePageShell from "../../../components/LandingPage/Profile/ProfilePageShell";
 import SectionHeader from "../../../components/LandingPage/SectionHeader";
 import { Marquee } from "../../../components/LandingPage/magicui/marquee";
+import ifrcLogo from "../../../assets/img/International_Federation_of_Red_Cross_and_Red_Crescent_Societies_Logo.png";
+import corafLogo from "../../../assets/img/logo-coraf.png";
+import sunKingLogo from "../../../assets/img/Sun-King_New_Logo-02.png";
+import wfpLogo from "../../../assets/img/wfp-logo-extended-blue-en.png";
 
 const partnerLogos = [
-  { id: 1, name: "Partner 1", logo: "https://via.placeholder.com/150x80?text=Partner+1" },
-  { id: 2, name: "Partner 2", logo: "https://via.placeholder.com/150x80?text=Partner+2" },
-  { id: 3, name: "Partner 3", logo: "https://via.placeholder.com/150x80?text=Partner+3" },
-  { id: 4, name: "Partner 4", logo: "https://via.placeholder.com/150x80?text=Partner+4" },
-  { id: 5, name: "Partner 5", logo: "https://via.placeholder.com/150x80?text=Partner+5" },
-  { id: 6, name: "Partner 6", logo: "https://via.placeholder.com/150x80?text=Partner+6" },
+  { id: 1, name: "World Food Programme", logo: wfpLogo },
+  { id: 2, name: "Sun King", logo: sunKingLogo },
+  { id: 3, name: "CORAF", logo: corafLogo },
+  { id: 4, name: "IFRC", logo: ifrcLogo },
+  { id: 5, name: "WFP Extended", logo: wfpLogo },
+];
+
+const supportHighlights = [
+  "Institutional visibility",
+  "Shared storytelling goals",
+  "Long-term collaboration",
 ];
 
 const LogoCard = ({ logo, name }) => {
   return (
-    <div className="flex items-center justify-center w-48 h-24 rounded-lg border border-[#bb7422]/20 bg-white hover:bg-[#f5f1e8] transition">
-      <img src={logo} alt={name} className="max-w-[80%] max-h-[80%] object-contain" />
+    <div className="group flex h-28 w-56 items-center justify-center rounded-[26px] border border-[#ead9c0] bg-[linear-gradient(180deg,#fffdf8_0%,#fff6ea_100%)] px-6 shadow-[0_12px_30px_rgba(15,23,42,0.06)] transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(15,23,42,0.1)]">
+      <img
+        src={logo}
+        alt={name}
+        className="max-h-12 max-w-[80%] object-contain opacity-90 transition duration-300 group-hover:opacity-100"
+      />
     </div>
   );
 };
@@ -39,30 +52,53 @@ const OurPartnersPage = () => {
         </div>
       }
     >
-      <div className="space-y-12">
+      <div className="space-y-10">
         <SectionHeader
           title="Our Partners"
           description="OHI collaborates with a wide network of partners including international organizations, government agencies, and community groups."
         />
 
-        <div className="space-y-6">
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            These partnerships strengthen our ability to create sustainable impact and reach more communities.
-          </p>
+        <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="rounded-[28px] border border-[#ead9c0] bg-white p-6 shadow-[0_14px_34px_rgba(15,23,42,0.06)] sm:p-8">
+            <p className="font-body text-sm font-semibold uppercase tracking-[0.24em] text-[#b16a18]">
+              Why it works
+            </p>
+            <p className="font-display mt-3 text-2xl font-semibold tracking-[-0.03em] text-[#173145] sm:text-[30px]">
+              Partnerships give the work more reach, clarity, and durability.
+            </p>
+            <p className="font-body mt-4 text-base leading-7 text-[#4e5a67]">
+              These relationships help OHI deliver communication that is aligned with
+              institutional goals and grounded in real-world audiences.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {supportHighlights.map((item) => (
+                <span
+                  key={item}
+                  className="inline-flex items-center rounded-full border border-[#ead9c0] bg-[#fff8ef] px-3 py-1 text-xs font-semibold text-[#8b5a1e]"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
 
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Through strategic alliances and collaborative initiatives, we leverage combined resources and expertise to address complex challenges across the regions we serve.
-          </p>
+          <div className="rounded-[28px] bg-[linear-gradient(180deg,#091826_0%,#12243a_100%)] p-6 text-white shadow-[0_14px_34px_rgba(15,23,42,0.12)] sm:p-8">
+            <p className="font-body text-sm font-semibold uppercase tracking-[0.24em] text-[#fbbf24]">
+              Supporters
+            </p>
+            <p className="font-display mt-3 text-2xl font-semibold tracking-[-0.03em] sm:text-[30px]">
+              A visual system that feels more premium and intentional.
+            </p>
+            <p className="font-body mt-4 text-base leading-7 text-white/78">
+              The supporter strip now reads as a curated set of institutional badges
+              instead of a flat carousel.
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div className="w-screen relative left-[calc(-50vw+50%)] bg-[#f5f1e8] py-12 md:py-16 mt-8">
-        <div className="container mx-auto px-4 md:px-8">
-          <h3 className="text-center text-lg font-semibold uppercase tracking-[0.02em] text-[#2b313a] mb-8">
-            Our Supporters
-          </h3>
+        <div className="mt-2 overflow-hidden rounded-[32px] border border-[#ead9c0] bg-[linear-gradient(180deg,#fffdf8_0%,#fff6ea_100%)] p-4 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-6">
           <div className="relative flex w-full items-center justify-center overflow-hidden">
-            <Marquee pauseOnHover className="[--duration:30s]">
+            <Marquee pauseOnHover className="[--duration:28s]">
               {partnerLogos.map((partner) => (
                 <LogoCard key={partner.id} logo={partner.logo} name={partner.name} />
               ))}
