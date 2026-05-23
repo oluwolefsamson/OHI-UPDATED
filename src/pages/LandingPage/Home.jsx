@@ -7,6 +7,22 @@ import { Badge } from "../../components/ui/badge";
 import Reveal from "../../components/ui/reveal";
 import { Marquee } from "../../components/LandingPage/magicui/marquee";
 
+function FallbackImage({ src, fallback, alt, className, ...props }) {
+  return (
+    <img
+      src={src || fallback}
+      alt={alt}
+      className={className}
+      onError={(event) => {
+        if (event.currentTarget.src !== fallback) {
+          event.currentTarget.src = fallback;
+        }
+      }}
+      {...props}
+    />
+  );
+}
+
 function Home() {
   const { config } = useLandingPageConfig();
   const hero = config.hero ?? landingPageDefaults.hero;
@@ -102,8 +118,9 @@ function Home() {
     <div className="overflow-hidden bg-[linear-gradient(180deg,#fffaf0_0%,#fcf6ea_28%,#f7f0e2_100%)] text-[#173145]">
       <section className="relative min-h-[calc(100vh-140px)] overflow-hidden bg-[#091826] py-0 text-white">
         <div className="absolute inset-0">
-          <img
+          <FallbackImage
             src={currentSlide.image}
+            fallback={landingPageDefaults.hero.slides[0].image}
             alt={currentSlide.title}
             className="h-full w-full object-cover opacity-50"
           />
@@ -152,8 +169,9 @@ function Home() {
         <div className="container">
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <Reveal className="overflow-hidden rounded-[18px] bg-white shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
-              <img
+              <FallbackImage
                 src={about.image}
+                fallback={landingPageDefaults.about.image}
                 alt="OHI team"
                 className="h-[240px] w-full object-cover sm:h-[300px] lg:h-[260px]"
               />
@@ -198,7 +216,12 @@ function Home() {
             {cardItems.map((item) => (
               <Reveal key={item.title}>
                 <article className="flex h-full min-h-[420px] flex-col overflow-hidden bg-white shadow-[0_12px_26px_rgba(15,23,42,0.14)]">
-                  <img src={item.image} alt={item.title} className="h-56 w-full object-cover" />
+                  <FallbackImage
+                    src={item.image}
+                    fallback={landingPageDefaults.gallery.items?.[0]?.image}
+                    alt={item.title}
+                    className="h-56 w-full object-cover"
+                  />
                   <div className="flex flex-1 flex-col p-4">
                     <h3 className="text-sm font-medium text-[#2e3135]">{item.title}</h3>
                     <p className="mt-3 text-xs leading-5 text-[#4e4e4e]">{item.description}</p>
@@ -402,8 +425,9 @@ function Home() {
             {storytellers.map((story) => (
               <Reveal key={story.name}>
                 <article className="flex h-full min-h-[460px] flex-col overflow-hidden bg-white shadow-[0_12px_24px_rgba(15,23,42,0.14)]">
-                  <img
+                  <FallbackImage
                     src={story.image}
+                    fallback={landingPageDefaults.hero.images.hero1}
                     alt={story.name}
                     className="h-64 w-full object-cover sm:h-72 lg:h-80"
                   />
@@ -464,7 +488,12 @@ function Home() {
                   key={card.title}
                   className="w-[280px] overflow-hidden border border-[#ece7df] bg-white shadow-[0_10px_24px_rgba(15,23,42,0.08)]"
                 >
-                  <img src={card.image} alt={card.title} className="h-32 w-full object-cover" />
+                  <FallbackImage
+                    src={card.image}
+                    fallback={landingPageDefaults.gallery.items?.[0]?.image}
+                    alt={card.title}
+                    className="h-32 w-full object-cover"
+                  />
                   <div className="p-3">
                     <p className="text-[10px] uppercase tracking-[0.22em] text-[#9b9b9b]">
                       {card.date}
@@ -520,8 +549,9 @@ function Home() {
             </div>
 
             <div className="relative h-[220px] overflow-hidden rounded-[10px] bg-black shadow-[0_16px_38px_rgba(0,0,0,0.4)]">
-              <img
+              <FallbackImage
                 src={heroImages.hero2}
+                fallback={landingPageDefaults.hero.images.hero2}
                 alt="OHI video preview"
                 className="h-full w-full object-cover opacity-95"
               />
