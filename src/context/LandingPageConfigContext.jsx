@@ -61,6 +61,10 @@ function stripBundledAssetUrls(value) {
     return undefined;
   }
 
+  if (typeof value === "string" && (value.startsWith("/src/") || value.startsWith("src/"))) {
+    return undefined;
+  }
+
   return value;
 }
 
