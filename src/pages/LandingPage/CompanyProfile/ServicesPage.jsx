@@ -1,0 +1,232 @@
+import React from "react";
+import { ArrowRight, Film, Megaphone, VideoIcon } from "lucide-react";
+import { Link } from "react-router-dom";
+import serviceImage01 from "../../../assets/images/Gallery/gallery-01.jpeg";
+import serviceImage02 from "../../../assets/images/Gallery/gallery-02.jpeg";
+import serviceImage03 from "../../../assets/images/Gallery/gallery-03.jpeg";
+import serviceImage04 from "../../../assets/images/Gallery/gallery-04.jpeg";
+import serviceImage05 from "../../../assets/images/Gallery/gallery-05.jpeg";
+import serviceImage06 from "../../../assets/images/Gallery/gallery-06.jpeg";
+import serviceImage07 from "../../../assets/images/Gallery/gallery-07.jpeg";
+import serviceImage08 from "../../../assets/images/Gallery/gallery-08.jpeg";
+import heroBgImage from "../../../assets/images/hero-bg.png";
+import profileHeroMountain from "../../../assets/images/profile-hero-mountain.jpg";
+import { useLandingPageConfig } from "../../../context/LandingPageConfigContext";
+import ProfilePageShell from "../../../components/LandingPage/Profile/ProfilePageShell";
+import SectionHeader from "../../../components/LandingPage/SectionHeader";
+import Reveal from "../../../components/ui/reveal";
+
+const ServicesPage = () => {
+  const { config } = useLandingPageConfig();
+  const { services } = config;
+
+  const serviceFormats = [
+    "Investment & programme visibility",
+    "Impact documentaries",
+    "ESG & social impact storytelling",
+    "Development programme communication",
+    "Donor & investor reporting films",
+    "Multilingual field production",
+  ];
+
+  const serviceShowcase = [
+    {
+      title: "Impact Documentaries",
+      description:
+        "We produce high-quality documentaries that humanize data and reveal real impact on the ground. OHI films go beyond storytelling to build trust, credibility, and long-term confidence among institutions, partners, and communities.",
+      image: serviceImage01,
+    },
+    {
+      title: "Development Programme Communication",
+      description:
+        "OHI helps development programmes communicate their objectives, implementation, and results with clarity and authenticity. Our visuals strengthen transparency, accountability, and stakeholder alignment across the project lifecycle.",
+      image: serviceImage02,
+    },
+    {
+      title: "Investment & Programme Visibility",
+      description:
+        "We craft investor-focused films that present projects as credible, bankable, and scalable opportunities. By combining strategic messaging with compelling visuals, OHI helps unlock financing and accelerate decision-making.",
+      image: serviceImage03,
+    },
+    {
+      title: "ESG & Social Impact Storytelling",
+      description:
+        "Our content amplifies community voice and local ownership, ensuring projects are seen through the lens of those they serve. OHI storytelling builds legitimacy, social buy-in, and sustainable impact.",
+      image: serviceImage04,
+    },
+    {
+      title: "Donor & Investor Reporting Films",
+      description:
+        "We capture authentic testimonials that turn communities and project participants into powerful advocates for your work. Each story is handled ethically, with dignity, and aligned with broader impact and investment narratives.",
+      image: serviceImage05,
+    },
+    {
+      title: "Multilingual Field Production",
+      description:
+        "OHI produces concise, evidence-driven reporting films that communicate results, learning, and accountability. These films support partner relations, renewal, and long-term partnerships.",
+      image: serviceImage06,
+    },
+    {
+      title: "Event & Mission Coverage",
+      description:
+        "From high-level forums to field missions, we document moments that matter with professional and strategic intent. OHI ensures your engagements translate into lasting communication value.",
+      image: serviceImage07,
+    },
+    {
+      title: "Social Media & Digital Campaigns",
+      description:
+        "We design digital-first content that extends the life and reach of your projects beyond the field. OHI campaigns are tailored to engage policymakers, investors, and communities across platforms.",
+      image: serviceImage08,
+    },
+  ];
+
+  return (
+    <ProfilePageShell
+      title="Services"
+      heroImage={profileHeroMountain}
+      heroImageAlt="OHI programmes hero"
+      description="OHI creates development communication that helps institutions, partners, and communities understand the work being done, why it matters, and why it deserves attention from capital and policy actors."
+      descriptionClassName="text-white"
+      primaryCta={{ label: "View Portfolio", href: "/portfolio" }}
+      secondaryCta={{ label: "Contact Us", href: "/contact" }}
+      heroBadge={
+        <div className="space-y-1">
+          <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
+            OHI profile
+          </p>
+          <p className="font-body text-sm leading-6 text-white/80">
+            Strategic visibility for development, investment, and impact communication.
+          </p>
+        </div>
+      }
+      statCards={[
+        { eyebrow: "Projects", value: "100+", label: "Projects delivered" },
+        { eyebrow: "Clients", value: "70+", label: "Institutional clients" },
+        { eyebrow: "Retention", value: "95%", label: "Repeat-client rate" },
+      ]}
+    >
+      <section className="rounded-[36px] bg-[#fffaf5] p-4 sm:p-6">
+        <SectionHeader
+          title="Core services"
+          description="The company profile describes OHI as a partner for institutions that need clear, credible, and investment-grade storytelling."
+        />
+        <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {services.cards.map((card, index) => (
+            <Reveal key={card.name} delay={0.04 + index * 0.04}>
+              <article className="rounded-[28px] border border-[#e8dcc8] bg-white p-6 shadow-[0_12px_28px_rgba(15,23,42,0.06)] transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(201,107,23,0.1)]">
+                <div
+                  className="h-2 w-20 rounded-full"
+                  style={{ backgroundColor: card.textColor }}
+                />
+                <h3 className="font-display mt-5 text-2xl font-semibold text-[#173145]">{card.name}</h3>
+                <p className="font-body mt-4 text-base leading-7 text-[#4e5a67]">{card.desc}</p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section
+        className="mt-12 relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-cover bg-center bg-no-repeat py-8 sm:py-10 lg:py-12"
+        style={{ backgroundImage: `url(${heroBgImage})` }}
+      >
+        <div className="container grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="rounded-[28px] border border-[#e8dcc8] bg-white/88 p-6 text-[#173145] shadow-[0_12px_30px_rgba(15,23,42,0.08)] backdrop-blur-sm">
+            <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-[#b16a18]">
+              Communication formats
+            </p>
+            <h3 className="font-display mt-4 text-3xl font-semibold tracking-[-0.03em]">Visual formats built for clarity</h3>
+            <p className="font-body mt-4 leading-7 text-[#4e5a67]">
+              Each format is chosen to match the communication objective, whether the goal is public awareness, stakeholder trust, donor reporting, or investor confidence.
+            </p>
+            <div className="mt-6 space-y-3">
+              {serviceFormats.map((item, index) => (
+                <Reveal key={item} delay={0.05 + index * 0.03}>
+                  <div className="flex items-center gap-3 rounded-2xl bg-[#fff8ef] px-4 py-3 transition duration-300 ease-out hover:bg-white">
+                  <VideoIcon className="h-4 w-4 text-[#b16a18]" />
+                  <span className="font-body text-sm font-medium text-[#173145]">{item}</span>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-[28px] border border-[#e8dcc8] bg-white/88 p-6 text-[#173145] shadow-[0_12px_30px_rgba(15,23,42,0.08)] backdrop-blur-sm">
+            <div className="flex items-center gap-3">
+              <Megaphone className="h-5 w-5 text-[#b16a18]" />
+              <h3 className="font-display text-2xl font-semibold tracking-[-0.03em]">How the work travels</h3>
+            </div>
+            <p className="font-body mt-4 text-base leading-7 text-[#4e5a67]">
+              OHI frames each format as a communication asset, not just a video. The result is content that can be used across reports, websites, social channels, presentations, and stakeholder engagement.
+            </p>
+            <div className="mt-6 rounded-[24px] bg-[#fff8ef] p-5">
+              <div className="flex items-center gap-3">
+                <Film className="h-5 w-5 text-[#b16a18]" />
+                <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-[#b16a18]">
+                  Delivery approach
+                </p>
+              </div>
+              <p className="font-body mt-3 text-sm leading-6 text-[#4e5a67]">
+                Strategic, polished, and grounded in the realities of development work across the continent.
+              </p>
+            </div>
+            <div className="mt-6">
+              <Link to="/who-we-serve">
+                <button className="btn inline-flex items-center gap-2">
+                  See sectors <ArrowRight className="h-4 w-4" />
+                </button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-16 rounded-[36px] bg-[linear-gradient(180deg,#eef6fb_0%,#e3eff8_28%,#d8e8f5_100%)] px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeader
+            title="Formats in practice"
+            description="A closer look at how OHI adapts each format to the communication objective, audience, and sector."
+          />
+
+          <div className="mt-10 space-y-5">
+            {serviceShowcase.map((item, index) => (
+              <Reveal key={item.title} delay={0.06 + index * 0.05}>
+                <article className="overflow-hidden rounded-[24px] border border-[#e8dcc8] bg-white shadow-[0_12px_30px_rgba(15,23,42,0.08)] transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(201,107,23,0.1)]">
+                  <div className="grid items-stretch md:grid-cols-2">
+                    <div
+                      className={`relative min-h-[220px] md:min-h-[200px] ${
+                        index % 2 === 1 ? "md:order-2" : ""
+                      }`}
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="h-full w-full object-cover transition duration-500 ease-out"
+                      />
+                    </div>
+                    <div
+                      className={`flex items-center p-6 sm:p-8 ${
+                        index % 2 === 1 ? "md:order-1" : ""
+                      }`}
+                    >
+                      <div className="max-w-xl">
+                        <h3 className="font-display text-2xl font-semibold tracking-[-0.02em] text-[#b16a18]">
+                          {item.title}
+                        </h3>
+                        <p className="font-body mt-3 text-sm leading-7 text-[#4e5a67] sm:text-[15px]">
+                          {item.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+    </ProfilePageShell>
+  );
+};
+
+export default ServicesPage;

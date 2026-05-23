@@ -1,0 +1,221 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Play,
+  Twitter,
+  Youtube,
+} from "lucide-react";
+import Logo from "../Logo/logo.jsx";
+import { partnerCountryNames } from "../afidffData";
+import corafLogo from "../../../assets/img/logo-coraf.png";
+import footerVideoThumb from "../../../assets/images/Gallery/gallery-11.jpeg";
+
+const quickLinks = [
+  { label: "Membership", href: "/about" },
+  { label: "Ongoing Projects", href: "/services" },
+  { label: "Resources", href: "/company-profile" },
+  { label: "SEI", href: "/impact" },
+  { label: "Download Brochure", href: "/company-profile" },
+  { label: "Webmail", href: "mailto:contact@olympianhouseintl.com" },
+  { label: "Gallery", href: "/portfolio" },
+  { label: "Privacy Policy", href: "/contact" },
+  { label: "SUKUR Heritage Site", href: "/who-we-serve" },
+  { label: "Become A Volunteer", href: "/contact" },
+  { label: "Opportunities", href: "/impact" },
+];
+
+const socialLinks = [
+  { label: "Facebook", icon: Facebook, href: "https://facebook.com" },
+  { label: "Instagram", icon: Instagram, href: "https://instagram.com" },
+  { label: "Twitter", icon: Twitter, href: "https://x.com" },
+  { label: "LinkedIn", icon: Linkedin, href: "https://linkedin.com" },
+  { label: "YouTube", icon: Youtube, href: "https://youtube.com" },
+];
+
+const partnerCountryTiles = [
+  ["NG", "bg-[#0b8f3a]"],
+  ["CM", "bg-[#0f7abf]"],
+  ["KE", "bg-[#111827]"],
+  ["GH", "bg-[#ef4444]"],
+  ["US", "bg-[#1d4ed8]"],
+  ["BI", "bg-[#d97706]"],
+  ["UG", "bg-[#ef4444]"],
+  ["RW", "bg-[#0ea5e9]"],
+];
+
+function ExternalLink({ href, children, className }) {
+  const external = href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("tel:");
+
+  if (external) {
+    return (
+      <a
+        href={href}
+        className={className}
+        target={href.startsWith("http") ? "_blank" : undefined}
+        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <Link to={href} className={className}>
+      {children}
+    </Link>
+  );
+}
+
+const Footer = () => {
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="border-t border-[#b96d1d] bg-[#141211] text-white">
+      <div className="container py-14">
+        <div className="grid gap-10 lg:grid-cols-[1fr_0.8fr_0.95fr_0.95fr]">
+          <div className="max-w-sm">
+            <Logo className="h-11 brightness-0 invert" />
+
+            <div className="mt-5 space-y-4 text-sm leading-7 text-white/84">
+              <p>
+                AFRICA HQ: Suite 9 Shema Office Complex, Ahmadu Bello Way, Jahi, Abuja.
+              </p>
+              <p>USA: 440 #12 Logan Place Newport News, VA 23601</p>
+              <p>
+                ART &amp; CRAFT VILLAGE: Suite A22, Plot No. 1519, Cadastral Zone A00,
+                Central Area, Abuja
+              </p>
+              <p>
+                Email:{" "}
+                <a
+                  href="mailto:contact@olympianhouseintl.com"
+                  className="font-semibold text-white transition hover:text-[#f6b14c]"
+                >
+                  contact@olympianhouseintl.com
+                </a>
+              </p>
+              <p>
+                Tel:{" "}
+                <a
+                  href="tel:+2348181222333"
+                  className="font-semibold text-white transition hover:text-[#f6b14c]"
+                >
+                  +234 818 122 23 33
+                </a>
+              </p>
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center gap-4">
+              {socialLinks.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <ExternalLink
+                    key={item.label}
+                    href={item.href}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full text-[#3d8de3] transition hover:text-white"
+                  >
+                    <Icon className="h-5 w-5" />
+                  </ExternalLink>
+                );
+              })}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-bold text-white">Quick Links</h3>
+            <ul className="mt-5 space-y-2 text-sm text-white/76">
+              {quickLinks.map((link) => (
+                <li key={link.label}>
+                  <ExternalLink
+                    href={link.href}
+                    className="transition hover:text-[#f6b14c]"
+                  >
+                    {link.label}
+                  </ExternalLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-bold text-white">OHI: WHO WE ARE</h3>
+            <div className="mt-5 overflow-hidden rounded-sm bg-black shadow-[0_12px_28px_rgba(0,0,0,0.35)]">
+              <div className="relative aspect-video">
+                <img
+                  src={footerVideoThumb}
+                  alt="OHI video preview"
+                  className="h-full w-full object-cover opacity-75"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <button
+                    type="button"
+                    className="inline-flex h-12 w-16 items-center justify-center rounded-lg bg-red-500/95 text-white shadow-[0_8px_18px_rgba(0,0,0,0.2)]"
+                    aria-label="Play video"
+                  >
+                    <Play className="h-6 w-6 fill-current" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 flex justify-center">
+              <img src={corafLogo} alt="Adobe" className="h-12 object-contain" />
+            </div>
+
+            <div className="mt-6 flex justify-center">
+              <div className="grid grid-cols-5 gap-1">
+                {Array.from({ length: 15 }).map((_, index) => {
+                  const swatch =
+                    index % 5 === 0
+                      ? "bg-[#1d4ed8]"
+                      : index % 5 === 1
+                        ? "bg-[#22c55e]"
+                        : index % 5 === 2
+                          ? "bg-[#ef4444]"
+                          : index % 5 === 3
+                            ? "bg-[#f59e0b]"
+                            : "bg-[#0ea5e9]";
+
+                  return (
+                    <span key={index} className={`h-5 w-5 rounded-full ${swatch}`} />
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-lg font-bold text-white">Our Partner Countries</h3>
+            <div className="mt-5 grid grid-cols-4 gap-2">
+              {partnerCountryTiles.map(([code, color]) => (
+                <div
+                  key={code}
+                  className={`flex h-12 items-center justify-center rounded-sm text-xs font-bold text-white ${color}`}
+                >
+                  {code}
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 grid grid-cols-2 gap-2 text-[11px] text-white/78">
+              {partnerCountryNames.slice(0, 8).map((country) => (
+                <div key={country} className="rounded-sm border border-white/10 px-2 py-1">
+                  {country}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-12 border-t border-white/10 pt-5 text-sm text-white/70">
+          <p>Copyright © {year} All Rights Reserved. Designed by OLSTECH SOLUTIONS</p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

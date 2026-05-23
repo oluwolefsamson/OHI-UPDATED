@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-display {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  letter-spacing: -0.03em;
+}
+
+.font-body {
+  font-family: "Inter", sans-serif;
+}
+
+.swiper-pagination-bullet {
+  width: 12px !important;
+  height: 12px !important;
+  border: 1px solid #181a1e !important;
+  opacity: 100% !important;
+  background: #fff !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #0067ff !important;
+  border: none !important;
+}
+
+.swiper {
+  padding-bottom: 70px !important;
+}
+
+.swiper-slide.swiper-slide-next {
+  background: #0067ff;
+  border-radius: 12px;
+  box-shadow: 0px 20px 20px rgba(0, 103, 255, 0.3) !important;
+}
+
+.swiper-slide.swiper-slide-next h4,
+.swiper-slide.swiper-slide-next p {
+  color: #fff !important;
+}
+
+.swiper-pagination {
+  top: 90% !important;
+}
+
+.header--fixed {
+  height: 100px;
+  line-height: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(14px);
+}
+
+/* Custom styles to hide the header */
+.custom-dashboard-header {
+  display: none; /* Hides the header */
+}
+
+@media only screen and (max-width: 760px) {
+  .navigation {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #00000084;
+    display: none;
+  }
+
+  .menu {
+    width: 15rem;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #fff;
+    z-index: 200;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 30px;
+  }
+
+  .show__menu {
+    display: block;
+  }
+}

@@ -1,0 +1,1522 @@
+import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { toast } from "sonner";
+import { useLandingPageConfig } from "../../context/LandingPageConfigContext";
+import { ArrowRightIcon, RotateCcwIcon, SparklesIcon } from "lucide-react";
+import { Button } from "../../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../../components/ui/card";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
+import { Textarea } from "../../components/ui/textarea";
+import { motion } from "framer-motion";
+import { AnimatedText } from "../../components/ui/AnimatedText";
+import { useNotifications } from "../../context/NotificationContext";
+import { landingPageDefaults } from "../../data/landingPageDefaults";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 20 } }
+};
+
+function readFileAsDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+}
+
+function SectionCard({ id, title, description, children, onSave, saveLabel = "Save changes" }) {
+  return (
+    <motion.div variants={itemVariants}>
+      <Card
+        id={id}
+        className="scroll-mt-24 overflow-hidden border-border/80 bg-card/95 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur"
+      >
+      <div className="h-1 bg-[linear-gradient(90deg,#0f4c81,#118ab2,#f4b942)]" />
+      <CardHeader className="border-b border-border/60 px-6 py-5">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+          Section editor
+        </p>
+        <CardTitle className="mt-2 text-2xl text-foreground">{title}</CardTitle>
+        {description && (
+          <CardDescription className="mt-2 max-w-3xl text-sm leading-6">
+            {description}
+          </CardDescription>
+        )}
+      </CardHeader>
+      <CardContent className="px-6 py-6">
+        {children}
+        {onSave && (
+          <div className="mt-8 flex justify-end border-t border-border/40 pt-5">
+            <Button onClick={onSave} className="rounded-xl px-6 font-semibold shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-[#05c1ff] text-white hover:brightness-110 transition">
+              {saveLabel}
+            </Button>
+          </div>
+        )}
+      </CardContent>
+      </Card>
+    </motion.div>
+  );
+}
+
+function Field({ label, children, hint }) {
+  return (
+    <label className="block">
+      <Label className="mb-2 block text-sm font-semibold text-foreground">
+        {label}
+      </Label>
+      {children}
+      {hint && <span className="mt-2 block text-xs text-muted-foreground">{hint}</span>}
+    </label>
+  );
+}
+
+function TextInput(props) {
+  return (
+    <Input
+      {...props}
+      className={`w-full rounded-2xl ${props.className || ""}`}
+    />
+  );
+}
+
+function TextArea(props) {
+  return (
+    <Textarea
+      {...props}
+      className={`w-full rounded-2xl ${props.className || ""}`}
+    />
+  );
+}
+
+function ImageField({ label, value, onChange, hint }) {
+  return (
+    <Field label={label} hint={hint}>
+      <div className="flex flex-col gap-3 rounded-2xl border border-dashed border-border bg-muted/40 p-4">
+        <div className="flex items-center gap-4">
+          <img
+            src={value}
+            alt={label}
+            className="h-20 w-20 rounded-2xl object-cover ring-1 ring-slate-200"
+          />
+          <Input
+            type="file"
+            accept="image/*"
+            onChange={onChange}
+            className="block w-full text-sm text-foreground file:mr-4 file:rounded-full file:border-0 file:bg-primaryColor file:px-4 file:py-2 file:text-white hover:file:cursor-pointer"
+          />
+        </div>
+      </div>
+    </Field>
+  );
+}
+
+export default function LandingPageManager() {
+  const { config, setConfig, resetConfig } = useLandingPageConfig();
+  const { addNotification } = useNotifications();
+  const [draftConfig, setDraftConfig] = React.useState(config);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.hash) return;
+
+    const targetId = location.hash.replace("#", "");
+    const element = document.getElementById(targetId);
+    if (element) {
+      window.requestAnimationFrame(() => {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+  }, [location.hash]);
+
+  const updateTheme = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      theme: {
+        ...current.theme,
+        [key]: value,
+      },
+    }));
+  };
+
+  const updateHero = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      hero: {
+        ...current.hero,
+        [key]: value,
+      },
+    }));
+  };
+
+  const updateHeroSlide = (index, key, value) => {
+    setDraftConfig((current) => {
+      const slides = [...(current.hero.slides ?? [])];
+      slides[index] = { ...slides[index], [key]: value };
+      return {
+        ...current,
+        hero: {
+          ...current.hero,
+          slides,
+        },
+      };
+    });
+  };
+
+  const updateAbout = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      about: {
+        ...current.about,
+        [key]: value,
+      },
+    }));
+  };
+
+  const updateAboutOverlay = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      about: {
+        ...current.about,
+        overlay: {
+          ...current.about.overlay,
+          [key]: value,
+        },
+      },
+    }));
+  };
+
+  const updateWhyChoose = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      whyChoose: {
+        ...current.whyChoose,
+        [key]: value,
+      },
+    }));
+  };
+
+  const updateWhyChooseCard = (index, key, value) => {
+    setDraftConfig((current) => {
+      const cards = [...current.whyChoose.cards];
+      cards[index] = { ...cards[index], [key]: value };
+      return {
+        ...current,
+        whyChoose: {
+          ...current.whyChoose,
+          cards,
+        },
+      };
+    });
+  };
+
+  const updateFooter = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      footer: {
+        ...current.footer,
+        [key]: value,
+      },
+    }));
+  };
+
+  const updateServices = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      services: {
+        ...current.services,
+        [key]: value,
+      },
+    }));
+  };
+
+  const updateServiceCard = (index, key, value) => {
+    setDraftConfig((current) => {
+      const cards = [...current.services.cards];
+      cards[index] = { ...cards[index], [key]: value };
+      return {
+        ...current,
+        services: {
+          ...current.services,
+          cards,
+        },
+      };
+    });
+  };
+
+  const updateGallery = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      gallery: {
+        ...current.gallery,
+        [key]: value,
+      },
+    }));
+  };
+
+  const updateGalleryItem = (index, key, value) => {
+    setDraftConfig((current) => {
+      const items = [...current.gallery.items];
+      items[index] = { ...items[index], [key]: value };
+      return {
+        ...current,
+        gallery: {
+          ...current.gallery,
+          items,
+        },
+      };
+    });
+  };
+
+  const updateGalleryStories = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      galleryStories: {
+        ...current.galleryStories,
+        [key]: value,
+      },
+    }));
+  };
+
+  const updateGalleryLead = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      galleryStories: {
+        ...current.galleryStories,
+        lead: {
+          ...current.galleryStories.lead,
+          [key]: value,
+        },
+      },
+    }));
+  };
+
+  const updateGallerySupportIntro = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      galleryStories: {
+        ...current.galleryStories,
+        supportIntro: {
+          ...current.galleryStories.supportIntro,
+          [key]: value,
+        },
+      },
+    }));
+  };
+
+  const updateGallerySupportCard = (index, key, value) => {
+    setDraftConfig((current) => {
+      const supportCards = [...current.galleryStories.supportCards];
+      supportCards[index] = { ...supportCards[index], [key]: value };
+      return {
+        ...current,
+        galleryStories: {
+          ...current.galleryStories,
+          supportCards,
+        },
+      };
+    });
+  };
+
+  const updateGalleryStrip = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      galleryStories: {
+        ...current.galleryStories,
+        [key]: value,
+      },
+    }));
+  };
+
+  const updateGalleryStripItem = (index, key, value) => {
+    setDraftConfig((current) => {
+      const stripItems = [...current.galleryStories.stripItems];
+      stripItems[index] = { ...stripItems[index], [key]: value };
+      return {
+        ...current,
+        galleryStories: {
+          ...current.galleryStories,
+          stripItems,
+        },
+      };
+    });
+  };
+
+  const updateVideo = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      video: {
+        ...current.video,
+        [key]: value,
+      },
+    }));
+  };
+
+  const updateVideoLead = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      video: {
+        ...current.video,
+        lead: {
+          ...current.video.lead,
+          [key]: value,
+        },
+      },
+    }));
+  };
+
+  const updateVideoClip = (index, key, value) => {
+    setDraftConfig((current) => {
+      const clips = [...current.video.clips];
+      clips[index] = { ...clips[index], [key]: value };
+      return {
+        ...current,
+        video: {
+          ...current.video,
+          clips,
+        },
+      };
+    });
+  };
+
+  const updateProfile = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      profile: {
+        ...current.profile,
+        [key]: value,
+      },
+    }));
+  };
+
+  const updateVoices = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      voices: {
+        ...current.voices,
+        [key]: value,
+      },
+    }));
+  };
+
+  const updateVoiceReview = (index, key, value) => {
+    setDraftConfig((current) => {
+      const reviews = [...current.voices.reviews];
+      reviews[index] = { ...reviews[index], [key]: value };
+      return {
+        ...current,
+        voices: {
+          ...current.voices,
+          reviews,
+        },
+      };
+    });
+  };
+
+  const handleImageUpload = async (event, apply) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const dataUrl = await readFileAsDataUrl(file);
+      apply(String(dataUrl));
+      toast.success("Image updated");
+    } catch {
+      toast.error("Could not read that image");
+    } finally {
+      event.target.value = "";
+    }
+  };
+
+  return (
+    <motion.div 
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8"
+    >
+      <motion.div variants={itemVariants} className="mb-8 overflow-hidden rounded-[32px] border border-slate-200/80 bg-white/95 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur">
+        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primaryColor">
+              OHI Homepage Manager
+            </p>
+            <h1 className="mt-3 text-4xl font-bold tracking-tight text-headingColor sm:text-5xl">
+              <AnimatedText text="Control the public OHI homepage from one focused editor" />
+            </h1>
+            <p className="mt-4 max-w-3xl text__para">
+              Edit the homepage sections from one place. Changes save in this
+              browser and show on the public site.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Button
+                type="button"
+                className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold shadow-[0_16px_40px_rgba(15,76,129,0.24)] transition hover:translate-y-[-1px] hover:brightness-110"
+                onClick={async () => {
+                  await resetConfig();
+                  setDraftConfig(landingPageDefaults);
+                  toast.success("Homepage content reset to defaults");
+                }}
+              >
+                <RotateCcwIcon className="h-4 w-4" />
+                Reset defaults
+              </Button>
+              <Button asChild variant="outline" className="rounded-full px-5 py-3 text-sm font-semibold">
+                <Link to="/dashboard/overview">
+                  Back to overview
+                  <ArrowRightIcon className="h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+            <div className="rounded-2xl bg-slate-50/80 p-4">
+              <div className="flex items-center gap-2">
+                <SparklesIcon className="h-4 w-4 text-[#0f4c81]" />
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+                  Live preview
+                </p>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-textColor">
+                Changes update immediately in the browser.
+              </p>
+            </div>
+            <div className="rounded-2xl bg-slate-50/80 p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+                Focus
+              </p>
+              <p className="mt-2 text-sm leading-6 text-textColor">
+                Cleaner hierarchy, less repetition, clearer editing flow.
+              </p>
+            </div>
+            <div className="rounded-2xl bg-slate-50/80 p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+                Scope
+              </p>
+              <p className="mt-2 text-sm leading-6 text-textColor">
+                Homepage, theme settings, and content blocks.
+              </p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+      <SectionCard
+        id="what-can-be-edited"
+        title="What can be edited now"
+        description="The sections currently connected to the admin draftConfig."
+      >
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {[
+            "Hero copy, CTAs, stats, and images",
+            "About page copy, image, and overlay card",
+            "Why OHI cards, links, and icons",
+            "Who We Serve cards and copy",
+            "Documentaries / Portfolio gallery, stories, and strip items",
+            "Video / reel content and clips",
+            "Mission, vision, and values",
+            "Partners / reviews and quotes",
+            "Colors and background images",
+            "Footer copy and contact details",
+            "Logo and favicon are handled in the app shell",
+            "FAQ, testimonial, and feature sections stay code-managed",
+          ].map((item) => (
+            <div
+              key={item}
+              className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-textColor"
+            >
+              {item}
+            </div>
+          ))}
+        </div>
+      </SectionCard>
+
+      <div className="space-y-6">
+        <SectionCard
+          id="theme-settings"
+          title="Theme Settings"
+          description="Set the colors and page backgrounds used by the public homepage."
+          onSave={() => {
+            setConfig((current) => ({ ...current, theme: draftConfig.theme }));
+            toast.success("Theme Settings saved!");
+            addNotification("Theme colors and backgrounds have been updated.", "success", "Theme Settings Saved");
+          }}
+          saveLabel="Update Theme Settings"
+        >
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            <Field label="Primary color">
+              <Input
+                type="color"
+                value={draftConfig.theme.primaryColor}
+                onChange={(e) => updateTheme("primaryColor", e.target.value)}
+                className="h-12 w-full rounded-xl bg-background p-1"
+              />
+            </Field>
+            <Field label="Accent color">
+              <Input
+                type="color"
+                value={draftConfig.theme.accentColor}
+                onChange={(e) => updateTheme("accentColor", e.target.value)}
+                className="h-12 w-full rounded-xl bg-background p-1"
+              />
+            </Field>
+            <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-4 md:col-span-2 xl:col-span-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                Hero / Header / Footer backgrounds
+              </p>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                These are permanently set from the code defaults and are no longer editable in the dashboard.
+              </p>
+              <div className="mt-4 grid gap-4 sm:grid-cols-3">
+                <div className="overflow-hidden rounded-2xl border border-slate-100">
+                  <img
+                    src={draftConfig.theme.heroBgImage}
+                    alt="Hero background"
+                    className="h-28 w-full object-cover"
+                  />
+                </div>
+                <div className="overflow-hidden rounded-2xl border border-slate-100">
+                  <img
+                    src={draftConfig.theme.headerBgImage}
+                    alt="Header background"
+                    className="h-28 w-full object-cover"
+                  />
+                </div>
+                <div className="overflow-hidden rounded-2xl border border-slate-100">
+                  <img
+                    src={draftConfig.theme.heroBgImage}
+                    alt="Footer background"
+                    className="h-28 w-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="hero-content"
+          title="Hero Slides"
+          description="Update the rotating homepage slides, buttons, and slide images."
+          onSave={() => {
+            setConfig((current) => ({ ...current, hero: draftConfig.hero }));
+            toast.success("Hero Slides saved!");
+            addNotification("Hero slides, CTAs, and images have been updated.", "success", "Hero Slides Saved");
+          }}
+          saveLabel="Update Hero Slides"
+        >
+          <div className="grid gap-4 xl:grid-cols-2">
+            {(draftConfig.hero.slides ?? []).map((slide, index) => (
+              <div key={`${slide.kicker}-${index}`} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <div className="mb-4 overflow-hidden rounded-2xl border border-slate-200">
+                  <img src={slide.image} alt={slide.title} className="h-36 w-full object-cover" />
+                </div>
+                <div className="grid gap-4">
+                  <Field label={`Slide ${index + 1} kicker`}>
+                    <TextInput
+                      value={slide.kicker}
+                      onChange={(e) => updateHeroSlide(index, "kicker", e.target.value)}
+                    />
+                  </Field>
+                  <Field label={`Slide ${index + 1} title`}>
+                    <TextInput
+                      value={slide.title}
+                      onChange={(e) => updateHeroSlide(index, "title", e.target.value)}
+                    />
+                  </Field>
+                  <Field label={`Slide ${index + 1} subtitle`}>
+                    <TextInput
+                      value={slide.subtitle}
+                      onChange={(e) => updateHeroSlide(index, "subtitle", e.target.value)}
+                    />
+                  </Field>
+                  <Field label={`Slide ${index + 1} description`}>
+                    <TextArea
+                      rows={4}
+                      value={slide.description}
+                      onChange={(e) => updateHeroSlide(index, "description", e.target.value)}
+                    />
+                  </Field>
+                  <ImageField
+                    label={`Slide ${index + 1} image`}
+                    value={slide.image}
+                    onChange={(e) =>
+                      handleImageUpload(e, (value) => updateHeroSlide(index, "image", value))
+                    }
+                  />
+                </div>
+              </div>
+            ))}
+            <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-4 xl:col-span-2">
+              <p className="text-sm leading-6 text-slate-600">
+                The homepage now reads from the slide deck above. The old title-line and stat fields were removed from the editor because the public hero no longer uses them.
+              </p>
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="about-ohi"
+          title="About Section"
+          description="Edit the About page block below the hero."
+          onSave={() => {
+            setConfig((current) => ({ ...current, about: draftConfig.about }));
+            toast.success("About Section saved!");
+            addNotification("About section copy and overlay card have been updated.", "success", "About Section Saved");
+          }}
+          saveLabel="Update About Section"
+        >
+          <div className="grid gap-6 xl:grid-cols-2">
+            <div className="space-y-5">
+              <Field label="Section title">
+                <TextInput
+                  value={draftConfig.about.title}
+                  onChange={(e) => updateAbout("title", e.target.value)}
+                />
+              </Field>
+              {draftConfig.about.paragraphs.map((paragraph, index) => (
+                <Field key={index} label={`About paragraph ${index + 1}`}>
+                  <TextArea
+                    rows={5}
+                    value={paragraph}
+                    onChange={(e) => {
+                      const next = [...draftConfig.about.paragraphs];
+                      next[index] = e.target.value;
+                      updateAbout("paragraphs", next);
+                    }}
+                  />
+                </Field>
+              ))}
+              <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                  About image
+                </p>
+                <p className="mt-2 text-sm leading-6 text-slate-600">
+                  This image is permanent and follows the local code default.
+                </p>
+                <div className="mt-4 overflow-hidden rounded-2xl border border-slate-100">
+                  <img
+                    src={draftConfig.about.image}
+                    alt="About section"
+                    className="h-40 w-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-5 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+              <h3 className="text-lg font-bold text-headingColor">About card</h3>
+              <Field label="Since label">
+                <TextInput
+                  value={draftConfig.about.overlay.since}
+                  onChange={(e) => updateAboutOverlay("since", e.target.value)}
+                />
+              </Field>
+              <Field label="Tagline">
+                <TextInput
+                  value={draftConfig.about.overlay.tagline}
+                  onChange={(e) => updateAboutOverlay("tagline", e.target.value)}
+                />
+              </Field>
+              <Field label="Trust label">
+                <TextInput
+                  value={draftConfig.about.overlay.trustLabel}
+                  onChange={(e) =>
+                    updateAboutOverlay("trustLabel", e.target.value)
+                  }
+                />
+              </Field>
+              <Field label="Role label">
+                <TextInput
+                  value={draftConfig.about.overlay.role}
+                  onChange={(e) => updateAboutOverlay("role", e.target.value)}
+                />
+              </Field>
+              <ImageField
+                label="About card icon"
+                value={draftConfig.about.overlay.icon}
+                onChange={(e) =>
+                  handleImageUpload(e, (value) =>
+                    updateAboutOverlay("icon", value)
+                  )
+                }
+              />
+              <ImageField
+                label="About card avatar"
+                value={draftConfig.about.overlay.avatar}
+                onChange={(e) =>
+                  handleImageUpload(e, (value) =>
+                    updateAboutOverlay("avatar", value)
+                  )
+                }
+              />
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="why-ohi"
+          title="Why OHI Section"
+          description="Adjust the feature cards below About."
+          onSave={() => {
+            setConfig((current) => ({ ...current, whyChoose: draftConfig.whyChoose }));
+            toast.success("Why OHI Section saved!");
+            addNotification("Why OHI feature cards have been updated.", "success", "Why OHI Section Saved");
+          }}
+          saveLabel="Update Why OHI Section"
+        >
+          <div className="space-y-5">
+            <Field label="Section title">
+              <TextInput
+                value={draftConfig.whyChoose.title}
+                onChange={(e) => updateWhyChoose("title", e.target.value)}
+              />
+            </Field>
+            <Field label="Section description">
+              <TextArea
+                rows={4}
+                value={draftConfig.whyChoose.description}
+                onChange={(e) => updateWhyChoose("description", e.target.value)}
+              />
+            </Field>
+            <div className="grid gap-4 lg:grid-cols-3">
+              {draftConfig.whyChoose.cards.map((card, index) => (
+                <div key={card.title} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                  <Field label={`Card ${index + 1} title`}>
+                    <TextInput
+                      value={card.title}
+                      onChange={(e) =>
+                        updateWhyChooseCard(index, "title", e.target.value)
+                      }
+                    />
+                  </Field>
+                  <Field label={`Card ${index + 1} description`}>
+                    <TextArea
+                      rows={5}
+                      value={card.description}
+                      onChange={(e) =>
+                        updateWhyChooseCard(index, "description", e.target.value)
+                      }
+                    />
+                  </Field>
+                  <Field label={`Card ${index + 1} link`}>
+                    <TextInput
+                      value={card.href}
+                      onChange={(e) =>
+                        updateWhyChooseCard(index, "href", e.target.value)
+                      }
+                    />
+                  </Field>
+                  <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-3">
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                      Card {index + 1} media icon
+                    </p>
+                    <div className="mt-3 flex items-center gap-3">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primaryColor/10 text-primaryColor">
+                        {card.icon ? (
+                          <card.icon className="h-6 w-6" aria-hidden="true" />
+                        ) : null}
+                      </div>
+                      <p className="text-sm leading-6 text-slate-600">
+                        This icon is permanent and follows the code defaults.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="who-we-serve"
+          title="Who We Serve"
+          description="Edit the audience and services block shown on the public Who We Serve page."
+          onSave={() => {
+            setConfig((current) => ({ ...current, services: draftConfig.services }));
+            toast.success("Who We Serve saved!");
+          }}
+          saveLabel="Update Who We Serve"
+        >
+          <div className="space-y-5">
+            <Field label="Section title">
+              <TextInput
+                value={draftConfig.services.title}
+                onChange={(e) => updateServices("title", e.target.value)}
+              />
+            </Field>
+            <Field label="Section description">
+              <TextArea
+                rows={4}
+                value={draftConfig.services.description}
+                onChange={(e) => updateServices("description", e.target.value)}
+              />
+            </Field>
+            <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
+              {draftConfig.services.cards.map((card, index) => (
+                <div
+                  key={card.name}
+                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                >
+                  <Field label={`Card ${index + 1} title`}>
+                    <TextInput
+                      value={card.name}
+                      onChange={(e) =>
+                        updateServiceCard(index, "name", e.target.value)
+                      }
+                    />
+                  </Field>
+                  <Field label={`Card ${index + 1} description`}>
+                    <TextArea
+                      rows={4}
+                      value={card.desc}
+                      onChange={(e) =>
+                        updateServiceCard(index, "desc", e.target.value)
+                      }
+                    />
+                  </Field>
+                  <div className="grid grid-cols-2 gap-4">
+                    <Field label="Bg color">
+                      <Input
+                        type="color"
+                        value={card.bgColor}
+                        onChange={(e) =>
+                          updateServiceCard(index, "bgColor", e.target.value)
+                        }
+                        className="h-12 w-full rounded-xl bg-background p-1"
+                      />
+                    </Field>
+                    <Field label="Text color">
+                      <Input
+                        type="color"
+                        value={card.textColor}
+                        onChange={(e) =>
+                          updateServiceCard(index, "textColor", e.target.value)
+                        }
+                        className="h-12 w-full rounded-xl bg-background p-1"
+                      />
+                    </Field>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="gallery"
+          title="Documentaries / Portfolio"
+          description="Control the main visual grid for the documentaries and portfolio-style sections."
+          onSave={() => {
+            setConfig((current) => ({ ...current, gallery: draftConfig.gallery }));
+            toast.success("Gallery saved!");
+            addNotification("Gallery grid and items have been updated.", "success", "Gallery Saved");
+          }}
+          saveLabel="Update Gallery"
+        >
+          <div className="space-y-5">
+            <Field label="Gallery title">
+              <TextInput
+                value={draftConfig.gallery.title}
+                onChange={(e) => updateGallery("title", e.target.value)}
+              />
+            </Field>
+            <Field label="Gallery description">
+              <TextArea
+                rows={4}
+                value={draftConfig.gallery.description}
+                onChange={(e) => updateGallery("description", e.target.value)}
+              />
+            </Field>
+            <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-4">
+              {draftConfig.gallery.items.map((item, index) => (
+                <div
+                  key={item.title}
+                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                >
+                  <Field label={`Item ${index + 1} title`}>
+                    <TextInput
+                      value={item.title}
+                      onChange={(e) =>
+                        updateGalleryItem(index, "title", e.target.value)
+                      }
+                    />
+                  </Field>
+                  <Field label={`Item ${index + 1} category`}>
+                    <TextInput
+                      value={item.category}
+                      onChange={(e) =>
+                        updateGalleryItem(index, "category", e.target.value)
+                      }
+                    />
+                  </Field>
+                  <Field label="Span">
+                    <TextInput
+                      value={item.span || ""}
+                      onChange={(e) =>
+                        updateGalleryItem(index, "span", e.target.value)
+                      }
+                    />
+                  </Field>
+                  <ImageField
+                    label={`Item ${index + 1} image`}
+                    value={item.image}
+                    onChange={(e) =>
+                      handleImageUpload(e, (value) =>
+                        updateGalleryItem(index, "image", value)
+                      )
+                    }
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="gallery-stories"
+          title="Documentaries Story Strip"
+          description="Edit the story-led documentary strip and feature cards."
+          onSave={() => {
+            setConfig((current) => ({ ...current, galleryStories: draftConfig.galleryStories }));
+            toast.success("Gallery Stories saved!");
+          }}
+          saveLabel="Update Gallery Stories"
+        >
+          <div className="space-y-5">
+            <Field label="Section title">
+              <TextInput
+                value={draftConfig.galleryStories.title}
+                onChange={(e) => updateGalleryStories("title", e.target.value)}
+              />
+            </Field>
+            <Field label="Section description">
+              <TextArea
+                rows={4}
+                value={draftConfig.galleryStories.description}
+                onChange={(e) =>
+                  updateGalleryStories("description", e.target.value)
+                }
+              />
+            </Field>
+            <div className="grid gap-4 xl:grid-cols-2">
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Lead story</h3>
+                <Field label="Lead title">
+                  <TextInput
+                    value={draftConfig.galleryStories.lead.title}
+                    onChange={(e) => updateGalleryLead("title", e.target.value)}
+                  />
+                </Field>
+                <Field label="Lead category">
+                  <TextInput
+                    value={draftConfig.galleryStories.lead.category}
+                    onChange={(e) =>
+                      updateGalleryLead("category", e.target.value)
+                    }
+                  />
+                </Field>
+                <Field label="Lead description">
+                  <TextArea
+                    rows={4}
+                    value={draftConfig.galleryStories.lead.description}
+                    onChange={(e) =>
+                      updateGalleryLead("description", e.target.value)
+                    }
+                  />
+                </Field>
+                <ImageField
+                  label="Lead image"
+                  value={draftConfig.galleryStories.lead.image}
+                  onChange={(e) =>
+                    handleImageUpload(e, (value) =>
+                      updateGalleryLead("image", value)
+                    )
+                  }
+                />
+              </div>
+
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">
+                  Support intro
+                </h3>
+                <Field label="Eyebrow">
+                  <TextInput
+                    value={draftConfig.galleryStories.supportIntro.eyebrow}
+                    onChange={(e) =>
+                      updateGallerySupportIntro("eyebrow", e.target.value)
+                    }
+                  />
+                </Field>
+                <Field label="Title">
+                  <TextInput
+                    value={draftConfig.galleryStories.supportIntro.title}
+                    onChange={(e) =>
+                      updateGallerySupportIntro("title", e.target.value)
+                    }
+                  />
+                </Field>
+                <Field label="Description">
+                  <TextArea
+                    rows={5}
+                    value={draftConfig.galleryStories.supportIntro.description}
+                    onChange={(e) =>
+                      updateGallerySupportIntro("description", e.target.value)
+                    }
+                  />
+                </Field>
+              </div>
+            </div>
+            <div className="grid gap-4 lg:grid-cols-2">
+              {draftConfig.galleryStories.supportCards.map((card, index) => (
+                <div
+                  key={card.title}
+                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                >
+                  <Field label={`Support card ${index + 1} title`}>
+                    <TextInput
+                      value={card.title}
+                      onChange={(e) =>
+                        updateGallerySupportCard(index, "title", e.target.value)
+                      }
+                    />
+                  </Field>
+                  <Field label={`Support card ${index + 1} description`}>
+                    <TextArea
+                      rows={4}
+                      value={card.description}
+                      onChange={(e) =>
+                        updateGallerySupportCard(
+                          index,
+                          "description",
+                          e.target.value
+                        )
+                      }
+                    />
+                  </Field>
+                  <Field label="Accent">
+                    <TextInput
+                      value={card.accent}
+                      onChange={(e) =>
+                        updateGallerySupportCard(index, "accent", e.target.value)
+                      }
+                    />
+                  </Field>
+                  <ImageField
+                    label={`Support card ${index + 1} image`}
+                    value={card.image}
+                    onChange={(e) =>
+                      handleImageUpload(e, (value) =>
+                        updateGallerySupportCard(index, "image", value)
+                      )
+                    }
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="grid gap-4 xl:grid-cols-2">
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Strip</h3>
+                <Field label="Strip title">
+                  <TextInput
+                    value={draftConfig.galleryStories.stripTitle}
+                    onChange={(e) =>
+                      updateGalleryStrip("stripTitle", e.target.value)
+                    }
+                  />
+                </Field>
+                <Field label="Strip badge">
+                  <TextInput
+                    value={draftConfig.galleryStories.stripBadge}
+                    onChange={(e) =>
+                      updateGalleryStrip("stripBadge", e.target.value)
+                    }
+                  />
+                </Field>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                {draftConfig.galleryStories.stripItems.map((item, index) => (
+                  <div
+                    key={item.label}
+                    className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                  >
+                    <Field label={`Strip item ${index + 1} label`}>
+                      <TextInput
+                        value={item.label}
+                        onChange={(e) =>
+                          updateGalleryStripItem(index, "label", e.target.value)
+                        }
+                      />
+                    </Field>
+                    <Field label={`Strip item ${index + 1} description`}>
+                      <TextArea
+                        rows={3}
+                        value={item.description}
+                        onChange={(e) =>
+                          updateGalleryStripItem(
+                            index,
+                            "description",
+                            e.target.value
+                          )
+                        }
+                      />
+                    </Field>
+                    <ImageField
+                      label={`Strip item ${index + 1} image`}
+                      value={item.image}
+                      onChange={(e) =>
+                        handleImageUpload(e, (value) =>
+                          updateGalleryStripItem(index, "image", value)
+                        )
+                      }
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="video-section"
+          title="Video / Reel"
+          description="Edit the homepage video area for reels and promo clips."
+          onSave={() => {
+            setConfig((current) => ({ ...current, video: draftConfig.video }));
+            toast.success("Video Section saved!");
+            addNotification("Video section and clips have been updated.", "success", "Video Section Saved");
+          }}
+          saveLabel="Update Video Section"
+        >
+          <div className="space-y-5">
+            <Field label="Section title">
+              <TextInput
+                value={draftConfig.video.title}
+                onChange={(e) => updateVideo("title", e.target.value)}
+              />
+            </Field>
+            <Field label="Section description">
+              <TextArea
+                rows={4}
+                value={draftConfig.video.description}
+                onChange={(e) => updateVideo("description", e.target.value)}
+              />
+            </Field>
+            <div className="grid gap-4 xl:grid-cols-2">
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Lead video</h3>
+                <Field label="Lead title">
+                  <TextInput
+                    value={draftConfig.video.lead.title}
+                    onChange={(e) => updateVideoLead("title", e.target.value)}
+                  />
+                </Field>
+                <Field label="Lead category">
+                  <TextInput
+                    value={draftConfig.video.lead.category}
+                    onChange={(e) => updateVideoLead("category", e.target.value)}
+                  />
+                </Field>
+                <Field label="Lead description">
+                  <TextArea
+                    rows={4}
+                    value={draftConfig.video.lead.description}
+                    onChange={(e) =>
+                      updateVideoLead("description", e.target.value)
+                    }
+                  />
+                </Field>
+                <Field label="Lead embed URL">
+                  <TextInput
+                    value={draftConfig.video.lead.embedUrl || ""}
+                    onChange={(e) =>
+                      updateVideoLead("embedUrl", e.target.value)
+                    }
+                    placeholder="https://player.cloudinary.com/embed/?cloud_name=..."
+                  />
+                </Field>
+                <ImageField
+                  label="Lead poster"
+                  value={draftConfig.video.lead.poster}
+                  onChange={(e) =>
+                    handleImageUpload(e, (value) =>
+                      updateVideoLead("poster", value)
+                    )
+                  }
+                />
+              </div>
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Icon</h3>
+                <ImageField
+                  label="Video icon"
+                  value={draftConfig.video.icon}
+                  onChange={(e) =>
+                    handleImageUpload(e, (value) => updateVideo("icon", value))
+                  }
+                />
+              </div>
+            </div>
+            <div className="grid gap-4 lg:grid-cols-2">
+              {draftConfig.video.clips.map((clip, index) => (
+                <div
+                  key={clip.title}
+                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                >
+                  <Field label={`Clip ${index + 1} title`}>
+                    <TextInput
+                      value={clip.title}
+                      onChange={(e) =>
+                        updateVideoClip(index, "title", e.target.value)
+                      }
+                    />
+                  </Field>
+                  <Field label={`Clip ${index + 1} category`}>
+                    <TextInput
+                      value={clip.category}
+                      onChange={(e) =>
+                        updateVideoClip(index, "category", e.target.value)
+                      }
+                    />
+                  </Field>
+                  <Field label={`Clip ${index + 1} description`}>
+                    <TextArea
+                      rows={4}
+                      value={clip.description}
+                      onChange={(e) =>
+                        updateVideoClip(index, "description", e.target.value)
+                      }
+                    />
+                  </Field>
+                  <ImageField
+                    label={`Clip ${index + 1} poster`}
+                    value={clip.poster}
+                    onChange={(e) =>
+                      handleImageUpload(e, (value) =>
+                        updateVideoClip(index, "poster", value)
+                      )
+                    }
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="mission-vision-values"
+          title="Mission, Vision & Values"
+          description="Edit the profile block that supports the About page and company story."
+          onSave={() => {
+            setConfig((current) => ({ ...current, profile: draftConfig.profile }));
+            toast.success("Mission, Vision & Values saved!");
+            addNotification("Mission, vision, and values have been updated.", "success", "Mission & Values Saved");
+          }}
+          saveLabel="Update Mission, Vision & Values"
+        >
+          <div className="space-y-5">
+            <Field label="Section title">
+              <TextInput
+                value={draftConfig.profile.title}
+                onChange={(e) => updateProfile("title", e.target.value)}
+              />
+            </Field>
+            <Field label="Section description">
+              <TextArea
+                rows={4}
+                value={draftConfig.profile.description}
+                onChange={(e) => updateProfile("description", e.target.value)}
+              />
+            </Field>
+            <div className="grid gap-4 xl:grid-cols-3">
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Story</h3>
+                <Field label="Story title">
+                  <TextInput
+                    value={draftConfig.profile.storyTitle}
+                    onChange={(e) => updateProfile("storyTitle", e.target.value)}
+                  />
+                </Field>
+                <Field label="Story description">
+                  <TextArea
+                    rows={5}
+                    value={draftConfig.profile.storyDescription}
+                    onChange={(e) =>
+                      updateProfile("storyDescription", e.target.value)
+                    }
+                  />
+                </Field>
+              </div>
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Mission</h3>
+                <Field label="Mission title">
+                  <TextInput
+                    value={draftConfig.profile.missionTitle}
+                    onChange={(e) =>
+                      updateProfile("missionTitle", e.target.value)
+                    }
+                  />
+                </Field>
+                <Field label="Mission description">
+                  <TextArea
+                    rows={5}
+                    value={draftConfig.profile.missionDescription}
+                    onChange={(e) =>
+                      updateProfile("missionDescription", e.target.value)
+                    }
+                  />
+                </Field>
+              </div>
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Vision</h3>
+                <Field label="Vision title">
+                  <TextInput
+                    value={draftConfig.profile.visionTitle}
+                    onChange={(e) =>
+                      updateProfile("visionTitle", e.target.value)
+                    }
+                  />
+                </Field>
+                <Field label="Vision description">
+                  <TextArea
+                    rows={5}
+                    value={draftConfig.profile.visionDescription}
+                    onChange={(e) =>
+                      updateProfile("visionDescription", e.target.value)
+                    }
+                  />
+                </Field>
+              </div>
+            </div>
+            <div className="grid gap-4 lg:grid-cols-2">
+              {draftConfig.profile.values.map((value, index) => (
+                <Field key={index} label={`Value ${index + 1}`}>
+                  <TextInput
+                    value={value}
+                    onChange={(e) => {
+                      const next = [...draftConfig.profile.values];
+                      next[index] = e.target.value;
+                      updateProfile("values", next);
+                    }}
+                  />
+                </Field>
+              ))}
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="selected-voices"
+          title="Partners / Reviews"
+          description="Edit the testimonial-style quotes and partner reviews."
+          onSave={() => {
+            setConfig((current) => ({ ...current, voices: draftConfig.voices }));
+            toast.success("Selected Voices saved!");
+            addNotification("Testimonial quotes and reviews have been updated.", "success", "Selected Voices Saved");
+          }}
+          saveLabel="Update Selected Voices"
+        >
+          <div className="space-y-5">
+            <Field label="Section title">
+              <TextInput
+                value={draftConfig.voices.title}
+                onChange={(e) => updateVoices("title", e.target.value)}
+              />
+            </Field>
+            <Field label="Section description">
+              <TextArea
+                rows={4}
+                value={draftConfig.voices.description}
+                onChange={(e) => updateVoices("description", e.target.value)}
+              />
+            </Field>
+            <div className="grid gap-4 lg:grid-cols-2">
+              {draftConfig.voices.reviews.map((review, index) => (
+                <div
+                  key={review.username}
+                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                >
+                  <Field label={`Review ${index + 1} name`}>
+                    <TextInput
+                      value={review.name}
+                      onChange={(e) =>
+                        updateVoiceReview(index, "name", e.target.value)
+                      }
+                    />
+                  </Field>
+                  <Field label={`Review ${index + 1} username`}>
+                    <TextInput
+                      value={review.username}
+                      onChange={(e) =>
+                        updateVoiceReview(index, "username", e.target.value)
+                      }
+                    />
+                  </Field>
+                  <Field label={`Review ${index + 1} body`}>
+                    <TextArea
+                      rows={4}
+                      value={review.body}
+                      onChange={(e) =>
+                        updateVoiceReview(index, "body", e.target.value)
+                      }
+                    />
+                  </Field>
+                  <ImageField
+                    label={`Review ${index + 1} image`}
+                    value={review.img}
+                    onChange={(e) =>
+                      handleImageUpload(e, (value) =>
+                        updateVoiceReview(index, "img", value)
+                      )
+                    }
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="footer-settings"
+          title="Footer Settings"
+          description="Control the footer copy on the public site."
+          onSave={() => {
+            setConfig((current) => ({ ...current, footer: draftConfig.footer }));
+            toast.success("Footer Settings saved!");
+            addNotification("Footer text and contact details have been updated.", "success", "Footer Settings Saved");
+          }}
+          saveLabel="Update Footer Settings"
+        >
+          <div className="grid gap-4 lg:grid-cols-2">
+            <Field
+              label="Footer text"
+              hint='Use "{year}" where the current year should appear.'
+            >
+              <TextArea
+                rows={5}
+                value={draftConfig.footer.description}
+                onChange={(e) => updateFooter("description", e.target.value)}
+              />
+            </Field>
+          </div>
+        </SectionCard>
+      </div>
+    </motion.div>
+  );
+}
