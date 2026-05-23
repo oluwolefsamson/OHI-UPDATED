@@ -6,6 +6,7 @@ import hero2 from "../assets/images/HeroImg/hero2.jpeg";
 import hero3 from "../assets/images/HeroImg/hero3.jpeg";
 import hero4 from "../assets/images/HeroImg/hero4.jpeg";
 import hero5 from "../assets/images/HeroImg/hero5.jpeg";
+import profileHeroMountain from "../assets/images/profile-hero-mountain.jpg";
 import gallery01 from "../assets/images/Gallery/gallery-01.jpeg";
 import gallery02 from "../assets/images/Gallery/gallery-02.jpeg";
 import gallery03 from "../assets/images/Gallery/gallery-03.jpeg";
@@ -78,7 +79,7 @@ export const landingPageDefaults = {
           "We help private-sector and institutional partners show how their work contributes to measurable social value.",
       },
       {
-        image: hero5,
+        image: profileHeroMountain,
         kicker: "Investor and donor reporting",
         title: "Evidence-led films for decision makers",
         subtitle: "who expect clarity and accountability",
