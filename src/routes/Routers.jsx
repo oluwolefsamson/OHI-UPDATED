@@ -8,6 +8,7 @@ import CompanyProfile from "../pages/LandingPage/CompanyProfile/CompanyProfile";
 import AboutPage from "../pages/LandingPage/CompanyProfile/AboutPage";
 import BackgroundPage from "../pages/LandingPage/CompanyProfile/BackgroundPage";
 import OurTeamPage from "../pages/LandingPage/CompanyProfile/OurTeamPage";
+import LeadershipPage from "../pages/LandingPage/CompanyProfile/LeadershipPage";
 import OurPartnersPage from "../pages/LandingPage/CompanyProfile/OurPartnersPage";
 import OurPlatformsPage from "../pages/LandingPage/CompanyProfile/OurPlatformsPage";
 import PastPresidentsPage from "../pages/LandingPage/CompanyProfile/PastPresidentsPage";
@@ -38,6 +39,7 @@ const Routers = () => {
         <Route path="home" element={<Home />} />
         <Route path="company-profile" element={<CompanyProfile />} />
         <Route path="about" element={<AboutPage />} />
+        <Route path="leadership" element={<LeadershipPage />} />
         <Route path="background" element={<BackgroundPage />} />
         <Route path="our-team" element={<OurTeamPage />} />
         <Route path="our-partners" element={<OurPartnersPage />} />

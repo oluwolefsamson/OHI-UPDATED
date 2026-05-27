@@ -330,13 +330,8 @@ const columns = [
 ];
 
 function DraggableRow({ row }) {
-  if (!row.original?.id) {
-    console.error("Missing row ID:", row);
-    return null;
-  }
-
   const { transform, transition, setNodeRef, isDragging } = useSortable({
-    id: row.original.id,
+    id: row.original?.id ?? row.id,
   });
 
   return (

@@ -3,6 +3,7 @@ import BlurFade from "../../ui/blur-fade";
 import { X } from "lucide-react";
 import { useLandingPageConfig } from "../../../context/LandingPageConfigContext";
 import { landingPageDefaults } from "../../../data/landingPageDefaults";
+import UnderlinedHeading from "../UnderlinedHeading";
 
 const Gallery = () => {
   const { config } = useLandingPageConfig();
@@ -24,7 +25,9 @@ const Gallery = () => {
     <section id="gallery" className="px-2 py-16 sm:py-20">
       <div className="container">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="heading font-bold text-black">{config.gallery.title}</h2>
+          <UnderlinedHeading as="h2" className="heading font-bold text-black">
+            {config.gallery.title}
+          </UnderlinedHeading>
           <p className="text__para mt-5 text-black">
             {config.gallery.description}
           </p>

@@ -12,9 +12,9 @@ const ContactPage = () => {
         title="Contact Us"
         heroImage={contactHeroImage}
         heroImageAlt="Contact OHI hero"
-        description="Reach OHI for partnerships, project inquiries, media collaborations, or support. We respond with the same clarity and care we bring to our storytelling work."
+        description="Reach OHI for partnerships, project inquiries, and institutional visibility conversations. The team responds with the same clarity and care it brings to client work."
         descriptionClassName="text-white"
-        primaryCta={{ label: "Start a Conversation", href: "#contact-form" }}
+        primaryCta={{ label: "Book a Conversation", href: "#contact-form" }}
         secondaryCta={{ label: "View Map", href: "#contact-map" }}
         heroBadge={
           <div className="space-y-1">
@@ -22,7 +22,7 @@ const ContactPage = () => {
               OHI profile
             </p>
             <p className="font-body text-sm leading-6 text-white/80">
-              Strategic visibility for development, investment, and impact communication.
+              Strategic visibility for development, investment, and institutional communication.
             </p>
           </div>
         }

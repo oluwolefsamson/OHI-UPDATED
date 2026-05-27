@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Reveal from "../../ui/reveal";
 import { useLandingPageConfig } from "../../../context/LandingPageConfigContext";
+import UnderlinedHeading from "../UnderlinedHeading";
 
 const About = () => {
   const { config } = useLandingPageConfig();
@@ -56,7 +57,9 @@ const About = () => {
           </Reveal>
 
           <Reveal className="w-full order-1 lg:w-1/2 lg:order-2 xl:w-[670px]" x={64} distance={36}>
-            <h2 className="heading">{about.title}</h2>
+            <UnderlinedHeading as="h2" className="heading">
+              {about.title}
+            </UnderlinedHeading>
             {about.paragraphs.map((paragraph) => (
               <p key={paragraph} className="text__para">
                 {paragraph}

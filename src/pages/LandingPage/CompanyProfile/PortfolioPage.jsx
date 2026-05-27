@@ -36,7 +36,7 @@ const portfolioProjects = [
     title: "Program visibility films",
     category: "Development communication",
     image: portfolioImage01,
-    description: "Clear stories that help teams show results, context, and human impact.",
+    description: "Clear communication that helps teams show results, context, and institutional value.",
   },
   {
     title: "Stakeholder event coverage",
@@ -76,7 +76,7 @@ const PortfolioPage = () => {
       title="Documentaries"
       heroImage={portfolioImage02}
       heroImageAlt="OHI documentaries hero"
-      description="OHI creates development communication that helps institutions, partners, and communities understand the work being done, why it matters, and why it deserves attention from capital and policy actors."
+      description="OHI creates development communication that helps institutions, partners, and communities understand the work being done, why it matters, and why it deserves support from capital and policy actors."
       descriptionClassName="text-white"
       primaryCta={{ label: "View Portfolio", href: "/portfolio" }}
       secondaryCta={{ label: "Contact Us", href: "/contact" }}
@@ -157,7 +157,7 @@ const PortfolioPage = () => {
       <section id="clients" className="mt-16 rounded-[32px] border border-[#e8dcc8] bg-[#f4f8fb] p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-8">
         <SectionHeader
           title="Clients"
-          description="A moving strip of organizations and institutions OHI has worked with or produced for."
+          description="Organizations and institutions OHI has worked with or produced for."
           className="max-w-3xl"
         />
 
@@ -169,7 +169,7 @@ const PortfolioPage = () => {
             {clientLogos.map((client) => (
               <div
                 key={client.name}
-              className="flex h-28 w-56 items-center justify-center rounded-[24px] border border-[#e8dcc8] bg-[#fffaf6] px-6 shadow-[0_14px_40px_rgba(15,23,42,0.06)]"
+                className="flex h-28 w-56 items-center justify-center rounded-[24px] border border-[#e8dcc8] bg-[#fffaf6] px-6 shadow-[0_14px_40px_rgba(15,23,42,0.06)]"
               >
                 <img
                   src={client.image}

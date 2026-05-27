@@ -74,7 +74,7 @@ export default function ContactForm() {
                   Contact Us
                 </CardTitle>
                 <CardDescription className="font-body max-w-xl text-base leading-7 text-[#4e5a67]">
-                  Send a message and we&apos;ll reply by email.
+                  Book a strategic visibility conversation or send a project brief.
                 </CardDescription>
               </div>
             </CardHeader>
@@ -162,14 +162,14 @@ export default function ContactForm() {
 
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <p className="font-body text-sm text-[#708496]">
-                      We typically respond within one business day.
+                      For institutional inquiries, we usually respond within one business day.
                     </p>
                     <Button
                       type="submit"
                       size="lg"
                       className="group w-full rounded-xl bg-[linear-gradient(180deg,#f59d21_0%,#c96b17_100%)] px-6 text-white shadow-[0_18px_42px_rgba(201,107,23,0.22)] hover:brightness-105 sm:w-auto"
                     >
-                      {form.formState.isSubmitting ? "Sending..." : "Let's talk"}
+                      {form.formState.isSubmitting ? "Sending..." : "Start a conversation"}
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                     </Button>
                   </div>

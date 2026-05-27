@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -67,7 +67,7 @@ const CropsPrice = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [filteredCrops, setFilteredCrops] = useState([]);
 
-  const mockCrops = [
+  const mockCrops = useMemo(() => [
     {
       id: 1,
       name: "Corn",
@@ -112,17 +112,13 @@ const CropsPrice = () => {
       trend: "+5.7%",
       lastUpdated: "6h ago",
     },
-  ];
+  ], []);
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1500);
   }, []);
 
-  useEffect(() => {
-    filterCrops();
-  }, [searchQuery, selectedCategory]);
-
-  const filterCrops = () => {
+  const filterCrops = useCallback(() => {
     let result = mockCrops;
 
     if (selectedCategory !== "all") {
@@ -136,7 +132,11 @@ const CropsPrice = () => {
     }
 
     setFilteredCrops(result);
-  };
+  }, [mockCrops, searchQuery, selectedCategory]);
+
+  useEffect(() => {
+    filterCrops();
+  }, [filterCrops]);
 
   const PriceTrendDrawer = () => {
     const getData = (period = "7d") => {

@@ -6,7 +6,7 @@ const CentralAfricaPage = () => {
   return (
     <ProfilePageShell
       title="Central Africa"
-      description="Our initiatives and presence in Central Africa."
+      description="Institutional presence and delivery in Central Africa."
       descriptionClassName="text-white"
       primaryCta={{ label: "Our Team", href: "/our-team" }}
       secondaryCta={{ label: "Contact Us", href: "/contact" }}
@@ -24,16 +24,16 @@ const CentralAfricaPage = () => {
       <div className="space-y-12">
         <SectionHeader
           title="Central Africa"
-          description="Our initiatives and presence in Central Africa"
+          description="Institutional presence and delivery in Central Africa"
         />
         
         <div className="space-y-6">
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Olympian House International maintains a significant presence in Central Africa, working with communities and institutions across the region. Our work includes documentary production, capacity building, and institutional communication programs.
+            Olympian House International maintains an active presence in Central Africa, working with institutions and community stakeholders across the region. Our work includes documentary production, capacity building, and communication support for programmes that need to be understood clearly by funders, partners, and beneficiaries.
           </p>
           
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Through regional partnerships and localized approaches, we support development initiatives, institutional growth, and community engagement across Central African countries including Cameroon and beyond.
+            Through regional partnerships and localized delivery, we support development initiatives, institutional growth, and stakeholder engagement across Central African countries including Cameroon and neighboring markets.
           </p>
         </div>
       </div>

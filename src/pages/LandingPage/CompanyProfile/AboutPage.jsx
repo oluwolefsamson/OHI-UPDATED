@@ -150,8 +150,8 @@ const AboutPage = () => {
       <section className="relative left-1/2 w-screen -translate-x-1/2 bg-[linear-gradient(180deg,#f6b56a_0%,#eb8e37_100%)] px-4 py-10 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <SectionHeader
-            title="The OHI you don’t see"
-            description="A softer story layer that keeps the OHI message human, reflective, and rooted in the people the work is for."
+            title="The OHI difference"
+            description="A sharper institutional story layer that makes the case for credibility, trust, and strategic visibility."
             className="text-white"
           />
 
@@ -264,8 +264,8 @@ const AboutPage = () => {
           <div className="mt-8 rounded-[28px] border border-[#D9DCE2] bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)]">
             <img src={aboutVisual} alt="OHI visual story" className="h-[260px] w-full rounded-[20px] object-cover" />
             <p className="mt-5 text-base leading-7 text-textColor">
-              OHI is ready to turn your next project, campaign, or report into a story
-              that people will remember and trust.
+              OHI is ready to turn your next project, campaign, or report into a
+              story that decision-makers can trust and act on.
             </p>
             <div className="mt-6">
               <Button asChild className="rounded-none bg-[#f59e0b] px-6 text-white hover:bg-[#d97706]">

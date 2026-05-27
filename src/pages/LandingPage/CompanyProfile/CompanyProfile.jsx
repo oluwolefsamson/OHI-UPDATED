@@ -42,6 +42,12 @@ const brochurePdfHref = "/OHI-Company-Profile.pdf";
 
 const profilePages = [
   {
+    label: "Leadership",
+    path: "/leadership",
+    description: "A named executive profile with the accountability institutional buyers expect.",
+    icon: ShieldCheck,
+  },
+  {
     label: "Services",
     path: "/services",
     description: "The production formats and storytelling services OHI delivers.",
@@ -116,6 +122,13 @@ const profileHighlights = [
   },
 ];
 
+const footprint = [
+  "Central Africa: Cameroon and neighboring markets",
+  "East Africa: Kenya, Uganda, Tanzania, Rwanda, and beyond",
+  "Southern Africa: Zambia and regional partners",
+  "USA: fundraising, partnerships, and institutional collaboration",
+];
+
 const profileStats = [
   { label: "Projects delivered", value: "100+" },
   { label: "Institutional clients", value: "70+" },
@@ -127,7 +140,7 @@ const portfolioProjects = [
     title: "Program visibility films",
     category: "Development communication",
     image: portfolioImage01,
-    description: "Clear stories that help teams show results, context, and human impact.",
+    description: "Clear communication that helps teams show results, context, and institutional value.",
   },
   {
     title: "Stakeholder event coverage",
@@ -182,6 +195,28 @@ const CompanyProfile = () => {
         </div>
       }
     >
+      <section className="rounded-[36px] bg-[#091826] p-4 text-white sm:p-6">
+        <SectionHeader
+          title="The OHI difference"
+          description="OHI is not positioning itself as a generic production shop. The value is strategic visibility built for development, investor, and institutional audiences."
+          className="max-w-4xl text-left"
+        />
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {[
+            "We translate complex programmes into decision-ready communication.",
+            "We work in the language of institutions, not campaign slogans.",
+            "We pair regional delivery with proof, governance, and trust signals.",
+          ].map((item) => (
+            <div
+              key={item}
+              className="rounded-[24px] border border-white/12 bg-white/6 p-5 text-sm leading-6 text-white/82 backdrop-blur-sm"
+            >
+              {item}
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
         <div className="rounded-[32px] border border-[#D9DCE2] bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-8">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primaryColor">
@@ -394,6 +429,27 @@ const CompanyProfile = () => {
               </div>
             ))}
           </Marquee>
+        </div>
+      </section>
+
+      <section className="rounded-[36px] bg-[#fffaf5] p-4 sm:p-6">
+        <SectionHeader
+          title="Footprint"
+          description="A clearer view of where OHI already operates and how that scale supports institutional work."
+          className="max-w-4xl"
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {footprint.map((item) => (
+            <div
+              key={item}
+              className="rounded-[28px] border border-[#e8dcc8] bg-white p-5 shadow-[0_12px_28px_rgba(15,23,42,0.06)]"
+            >
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#b16a18]">
+                Coverage
+              </p>
+              <p className="mt-3 text-sm leading-6 text-[#4e5a67]">{item}</p>
+            </div>
+          ))}
         </div>
       </section>
 

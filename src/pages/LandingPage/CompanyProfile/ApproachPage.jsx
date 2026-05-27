@@ -77,7 +77,7 @@ const ApproachPage = () => {
                   Workflow
                 </p>
                 <p className="font-body mt-3 text-base leading-7 text-[#4e5a67]">
-                  The approach section keeps the steps and deliverables easy to scan while staying aligned with the profile narrative.
+                  The approach section keeps the steps and deliverables easy to scan while staying aligned with the institutional narrative.
                 </p>
               </div>
               <div className="rounded-[26px] border border-[#e8dcc8] bg-[linear-gradient(180deg,#091826_0%,#12243a_100%)] p-5 text-white shadow-[0_12px_30px_rgba(15,23,42,0.12)]">
@@ -85,7 +85,7 @@ const ApproachPage = () => {
                   Delivery style
                 </p>
                 <p className="font-body mt-3 text-base leading-7 text-white/80">
-                  OHI combines strategy, production, and editorial craft into one practical workflow.
+                  OHI combines strategy, production, and editorial craft into one practical workflow for institutional clients.
                 </p>
               </div>
             </div>

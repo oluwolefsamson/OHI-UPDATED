@@ -57,9 +57,9 @@ const ImpactPage = () => {
               <h3 className="font-display mt-4 text-3xl font-semibold tracking-[-0.03em] text-[#173145] sm:text-4xl">
                 Stories that help teams show results clearly
               </h3>
-              <p className="font-body mt-4 max-w-2xl text-base leading-7 text-[#4e5a67]">
-                The same recent image set now supports the hidden profile pages so the
-                experience feels consistent across the full company profile.
+          <p className="font-body mt-4 max-w-2xl text-base leading-7 text-[#4e5a67]">
+                The profile now makes the case for why OHI is a strategic
+                communication partner, not a generic production supplier.
               </p>
             </div>
             <div className="relative min-h-[280px]">
@@ -92,7 +92,7 @@ const ImpactPage = () => {
             <h3 className="font-display text-2xl font-semibold">What OHI helps you achieve</h3>
           </div>
           <p className="font-body mt-4 leading-7 text-white/80">
-            OHI transforms African projects into compelling stories that inspire action, visibility, trust, and lasting impact.
+            OHI turns African projects into clear communication assets that support action, visibility, trust, and long-term value.
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {config.hero.stats.map((stat) => (

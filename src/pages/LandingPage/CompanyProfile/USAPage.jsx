@@ -6,7 +6,7 @@ const USAPage = () => {
   return (
     <ProfilePageShell
       title="USA"
-      description="OHI's presence and partnerships in the United States."
+      description="OHI's institutional presence and partnerships in the United States."
       descriptionClassName="text-white"
       primaryCta={{ label: "Our Team", href: "/our-team" }}
       secondaryCta={{ label: "Contact Us", href: "/contact" }}
@@ -24,16 +24,16 @@ const USAPage = () => {
       <div className="space-y-12">
         <SectionHeader
           title="United States of America"
-          description="OHI's presence and partnerships in the USA"
+          description="OHI's institutional presence and partnerships in the USA"
         />
         
         <div className="space-y-6">
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Olympian House International extends its mission to the United States, where we work with American institutions, foundations, and organizations to amplify African voices and support development initiatives.
+            Olympian House International extends its institutional work to the United States, where it engages American institutions, foundations, and organizations on partnerships, communication support, and development-oriented collaborations.
           </p>
           
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Our USA-based operations facilitate knowledge exchange, support fundraising and partnerships, and create platforms for storytelling and institutional collaboration that strengthens OHI's global impact.
+            The USA-based presence supports knowledge exchange, partnership development, and institutional collaboration that strengthens OHI's cross-border operating model.
           </p>
         </div>
       </div>

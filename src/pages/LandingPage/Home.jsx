@@ -6,6 +6,7 @@ import { landingPageDefaults } from "../../data/landingPageDefaults";
 import { Badge } from "../../components/ui/badge";
 import Reveal from "../../components/ui/reveal";
 import { Marquee } from "../../components/LandingPage/magicui/marquee";
+import UnderlinedHeading from "../../components/LandingPage/UnderlinedHeading";
 
 function FallbackImage({ src, fallback, alt, className, ...props }) {
   return (
@@ -70,7 +71,7 @@ function Home() {
       title: "The Voice of the Dreamer",
       image: gallery.items?.[2]?.image ?? about.image,
       description:
-        "A softer story layer that keeps the OHI message human, reflective, and rooted in the people the work is for.",
+        "A people-facing narrative layer that keeps the OHI message grounded in the audiences and institutions the work serves.",
       href: "/impact",
     },
   ];
@@ -143,9 +144,17 @@ function Home() {
             <p className="font-body text-[11px] font-semibold uppercase tracking-[0.34em] text-white/78">
               {currentSlide.kicker}
             </p>
-            <h1 className="font-display mt-4 text-4xl font-semibold leading-[1.05] text-white sm:text-5xl md:text-6xl lg:text-[64px]">
+            <UnderlinedHeading
+              as="h1"
+              className="mt-4 text-4xl font-semibold leading-[1.05] text-white sm:text-5xl md:text-6xl lg:text-[64px]"
+              textClassName="font-display"
+              textColorClassName="text-white"
+              showBorder={false}
+              showPattern={false}
+              patternClassName="hidden"
+            >
               {currentSlide.title}
-            </h1>
+            </UnderlinedHeading>
             <p className="font-body mx-auto mt-4 max-w-4xl text-lg leading-8 font-medium text-white/92 sm:text-xl">
               {currentSlide.subtitle}
             </p>
@@ -154,7 +163,7 @@ function Home() {
             </p>
 
             <div className="font-body mt-8 inline-flex items-center gap-2 text-[18px] font-medium text-white/92">
-              <span>Discover More</span>
+              <span>Explore More</span>
               <ChevronDown className="h-6 w-6" />
             </div>
           </Reveal>
@@ -189,17 +198,19 @@ function Home() {
             </Reveal>
 
             <Reveal className="max-w-2xl space-y-4">
-              <h2 className="text-2xl font-bold leading-tight tracking-[-0.03em] text-[#2e3135] sm:text-3xl lg:text-[34px]">
+            <UnderlinedHeading
+              as="h2"
+              className="text-2xl font-bold leading-tight tracking-[-0.03em] text-[#2e3135] sm:text-3xl lg:text-[34px]"
+              showBorder={true}
+            >
                 Olympian House International
-              </h2>
+            </UnderlinedHeading>
               <p className="text-sm leading-6 text-[#4e4e4e] sm:text-[15px]">
-                Olympian House International (OHI) is a premier organisation founded on
-                the ideas of discovering and promoting young, talented, under-served
-                storytellers and documentary producers to global prominence. OHI
-                strategically plans to inspire the creation and expansion of businesses
-                in the areas of filmmaking and documentary across African communities to
-                become social development influencers and catalysts to economic growth
-                and sustainability in their local communities.
+                Olympian House International (OHI) creates development communication
+                that helps institutions, partners, and communities understand what is
+                being delivered, why it matters, and why it deserves sustained support.
+                The company combines production capability with strategic visibility so
+                its work reads as evidence, not entertainment.
               </p>
               <Link
                 to="/about"
@@ -212,14 +223,20 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-[linear-gradient(180deg,#d69547_0%,#cf8a3d_100%)] py-14 sm:py-16">
+      <section id="ohi-difference" className="bg-[linear-gradient(180deg,#d69547_0%,#cf8a3d_100%)] py-14 sm:py-16">
         <div className="container">
           <Reveal className="mx-auto max-w-3xl text-center text-white">
-            <h2 className="text-2xl font-bold tracking-[-0.03em] sm:text-3xl">
-              The OHI you don&apos;t see
-            </h2>
+            <UnderlinedHeading
+              as="h2"
+              className="text-2xl font-bold tracking-[-0.03em] sm:text-3xl text-white"
+              textColorClassName="text-white"
+              showBorder={false}
+              patternClassName="hidden"
+            >
+              The OHI difference
+            </UnderlinedHeading>
             <p className="mt-2 text-sm font-medium text-white/92">
-              We are promoting good content and showcasing African heritage
+              Strategic communication for institutions, donors, investors, and partners
             </p>
           </Reveal>
 
@@ -250,13 +267,17 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-white py-16 sm:py-20">
+      <section id="heritage-collection" className="bg-white py-16 sm:py-20">
         <div className="container">
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <Reveal className="max-w-xl">
-              <h2 className="text-2xl font-bold leading-tight tracking-[-0.03em] text-[#2e3135] sm:text-3xl lg:text-[34px]">
+            <UnderlinedHeading
+              as="h2"
+              className="text-2xl font-bold leading-tight tracking-[-0.03em] text-[#2e3135] sm:text-3xl lg:text-[34px]"
+              showBorder={true}
+            >
                 OHI Google Arts &amp; Culture Heritage Collection
-              </h2>
+            </UnderlinedHeading>
               <p className="mt-5 max-w-md text-sm leading-6 text-[#4e4e4e]">
                 OHI launches a digital heritage collection on Google Arts &amp; Culture
                 as part of the Africa Day celebration, creating a richer window into the
@@ -293,7 +314,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-[linear-gradient(180deg,#e1b06d_0%,#d39a4c_100%)] py-4 text-[#3a2413]">
+      <section id="support-ohi" className="bg-[linear-gradient(180deg,#e1b06d_0%,#d39a4c_100%)] py-4 text-[#3a2413]">
         <div className="container flex flex-wrap items-center justify-center gap-4 text-center">
           <p className="text-[13px] font-semibold">
             Support OHI
@@ -308,6 +329,7 @@ function Home() {
       </section>
 
       <section
+        id="turn-programme-into-proof"
         className="relative overflow-hidden bg-cover bg-center py-16 text-white sm:py-20"
         style={{
           backgroundImage: `linear-gradient(rgba(10,12,18,0.56), rgba(10,12,18,0.72)), url(${heroImages.hero4})`,
@@ -315,52 +337,55 @@ function Home() {
       >
         <div className="container">
           <Reveal className="max-w-xl">
-            <h2 className="text-3xl font-bold leading-[0.95] tracking-[-0.04em] sm:text-4xl lg:text-[44px]">
-              Join Our Impactful
-              <br />
-              Volunteer Community
+            <h2 className="text-3xl font-bold leading-[0.95] tracking-[-0.04em] text-white sm:text-4xl lg:text-[44px]">
+              Turn your next programme into proof
             </h2>
             <p className="mt-4 max-w-md text-sm leading-6 text-white/86">
-              We believe in the transformative power of collective action. Our
-              dedicated community of volunteers plays a crucial role in turning
-              compassion into meaningful change.
+              OHI helps institutions show results clearly through documentary work,
+              strategic visibility, and communication designed for decision-makers.
             </p>
             <p className="mt-4 max-w-md text-sm leading-6 text-white/86">
-              By joining our volunteer program, you become an essential part of our
-              mission to create a positive impact on a global scale.
+              If you need communication that reads like institutional proof, the team
+              is ready to support the brief.
             </p>
             <Link
               to="/contact"
               className="mt-5 inline-flex h-8 items-center justify-center bg-[#f58e1b] px-4 text-xs font-semibold text-white transition hover:bg-[#d76418]"
             >
-              Become a Volunteer
+              Contact Us
             </Link>
           </Reveal>
         </div>
       </section>
 
-      <section className="bg-white py-14 sm:py-16">
+      <section id="leadership-storytellers" className="bg-white py-14 sm:py-16">
         <div className="container">
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <Reveal className="overflow-hidden rounded-[10px] bg-white shadow-[0_12px_28px_rgba(15,23,42,0.12)]">
               <img
                 src={gallery.items?.[5]?.image ?? heroImages.hero1}
                 alt="OHI vision feature"
-                className="h-[220px] w-full object-cover sm:h-[300px] lg:h-[240px]"
+                className="h-[340px] w-full object-cover sm:h-[440px] lg:h-[400px]"
               />
             </Reveal>
 
             <Reveal className="max-w-xl">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.26em] text-[#d38a31]">
-                OHI Visionary Voices
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#d38a31]">
+                Leadership and storytellers
               </p>
-              <h3 className="mt-2 text-2xl font-bold leading-tight tracking-[-0.03em] text-[#2f3135] sm:text-[32px]">
-                OHI Visionary Voices
-              </h3>
-              <p className="mt-4 max-w-lg text-sm leading-6 text-[#5a5f66]">
-                Join visionary storytellers, industry experts, and successful creators.
-                Dive into the art of storytelling and its immense potential for impact
-                and income.
+              <UnderlinedHeading
+                as="h3"
+                className="mt-3 text-3xl font-bold leading-tight tracking-[-0.04em] text-[#2f3135] sm:text-[38px]"
+                showBorder={true}
+              >
+                Leadership and storytellers
+              </UnderlinedHeading>
+              <p className="mt-5 max-w-2xl text-base leading-7 text-[#5a5f66]">
+                Named leadership, regional storytellers, and institutional partners
+                working across Africa and beyond, with the visibility and continuity
+                needed for long-term partnerships, stronger programme alignment, and
+                communication that supports trust, collaboration, and measurable
+                institutional outcomes.
               </p>
               <Link
                 to="/company-profile"
@@ -375,9 +400,13 @@ function Home() {
 
       <section className="bg-white py-10 sm:py-14">
         <div className="container">
-          <h2 className="text-center text-2xl font-medium tracking-[-0.03em] text-[#2f3135] sm:text-[28px]">
+          <UnderlinedHeading
+            as="h2"
+            className="text-center text-2xl font-medium tracking-[-0.03em] text-[#2f3135] sm:text-[28px]"
+            showBorder={true}
+          >
             Featured Programmes
-          </h2>
+          </UnderlinedHeading>
 
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {[
@@ -391,13 +420,13 @@ function Home() {
                 title: "OHI Visionary Voices",
                 image: heroImages.hero2,
                 description:
-                  "Join visionary storytellers, industry experts, and successful creators. Delve into the art of storytelling and its immense potential for impact and income.",
+                  "A curated programme focused on credible voices, practical learning, and communication that serves institutional objectives.",
               },
               {
                 title: "African Festivals",
                 image: heroImages.hero3,
                 description:
-                  "Join our festivals that showcase a unique blend of rich African culture through dance, plays, fashion, movies, literature, and more, projecting core African values to the world.",
+                  "A cultural documentation platform that records African creative expression for public audiences, partners, and archival use.",
               },
             ].map((item) => (
               <Reveal key={item.title}>
@@ -423,13 +452,13 @@ function Home() {
       <section className="bg-[linear-gradient(180deg,#e9b164_0%,#e1a156_100%)] py-12 sm:py-14">
         <div className="container">
           <Reveal className="mx-auto max-w-3xl text-center">
-            <h2 className="text-2xl font-bold tracking-[-0.03em] text-[#2f3135] sm:text-[30px]">
-              OHI Story Tellers
-            </h2>
-            <p className="mt-2 text-sm text-[#5a3a17]">
-              Promoting Africa&apos;s talented storytellers, journalists, and documentary
-              producers to global prominence.
-            </p>
+              <h2 className="text-2xl font-bold tracking-[-0.03em] text-white sm:text-[30px]">
+              OHI Storytellers
+              </h2>
+              <p className="mt-2 text-sm text-white/90">
+              A network of practitioners producing communication and documentary work
+              for institutions, partners, and public-interest audiences.
+              </p>
           </Reveal>
 
           <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -465,18 +494,22 @@ function Home() {
               to="/contact"
               className="inline-flex h-8 items-center justify-center bg-[#c65f25] px-4 text-xs font-semibold text-white transition hover:bg-[#a94f1f]"
             >
-              Get Featured
+              Contact Us
             </Link>
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-14 sm:py-16">
+      <section id="news-blog" className="bg-white py-14 sm:py-16">
         <div className="container">
           <div className="flex items-end justify-between gap-4">
-            <h2 className="text-2xl font-medium tracking-[-0.03em] text-[#2f3135] sm:text-[28px]">
+            <UnderlinedHeading
+              as="h2"
+              className="text-2xl font-medium tracking-[-0.03em] text-[#2f3135] sm:text-[28px]"
+              showBorder={true}
+            >
               News &amp; Blog
-            </h2>
+            </UnderlinedHeading>
             <div className="hidden flex-1 items-center justify-end gap-2 lg:flex">
               {Array.from({ length: 14 }).map((_, index) => (
                 <span
@@ -514,7 +547,7 @@ function Home() {
                     </h3>
                     <p className="mt-3 text-[11px] leading-5 text-[#676767]">
                       OHI continues to shape public-facing documentary communication and
-                      heritage storytelling.
+                      heritage documentation for institutional audiences.
                     </p>
                     <Link
                       to="/about"
@@ -539,7 +572,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#111] py-0 text-white">
+      <section id="ohi-video" className="relative overflow-hidden bg-[#111] py-0 text-white">
         <div
           className="bg-cover bg-center"
           style={{
@@ -548,14 +581,12 @@ function Home() {
         >
           <div className="container grid gap-6 py-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
             <div className="max-w-xl">
-              <h2 className="text-4xl font-black uppercase leading-[0.95] tracking-[-0.05em] sm:text-5xl">
-                This is
-                <br />
-                OHI
+              <h2 className="text-4xl font-black uppercase leading-[0.95] tracking-[-0.05em] text-white sm:text-5xl">
+                This is OHI
               </h2>
               <p className="mt-4 max-w-md text-sm leading-6 text-white/82">
-                A visual bridge between documentary production, heritage stories, and
-                public impact communication.
+                Strategic visibility for development partners, public institutions,
+                and impact-led organisations.
               </p>
             </div>
 
@@ -583,10 +614,10 @@ function Home() {
           <div className="container">
             <div className="grid gap-4 text-center text-white sm:grid-cols-4">
               {[
-                ["OHI so far", ""],
-                ["500+", "Documentaries promoted"],
-                ["1000+", "Storytellers trained"],
-                ["25", "Countries"],
+                ["OHI at a glance", ""],
+                ["100+", "Projects delivered"],
+                ["70+", "Institutional clients"],
+                ["4", "Regional footprints"],
               ].map(([value, label], index) => (
                 <div key={value} className="space-y-1">
                   <p className="text-xl font-bold">{value}</p>

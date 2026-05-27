@@ -6,7 +6,7 @@ const OurPlatformsPage = () => {
   return (
     <ProfilePageShell
       title="Our Platforms"
-      description="Digital and communication channels through which we deliver impact."
+      description="The channels and formats OHI uses to deliver institutional communication."
       descriptionClassName="text-white"
       primaryCta={{ label: "Contact Us", href: "/contact" }}
       secondaryCta={{ label: "Our Team", href: "/our-team" }}
@@ -24,16 +24,16 @@ const OurPlatformsPage = () => {
       <div className="space-y-12">
         <SectionHeader
           title="Our Platforms"
-          description="Digital and communication channels through which we deliver impact"
+          description="Digital and communication channels used to support institutional delivery"
         />
-        
+
         <div className="space-y-6">
           <p className="text-lg text-muted-foreground leading-relaxed">
-            OHI operates through multiple platforms designed to reach different audiences and communities. Our digital ecosystem includes video production, documentary storytelling, institutional communications, and community engagement channels.
+            OHI operates through multiple platforms designed to reach different audiences and stakeholders. The digital ecosystem includes video production, documentary formats, institutional communications, and engagement channels.
           </p>
-          
+
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Each platform is carefully curated to serve specific purposes—from raising awareness to driving policy change, facilitating community dialogue, and creating lasting documentation of important initiatives.
+            Each platform serves a defined purpose, from raising awareness to supporting policy dialogue and creating durable documentation of important initiatives.
           </p>
         </div>
       </div>

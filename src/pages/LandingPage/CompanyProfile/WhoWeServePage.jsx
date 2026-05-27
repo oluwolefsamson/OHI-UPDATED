@@ -18,10 +18,10 @@ const sectors = [
 
 const strengths = [
   "Multilingual team working in English, French, and Pidgin.",
-  "Deep expertise in development-sector and institutional communication.",
+  "Experience in development-sector and institutional communication.",
   "Storytelling that resonates with communities, policymakers, and investors.",
-  "Experience with documentaries, reporting films, and stakeholder engagement media.",
-  "Led by a filmmaker with direct participation in high-level investment forums.",
+  "Documentaries, reporting films, and stakeholder engagement media.",
+  "Leadership with participation in high-level investment forums.",
   "Project management aligned with institutional and DFI standards.",
 ];
 
@@ -67,7 +67,7 @@ const WhoWeServePage = () => {
       <section>
         <SectionHeader
           title="Sectors OHI works with"
-          description="These sectors map directly to the profile document and explain the kind of partners OHI is built to support."
+          description="These sectors explain the kind of partners OHI is built to support."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {featuredStories.map((item) => (
@@ -112,7 +112,9 @@ const WhoWeServePage = () => {
         <div className="rounded-[28px] border border-[#e8dcc8] bg-white p-6 shadow-[0_12px_28px_rgba(15,23,42,0.06)]">
           <div className="flex items-center gap-3">
             <Layers3 className="h-5 w-5 text-[#b16a18]" />
-            <h3 className="font-display text-2xl font-semibold text-[#173145]">Unique strengths</h3>
+            <h3 className="font-display text-2xl font-semibold text-[#173145]">
+              Unique strengths
+            </h3>
           </div>
           <div className="mt-6 space-y-4">
             {strengths.map((strength) => (
@@ -126,16 +128,16 @@ const WhoWeServePage = () => {
         <div className="rounded-[28px] border border-[#e8dcc8] bg-[linear-gradient(180deg,#091826_0%,#12243a_100%)] p-6 text-white shadow-sm">
           <div className="flex items-center gap-3">
             <Globe2 className="h-5 w-5 text-[#fbbf24]" />
-            <h3 className="font-display text-2xl font-semibold">Built for African contexts</h3>
+          <h3 className="font-display text-2xl font-semibold">Built for African contexts</h3>
           </div>
           <p className="font-body mt-4 leading-7 text-white/80">
-            The company profile positions OHI as a partner for African development and investment stories, with the multilingual flexibility to work across regions, institutions, and audiences.
+            OHI works across African development and investment stories with the multilingual flexibility to support regions, institutions, and audiences.
           </p>
           <div className="mt-6 rounded-[24px] bg-white/10 p-5">
             <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
               Communication outcome
             </p>
-            <p className="font-body mt-3 text-lg leading-8 text-white/90">
+              <p className="font-body mt-3 text-lg leading-8 text-white/90">
               Clearer reporting, stronger stakeholder alignment, and stories that feel credible to the people who need to act on them.
             </p>
           </div>

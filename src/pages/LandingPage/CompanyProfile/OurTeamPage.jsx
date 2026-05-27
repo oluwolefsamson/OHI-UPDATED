@@ -122,7 +122,7 @@ const OurTeamPage = () => {
       title="Our Team"
       heroImage={heroImage}
       heroImageAlt="Our Team"
-      description="Meet the dedicated professionals and visionary leaders driving OHI's mission across Africa and globally. Our team brings diverse expertise, cultural knowledge, and unwavering commitment to creating meaningful impact in our communities."
+      description="Meet the executives and regional leads who support OHI's institutional delivery across Africa and internationally. The team brings production, communications, and programme management experience to the organization’s work."
       descriptionClassName="text-white"
       primaryCta={{ label: "Contact Us", href: "/contact" }}
       secondaryCta={{ label: "Learn More", href: "/about" }}
@@ -132,7 +132,7 @@ const OurTeamPage = () => {
             Executive Team
           </p>
           <p className="font-body text-sm leading-6 text-white/80">
-            Leadership and expertise shaping OHI's vision and growth.
+            Leadership and operational expertise shaping OHI's direction and delivery.
           </p>
         </div>
       }

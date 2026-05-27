@@ -156,7 +156,7 @@ export function ProfileProvider({ children }) {
       uploadAvatar,
       changePassword,
     };
-  }, [profile, loading, user]);
+  }, [profile, loading, user, addNotification]);
 
   return (
     <ProfileContext.Provider value={value}>

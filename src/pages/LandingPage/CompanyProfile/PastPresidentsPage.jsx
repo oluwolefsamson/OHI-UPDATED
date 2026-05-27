@@ -6,7 +6,7 @@ const PastPresidentsPage = () => {
   return (
     <ProfilePageShell
       title="Past Presidents"
-      description="The visionary leaders who have guided OHI's development."
+      description="The leaders who have guided OHI's institutional development."
       descriptionClassName="text-white"
       primaryCta={{ label: "Our Team", href: "/our-team" }}
       secondaryCta={{ label: "Contact Us", href: "/contact" }}
@@ -24,16 +24,16 @@ const PastPresidentsPage = () => {
       <div className="space-y-12">
         <SectionHeader
           title="Past Presidents"
-          description="The visionary leaders who have guided OHI's development"
+          description="The leaders who have guided OHI's institutional development"
         />
         
         <div className="space-y-6">
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Olympian House International has been shaped by the leadership and vision of dedicated presidents who have guided the organization through different phases of growth and transformation.
+            Olympian House International has been shaped by presidents who guided the organization through different phases of growth, restructuring, and geographic expansion.
           </p>
           
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Each leader has contributed significantly to building our institutional capacity, expanding our geographic reach, and strengthening our commitment to excellence and impact in service to our communities.
+            Each leader contributed to institutional capacity, governance continuity, and the expansion of the organization’s operating footprint.
           </p>
         </div>
       </div>

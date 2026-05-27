@@ -37,7 +37,7 @@ const OurPartnersPage = () => {
   return (
     <ProfilePageShell
       title="Our Partners"
-      description="Working together with organizations and institutions for greater impact."
+      description="Institutional partnerships that support delivery, credibility, and reach."
       descriptionClassName="text-white"
       primaryCta={{ label: "Contact Us", href: "/contact" }}
       secondaryCta={{ label: "Our Team", href: "/our-team" }}
@@ -55,7 +55,7 @@ const OurPartnersPage = () => {
       <div className="space-y-10">
         <SectionHeader
           title="Our Partners"
-          description="OHI collaborates with a wide network of partners including international organizations, government agencies, and community groups."
+          description="OHI collaborates with a network of partners including international organizations, government agencies, and community groups."
         />
 
         <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
@@ -68,7 +68,7 @@ const OurPartnersPage = () => {
             </p>
             <p className="font-body mt-4 text-base leading-7 text-[#4e5a67]">
               These relationships help OHI deliver communication that is aligned with
-              institutional goals and grounded in real-world audiences.
+              institutional goals, audience needs, and programme objectives.
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
               {supportHighlights.map((item) => (
@@ -87,11 +87,11 @@ const OurPartnersPage = () => {
               Supporters
             </p>
             <p className="font-display mt-3 text-2xl font-semibold tracking-[-0.03em] sm:text-[30px]">
-              A visual system that feels more premium and intentional.
+              A partner set that signals scale and institutional trust.
             </p>
             <p className="font-body mt-4 text-base leading-7 text-white/78">
-              The supporter strip now reads as a curated set of institutional badges
-              instead of a flat carousel.
+              The supporter strip presents the relationships as proof of operating
+              context rather than decorative branding.
             </p>
           </div>
         </div>

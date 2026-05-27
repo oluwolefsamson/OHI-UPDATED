@@ -5,6 +5,7 @@ import featureImg from "../../../assets/images/transform.jpeg";
 import videoIcon from "../../../assets/img/cropped-logo-ohi-blue.png";
 import avatarIcon from "../../../assets/img/WFP-03555-150x150.jpg";
 import Reveal from "../../ui/reveal";
+import UnderlinedHeading from "../UnderlinedHeading";
 
 const Feature = () => {
   return (
@@ -12,9 +13,9 @@ const Feature = () => {
       <div className="container">
         <div className="flex flex-col items-center justify-between gap-10 lg:flex-row">
           <Reveal className="w-full lg:flex-1 xl:w-[670px]" x={-60} distance={34}>
-            <h2 className="heading">
+            <UnderlinedHeading as="h2" className="heading">
               We transform African projects into stories that inspire action.
-            </h2>
+            </UnderlinedHeading>
             <ul className="pl-4">
               <li className="text__para">
                 1. Demonstrate impact and transparency with credible visuals.

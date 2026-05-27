@@ -33,49 +33,49 @@ const ServicesPage = () => {
     {
       title: "Impact Documentaries",
       description:
-        "We produce high-quality documentaries that humanize data and reveal real impact on the ground. OHI films go beyond storytelling to build trust, credibility, and long-term confidence among institutions, partners, and communities.",
+        "We produce documentaries that turn programme results into evidence-led narratives for institutional audiences.",
       image: serviceImage01,
     },
     {
       title: "Development Programme Communication",
       description:
-        "OHI helps development programmes communicate their objectives, implementation, and results with clarity and authenticity. Our visuals strengthen transparency, accountability, and stakeholder alignment across the project lifecycle.",
+        "OHI helps development programmes communicate objectives, implementation, and results with clarity and accountability.",
       image: serviceImage02,
     },
     {
       title: "Investment & Programme Visibility",
       description:
-        "We craft investor-focused films that present projects as credible, bankable, and scalable opportunities. By combining strategic messaging with compelling visuals, OHI helps unlock financing and accelerate decision-making.",
+        "We craft investor-facing films that present projects as credible opportunities for financing and partnership.",
       image: serviceImage03,
     },
     {
       title: "ESG & Social Impact Storytelling",
       description:
-        "Our content amplifies community voice and local ownership, ensuring projects are seen through the lens of those they serve. OHI storytelling builds legitimacy, social buy-in, and sustainable impact.",
+        "Our content amplifies community voice and local ownership while supporting ESG and social impact reporting.",
       image: serviceImage04,
     },
     {
       title: "Donor & Investor Reporting Films",
       description:
-        "We capture authentic testimonials that turn communities and project participants into powerful advocates for your work. Each story is handled ethically, with dignity, and aligned with broader impact and investment narratives.",
+        "We produce reporting films that support donor updates, investor confidence, and renewal conversations.",
       image: serviceImage05,
     },
     {
       title: "Multilingual Field Production",
       description:
-        "OHI produces concise, evidence-driven reporting films that communicate results, learning, and accountability. These films support partner relations, renewal, and long-term partnerships.",
+        "OHI produces concise, evidence-driven reporting films across languages and regions.",
       image: serviceImage06,
     },
     {
       title: "Event & Mission Coverage",
       description:
-        "From high-level forums to field missions, we document moments that matter with professional and strategic intent. OHI ensures your engagements translate into lasting communication value.",
+        "From high-level forums to field missions, we document moments that matter with professional intent.",
       image: serviceImage07,
     },
     {
       title: "Social Media & Digital Campaigns",
       description:
-        "We design digital-first content that extends the life and reach of your projects beyond the field. OHI campaigns are tailored to engage policymakers, investors, and communities across platforms.",
+        "We design digital-first content that extends project visibility across web, social, and stakeholder channels.",
       image: serviceImage08,
     },
   ];
@@ -108,7 +108,7 @@ const ServicesPage = () => {
       <section className="rounded-[36px] bg-[#fffaf5] p-4 sm:p-6">
         <SectionHeader
           title="Core services"
-          description="The company profile describes OHI as a partner for institutions that need clear, credible, and investment-grade storytelling."
+          description="OHI is a partner for institutions that need clear, credible, and investment-grade storytelling."
         />
         <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {services.cards.map((card, index) => (
@@ -135,7 +135,9 @@ const ServicesPage = () => {
             <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-[#b16a18]">
               Communication formats
             </p>
-            <h3 className="font-display mt-4 text-3xl font-semibold tracking-[-0.03em]">Visual formats built for clarity</h3>
+            <h3 className="font-display mt-4 text-3xl font-semibold tracking-[-0.03em]">
+              Visual formats built for clarity
+            </h3>
             <p className="font-body mt-4 leading-7 text-[#4e5a67]">
               Each format is chosen to match the communication objective, whether the goal is public awareness, stakeholder trust, donor reporting, or investor confidence.
             </p>
@@ -143,8 +145,8 @@ const ServicesPage = () => {
               {serviceFormats.map((item, index) => (
                 <Reveal key={item} delay={0.05 + index * 0.03}>
                   <div className="flex items-center gap-3 rounded-2xl bg-[#fff8ef] px-4 py-3 transition duration-300 ease-out hover:bg-white">
-                  <VideoIcon className="h-4 w-4 text-[#b16a18]" />
-                  <span className="font-body text-sm font-medium text-[#173145]">{item}</span>
+                    <VideoIcon className="h-4 w-4 text-[#b16a18]" />
+                    <span className="font-body text-sm font-medium text-[#173145]">{item}</span>
                   </div>
                 </Reveal>
               ))}

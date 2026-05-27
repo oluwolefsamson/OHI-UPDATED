@@ -2,6 +2,7 @@
 import { createContext, useContext, useState } from "react";
 
 const DataContext = createContext();
+const sampleData = [];
 
 export function DataProvider({ children }) {
   const [tableData, setTableData] = useState(sampleData); // Initial data
