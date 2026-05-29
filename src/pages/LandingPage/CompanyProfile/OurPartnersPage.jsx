@@ -52,14 +52,14 @@ const OurPartnersPage = () => {
         </div>
       }
     >
-      <div className="space-y-10">
+      <div className="mx-auto max-w-6xl space-y-10 p-4 sm:p-6 lg:p-8">
         <SectionHeader
           title="Our Partners"
           description="OHI collaborates with a network of partners including international organizations, government agencies, and community groups."
         />
 
         <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="rounded-[28px] border border-[#ead9c0] bg-white p-6 shadow-[0_14px_34px_rgba(15,23,42,0.06)] sm:p-8">
+          <div className="bg-white p-6 shadow-[0_14px_34px_rgba(15,23,42,0.06)] sm:p-8">
             <p className="font-body text-sm font-semibold uppercase tracking-[0.24em] text-[#b16a18]">
               Why it works
             </p>
@@ -82,7 +82,7 @@ const OurPartnersPage = () => {
             </div>
           </div>
 
-          <div className="rounded-[28px] bg-[linear-gradient(180deg,#091826_0%,#12243a_100%)] p-6 text-white shadow-[0_14px_34px_rgba(15,23,42,0.12)] sm:p-8">
+          <div className="bg-[linear-gradient(180deg,#091826_0%,#12243a_100%)] p-6 text-white shadow-[0_14px_34px_rgba(15,23,42,0.12)] sm:p-8">
             <p className="font-body text-sm font-semibold uppercase tracking-[0.24em] text-[#fbbf24]">
               Supporters
             </p>
@@ -96,7 +96,7 @@ const OurPartnersPage = () => {
           </div>
         </div>
 
-        <div className="mt-2 overflow-hidden rounded-[32px] border border-[#ead9c0] bg-[linear-gradient(180deg,#fffdf8_0%,#fff6ea_100%)] p-4 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-6">
+        <div className="mt-2 overflow-hidden bg-[linear-gradient(180deg,#fffdf8_0%,#fff6ea_100%)] p-4 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-6">
           <div className="relative flex w-full items-center justify-center overflow-hidden">
             <Marquee pauseOnHover className="[--duration:28s]">
               {partnerLogos.map((partner) => (

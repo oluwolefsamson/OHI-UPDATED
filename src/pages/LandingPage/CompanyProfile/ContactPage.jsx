@@ -29,7 +29,7 @@ const ContactPage = () => {
       />
 
       <div className="bg-[#bb7422]">
-        <div className="container mx-auto space-y-16 px-4 py-16 sm:px-5 lg:px-20 lg:py-20">
+        <div className="mx-auto max-w-6xl space-y-16 px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div id="contact-form">
             <Contact />
           </div>

@@ -54,15 +54,16 @@ const ApproachPage = () => {
         { eyebrow: "Retention", value: "95%", label: "Repeat-client rate" },
       ]}
     >
-      <section className="rounded-[36px] bg-[#fffaf5] p-4 sm:p-6">
-        <SectionHeader
-          title="How OHI works"
-          description="Each project is designed to be practical for DFIs, governments, and institutions that need professional communication support without unnecessary complexity."
-          className="max-w-4xl"
-          textColorClassName="text-[#2f3135]"
-        />
-        <div className="mt-10 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="max-w-2xl">
+      <section className="bg-[#fffaf5] p-4 sm:p-6">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeader
+            title="How OHI works"
+            description="Each project is designed to be practical for DFIs, governments, and institutions that need professional communication support without unnecessary complexity."
+            className="max-w-4xl"
+            textColorClassName="text-[#2f3135]"
+          />
+          <div className="mt-10 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+            <div>
             <div className="flex h-full flex-col justify-center p-6 sm:p-8">
               <p className="font-body text-xs font-semibold uppercase tracking-[0.3em] text-[#d38a31]">
                 Workflow
@@ -76,7 +77,7 @@ const ApproachPage = () => {
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[560px]">
+            <div className="relative mx-auto w-full max-w-[560px]">
             <div className="overflow-hidden rounded-none border border-[#D9DCE2] bg-white shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
               <img
                 src={approachVisual}
@@ -85,8 +86,8 @@ const ApproachPage = () => {
               />
             </div>
           </div>
-        </div>
-        <div className="mt-12 grid gap-4 lg:grid-cols-4">
+          </div>
+          <div className="mt-12 grid gap-4 lg:grid-cols-4">
           {steps.map((step, index) => (
             <article
               key={step.title}
@@ -106,11 +107,13 @@ const ApproachPage = () => {
               </p>
             </article>
           ))}
+          </div>
         </div>
       </section>
 
-      <section className="mt-12 grid gap-6 rounded-[36px] bg-[#f4f8fb] p-4 lg:grid-cols-[0.9fr_1.1fr] lg:p-6">
-        <div className="border border-[#D9DCE2] bg-[#0f172a] p-6 text-white shadow-sm">
+      <section className="mt-12 bg-[#f4f8fb] p-4 lg:p-6">
+        <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="bg-[#0f172a] p-6 text-white shadow-sm">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-yellow-300">
             Working style
           </p>
@@ -118,9 +121,9 @@ const ApproachPage = () => {
           <p className="mt-4 leading-7 text-white/80">
             The profile notes a project management approach that aligns with communication standards expected by development partners, DFIs, and institutional teams.
           </p>
-        </div>
+          </div>
 
-        <div className="border border-[#D9DCE2] bg-white p-6 shadow-sm">
+          <div className="bg-white p-6 shadow-sm">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primaryColor">
             Deliverables
           </p>
@@ -143,6 +146,7 @@ const ApproachPage = () => {
                 Back to services <ArrowRight className="h-4 w-4" />
               </button>
             </Link>
+          </div>
           </div>
         </div>
       </section>

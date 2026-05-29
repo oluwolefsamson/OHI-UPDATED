@@ -87,7 +87,7 @@ const PortfolioPage = () => {
       ]}
     >
       <section className="bg-[#bb7422] p-4 sm:p-6">
-        <div className="container">
+        <div className="mx-auto max-w-6xl">
           <SectionHeader
             title="Portfolio highlights"
             textColorClassName="text-white"
@@ -148,7 +148,8 @@ const PortfolioPage = () => {
 
       <Brochure />
 
-      <section className="mt-16 rounded-[32px] border border-[#e8dcc8] bg-[#fff3e3] p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-8">
+      <section className="mt-16 bg-[#fff3e3] p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-8">
+        <div className="mx-auto max-w-6xl">
         <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal delay={0.06}>
             <div className="bg-[#fff8ef] p-6">
@@ -184,6 +185,7 @@ const PortfolioPage = () => {
               </div>
             </div>
           </Reveal>
+        </div>
         </div>
       </section>
     </ProfilePageShell>

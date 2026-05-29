@@ -27,6 +27,7 @@ function FallbackImage({ src, fallback, alt, className, ...props }) {
 
 function Home() {
   const { config } = useLandingPageConfig();
+  const homePage = config.homePage ?? landingPageDefaults.homePage;
   const hero = config.hero ?? landingPageDefaults.hero;
   const about = config.about ?? landingPageDefaults.about;
   const gallery = config.gallery ?? landingPageDefaults.gallery;
@@ -218,25 +219,17 @@ function Home() {
             </Reveal>
 
             <Reveal className="max-w-2xl space-y-4">
-            <UnderlinedHeading
-              as="h2"
-              className="text-2xl font-bold leading-tight tracking-[-0.03em] text-[#2e3135] sm:text-3xl lg:text-[34px]"
-              showBorder={true}
-            >
-                Olympian House International
-            </UnderlinedHeading>
+              <UnderlinedHeading as="h2" className="text-2xl font-bold leading-tight tracking-[-0.03em] text-[#2e3135] sm:text-3xl lg:text-[34px]" showBorder={true}>
+                {homePage.about.title}
+              </UnderlinedHeading>
               <p className="text-sm leading-6 text-[#4e4e4e] sm:text-[15px]">
-                Olympian House International (OHI) creates development communication
-                that helps institutions, partners, and communities understand what is
-                being delivered, why it matters, and why it deserves sustained support.
-                The company combines production capability with strategic visibility so
-                its work reads as evidence, not entertainment.
+                {homePage.about.description}
               </p>
               <Link
-                to="/about"
+                to={homePage.about.ctaHref ?? "/about"}
                 className="inline-flex h-8 items-center justify-center bg-[#e97a2f] px-4 text-xs font-semibold text-white transition hover:bg-[#d96f1f]"
               >
-                Learn More
+                {homePage.about.ctaLabel ?? "Learn More"}
               </Link>
             </Reveal>
           </div>
@@ -253,44 +246,54 @@ function Home() {
               showBorder={false}
               patternClassName="hidden"
             >
-              The OHI difference
+              {homePage.difference.title}
             </UnderlinedHeading>
             <p className="mt-2 text-sm font-medium text-white/92">
-              Strategic communication for institutions, donors, investors, and partners
+              {homePage.difference.description}
             </p>
           </Reveal>
 
           <motion.div
-            className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4"
+            className="mt-10 grid gap-5 lg:grid-cols-[0.95fr_1.05fr]"
             variants={staggerContainer}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
           >
-            {cardItems.map((item) => (
-              <motion.article
-                key={item.title}
-                variants={staggerItem}
-                className="flex h-full min-h-[420px] flex-col overflow-hidden bg-white shadow-[0_12px_26px_rgba(15,23,42,0.14)]"
-              >
-                  <FallbackImage
-                    src={item.image}
-                    fallback={landingPageDefaults.gallery.items?.[0]?.image}
-                    alt={item.title}
-                    className="h-56 w-full object-cover"
-                  />
-                  <div className="flex flex-1 flex-col p-4">
-                    <h3 className="text-sm font-medium text-[#2e3135]">{item.title}</h3>
-                    <p className="mt-3 text-xs leading-5 text-[#4e4e4e]">{item.description}</p>
-                    <Link
-                      to={item.href}
-                      className="mt-auto inline-flex text-xs font-semibold text-[#e97a2f] transition hover:text-[#c86216]"
-                    >
-                      Learn More
-                    </Link>
-                  </div>
-              </motion.article>
-            ))}
+            <motion.div variants={staggerItem} className="overflow-hidden bg-white shadow-[0_12px_26px_rgba(15,23,42,0.14)]">
+              <FallbackImage
+                src={homePage.difference.image}
+                fallback={landingPageDefaults.gallery.items?.[0]?.image}
+                alt={homePage.difference.title}
+                className="h-full min-h-[420px] w-full object-cover"
+              />
+            </motion.div>
+
+            <motion.div variants={staggerItem} className="grid gap-5 md:grid-cols-2">
+              {(homePage.difference.cards ?? cardItems).map((item) => (
+                <article
+                  key={item.title}
+                  className="flex h-full min-h-[200px] flex-col overflow-hidden bg-white shadow-[0_12px_26px_rgba(15,23,42,0.14)]"
+                >
+                    <FallbackImage
+                      src={item.image}
+                      fallback={landingPageDefaults.gallery.items?.[0]?.image}
+                      alt={item.title}
+                      className="h-44 w-full object-cover"
+                    />
+                    <div className="flex flex-1 flex-col p-4">
+                      <h3 className="text-sm font-medium text-[#2e3135]">{item.title}</h3>
+                      <p className="mt-3 text-xs leading-5 text-[#4e4e4e]">{item.description}</p>
+                      <Link
+                        to={item.href ?? "/about"}
+                        className="mt-auto inline-flex text-xs font-semibold text-[#e97a2f] transition hover:text-[#c86216]"
+                      >
+                        Learn More
+                      </Link>
+                    </div>
+                </article>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -304,21 +307,16 @@ function Home() {
               className="text-2xl font-bold leading-tight tracking-[-0.03em] text-[#2e3135] sm:text-3xl lg:text-[34px]"
               showBorder={true}
             >
-                OHI Google Arts &amp; Culture Heritage Collection
+                {homePage.heritage.title}
             </UnderlinedHeading>
               <p className="mt-5 max-w-md text-sm leading-6 text-[#4e4e4e]">
-                OHI launches a digital heritage collection on Google Arts &amp; Culture
-                as part of the Africa Day celebration, creating a richer window into the
-                stories, people, and places that shape African identity. The collection
-                brings together carefully curated visual material that helps preserve
-                memory, celebrate culture, and make heritage more accessible to audiences
-                across communities and regions.
+                {homePage.heritage.description}
               </p>
               <Link
-                to="/documentary"
+                to={homePage.heritage.ctaHref ?? "/documentary"}
                 className="mt-5 inline-flex h-8 items-center justify-center bg-[#e97a2f] px-4 text-xs font-semibold text-white transition hover:bg-[#d96f1f]"
               >
-                Virtual Tours
+                {homePage.heritage.ctaLabel ?? "Virtual Tours"}
               </Link>
             </Reveal>
 
@@ -352,13 +350,13 @@ function Home() {
       <section id="support-ohi" className="bg-[linear-gradient(180deg,#e1b06d_0%,#d39a4c_100%)] py-4 text-[#3a2413]">
         <div className="container flex flex-wrap items-center justify-center gap-4 text-center">
           <p className="text-[13px] font-semibold">
-            Support OHI
+            {homePage.supporters.title}
           </p>
           <Link
-            to="/contact"
+            to={homePage.supporters.ctaHref ?? "/contact"}
             className="inline-flex h-7 items-center justify-center rounded-sm bg-[linear-gradient(180deg,#f58e1b_0%,#d76418_100%)] px-4 text-xs font-bold text-white shadow-[0_8px_18px_rgba(0,0,0,0.16)]"
           >
-            Donate Now
+            {homePage.supporters.ctaLabel ?? "Donate Now"}
           </Link>
         </div>
       </section>
@@ -406,27 +404,23 @@ function Home() {
 
             <Reveal className="max-w-xl">
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#d38a31]">
-                Leadership and storytellers
+                {homePage.leadership.eyebrow}
               </p>
               <UnderlinedHeading
                 as="h3"
                 className="mt-3 text-3xl font-bold leading-tight tracking-[-0.04em] text-[#2f3135] sm:text-[38px]"
                 showBorder={true}
               >
-                Leadership and storytellers
+                {homePage.leadership.title}
               </UnderlinedHeading>
               <p className="mt-5 max-w-2xl text-base leading-7 text-[#5a5f66]">
-                Named leadership, regional storytellers, and institutional partners
-                working across Africa and beyond, with the visibility and continuity
-                needed for long-term partnerships, stronger programme alignment, and
-                communication that supports trust, collaboration, and measurable
-                institutional outcomes.
+                {homePage.leadership.description}
               </p>
               <Link
-                to="/documentary"
+                to={homePage.leadership.ctaHref ?? "/documentary"}
                 className="mt-5 inline-flex h-8 items-center justify-center bg-[#e97a2f] px-4 text-xs font-semibold text-white transition hover:bg-[#d96f1f]"
               >
-                Learn More
+                {homePage.leadership.ctaLabel ?? "Learn More"}
               </Link>
             </Reveal>
           </div>
@@ -440,7 +434,7 @@ function Home() {
             className="text-center text-2xl font-medium tracking-[-0.03em] text-[#2f3135] sm:text-[28px]"
             showBorder={true}
           >
-            Featured Programmes
+            {homePage.programmes.title}
           </UnderlinedHeading>
 
           <motion.div
@@ -450,28 +444,9 @@ function Home() {
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
           >
-            {[ 
-              {
-                title: "UNESCO World Heritage Volunteers Initiative",
-                image: heroImages.hero1,
-                description:
-                  "The initiative aims to sensitise and develop an appreciation of World Heritage values through concrete hands-on activities, awareness-raising campaigns, and skills training.",
-              },
-              {
-                title: "OHI Visionary Voices",
-                image: heroImages.hero2,
-                description:
-                  "A curated programme focused on credible voices, practical learning, and communication that serves institutional objectives.",
-              },
-              {
-                title: "African Festivals",
-                image: heroImages.hero3,
-                description:
-                  "A cultural documentation platform that records African creative expression for public audiences, partners, and archival use.",
-              },
-            ].map((item) => (
+            {homePage.programmes.items.map((item, index) => (
               <motion.article key={item.title} variants={staggerItem} className="flex h-full min-h-[460px] flex-col overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_10px_24px_rgba(15,23,42,0.12)]">
-                  <img src={item.image} alt={item.title} className="h-60 w-full object-cover" />
+                  <img src={[heroImages.hero1, heroImages.hero2, heroImages.hero3][index]} alt={item.title} className="h-60 w-full object-cover" />
                   <div className="flex flex-1 flex-col p-4">
                     <h3 className="text-sm font-bold leading-5 text-[#a75f1a]">{item.title}</h3>
                     <p className="mt-3 text-xs leading-5 text-[#54565a]">{item.description}</p>
@@ -492,11 +467,10 @@ function Home() {
         <div className="container">
           <Reveal className="mx-auto max-w-3xl text-center">
               <h2 className="text-2xl font-bold tracking-[-0.03em] text-white sm:text-[30px]">
-              OHI Storytellers
+              {homePage.storytellers.title}
               </h2>
               <p className="mt-2 text-sm text-white/90">
-              A network of practitioners producing communication and documentary work
-              for institutions, partners, and public-interest audiences.
+              {homePage.storytellers.description}
               </p>
           </Reveal>
 
@@ -534,10 +508,10 @@ function Home() {
               View More
             </Link>
             <Link
-              to="/contact"
+              to={homePage.storytellers.ctaHref ?? "/contact"}
               className="inline-flex h-8 items-center justify-center bg-[#c65f25] px-4 text-xs font-semibold text-white transition hover:bg-[#a94f1f]"
             >
-              Contact Us
+              {homePage.storytellers.ctaLabel ?? "Contact Us"}
             </Link>
           </div>
         </div>
@@ -551,7 +525,7 @@ function Home() {
               className="text-2xl font-medium tracking-[-0.03em] text-[#2f3135] sm:text-[28px]"
               showBorder={true}
             >
-              News &amp; Blog
+              {homePage.news.title}
             </UnderlinedHeading>
             <div className="hidden flex-1 items-center justify-end gap-2 lg:flex">
               {Array.from({ length: 14 }).map((_, index) => (
@@ -589,8 +563,7 @@ function Home() {
                       {card.title}
                     </h3>
                     <p className="mt-3 text-[11px] leading-5 text-[#676767]">
-                      OHI continues to shape public-facing documentary communication and
-                      heritage documentation for institutional audiences.
+                      {homePage.news.description}
                     </p>
                     <Link
                       to="/about"

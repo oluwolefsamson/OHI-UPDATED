@@ -6,6 +6,7 @@ export const publicMenuSections = [
     label: "About OHI",
     href: "/about",
     items: [
+      { label: "About Us", href: "/about" },
       { label: "Our Background", href: "/background" },
       { label: "The Team", href: "/our-team" },
       { label: "Partners", href: "/our-partners" },

@@ -158,11 +158,12 @@ const CompanyProfile = () => {
   const difference = companyProfile.difference ?? {};
   const overview = companyProfile.overview ?? {};
   const footprintConfig = companyProfile.footprint ?? {};
+  const portfolioConfig = companyProfile.portfolio ?? {};
 
   return (
     <ProfilePageShell
       title={hero.title ?? "Documentary"}
-      heroImage={companyHeroImage}
+      heroImage={hero.image ?? companyHeroImage}
       heroImageAlt="OHI documentary hero"
       description={hero.description ?? "OHI creates development communication that helps institutions, partners, and communities understand the work being done, why it matters, and why it deserves attention from capital and policy actors."}
       descriptionClassName="text-white"
@@ -181,13 +182,17 @@ const CompanyProfile = () => {
     >
       <section className="bg-[linear-gradient(180deg,#f6b56a_0%,#eb8e37_100%)] px-4 py-10 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
-          <SectionHeader
-            title={difference.title ?? "The OHI difference"}
-            description={difference.description ?? "OHI is not positioning itself as a generic production shop. The value is strategic visibility built for development, investor, and institutional audiences."}
-            className="max-w-4xl text-left"
-            textColorClassName="text-white"
-            descriptionClassName="text-white/80"
-          />
+          <div className="mx-auto max-w-4xl text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-white/80">
+              Documentary focus
+            </p>
+            <h2 className="mt-4 text-3xl font-bold tracking-[-0.03em] text-white sm:text-4xl">
+              {difference.title ?? "The OHI difference"}
+            </h2>
+            <p className="mt-4 text-base leading-7 text-white/80 sm:text-lg">
+              {difference.description ?? "OHI is not positioning itself as a generic production shop. The value is strategic visibility built for development, investor, and institutional audiences."}
+            </p>
+          </div>
 
           <div className="mt-10 grid gap-4 md:grid-cols-3">
           {(difference.points ?? [
@@ -378,12 +383,12 @@ const CompanyProfile = () => {
             {(footprintConfig.items ?? footprint).map((item) => (
               <div
                 key={item}
-                className="border border-white/20 bg-white/10 p-5 shadow-[0_12px_28px_rgba(15,23,42,0.06)] backdrop-blur-sm"
+                className="bg-white p-5 shadow-[0_12px_28px_rgba(15,23,42,0.06)]"
               >
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/80">
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#b16a18]">
                   Coverage
                 </p>
-                <p className="mt-3 text-sm leading-6 text-white">{item}</p>
+                <p className="mt-3 text-sm leading-6 text-[#4e5a67]">{item}</p>
               </div>
             ))}
           </div>
@@ -406,7 +411,7 @@ const CompanyProfile = () => {
               >
               <div className="relative h-[250px] overflow-hidden">
                 <img
-                  src={project.image}
+                  src={project.image ?? portfolioProjects.find((item) => item.title === project.title)?.image}
                   alt={project.title}
                   className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                 />

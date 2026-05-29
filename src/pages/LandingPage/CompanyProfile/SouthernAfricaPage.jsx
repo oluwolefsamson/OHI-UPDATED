@@ -21,7 +21,7 @@ const SouthernAfricaPage = () => {
         </div>
       }
     >
-      <div className="space-y-12">
+      <div className="mx-auto max-w-6xl space-y-12 p-4 sm:p-6 lg:p-8">
         <SectionHeader
           title="Southern Africa"
           description="Institutional presence and partnerships in Southern Africa"

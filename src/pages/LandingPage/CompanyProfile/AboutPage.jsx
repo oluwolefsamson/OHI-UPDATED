@@ -4,7 +4,6 @@ import { ArrowRight, BadgeCheck, HeartHandshake, Sparkles } from "lucide-react";
 import ProfilePageShell from "../../../components/LandingPage/Profile/ProfilePageShell";
 import SectionHeader from "../../../components/LandingPage/SectionHeader";
 import { Button } from "../../../components/ui/button";
-import UnderlinedHeading from "../../../components/LandingPage/UnderlinedHeading";
 import { useLandingPageConfig } from "../../../context/LandingPageConfigContext";
 import aboutHeroImage from "../../../assets/images/profile-hero-mountain.jpg";
 import storyVisual from "../../../assets/images/Gallery/gallery-11.jpeg";
@@ -61,12 +60,17 @@ const AboutPage = () => {
   const difference = aboutPage.difference ?? {};
   const snapshot = aboutPage.snapshot ?? {};
   const close = aboutPage.close ?? {};
+  const differencePrinciples = (difference.principles ?? principles).map((item, index) => ({
+    ...item,
+    icon: item.icon ?? principles[index]?.icon,
+  }));
 
   return (
     <ProfilePageShell
       eyebrow={hero.eyebrow ?? "OHI profile"}
       title={hero.title ?? "About OHI"}
       description={hero.description ?? "OHI creates development communication that helps institutions, partners, and communities understand the work being done, why it matters, and why it deserves attention from capital and policy actors."}
+      descriptionClassName="text-white"
       primaryCta={{ label: hero.primaryCtaLabel ?? "View Portfolio", href: hero.primaryCtaHref ?? "/portfolio" }}
       secondaryCta={{ label: hero.secondaryCtaLabel ?? "Contact Us", href: hero.secondaryCtaHref ?? "/contact" }}
       heroImage={aboutHeroImage}
@@ -82,21 +86,21 @@ const AboutPage = () => {
         </div>
       }
     >
-      <section className="rounded-[36px] bg-[#fffaf5] p-4 lg:p-6">
-        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="rounded-[32px] border border-[#D9DCE2] bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-8">
+      <section className="bg-[#fffaf5] p-4 lg:p-6">
+        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-8">
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primaryColor">
               {intro.aboutLabel ?? "About OHI"}
             </p>
-            <UnderlinedHeading as="h2" className="mt-4 text-3xl font-bold tracking-[-0.03em] text-headingColor sm:text-4xl">
+            <h2 className="mt-4 text-3xl font-bold tracking-[-0.03em] text-headingColor sm:text-4xl">
               {intro.title ?? "We turn Africa's development story into strategic visibility"}
-            </UnderlinedHeading>
+            </h2>
             <p className="mt-4 text-base leading-7 text-justify text-textColor">
               {intro.description ?? "OHI creates development communication that helps institutions, partners, and communities understand the work being done and why it matters."}
             </p>
 
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-[24px] border border-[#e8dcc8] bg-[#fff9f1] p-4">
+              <div className="bg-[#fff9f1] p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b16a18]">
                   {intro.editorialLabel ?? "Editorial focus"}
                 </p>
@@ -104,7 +108,7 @@ const AboutPage = () => {
                   {intro.editorialText ?? "OHI combines strategy, production, and field storytelling into one editorial workflow."}
                 </p>
               </div>
-              <div className="rounded-[24px] border border-[#e8dcc8] bg-white p-4">
+              <div className="bg-white p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b16a18]">
                   What we do
                 </p>
@@ -129,7 +133,7 @@ const AboutPage = () => {
           </div>
 
           <div className="space-y-4">
-            <div className="overflow-hidden rounded-[32px] border border-[#D9DCE2] bg-white shadow-[0_16px_40px_rgba(15,23,42,0.06)]">
+            <div className="overflow-hidden bg-white shadow-[0_16px_40px_rgba(15,23,42,0.06)]">
               <img
                 src={storyVisual}
                 alt="OHI story visual"
@@ -137,10 +141,10 @@ const AboutPage = () => {
               />
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="overflow-hidden rounded-[28px] border border-[#D9DCE2] bg-white shadow-[0_12px_28px_rgba(15,23,42,0.06)]">
+              <div className="overflow-hidden bg-white shadow-[0_12px_28px_rgba(15,23,42,0.06)]">
                 <img src={portraitTwo} alt="OHI detail visual" className="h-[220px] w-full object-cover" />
               </div>
-              <div className="rounded-[28px] border border-[#D9DCE2] bg-[linear-gradient(180deg,#091826_0%,#12243a_100%)] p-5 text-white shadow-[0_12px_28px_rgba(15,23,42,0.12)]">
+              <div className="bg-[linear-gradient(180deg,#091826_0%,#12243a_100%)] p-5 text-white shadow-[0_12px_28px_rgba(15,23,42,0.12)]">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
                   {close.title ?? "What OHI stands for"}
                 </p>
@@ -153,65 +157,22 @@ const AboutPage = () => {
         </div>
       </section>
 
-      <section className="rounded-[36px] bg-[#f4f8fb] p-4 sm:p-6">
-        <SectionHeader
-          title={difference.title ?? "The OHI difference"}
-          description={difference.description ?? "A sharper institutional story layer that makes the case for credibility, trust, and strategic visibility."}
-        />
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {(difference.principles ?? principles).map((item) => (
-            <div key={item.title} className="rounded-[28px] border border-[#e8dcc8] bg-white p-6 shadow-[0_12px_28px_rgba(15,23,42,0.06)]">
-              <div className="flex h-16 w-16 items-center justify-center rounded-[18px] bg-[linear-gradient(180deg,rgba(245,157,33,0.04)_0%,rgba(245,157,33,0.14)_100%)] text-[#b16a18]">
-                <item.icon className="h-8 w-8" />
-              </div>
-              <UnderlinedHeading as="h3" className="mt-4 text-xl font-semibold text-headingColor">
-                {item.title}
-              </UnderlinedHeading>
-              <p className="mt-3 text-sm leading-6 text-textColor">
-                {item.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="grid gap-8 rounded-[36px] bg-[#fff3e3] p-4 lg:grid-cols-[1fr_1.05fr] lg:p-6">
-        <div className="rounded-[32px] border border-[#D9DCE2] bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primaryColor">
-            {snapshot.label ?? "OHI at a glance"}
-          </p>
-          <UnderlinedHeading as="h3" className="mt-4 text-3xl font-bold tracking-[-0.03em] text-headingColor sm:text-4xl">
-            {snapshot.title ?? "The core principles that guide OHI"}
-          </UnderlinedHeading>
-          <p className="mt-4 text-base leading-7 text-justify text-textColor">
-            {snapshot.description ?? "The documentary positions OHI as a partner for institutions that need communication with clarity, trust, and confidence."}
-          </p>
-
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">
-            {(snapshot.stats ?? stats).map((stat) => (
-              <div key={stat.label} className="rounded-[24px] border border-[#e8dcc8] bg-[#fff9f1] p-4">
-                <p className="text-3xl font-bold tracking-[-0.04em] text-headingColor">
-                  {stat.value}
-                </p>
-                <p className="mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#708496]">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="rounded-[32px] border border-[#e8dcc8] bg-[linear-gradient(180deg,#091826_0%,#12243a_100%)] p-6 text-white shadow-[0_16px_40px_rgba(15,23,42,0.12)] sm:p-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-white/80">
-            {snapshot.missionTitle ?? "Mission & vision"}
-          </p>
-          <div className="mt-5 space-y-5">
-            {(snapshot.missionItems ?? teamHighlights).map((item) => (
-              <div key={item.title} className="rounded-[24px] bg-white/10 p-5 backdrop-blur-sm">
-                <UnderlinedHeading as="h3" className="text-lg font-semibold">
+      <section className="bg-[#f4f8fb] p-4 sm:p-6">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeader
+            title={difference.title ?? "The OHI difference"}
+            description={difference.description ?? "A sharper institutional story layer that makes the case for credibility, trust, and strategic visibility."}
+          />
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {differencePrinciples.map((item) => (
+              <div key={item.title} className="bg-white p-6 shadow-[0_12px_28px_rgba(15,23,42,0.06)]">
+                <div className="flex h-16 w-16 items-center justify-center bg-[linear-gradient(180deg,rgba(245,157,33,0.04)_0%,rgba(245,157,33,0.14)_100%)] text-[#b16a18]">
+                  <item.icon className="h-8 w-8" />
+                </div>
+                <h3 className="mt-4 text-xl font-semibold text-headingColor">
                   {item.title}
-                </UnderlinedHeading>
-                <p className="mt-3 text-sm leading-6 text-white/80">
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-textColor">
                   {item.description}
                 </p>
               </div>
@@ -220,22 +181,71 @@ const AboutPage = () => {
         </div>
       </section>
 
-      <section className="rounded-[36px] bg-white p-4 sm:p-6">
-        <SectionHeader
-          title={close.title ?? "A multilingual team fluent in English, French, and Pidgin"}
-          description={close.description ?? "OHI combines strategy, production, and editorial craft to help development work communicate with confidence across Africa."}
-          className="max-w-4xl"
-        />
-        <div className="mt-8 rounded-[28px] border border-[#D9DCE2] bg-[#fffaf5] p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)]">
-          <p className="text-base leading-7 text-textColor">
-            {close.body ?? "OHI is ready to turn your next project, campaign, or report into a story that decision-makers can trust and act on."}
-          </p>
-          <div className="mt-6">
-            <Button asChild className="rounded-none bg-[#f59e0b] px-6 text-white hover:bg-[#d97706]">
-              <Link to={close.ctaHref ?? "/contact"} className="inline-flex items-center gap-2">
-                {close.ctaLabel ?? "Get a Quotation"} <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
+      <section className="bg-[#fff3e3] p-4 lg:p-6">
+        <div className="mx-auto grid w-full max-w-6xl gap-8 lg:grid-cols-[1fr_1.05fr]">
+          <div className="bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primaryColor">
+              {snapshot.label ?? "OHI at a glance"}
+            </p>
+            <h3 className="mt-4 text-3xl font-bold tracking-[-0.03em] text-headingColor sm:text-4xl">
+              {snapshot.title ?? "The core principles that guide OHI"}
+            </h3>
+            <p className="mt-4 text-base leading-7 text-justify text-textColor">
+              {snapshot.description ?? "The documentary positions OHI as a partner for institutions that need communication with clarity, trust, and confidence."}
+            </p>
+
+            <div className="mt-6 grid gap-4 sm:grid-cols-3">
+              {(snapshot.stats ?? stats).map((stat) => (
+                <div key={stat.label} className="bg-[#fff9f1] p-4">
+                  <p className="text-3xl font-bold tracking-[-0.04em] text-headingColor">
+                    {stat.value}
+                  </p>
+                  <p className="mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#708496]">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-[linear-gradient(180deg,#091826_0%,#12243a_100%)] p-6 text-white shadow-[0_16px_40px_rgba(15,23,42,0.12)] sm:p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-white/80">
+              {snapshot.missionTitle ?? "Mission & vision"}
+            </p>
+            <div className="mt-5 space-y-5">
+              {(snapshot.missionItems ?? teamHighlights).map((item) => (
+                <div key={item.title} className="bg-white/10 p-5 backdrop-blur-sm">
+                  <h3 className="text-lg font-semibold text-white">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-6 text-white/80">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white p-4 sm:p-6">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeader
+            title={close.title ?? "A multilingual team fluent in English, French, and Pidgin"}
+            description={close.description ?? "OHI combines strategy, production, and editorial craft to help development work communicate with confidence across Africa."}
+            className="max-w-4xl"
+          />
+          <div className="mt-8 bg-[#fffaf5] p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)]">
+            <p className="text-base leading-7 text-textColor">
+              {close.body ?? "OHI is ready to turn your next project, campaign, or report into a story that decision-makers can trust and act on."}
+            </p>
+            <div className="mt-6">
+              <Button asChild className="rounded-none bg-[#f59e0b] px-6 text-white hover:bg-[#d97706]">
+                <Link to={close.ctaHref ?? "/contact"} className="inline-flex items-center gap-2">
+                  {close.ctaLabel ?? "Get a Quotation"} <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>

@@ -2,14 +2,15 @@ import * as React from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   BriefcaseBusiness,
+  FileText,
   Images,
   PaletteIcon,
   PartyPopper,
   PenSquare,
   Search,
+  Sparkles,
   ShieldCheck,
   SquareUserRound,
-  Sparkles,
   SwatchBook,
   TextIcon,
   Video,
@@ -30,6 +31,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSkeleton,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
   useSidebar,
 } from "../../components/ui/sidebar";
 import OhiLogo from "../LandingPage/Logo/logo";
@@ -49,57 +53,80 @@ const mainItems = [
   },
 ];
 
-const sectionItems = [
-  { title: "Home Hero", url: "/dashboard/landing-page#hero-content", icon: Sparkles },
-  { title: "Theme", url: "/dashboard/landing-page#theme-settings", icon: SwatchBook },
-  { title: "About Page", url: "/dashboard/landing-page#about-page", icon: PenSquare },
-  { title: "Why OHI", url: "/dashboard/landing-page#why-ohi", icon: PartyPopper },
+const sitePages = [
   {
-    title: "Who We Serve",
-    url: "/dashboard/landing-page#who-we-serve",
-    icon: SquareUserRound,
-  },
-  { title: "Gallery", url: "/dashboard/landing-page#gallery", icon: Images },
-  {
-    title: "Gallery Stories",
-    url: "/dashboard/landing-page#gallery-stories",
-    icon: TextIcon,
-  },
-  { title: "Video Section", url: "/dashboard/landing-page#video-section", icon: Video },
-  {
-    title: "Mission, Vision & Values",
-    url: "/dashboard/landing-page#mission-vision-values",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Selected Voices",
-    url: "/dashboard/landing-page#selected-voices",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Footer",
-    url: "/dashboard/landing-page#footer-settings",
-    icon: ShieldCheck,
+    title: "Home",
+    url: "/dashboard/landing-page#hero-content",
+    icon: Sparkles,
+    sections: [
+      { title: "Hero", url: "/dashboard/landing-page#home-hero", icon: Sparkles },
+      { title: "About Us", url: "/dashboard/landing-page#home-about", icon: PenSquare },
+      { title: "About OHI", url: "/dashboard/landing-page#home-about", icon: PenSquare },
+      { title: "OHI Difference", url: "/dashboard/landing-page#home-difference", icon: PartyPopper },
+      { title: "OHI Google Arts & Culture Heritage Collection", url: "/dashboard/landing-page#home-heritage", icon: Images },
+      { title: "Leadership and storytellers", url: "/dashboard/landing-page#home-leadership", icon: ShieldCheck },
+      { title: "Featured Programmes", url: "/dashboard/landing-page#home-programmes", icon: BriefcaseBusiness },
+      { title: "OHI Storytellers", url: "/dashboard/landing-page#home-storytellers", icon: SquareUserRound },
+      { title: "News & Blog", url: "/dashboard/landing-page#home-news", icon: TextIcon },
+      { title: "OurPartners / Supporters", url: "/dashboard/landing-page#home-supporters", icon: FileText },
+    ],
   },
   {
     title: "Documentary",
     url: "/dashboard/landing-page#company-profile",
     icon: Sparkles,
+    sections: [
+      { title: "Hero", url: "/dashboard/landing-page#company-profile", icon: Sparkles },
+      { title: "Difference", url: "/dashboard/landing-page#company-profile", icon: PartyPopper },
+      { title: "Overview", url: "/dashboard/landing-page#company-profile", icon: PenSquare },
+      { title: "Footprint", url: "/dashboard/landing-page#company-profile", icon: FileText },
+      { title: "Featured Story", url: "/dashboard/landing-page#company-profile", icon: Images },
+    ],
   },
   {
-    title: "Services Page",
+    title: "About",
+    url: "/dashboard/landing-page#about-page",
+    icon: PenSquare,
+    sections: [
+      { title: "Hero", url: "/dashboard/landing-page#about-page", icon: Sparkles },
+      { title: "Intro", url: "/dashboard/landing-page#about-page", icon: PenSquare },
+      { title: "Difference", url: "/dashboard/landing-page#about-page", icon: PartyPopper },
+      { title: "Snapshot", url: "/dashboard/landing-page#about-page", icon: ShieldCheck },
+      { title: "Close", url: "/dashboard/landing-page#about-page", icon: FileText },
+    ],
+  },
+  {
+    title: "Services",
     url: "/dashboard/landing-page#services-page",
     icon: BriefcaseBusiness,
+    sections: [
+      { title: "Hero", url: "/dashboard/landing-page#services-page", icon: Sparkles },
+      { title: "Core services", url: "/dashboard/landing-page#services-page", icon: BriefcaseBusiness },
+      { title: "Formats", url: "/dashboard/landing-page#services-page", icon: TextIcon },
+      { title: "Delivery approach", url: "/dashboard/landing-page#services-page", icon: ShieldCheck },
+      { title: "Showcase", url: "/dashboard/landing-page#services-page", icon: Images },
+    ],
   },
   {
-    title: "Portfolio Page",
+    title: "Portfolio",
     url: "/dashboard/landing-page#portfolio-page",
     icon: Images,
+    sections: [
+      { title: "Hero", url: "/dashboard/landing-page#portfolio-page", icon: Sparkles },
+      { title: "Header", url: "/dashboard/landing-page#portfolio-page", icon: PenSquare },
+      { title: "Projects", url: "/dashboard/landing-page#portfolio-page", icon: Images },
+      { title: "Method", url: "/dashboard/landing-page#portfolio-page", icon: ShieldCheck },
+    ],
   },
   {
-    title: "Leadership Page",
+    title: "Leadership",
     url: "/dashboard/landing-page#leadership-page",
     icon: ShieldCheck,
+    sections: [
+      { title: "Hero", url: "/dashboard/landing-page#leadership-page", icon: Sparkles },
+      { title: "Leader", url: "/dashboard/landing-page#leadership-page", icon: PenSquare },
+      { title: "Highlights", url: "/dashboard/landing-page#leadership-page", icon: ShieldCheck },
+    ],
   },
 ];
 
@@ -113,6 +140,14 @@ export function AppSidebar(props) {
   const { user } = useAdminAuth();
   const location = useLocation();
   const collapsed = state === "collapsed";
+  const [openSections, setOpenSections] = React.useState({
+    Home: true,
+    Documentary: true,
+    About: true,
+    Services: true,
+    Portfolio: true,
+    Leadership: true,
+  });
 
   const [isMobile, setIsMobile] = React.useState(
     typeof window !== "undefined" ? window.innerWidth < 768 : false
@@ -128,6 +163,12 @@ export function AppSidebar(props) {
       clearTimeout(timer);
     };
   }, []);
+
+  React.useEffect(() => {
+    if (location.pathname === "/dashboard/landing-page") {
+      setOpenSections((current) => ({ ...current, Home: true }));
+    }
+  }, [location.pathname]);
 
   const sidebarUser = {
     name: user?.name || "OHI Admin",
@@ -239,27 +280,50 @@ export function AppSidebar(props) {
           </SidebarMenu>
         </SidebarGroup>
 
-        <SidebarGroup className="px-0">
-          <SidebarGroupLabel className="px-5 pt-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-            Sections
-          </SidebarGroupLabel>
-          <SidebarMenu className="px-3">
-            {sectionItems.map((item) => {
-              const active = isActivePath(location, item.url);
-              const Icon = item.icon;
-              return (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild size="sm" isActive={active} tooltip={collapsed ? item.title : undefined}>
-                    <Link to={item.url}>
-                      <Icon className="h-4 w-4" />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              );
-            })}
-          </SidebarMenu>
-        </SidebarGroup>
+        {sitePages.map((page) => (
+          <SidebarGroup key={page.title} className="px-0">
+            <SidebarGroupLabel className="px-5 pt-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+              {page.title}
+            </SidebarGroupLabel>
+            <SidebarMenu className="px-3">
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  size="sm"
+                  isActive={isActivePath(location, page.url)}
+                  tooltip={collapsed ? page.title : undefined}
+                  onClick={() =>
+                    setOpenSections((current) => ({
+                      ...current,
+                      [page.title]: !current[page.title],
+                    }))
+                  }
+                >
+                  <page.icon className="h-4 w-4" />
+                  <span>{page.title}</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              {openSections[page.title] && (
+                <SidebarMenuSub>
+                  {page.sections.map((item) => {
+                    const active = isActivePath(location, item.url);
+                    const Icon = item.icon;
+                    return (
+                      <SidebarMenuSubItem key={`${page.title}-${item.title}`}>
+                        <SidebarMenuSubButton asChild isActive={active}>
+                          <Link to={item.url}>
+                            <Icon className="h-4 w-4" />
+                            <span>{item.title}</span>
+                          </Link>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    );
+                  })}
+                </SidebarMenuSub>
+              )}
+            </SidebarMenu>
+          </SidebarGroup>
+        ))}
       </SidebarContent>
 
       <SidebarFooter className="border-t border-border bg-background/80 backdrop-blur">

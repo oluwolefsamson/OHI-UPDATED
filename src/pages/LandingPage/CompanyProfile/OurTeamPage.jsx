@@ -138,6 +138,7 @@ const OurTeamPage = () => {
       }
     >
       <section className="px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+        <div className="mx-auto max-w-6xl">
         <div className="text-center">
           <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-[0.02em] text-[#2b313a]">
             Executive Team
@@ -169,11 +170,12 @@ const OurTeamPage = () => {
             </div>
           ))}
         </div>
+        </div>
       </section>
 
       {/* Board of Trustees Section */}
-      <section className="w-screen relative left-[calc(-50vw+50%)] bg-[#bb7422] px-4 py-14 sm:px-6 sm:py-16 md:py-20 lg:px-8">
-        <div className="container mx-auto px-0">
+      <section className="bg-[#bb7422] px-4 py-14 sm:px-6 sm:py-16 md:py-20 lg:px-8">
+        <div className="mx-auto max-w-6xl px-0">
           <div className="text-center">
             <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-[0.02em] text-white">
               Board of Trustees

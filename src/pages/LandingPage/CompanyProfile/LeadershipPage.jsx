@@ -61,8 +61,9 @@ const LeadershipPage = () => {
         </div>
       }
     >
-      <section className="grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
-        <div className="rounded-[32px] border border-[#D9DCE2] bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-8">
+      <section className="bg-white p-4 sm:p-6">
+        <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.08fr_0.92fr]">
+        <div className="bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-8">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primaryColor">
             Named leadership
           </p>
@@ -99,26 +100,29 @@ const LeadershipPage = () => {
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-none border border-[#e8dcc8] bg-white shadow-[0_16px_40px_rgba(15,23,42,0.06)]">
+        <div className="overflow-hidden bg-white shadow-[0_16px_40px_rgba(15,23,42,0.06)]">
           <img src={leaderPortrait} alt="OHI leader portrait" className="h-full min-h-[420px] w-full object-cover" />
+        </div>
         </div>
       </section>
 
-      <section className="rounded-[36px] bg-[#f4f8fb] p-4 sm:p-6">
-        <SectionHeader
-          title="Why leadership matters"
-          description="Institutional buyers want to know who is accountable, who is credible, and who can execute across markets."
-        />
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {(highlights ?? leadershipHighlights).map((item) => (
-            <div key={item.title} className="rounded-[28px] border border-[#e8dcc8] bg-white p-6 shadow-[0_12px_28px_rgba(15,23,42,0.06)]">
-              <item.icon className="h-5 w-5 text-[#b16a18]" />
-              <UnderlinedHeading as="h3" className="mt-4 text-xl font-semibold text-headingColor">
-                {item.title}
-              </UnderlinedHeading>
-              <p className="mt-3 text-sm leading-6 text-textColor">{item.description}</p>
-            </div>
-          ))}
+      <section className="bg-[#f4f8fb] p-4 sm:p-6">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeader
+            title="Why leadership matters"
+            description="Institutional buyers want to know who is accountable, who is credible, and who can execute across markets."
+          />
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {(highlights ?? leadershipHighlights).map((item) => (
+              <div key={item.title} className="bg-white p-6 shadow-[0_12px_28px_rgba(15,23,42,0.06)]">
+                <item.icon className="h-5 w-5 text-[#b16a18]" />
+                <UnderlinedHeading as="h3" className="mt-4 text-xl font-semibold text-headingColor">
+                  {item.title}
+                </UnderlinedHeading>
+                <p className="mt-3 text-sm leading-6 text-textColor">{item.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </ProfilePageShell>

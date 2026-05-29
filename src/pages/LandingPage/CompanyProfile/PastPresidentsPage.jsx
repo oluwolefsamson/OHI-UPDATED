@@ -21,7 +21,7 @@ const PastPresidentsPage = () => {
         </div>
       }
     >
-      <div className="space-y-12">
+      <div className="mx-auto max-w-6xl space-y-12 p-4 sm:p-6 lg:p-8">
         <SectionHeader
           title="Past Presidents"
           description="The leaders who have guided OHI's institutional development"

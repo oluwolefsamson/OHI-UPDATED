@@ -88,6 +88,96 @@ export const landingPageDefaults = {
     secondaryCtaLabel: "Our Story",
     secondaryCtaHref: "/about",
   },
+  homePage: {
+    about: {
+      title: "Olympian House International",
+      description:
+        "Olympian House International (OHI) creates development communication that helps institutions, partners, and communities understand what is being delivered, why it matters, and why it deserves sustained support.",
+      ctaLabel: "Learn More",
+      ctaHref: "/about",
+    },
+    difference: {
+      title: "The OHI difference",
+      description:
+        "Strategic communication for institutions, donors, investors, and partners.",
+      image: gallery04,
+      cards: [
+        {
+          title: "Programmes with evidence",
+          description: "OHI turns complex work into clear stories that support action.",
+          image: gallery01,
+        },
+        {
+          title: "Institutional fluency",
+          description: "The language stays grounded in how partners actually work.",
+          image: gallery02,
+        },
+        {
+          title: "Regional delivery",
+          description: "The team works across Africa with a practical understanding of context.",
+          image: gallery03,
+        },
+        {
+          title: "Visibility that converts",
+          description: "The content is designed to be useful across reports, web, and outreach.",
+          image: gallery05,
+        },
+      ],
+    },
+    heritage: {
+      title: "OHI Google Arts & Culture Heritage Collection",
+      description:
+        "OHI launches a digital heritage collection on Google Arts & Culture as part of the Africa Day celebration.",
+      ctaLabel: "Virtual Tours",
+      ctaHref: "/documentary",
+    },
+    leadership: {
+      eyebrow: "Leadership and storytellers",
+      title: "Leadership and storytellers",
+      description:
+        "Named leadership, regional storytellers, and institutional partners working across Africa and beyond.",
+      ctaLabel: "Learn More",
+      ctaHref: "/documentary",
+    },
+    programmes: {
+      title: "Featured Programmes",
+      items: [
+        {
+          title: "UNESCO World Heritage Volunteers Initiative",
+          description:
+            "The initiative aims to sensitise and develop an appreciation of World Heritage values through hands-on activities, awareness-raising campaigns, and skills training.",
+        },
+        {
+          title: "OHI Visionary Voices",
+          description:
+            "A curated programme focused on credible voices, practical learning, and communication that serves institutional objectives.",
+        },
+        {
+          title: "African Festivals",
+          description:
+            "A cultural documentation platform that records African creative expression for public audiences, partners, and archival use.",
+        },
+      ],
+    },
+    storytellers: {
+      title: "OHI Storytellers",
+      description:
+        "A network of practitioners producing communication and documentary work for institutions, partners, and public-interest audiences.",
+      ctaLabel: "Contact Us",
+      ctaHref: "/contact",
+    },
+    news: {
+      title: "News & Blog",
+      description:
+        "OHI continues to shape public-facing documentary communication and heritage documentation for institutional audiences.",
+    },
+    supporters: {
+      title: "OurPartners / Supporters",
+      description: "Support OHI and connect with the team for partnership or funding.",
+      ctaLabel: "Donate Now",
+      ctaHref: "/contact",
+    },
+  },
   about: {
     title: "Our Story",
     paragraphs: [
@@ -408,36 +498,42 @@ export const landingPageDefaults = {
         {
           title: "Program visibility films",
           category: "Development communication",
+          image: gallery01,
           description:
             "Clear communication that helps teams show results, context, and institutional value.",
         },
         {
           title: "Stakeholder event coverage",
           category: "Event production",
+          image: gallery02,
           description:
             "Fast, polished coverage for launches, convenings, and milestone moments.",
         },
         {
           title: "Human-centered interviews",
           category: "Story gathering",
+          image: gallery03,
           description:
             "Short-form stories that make complex initiatives feel relatable and real.",
         },
         {
           title: "Campaign content packages",
           category: "Multi-channel delivery",
+          image: gallery04,
           description:
             "Reusable content for reports, digital campaigns, and partner updates.",
         },
         {
           title: "Field documentation",
           category: "On-location production",
+          image: gallery05,
           description:
             "Visual reporting from communities, project sites, and implementation work.",
         },
         {
           title: "Impact storytelling",
           category: "Strategic visibility",
+          image: gallery06,
           description:
             "Editorial visuals built to support credibility, trust, and action.",
         },

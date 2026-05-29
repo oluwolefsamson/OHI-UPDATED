@@ -22,8 +22,8 @@ const OurPlatformsPage = () => {
         </div>
       }
     >
-      <div className="grid gap-8 rounded-[36px] bg-[#fffaf5] p-4 lg:grid-cols-[1.05fr_0.95fr] lg:p-6">
-        <div className="max-w-2xl">
+      <div className="mx-auto grid max-w-6xl gap-8 bg-[#fffaf5] p-4 lg:grid-cols-[1.05fr_0.95fr] lg:p-6">
+        <div>
           <SectionHeader
             title="Our Platforms"
             description="Digital and communication channels used to support institutional delivery"
@@ -41,7 +41,7 @@ const OurPlatformsPage = () => {
           </div>
         </div>
 
-        <div className="relative min-h-[320px] overflow-hidden rounded-none border border-[#e8dcc8] bg-white shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:min-h-[420px]">
+        <div className="relative min-h-[320px] overflow-hidden bg-white shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:min-h-[420px]">
           <img
             src={platformImage}
             alt="OHI platforms visual"

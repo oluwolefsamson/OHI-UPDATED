@@ -106,32 +106,32 @@ const ServicesPage = () => {
         { eyebrow: "Retention", value: "95%", label: "Repeat-client rate" },
       ]}
     >
-      <section className="rounded-[36px] bg-[#fffaf5] px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-18">
-        <SectionHeader
-          title="Core services"
-          description="OHI is a partner for institutions that need clear, credible, and investment-grade storytelling."
-        />
-        <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {services.cards.map((card, index) => (
-            <Reveal key={card.name} delay={0.04 + index * 0.04}>
-              <article className="rounded-[28px] border border-[#e8dcc8] bg-white p-6 shadow-[0_12px_28px_rgba(15,23,42,0.06)] transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(201,107,23,0.1)]">
-                <div
-                  className="h-2 w-20 rounded-full"
-                  style={{ backgroundColor: card.textColor }}
-                />
-                <h3 className="font-display mt-5 text-2xl font-semibold text-[#173145]">{card.name}</h3>
-                <p className="font-body mt-4 text-base leading-7 text-[#4e5a67]">{card.desc}</p>
-              </article>
-            </Reveal>
-          ))}
+      <section className="bg-[#fffaf5] px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-18">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeader
+            title="Core services"
+            description="OHI is a partner for institutions that need clear, credible, and investment-grade storytelling."
+          />
+          <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {services.cards.map((card, index) => (
+              <Reveal key={card.name} delay={0.04 + index * 0.04}>
+                <article className="bg-white p-6 shadow-[0_12px_28px_rgba(15,23,42,0.06)] transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(201,107,23,0.1)]">
+                  <div
+                    className="h-2 w-20"
+                    style={{ backgroundColor: card.textColor }}
+                  />
+                  <h3 className="font-display mt-5 text-2xl font-semibold text-[#173145]">{card.name}</h3>
+                  <p className="font-body mt-4 text-base leading-7 text-[#4e5a67]">{card.desc}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section
-        className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-[#bb7422] py-14 sm:py-16 lg:py-20"
-      >
-        <div className="container grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="border border-[#bb7422] bg-white p-6 text-white shadow-[0_12px_30px_rgba(15,23,42,0.08)]">
+      <section className="overflow-hidden bg-[#bb7422] py-14 sm:py-16 lg:py-20">
+        <div className="mx-auto grid max-w-6xl gap-6 px-4 lg:grid-cols-[1.1fr_0.9fr] sm:px-6 lg:px-8">
+          <div className="bg-white p-6 text-white shadow-[0_12px_30px_rgba(15,23,42,0.08)]">
             <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-[#173145]">
               Communication formats
             </p>
@@ -153,7 +153,7 @@ const ServicesPage = () => {
             </div>
           </div>
 
-          <div className="border border-[#bb7422] bg-white p-6 text-white shadow-[0_12px_30px_rgba(15,23,42,0.08)]">
+          <div className="bg-white p-6 text-white shadow-[0_12px_30px_rgba(15,23,42,0.08)]">
             <div className="flex items-center gap-3">
               <Megaphone className="h-5 w-5 text-[#bb7422]" />
               <h3 className="font-display text-2xl font-semibold tracking-[-0.03em] text-[#173145]">How the work travels</h3>
@@ -183,7 +183,7 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      <section className="w-screen relative left-1/2 -translate-x-1/2 bg-[linear-gradient(180deg,#eef6fb_0%,#e3eff8_28%,#d8e8f5_100%)] px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+      <section className="bg-[linear-gradient(180deg,#eef6fb_0%,#e3eff8_28%,#d8e8f5_100%)] px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <div className="mx-auto max-w-6xl">
           <SectionHeader
             title="Formats in practice"
