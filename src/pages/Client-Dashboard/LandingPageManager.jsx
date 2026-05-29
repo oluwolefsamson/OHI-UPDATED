@@ -14,6 +14,7 @@ import {
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { Textarea } from "../../components/ui/textarea";
+import { FileInput } from "../../components/ui/file-input";
 import { motion } from "framer-motion";
 import { AnimatedText } from "../../components/ui/AnimatedText";
 import { useNotifications } from "../../context/NotificationContext";
@@ -108,21 +109,7 @@ function TextArea(props) {
 function ImageField({ label, value, onChange, hint }) {
   return (
     <Field label={label} hint={hint}>
-      <div className="flex flex-col gap-3 rounded-2xl border border-dashed border-border bg-muted/40 p-4">
-        <div className="flex items-center gap-4">
-          <img
-            src={value}
-            alt={label}
-            className="h-20 w-20 rounded-2xl object-cover ring-1 ring-slate-200"
-          />
-          <Input
-            type="file"
-            accept="image/*"
-            onChange={onChange}
-            className="block w-full text-sm text-foreground file:mr-4 file:rounded-full file:border-0 file:bg-primaryColor file:px-4 file:py-2 file:text-white hover:file:cursor-pointer"
-          />
-        </div>
-      </div>
+      <FileInput label="Choose file" value={value} accept="image/*" onChange={onChange} previewAlt={label} />
     </Field>
   );
 }
@@ -533,7 +520,7 @@ export default function LandingPageManager() {
             "Video / reel content and clips",
             "Mission, vision, and values",
             "Partners / reviews and quotes",
-            "Colors and background images",
+            "Colors",
             "Footer copy and contact details",
             "Logo and favicon are handled in the app shell",
             "FAQ, testimonial, and feature sections stay code-managed",
@@ -552,11 +539,11 @@ export default function LandingPageManager() {
         <SectionCard
           id="theme-settings"
           title="Theme Settings"
-          description="Set the colors and page backgrounds used by the public homepage."
+          description="Set the colors used by the public homepage."
           onSave={() => {
             setConfig((current) => ({ ...current, theme: draftConfig.theme }));
             toast.success("Theme Settings saved!");
-            addNotification("Theme colors and backgrounds have been updated.", "success", "Theme Settings Saved");
+            addNotification("Theme colors have been updated.", "success", "Theme Settings Saved");
           }}
           saveLabel="Update Theme Settings"
         >
@@ -577,37 +564,6 @@ export default function LandingPageManager() {
                 className="h-12 w-full rounded-xl bg-background p-1"
               />
             </Field>
-            <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-4 md:col-span-2 xl:col-span-2">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                Hero / Header / Footer backgrounds
-              </p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
-                These are permanently set from the code defaults and are no longer editable in the dashboard.
-              </p>
-              <div className="mt-4 grid gap-4 sm:grid-cols-3">
-                <div className="overflow-hidden rounded-2xl border border-slate-100">
-                  <img
-                    src={draftConfig.theme.heroBgImage}
-                    alt="Hero background"
-                    className="h-28 w-full object-cover"
-                  />
-                </div>
-                <div className="overflow-hidden rounded-2xl border border-slate-100">
-                  <img
-                    src={draftConfig.theme.headerBgImage}
-                    alt="Header background"
-                    className="h-28 w-full object-cover"
-                  />
-                </div>
-                <div className="overflow-hidden rounded-2xl border border-slate-100">
-                  <img
-                    src={draftConfig.theme.heroBgImage}
-                    alt="Footer background"
-                    className="h-28 w-full object-cover"
-                  />
-                </div>
-              </div>
-            </div>
           </div>
         </SectionCard>
 

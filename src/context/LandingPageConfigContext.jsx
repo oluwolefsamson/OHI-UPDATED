@@ -107,8 +107,6 @@ function normalizeConfig(config) {
   const nextTheme = config.theme
     ? {
         ...config.theme,
-        heroBgImage: landingPageDefaults.theme.heroBgImage,
-        headerBgImage: landingPageDefaults.theme.headerBgImage,
       }
     : null;
   const nextAbout = config.about
@@ -186,8 +184,6 @@ function applyThemeVars(theme) {
   root.style.setProperty("--ohi-primary", theme.primaryColor);
   root.style.setProperty("--ohi-accent", theme.accentColor);
   root.style.setProperty("--ohi-hero-text", theme.heroButtonText);
-  root.style.setProperty("--ohi-hero-bg", `url("${theme.heroBgImage}")`);
-  root.style.setProperty("--ohi-header-bg", `url("${theme.headerBgImage}")`);
 }
 
 function buildLandingPageConfig(rawConfig) {

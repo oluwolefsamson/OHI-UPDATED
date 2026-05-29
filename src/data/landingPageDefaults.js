@@ -1,6 +1,4 @@
 import { Camera, Clapperboard, Film } from "lucide-react";
-import heroBg from "../assets/images/hero-bg.png";
-import headerBg from "../assets/images/mask.png";
 import hero1 from "../assets/images/HeroImg/hero1.jpeg";
 import hero2 from "../assets/images/HeroImg/hero2.jpeg";
 import hero3 from "../assets/images/HeroImg/hero3.jpeg";
@@ -41,8 +39,6 @@ export const landingPageDefaults = {
     primaryColor: "#05c1ff",
     accentColor: "#f9a11b",
     heroButtonText: "#ffffff",
-    heroBgImage: heroBg,
-    headerBgImage: headerBg,
   },
   hero: {
     slides: [

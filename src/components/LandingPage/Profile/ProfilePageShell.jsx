@@ -21,7 +21,7 @@ export default function ProfilePageShell({
 }) {
   return (
     <>
-      <section className="hero__section">
+      <section className="hero__section py-0">
         <div
           className={`relative w-full overflow-hidden rounded-none ${
             heroVariant === "minimal"
@@ -37,8 +37,8 @@ export default function ProfilePageShell({
                 className="absolute inset-0 h-full w-full object-cover opacity-80"
               />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,15,0.18)_0%,rgba(8,10,15,0.58)_56%,rgba(8,10,15,0.84)_100%)]" />
-              <div className="absolute inset-x-0 top-0 h-2 bg-[#f59e0b]" />
-              <div className="relative container mx-auto flex min-h-[440px] px-4 pb-20 pt-28 sm:min-h-[500px] sm:px-5 lg:min-h-[540px] lg:px-20 lg:pb-28 lg:pt-32">
+              <div className="absolute inset-x-0 top-0 h-2 bg-[#bb7422]" />
+              <div className="relative container mx-auto flex min-h-[440px] px-4 sm:min-h-[500px] sm:px-5 lg:min-h-[540px] lg:px-20">
                 <div className="grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-end">
                   <div className={`max-w-4xl ${heroContentClassName}`.trim()}>
                     <Reveal delay={0.04}>
@@ -48,7 +48,7 @@ export default function ProfilePageShell({
                     </Reveal>
                     <Reveal as="h1" delay={0.08}>
                       <span
-                        className={`font-display mt-3 inline-block border-b-[10px] border-[#f59e0b] pb-3 text-4xl font-semibold leading-none text-white sm:text-5xl lg:text-6xl ${titleClassName}`.trim()}
+                        className={`font-display mt-3 inline-block border-b-[10px] border-[#bb7422] pb-3 text-4xl font-semibold leading-none text-white sm:text-5xl lg:text-6xl ${titleClassName}`.trim()}
                       >
                         {title}
                       </span>
@@ -116,9 +116,9 @@ export default function ProfilePageShell({
               />
               <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,10,15,0.88)_0%,rgba(8,10,15,0.62)_46%,rgba(8,10,15,0.28)_100%)]" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(245,158,11,0.14),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(249,115,22,0.12),transparent_30%)]" />
-              <div className="absolute inset-x-0 top-0 h-2 bg-[#f59e0b]" />
+              <div className="absolute inset-x-0 top-0 h-2 bg-[#bb7422]" />
 
-              <div className="relative z-10 flex min-h-[460px] flex-col justify-center py-8 lg:min-h-[540px] lg:py-10">
+              <div className="relative z-10 flex min-h-[460px] flex-col justify-center py-0 lg:min-h-[540px]">
                 <div className="container h-full">
                   <div className="grid gap-8 lg:grid-cols-[1.06fr_0.94fr] lg:items-end">
                     <div className="max-w-2xl">

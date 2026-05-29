@@ -63,7 +63,7 @@ const editableItems = [
   },
   {
     title: "Theme and colors",
-    description: "Primary color, accent, and background images.",
+    description: "Primary color and accent.",
     icon: PaletteIcon,
     route: "/dashboard/landing-page",
   },

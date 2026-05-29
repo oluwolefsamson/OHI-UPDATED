@@ -66,11 +66,6 @@ const Brochure = () => {
       className="relative left-1/2 mt-16 w-screen -translate-x-1/2 overflow-hidden shadow-sm"
     >
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "var(--ohi-hero-bg)" }}
-        aria-hidden="true"
-      />
-      <div
         className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.96)_0%,rgba(255,255,255,0.9)_44%,rgba(255,248,237,0.84)_100%)]"
         aria-hidden="true"
       />

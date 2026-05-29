@@ -9,7 +9,6 @@ import serviceImage05 from "../../../assets/images/Gallery/gallery-05.jpeg";
 import serviceImage06 from "../../../assets/images/Gallery/gallery-06.jpeg";
 import serviceImage07 from "../../../assets/images/Gallery/gallery-07.jpeg";
 import serviceImage08 from "../../../assets/images/Gallery/gallery-08.jpeg";
-import heroBgImage from "../../../assets/images/hero-bg.png";
 import profileHeroMountain from "../../../assets/images/profile-hero-mountain.jpg";
 import { useLandingPageConfig } from "../../../context/LandingPageConfigContext";
 import ProfilePageShell from "../../../components/LandingPage/Profile/ProfilePageShell";
@@ -127,15 +126,14 @@ const ServicesPage = () => {
       </section>
 
       <section
-        className="mt-12 relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-cover bg-center bg-no-repeat py-8 sm:py-10 lg:py-12"
-        style={{ backgroundImage: `url(${heroBgImage})` }}
+        className="mt-12 relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-[#bb7422] py-8 sm:py-10 lg:py-12"
       >
         <div className="container grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="rounded-[28px] border border-[#e8dcc8] bg-white/88 p-6 text-[#173145] shadow-[0_12px_30px_rgba(15,23,42,0.08)] backdrop-blur-sm">
-            <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-[#b16a18]">
+          <div className="border border-[#bb7422] bg-white p-6 text-white shadow-[0_12px_30px_rgba(15,23,42,0.08)]">
+            <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-[#173145]">
               Communication formats
             </p>
-            <h3 className="font-display mt-4 text-3xl font-semibold tracking-[-0.03em]">
+            <h3 className="font-display mt-4 text-3xl font-semibold tracking-[-0.03em] text-[#173145]">
               Visual formats built for clarity
             </h3>
             <p className="font-body mt-4 leading-7 text-[#4e5a67]">
@@ -144,8 +142,8 @@ const ServicesPage = () => {
             <div className="mt-6 space-y-3">
               {serviceFormats.map((item, index) => (
                 <Reveal key={item} delay={0.05 + index * 0.03}>
-                  <div className="flex items-center gap-3 rounded-2xl bg-[#fff8ef] px-4 py-3 transition duration-300 ease-out hover:bg-white">
-                    <VideoIcon className="h-4 w-4 text-[#b16a18]" />
+                  <div className="flex items-center gap-3 bg-[#fff8ef] px-4 py-3 transition duration-300 ease-out hover:bg-white">
+                    <VideoIcon className="h-4 w-4 text-[#bb7422]" />
                     <span className="font-body text-sm font-medium text-[#173145]">{item}</span>
                   </div>
                 </Reveal>
@@ -153,18 +151,18 @@ const ServicesPage = () => {
             </div>
           </div>
 
-          <div className="rounded-[28px] border border-[#e8dcc8] bg-white/88 p-6 text-[#173145] shadow-[0_12px_30px_rgba(15,23,42,0.08)] backdrop-blur-sm">
+          <div className="border border-[#bb7422] bg-white p-6 text-white shadow-[0_12px_30px_rgba(15,23,42,0.08)]">
             <div className="flex items-center gap-3">
-              <Megaphone className="h-5 w-5 text-[#b16a18]" />
-              <h3 className="font-display text-2xl font-semibold tracking-[-0.03em]">How the work travels</h3>
+              <Megaphone className="h-5 w-5 text-[#bb7422]" />
+              <h3 className="font-display text-2xl font-semibold tracking-[-0.03em] text-[#173145]">How the work travels</h3>
             </div>
             <p className="font-body mt-4 text-base leading-7 text-[#4e5a67]">
               OHI frames each format as a communication asset, not just a video. The result is content that can be used across reports, websites, social channels, presentations, and stakeholder engagement.
             </p>
-            <div className="mt-6 rounded-[24px] bg-[#fff8ef] p-5">
+            <div className="mt-6 bg-[#fff8ef] p-5">
               <div className="flex items-center gap-3">
-                <Film className="h-5 w-5 text-[#b16a18]" />
-                <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-[#b16a18]">
+                <Film className="h-5 w-5 text-[#bb7422]" />
+                <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-[#bb7422]">
                   Delivery approach
                 </p>
               </div>
@@ -183,7 +181,7 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      <section className="mt-16 rounded-[36px] bg-[linear-gradient(180deg,#eef6fb_0%,#e3eff8_28%,#d8e8f5_100%)] px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+      <section className="mt-16 w-screen relative left-1/2 -translate-x-1/2 bg-[linear-gradient(180deg,#eef6fb_0%,#e3eff8_28%,#d8e8f5_100%)] px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <SectionHeader
             title="Formats in practice"
@@ -193,7 +191,7 @@ const ServicesPage = () => {
           <div className="mt-10 space-y-5">
             {serviceShowcase.map((item, index) => (
               <Reveal key={item.title} delay={0.06 + index * 0.05}>
-                <article className="overflow-hidden rounded-[24px] border border-[#e8dcc8] bg-white shadow-[0_12px_30px_rgba(15,23,42,0.08)] transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(201,107,23,0.1)]">
+        <article className="overflow-hidden rounded-[24px] border border-white/20 bg-white shadow-[0_12px_30px_rgba(15,23,42,0.08)] transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(201,107,23,0.1)]">
                   <div className="grid items-stretch md:grid-cols-2">
                     <div
                       className={`relative min-h-[220px] md:min-h-[200px] ${
@@ -212,7 +210,7 @@ const ServicesPage = () => {
                       }`}
                     >
                       <div className="max-w-xl">
-                        <h3 className="font-display text-2xl font-semibold tracking-[-0.02em] text-[#b16a18]">
+                        <h3 className="font-display text-2xl font-semibold tracking-[-0.02em] text-[#bb7422]">
                           {item.title}
                         </h3>
                         <p className="font-body mt-3 text-sm leading-7 text-[#4e5a67] sm:text-[15px]">
