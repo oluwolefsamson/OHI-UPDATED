@@ -20,6 +20,7 @@ const ServicesPage = () => {
   const { services } = config;
   const servicesPage = config.servicesPage ?? {};
   const hero = servicesPage.hero ?? {};
+  const introImage = servicesPage.introImage ?? profileHeroMountain;
 
   const serviceFormats = [
     "Investment & programme visibility",
@@ -84,7 +85,7 @@ const ServicesPage = () => {
   return (
     <ProfilePageShell
       title={hero.title ?? "Services"}
-      heroImage={profileHeroMountain}
+      heroImage={hero.image ?? profileHeroMountain}
       heroImageAlt="OHI programmes hero"
       description={hero.description ?? "OHI creates development communication that helps institutions, partners, and communities understand the work being done, why it matters, and why it deserves attention from capital and policy actors."}
       descriptionClassName="text-white"
@@ -201,7 +202,7 @@ const ServicesPage = () => {
                       }`}
                     >
                       <img
-                        src={item.image}
+                        src={item.image ?? serviceShowcase[index]?.image ?? introImage}
                         alt={item.title}
                         className="h-full w-full object-cover transition duration-500 ease-out"
                       />

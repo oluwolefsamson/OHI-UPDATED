@@ -61,10 +61,11 @@ const PortfolioPage = () => {
   const { config } = useLandingPageConfig();
   const portfolioPage = config.portfolioPage ?? {};
   const hero = portfolioPage.hero ?? {};
+  const heroImage = hero.image ?? portfolioImage02;
   return (
     <ProfilePageShell
       title={hero.title ?? "Portfolio"}
-      heroImage={portfolioImage02}
+      heroImage={heroImage}
       heroImageAlt="OHI portfolio hero"
       description={hero.description ?? "OHI presents a portfolio of development storytelling projects, case studies, and content packages that demonstrate institutional impact, visibility, and narrative clarity."}
       descriptionClassName="text-white"
@@ -150,7 +151,7 @@ const PortfolioPage = () => {
 
       <section className="mt-16 bg-[#fff3e3] p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-8">
         <div className="mx-auto max-w-6xl">
-        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal delay={0.06}>
             <div className="bg-[#fff8ef] p-6">
               <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-[#b16a18]">

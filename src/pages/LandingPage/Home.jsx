@@ -82,22 +82,22 @@ function Home() {
     {
       name: "Collins Nkom",
       role: "African storyteller",
-      image: heroImages.hero1,
+      image: gallery.items?.[5]?.image ?? heroImages.hero1,
     },
     {
       name: "Svenja Kruger",
       role: "African storyteller",
-      image: heroImages.hero2,
+      image: gallery.items?.[6]?.image ?? heroImages.hero2,
     },
     {
       name: "Tiger Firehouse",
       role: "African storyteller",
-      image: heroImages.hero3,
+      image: gallery.items?.[7]?.image ?? heroImages.hero3,
     },
     {
       name: "Yared Zeleke",
       role: "African storyteller",
-      image: heroImages.hero5,
+      image: gallery.items?.[8]?.image ?? heroImages.hero5,
     },
   ];
   const newsCards = [
@@ -211,7 +211,7 @@ function Home() {
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <Reveal className="overflow-hidden rounded-[18px] bg-white shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
               <FallbackImage
-                src={about.image}
+                src={homePage.about.image ?? about.image}
                 fallback={landingPageDefaults.about.image}
                 alt="OHI team"
                 className="h-[240px] w-full object-cover sm:h-[300px] lg:h-[260px]"
@@ -396,7 +396,7 @@ function Home() {
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <Reveal className="overflow-hidden rounded-[10px] bg-white shadow-[0_12px_28px_rgba(15,23,42,0.12)]">
               <img
-                src={gallery.items?.[5]?.image ?? heroImages.hero1}
+                src={homePage.leadership.image ?? gallery.items?.[5]?.image ?? heroImages.hero1}
                 alt="OHI vision feature"
                 className="h-[340px] w-full object-cover sm:h-[440px] lg:h-[400px]"
               />
@@ -446,7 +446,7 @@ function Home() {
           >
             {homePage.programmes.items.map((item, index) => (
               <motion.article key={item.title} variants={staggerItem} className="flex h-full min-h-[460px] flex-col overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_10px_24px_rgba(15,23,42,0.12)]">
-                  <img src={[heroImages.hero1, heroImages.hero2, heroImages.hero3][index]} alt={item.title} className="h-60 w-full object-cover" />
+                  <img src={item.image ?? [heroImages.hero1, heroImages.hero2, heroImages.hero3][index]} alt={item.title} className="h-60 w-full object-cover" />
                   <div className="flex flex-1 flex-col p-4">
                     <h3 className="text-sm font-bold leading-5 text-[#a75f1a]">{item.title}</h3>
                     <p className="mt-3 text-xs leading-5 text-[#54565a]">{item.description}</p>
@@ -484,7 +484,7 @@ function Home() {
             {storytellers.map((story) => (
               <motion.article key={story.name} variants={staggerItem} className="flex h-full min-h-[460px] flex-col overflow-hidden bg-white shadow-[0_12px_24px_rgba(15,23,42,0.14)]">
                   <FallbackImage
-                    src={story.image}
+                    src={homePage.storytellers.images?.[storytellers.indexOf(story)] ?? story.image}
                     fallback={heroSlideFallbacks[0]}
                     alt={story.name}
                     className="h-64 w-full object-cover sm:h-72 lg:h-80"
@@ -544,17 +544,17 @@ function Home() {
             <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-white to-transparent" />
 
             <Marquee pauseOnHover className="[--duration:32s] px-0 py-0" repeat={3}>
-              {newsCards.map((card) => (
-                <article
-                  key={card.title}
-                  className="w-[280px] overflow-hidden border border-[#ece7df] bg-white shadow-[0_10px_24px_rgba(15,23,42,0.08)]"
-                >
-                  <FallbackImage
-                    src={card.image}
+            {newsCards.map((card, index) => (
+              <article
+                key={card.title}
+                className="w-[280px] overflow-hidden border border-[#ece7df] bg-white shadow-[0_10px_24px_rgba(15,23,42,0.08)]"
+              >
+                <FallbackImage
+                    src={homePage.news.images?.[index] ?? card.image}
                     fallback={landingPageDefaults.gallery.items?.[0]?.image}
                     alt={card.title}
                     className="h-32 w-full object-cover"
-                  />
+                />
                   <div className="p-3">
                     <p className="text-[10px] uppercase tracking-[0.22em] text-[#9b9b9b]">
                       {card.date}

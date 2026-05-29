@@ -41,10 +41,12 @@ const LeadershipPage = () => {
   const hero = leadershipPage.hero ?? {};
   const leader = leadershipPage.leader ?? {};
   const highlights = leadershipPage.highlights ?? leadershipHighlights;
+  const leaderHeroImage = hero.image ?? heroImage;
+  const portraitImage = leader.heroImage ?? leaderPortrait;
   return (
     <ProfilePageShell
       title={hero.title ?? "Leadership"}
-      heroImage={heroImage}
+      heroImage={leaderHeroImage}
       heroImageAlt="OHI leadership hero"
       description={hero.description ?? "OHI is led with a clear institutional purpose: to turn strong production capability into trust, visibility, and decision-ready communication for development and impact audiences."}
       descriptionClassName="text-white"
@@ -63,7 +65,7 @@ const LeadershipPage = () => {
     >
       <section className="bg-white p-4 sm:p-6">
         <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.08fr_0.92fr]">
-        <div className="bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-8">
+          <div className="bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-8">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primaryColor">
             Named leadership
           </p>
@@ -100,9 +102,9 @@ const LeadershipPage = () => {
           </div>
         </div>
 
-        <div className="overflow-hidden bg-white shadow-[0_16px_40px_rgba(15,23,42,0.06)]">
-          <img src={leaderPortrait} alt="OHI leader portrait" className="h-full min-h-[420px] w-full object-cover" />
-        </div>
+          <div className="overflow-hidden bg-white shadow-[0_16px_40px_rgba(15,23,42,0.06)]">
+            <img src={portraitImage} alt="OHI leader portrait" className="h-full min-h-[420px] w-full object-cover" />
+          </div>
         </div>
       </section>
 

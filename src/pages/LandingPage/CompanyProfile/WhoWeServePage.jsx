@@ -3,6 +3,7 @@ import { ArrowRight, Globe2, Layers3, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import ProfilePageShell from "../../../components/LandingPage/Profile/ProfilePageShell";
 import SectionHeader from "../../../components/LandingPage/SectionHeader";
+import { useLandingPageConfig } from "../../../context/LandingPageConfigContext";
 import { Badge } from "../../../components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../../components/ui/card";
 import serveVisual from "../../../assets/images/Gallery/gallery-11.jpeg";
@@ -44,22 +45,25 @@ const featuredStories = [
 ];
 
 const WhoWeServePage = () => {
+  const { config } = useLandingPageConfig();
+  const whoWeServePage = config.whoWeServePage ?? {};
+  const hero = whoWeServePage.hero ?? {};
   return (
     <ProfilePageShell
-      title="Who We Serve"
-      heroImage={serveVisual}
+      title={hero.title ?? "Who We Serve"}
+      heroImage={hero.image ?? serveVisual}
       heroImageAlt="OHI team visual"
-      description="OHI creates development communication that helps institutions, partners, and communities understand the work being done, why it matters, and why it deserves attention from capital and policy actors."
+      description={hero.description ?? "OHI creates development communication that helps institutions, partners, and communities understand the work being done, why it matters, and why it deserves attention from capital and policy actors."}
       descriptionClassName="text-white"
-      primaryCta={{ label: "View Portfolio", href: "/portfolio" }}
-      secondaryCta={{ label: "Contact Us", href: "/contact" }}
+      primaryCta={{ label: hero.primaryCtaLabel ?? "View Portfolio", href: hero.primaryCtaHref ?? "/portfolio" }}
+      secondaryCta={{ label: hero.secondaryCtaLabel ?? "Contact Us", href: hero.secondaryCtaHref ?? "/contact" }}
       heroBadge={
         <div className="space-y-1">
           <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
-            OHI profile
+            {hero.badgeEyebrow ?? "OHI profile"}
           </p>
           <p className="font-body text-sm leading-6 text-white/80">
-            Strategic visibility for development, investment, and impact communication.
+            {hero.badgeDescription ?? "Strategic visibility for development, investment, and impact communication."}
           </p>
         </div>
       }

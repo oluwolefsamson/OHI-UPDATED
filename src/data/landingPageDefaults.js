@@ -95,6 +95,7 @@ export const landingPageDefaults = {
         "Olympian House International (OHI) creates development communication that helps institutions, partners, and communities understand what is being delivered, why it matters, and why it deserves sustained support.",
       ctaLabel: "Learn More",
       ctaHref: "/about",
+      image: gallery11,
     },
     difference: {
       title: "The OHI difference",
@@ -138,6 +139,7 @@ export const landingPageDefaults = {
         "Named leadership, regional storytellers, and institutional partners working across Africa and beyond.",
       ctaLabel: "Learn More",
       ctaHref: "/documentary",
+      image: gallery12,
     },
     programmes: {
       title: "Featured Programmes",
@@ -146,16 +148,19 @@ export const landingPageDefaults = {
           title: "UNESCO World Heritage Volunteers Initiative",
           description:
             "The initiative aims to sensitise and develop an appreciation of World Heritage values through hands-on activities, awareness-raising campaigns, and skills training.",
+          image: hero1,
         },
         {
           title: "OHI Visionary Voices",
           description:
             "A curated programme focused on credible voices, practical learning, and communication that serves institutional objectives.",
+          image: hero2,
         },
         {
           title: "African Festivals",
           description:
             "A cultural documentation platform that records African creative expression for public audiences, partners, and archival use.",
+          image: hero3,
         },
       ],
     },
@@ -165,11 +170,13 @@ export const landingPageDefaults = {
         "A network of practitioners producing communication and documentary work for institutions, partners, and public-interest audiences.",
       ctaLabel: "Contact Us",
       ctaHref: "/contact",
+      image: gallery12,
     },
     news: {
       title: "News & Blog",
       description:
         "OHI continues to shape public-facing documentary communication and heritage documentation for institutional audiences.",
+      images: [gallery01, gallery02, gallery03],
     },
     supporters: {
       title: "OurPartners / Supporters",
@@ -557,6 +564,8 @@ export const landingPageDefaults = {
       title: "We turn Africa's development story into strategic visibility",
       description:
         "OHI creates development communication that helps institutions, partners, and communities understand the work being done and why it matters.",
+      image: storyImg,
+      detailImage: gallery12,
       aboutLabel: "About OHI",
       aboutText:
         "We build visual stories that are clear, credible, and designed to move audiences from awareness to action.",
@@ -598,13 +607,14 @@ export const landingPageDefaults = {
       title: "A multilingual team fluent in English, French, and Pidgin",
       description:
         "OHI combines strategy, production, and editorial craft to help development work communicate with confidence across Africa.",
+      image: gallery06,
       body:
         "OHI is ready to turn your next project, campaign, or report into a story that decision-makers can trust and act on.",
       ctaLabel: "Get a Quotation",
       ctaHref: "/contact",
     },
   },
-  servicesPage: {
+    servicesPage: {
     hero: {
       title: "Services",
       description:
@@ -622,6 +632,7 @@ export const landingPageDefaults = {
       description:
         "OHI is a partner for institutions that need clear, credible, and investment-grade storytelling.",
     },
+    introImage: gallery01,
     formats: [
       "Investment & programme visibility",
       "Impact documentaries",
@@ -645,41 +656,49 @@ export const landingPageDefaults = {
         title: "Impact Documentaries",
         description:
           "We produce documentaries that turn programme results into evidence-led narratives for institutional audiences.",
+        image: gallery01,
       },
       {
         title: "Development Programme Communication",
         description:
           "OHI helps development programmes communicate objectives, implementation, and results with clarity and accountability.",
+        image: gallery02,
       },
       {
         title: "Investment & Programme Visibility",
         description:
           "We craft investor-facing films that present projects as credible opportunities for financing and partnership.",
+        image: gallery03,
       },
       {
         title: "ESG & Social Impact Storytelling",
         description:
           "Our content amplifies community voice and local ownership while supporting ESG and social impact reporting.",
+        image: gallery04,
       },
       {
         title: "Donor & Investor Reporting Films",
         description:
           "We produce reporting films that support donor updates, investor confidence, and renewal conversations.",
+        image: gallery05,
       },
       {
         title: "Multilingual Field Production",
         description:
           "OHI produces concise, evidence-driven reporting films across languages and regions.",
+        image: gallery06,
       },
       {
         title: "Event & Mission Coverage",
         description:
           "From high-level forums to field missions, we document moments that matter with professional intent.",
+        image: gallery07,
       },
       {
         title: "Social Media & Digital Campaigns",
         description:
           "We design digital-first content that extends project visibility across web, social, and stakeholder channels.",
+        image: gallery08,
       },
     ],
   },
@@ -695,6 +714,7 @@ export const landingPageDefaults = {
       badgeEyebrow: "OHI portfolio",
       badgeDescription:
         "Strategic visibility for development, investment, and impact communication.",
+      image: profileHeroMountain,
     },
     header: {
       title: "Portfolio highlights",
@@ -750,6 +770,79 @@ export const landingPageDefaults = {
       { title: "Trust and governance", description: "Keeps delivery, reporting, and relationship management aligned with professional standards." },
       { title: "Regional reach", description: "Works across West, Central, East, and Southern Africa with a practical understanding of local context." },
     ],
+  },
+  backgroundPage: {
+    hero: {
+      title: "Background",
+      description: "The history and institutional foundation of Olympian House International.",
+      image: storyImg,
+      primaryCtaLabel: "Our Team",
+      primaryCtaHref: "/our-team",
+      secondaryCtaLabel: "Contact Us",
+      secondaryCtaHref: "/contact",
+      badgeEyebrow: "OHI profile",
+      badgeDescription:
+        "Strategic visibility for development, investment, and impact communication.",
+    },
+  },
+  impactPage: {
+    hero: {
+      title: "Impact",
+      description:
+        "OHI creates development communication that helps institutions, partners, and communities understand the work being done, why it matters, and why it deserves attention from capital and policy actors.",
+      primaryCtaLabel: "View Portfolio",
+      primaryCtaHref: "/portfolio",
+      secondaryCtaLabel: "Contact Us",
+      secondaryCtaHref: "/contact",
+      badgeEyebrow: "OHI profile",
+      badgeDescription:
+        "Strategic visibility for development, investment, and impact communication.",
+      image: gallery05,
+    },
+    proof: {
+      title: "Why organizations invest in storytelling",
+      description:
+        "The profile makes a direct business case for visual communication, not just a creative one.",
+      visualTitle: "Visual proof",
+      visualHeading: "Stories that help teams show results clearly",
+      visualDescription:
+        "The profile now makes the case for why OHI is a strategic communication partner, not a generic production supplier.",
+      image: gallery05,
+    },
+    benefits: {
+      title: "What OHI helps you achieve",
+      description:
+        "OHI turns African projects into clear communication assets that support action, visibility, trust, and long-term value.",
+      points: [
+        "Demonstrate impact and transparency",
+        "Attract new partners and financing",
+        "Strengthen stakeholder alignment",
+        "Build trust with communities",
+        "Drive policy influence",
+        "Showcase success stories",
+      ],
+      payoffTitle: "The communication payoff",
+      payoffDescription:
+        "Good storytelling helps a programme look like a programme that can be trusted, funded, shared, and scaled. That is the lens behind every project in the profile.",
+      supportTitle: "Support for teams",
+      supportDescription:
+        "Use the work across reports, launch materials, stakeholder meetings, digital campaigns, and partner communications.",
+    },
+  },
+  whoWeServePage: {
+    hero: {
+      title: "Who We Serve",
+      description:
+        "OHI creates development communication that helps institutions, partners, and communities understand the work being done, why it matters, and why it deserves attention from capital and policy actors.",
+      primaryCtaLabel: "View Portfolio",
+      primaryCtaHref: "/portfolio",
+      secondaryCtaLabel: "Contact Us",
+      secondaryCtaHref: "/contact",
+      badgeEyebrow: "OHI profile",
+      badgeDescription:
+        "Strategic visibility for development, investment, and impact communication.",
+      image: gallery11,
+    },
   },
   voices: {
     title: "Selected Voices",

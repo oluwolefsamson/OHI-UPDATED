@@ -135,14 +135,14 @@ const AboutPage = () => {
           <div className="space-y-4">
             <div className="overflow-hidden bg-white shadow-[0_16px_40px_rgba(15,23,42,0.06)]">
               <img
-                src={storyVisual}
+                src={intro.image ?? storyVisual}
                 alt="OHI story visual"
                 className="h-[320px] w-full object-cover sm:h-[380px]"
               />
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="overflow-hidden bg-white shadow-[0_12px_28px_rgba(15,23,42,0.06)]">
-                <img src={portraitTwo} alt="OHI detail visual" className="h-[220px] w-full object-cover" />
+                <img src={intro.detailImage ?? portraitTwo} alt="OHI detail visual" className="h-[220px] w-full object-cover" />
               </div>
               <div className="bg-[linear-gradient(180deg,#091826_0%,#12243a_100%)] p-5 text-white shadow-[0_12px_28px_rgba(15,23,42,0.12)]">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
@@ -221,6 +221,13 @@ const AboutPage = () => {
                   <p className="mt-3 text-sm leading-6 text-white/80">
                     {item.description}
                   </p>
+                  {item.image ? (
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="mt-4 h-40 w-full object-cover"
+                    />
+                  ) : null}
                 </div>
               ))}
             </div>
@@ -236,6 +243,13 @@ const AboutPage = () => {
             className="max-w-4xl"
           />
           <div className="mt-8 bg-[#fffaf5] p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)]">
+            {close.image ? (
+              <img
+                src={close.image}
+                alt={close.title ?? "OHI closing visual"}
+                className="mb-6 h-[280px] w-full object-cover"
+              />
+            ) : null}
             <p className="text-base leading-7 text-textColor">
               {close.body ?? "OHI is ready to turn your next project, campaign, or report into a story that decision-makers can trust and act on."}
             </p>

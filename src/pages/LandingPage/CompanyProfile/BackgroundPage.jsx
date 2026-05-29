@@ -3,23 +3,28 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import ProfilePageShell from "../../../components/LandingPage/Profile/ProfilePageShell";
 import SectionHeader from "../../../components/LandingPage/SectionHeader";
+import { useLandingPageConfig } from "../../../context/LandingPageConfigContext";
 import ourStoryImage from "../../../assets/images/our-story.jpeg";
 
 const BackgroundPage = () => {
+  const { config } = useLandingPageConfig();
+  const backgroundPage = config.backgroundPage ?? {};
+  const hero = backgroundPage.hero ?? {};
   return (
     <ProfilePageShell
-      title="Background"
-      description="The history and institutional foundation of Olympian House International."
+      title={hero.title ?? "Background"}
+      heroImage={hero.image ?? ourStoryImage}
+      description={hero.description ?? "The history and institutional foundation of Olympian House International."}
       descriptionClassName="text-white"
-      primaryCta={{ label: "Our Team", href: "/our-team" }}
-      secondaryCta={{ label: "Contact Us", href: "/contact" }}
+      primaryCta={{ label: hero.primaryCtaLabel ?? "Our Team", href: hero.primaryCtaHref ?? "/our-team" }}
+      secondaryCta={{ label: hero.secondaryCtaLabel ?? "Contact Us", href: hero.secondaryCtaHref ?? "/contact" }}
       heroBadge={
         <div className="space-y-1">
           <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
-            OHI profile
+            {hero.badgeEyebrow ?? "OHI profile"}
           </p>
           <p className="font-body text-sm leading-6 text-white/80">
-            Strategic visibility for development, investment, and impact communication.
+            {hero.badgeDescription ?? "Strategic visibility for development, investment, and impact communication."}
           </p>
         </div>
       }

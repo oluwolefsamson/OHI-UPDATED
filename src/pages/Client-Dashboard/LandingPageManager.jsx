@@ -485,6 +485,16 @@ export default function LandingPageManager() {
     }));
   };
 
+  const updateServicesPageRoot = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      servicesPage: {
+        ...current.servicesPage,
+        [key]: value,
+      },
+    }));
+  };
+
   const updatePortfolioPage = (section, key, value) => {
     setDraftConfig((current) => ({
       ...current,
@@ -505,6 +515,45 @@ export default function LandingPageManager() {
         ...current.leadershipPage,
         [section]: {
           ...current.leadershipPage?.[section],
+          [key]: value,
+        },
+      },
+    }));
+  };
+
+  const updateBackgroundPage = (section, key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      backgroundPage: {
+        ...current.backgroundPage,
+        [section]: {
+          ...current.backgroundPage?.[section],
+          [key]: value,
+        },
+      },
+    }));
+  };
+
+  const updateImpactPage = (section, key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      impactPage: {
+        ...current.impactPage,
+        [section]: {
+          ...current.impactPage?.[section],
+          [key]: value,
+        },
+      },
+    }));
+  };
+
+  const updateWhoWeServePage = (section, key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      whoWeServePage: {
+        ...current.whoWeServePage,
+        [section]: {
+          ...current.whoWeServePage?.[section],
           [key]: value,
         },
       },
@@ -662,6 +711,13 @@ export default function LandingPageManager() {
                 <Field label={`Slide ${index + 1} title`}><TextInput value={slide.title} onChange={(e) => updateHeroSlide(index, "title", e.target.value)} /></Field>
                 <Field label={`Slide ${index + 1} subtitle`}><TextInput value={slide.subtitle} onChange={(e) => updateHeroSlide(index, "subtitle", e.target.value)} /></Field>
                 <Field label={`Slide ${index + 1} description`}><TextArea rows={4} value={slide.description} onChange={(e) => updateHeroSlide(index, "description", e.target.value)} /></Field>
+                <ImageField
+                  label={`Slide ${index + 1} image`}
+                  value={slide.image || ""}
+                  onChange={(e) =>
+                    handleImageUpload(e, (value) => updateHeroSlide(index, "image", value))
+                  }
+                />
               </div>
             ))}
           </div>
@@ -673,6 +729,13 @@ export default function LandingPageManager() {
             <Field label="Description"><TextArea rows={4} value={draftConfig.homePage?.about?.description || ""} onChange={(e) => updateHomePage("about", "description", e.target.value)} /></Field>
             <Field label="Button label"><TextInput value={draftConfig.homePage?.about?.ctaLabel || ""} onChange={(e) => updateHomePage("about", "ctaLabel", e.target.value)} /></Field>
             <Field label="Button link"><TextInput value={draftConfig.homePage?.about?.ctaHref || ""} onChange={(e) => updateHomePage("about", "ctaHref", e.target.value)} /></Field>
+            <ImageField
+              label="Section image"
+              value={draftConfig.homePage?.about?.image || ""}
+              onChange={(e) =>
+                handleImageUpload(e, (value) => updateHomePage("about", "image", value))
+              }
+            />
           </div>
         </SectionCard>
 
@@ -699,6 +762,28 @@ export default function LandingPageManager() {
             <Field label="Description"><TextArea rows={4} value={draftConfig.homePage?.heritage?.description || ""} onChange={(e) => updateHomePage("heritage", "description", e.target.value)} /></Field>
             <Field label="Button label"><TextInput value={draftConfig.homePage?.heritage?.ctaLabel || ""} onChange={(e) => updateHomePage("heritage", "ctaLabel", e.target.value)} /></Field>
             <Field label="Button link"><TextInput value={draftConfig.homePage?.heritage?.ctaHref || ""} onChange={(e) => updateHomePage("heritage", "ctaHref", e.target.value)} /></Field>
+            <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                Heritage images
+              </p>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                These images come from the shared Gallery section and are shown here as a preview. Edit the actual images in the Gallery editor below.
+              </p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {(draftConfig.gallery?.items || []).slice(4, 12).map((item, index) => (
+                  <div key={item.title || index} className="overflow-hidden rounded-2xl bg-slate-50 shadow-[0_8px_24px_rgba(15,23,42,0.06)]">
+                    <img
+                      src={item.image || ""}
+                      alt={item.title || `Heritage ${index + 1}`}
+                      className="h-32 w-full object-cover"
+                    />
+                    <div className="p-3">
+                      <p className="text-xs font-medium text-slate-700">{item.title || `Heritage ${index + 1}`}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </SectionCard>
 
@@ -709,6 +794,13 @@ export default function LandingPageManager() {
             <Field label="Description"><TextArea rows={4} value={draftConfig.homePage?.leadership?.description || ""} onChange={(e) => updateHomePage("leadership", "description", e.target.value)} /></Field>
             <Field label="Button label"><TextInput value={draftConfig.homePage?.leadership?.ctaLabel || ""} onChange={(e) => updateHomePage("leadership", "ctaLabel", e.target.value)} /></Field>
             <Field label="Button link"><TextInput value={draftConfig.homePage?.leadership?.ctaHref || ""} onChange={(e) => updateHomePage("leadership", "ctaHref", e.target.value)} /></Field>
+            <ImageField
+              label="Section image"
+              value={draftConfig.homePage?.leadership?.image || ""}
+              onChange={(e) =>
+                handleImageUpload(e, (value) => updateHomePage("leadership", "image", value))
+              }
+            />
           </div>
         </SectionCard>
 
@@ -719,6 +811,15 @@ export default function LandingPageManager() {
               <div key={index} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
                 <Field label={`Programme ${index + 1} title`}><TextInput value={item.title || ""} onChange={(e) => updateHomePageArrayItem("programmes", "items", index, "title", e.target.value)} /></Field>
                 <Field label={`Programme ${index + 1} description`}><TextArea rows={4} value={item.description || ""} onChange={(e) => updateHomePageArrayItem("programmes", "items", index, "description", e.target.value)} /></Field>
+                <ImageField
+                  label={`Programme ${index + 1} image`}
+                  value={item.image || ""}
+                  onChange={(e) =>
+                    handleImageUpload(e, (value) =>
+                      updateHomePageArrayItem("programmes", "items", index, "image", value)
+                    )
+                  }
+                />
               </div>
             ))}
           </div>
@@ -730,6 +831,13 @@ export default function LandingPageManager() {
             <Field label="Description"><TextArea rows={4} value={draftConfig.homePage?.storytellers?.description || ""} onChange={(e) => updateHomePage("storytellers", "description", e.target.value)} /></Field>
             <Field label="Button label"><TextInput value={draftConfig.homePage?.storytellers?.ctaLabel || ""} onChange={(e) => updateHomePage("storytellers", "ctaLabel", e.target.value)} /></Field>
             <Field label="Button link"><TextInput value={draftConfig.homePage?.storytellers?.ctaHref || ""} onChange={(e) => updateHomePage("storytellers", "ctaHref", e.target.value)} /></Field>
+            <ImageField
+              label="Section image"
+              value={draftConfig.homePage?.storytellers?.image || ""}
+              onChange={(e) =>
+                handleImageUpload(e, (value) => updateHomePage("storytellers", "image", value))
+              }
+            />
           </div>
         </SectionCard>
 
@@ -737,6 +845,19 @@ export default function LandingPageManager() {
           <div className="space-y-4">
             <Field label="Title"><TextInput value={draftConfig.homePage?.news?.title || ""} onChange={(e) => updateHomePage("news", "title", e.target.value)} /></Field>
             <Field label="Description"><TextArea rows={4} value={draftConfig.homePage?.news?.description || ""} onChange={(e) => updateHomePage("news", "description", e.target.value)} /></Field>
+            <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">News images</p>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                These images show the current cards used in the scrolling news block. Edit the Gallery items if you want to replace the source images.
+              </p>
+              <div className="mt-4 grid gap-3 md:grid-cols-3">
+                {(draftConfig.homePage?.news?.images || []).map((image, index) => (
+                  <div key={index} className="overflow-hidden rounded-2xl bg-slate-50 shadow-[0_8px_24px_rgba(15,23,42,0.06)]">
+                    <img src={image || ""} alt={`News ${index + 1}`} className="h-28 w-full object-cover" />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </SectionCard>
 
@@ -894,9 +1015,23 @@ export default function LandingPageManager() {
                 <Field label="About label">
                   <TextInput value={draftConfig.aboutPage?.intro?.aboutLabel || ""} onChange={(e) => updateAboutPageSection("intro", "aboutLabel", e.target.value)} />
                 </Field>
-                <Field label="About text">
+              <Field label="About text">
                   <TextArea rows={4} value={draftConfig.aboutPage?.intro?.aboutText || ""} onChange={(e) => updateAboutPageSection("intro", "aboutText", e.target.value)} />
                 </Field>
+                <ImageField
+                  label="Intro image"
+                  value={draftConfig.aboutPage?.intro?.image || ""}
+                  onChange={(e) =>
+                    handleImageUpload(e, (value) => updateAboutPageSection("intro", "image", value))
+                  }
+                />
+                <ImageField
+                  label="Intro detail image"
+                  value={draftConfig.aboutPage?.intro?.detailImage || ""}
+                  onChange={(e) =>
+                    handleImageUpload(e, (value) => updateAboutPageSection("intro", "detailImage", value))
+                  }
+                />
               </div>
 
               <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
@@ -913,6 +1048,13 @@ export default function LandingPageManager() {
                 <Field label="Close body">
                   <TextArea rows={4} value={draftConfig.aboutPage?.close?.body || ""} onChange={(e) => updateAboutPageSection("close", "body", e.target.value)} />
                 </Field>
+                <ImageField
+                  label="Close image"
+                  value={draftConfig.aboutPage?.close?.image || ""}
+                  onChange={(e) =>
+                    handleImageUpload(e, (value) => updateAboutPageSection("close", "image", value))
+                  }
+                />
               </div>
             </div>
           </div>
@@ -1656,6 +1798,13 @@ export default function LandingPageManager() {
             <Field label="Hero description">
               <TextArea rows={4} value={draftConfig.servicesPage?.hero?.description || ""} onChange={(e) => updateServicesPage("hero", "description", e.target.value)} />
             </Field>
+            <ImageField
+              label="Hero image"
+              value={draftConfig.servicesPage?.hero?.image || ""}
+              onChange={(e) =>
+                handleImageUpload(e, (value) => updateServicesPage("hero", "image", value))
+              }
+            />
             <div className="grid gap-4 xl:grid-cols-2">
               <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
                 <h3 className="text-lg font-bold text-headingColor">Intro</h3>
@@ -1665,6 +1814,13 @@ export default function LandingPageManager() {
                 <Field label="Section description">
                   <TextArea rows={4} value={draftConfig.servicesPage?.servicesIntro?.description || ""} onChange={(e) => updateServicesPage("servicesIntro", "description", e.target.value)} />
                 </Field>
+                <ImageField
+                  label="Intro image"
+                  value={draftConfig.servicesPage?.introImage || ""}
+                  onChange={(e) =>
+                    handleImageUpload(e, (value) => updateServicesPageRoot("introImage", value))
+                  }
+                />
               </div>
               <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
                 <h3 className="text-lg font-bold text-headingColor">Travel block</h3>
@@ -1675,6 +1831,63 @@ export default function LandingPageManager() {
                   <TextArea rows={4} value={draftConfig.servicesPage?.travel?.description || ""} onChange={(e) => updateServicesPage("travel", "description", e.target.value)} />
                 </Field>
               </div>
+            </div>
+            <div className="grid gap-4 xl:grid-cols-2">
+              {(draftConfig.servicesPage?.showcase || []).map((item, index) => (
+                <div key={index} className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                  <h3 className="text-lg font-bold text-headingColor">Showcase {index + 1}</h3>
+                  <Field label={`Showcase ${index + 1} title`}>
+                    <TextInput
+                      value={item.title || ""}
+                      onChange={(e) => {
+                        const next = [...(draftConfig.servicesPage?.showcase || [])];
+                        next[index] = { ...next[index], title: e.target.value };
+                        setDraftConfig((current) => ({
+                          ...current,
+                          servicesPage: {
+                            ...current.servicesPage,
+                            showcase: next,
+                          },
+                        }));
+                      }}
+                    />
+                  </Field>
+                  <Field label={`Showcase ${index + 1} description`}>
+                    <TextArea
+                      rows={4}
+                      value={item.description || ""}
+                      onChange={(e) => {
+                        const next = [...(draftConfig.servicesPage?.showcase || [])];
+                        next[index] = { ...next[index], description: e.target.value };
+                        setDraftConfig((current) => ({
+                          ...current,
+                          servicesPage: {
+                            ...current.servicesPage,
+                            showcase: next,
+                          },
+                        }));
+                      }}
+                    />
+                  </Field>
+                  <ImageField
+                    label={`Showcase ${index + 1} image`}
+                    value={item.image || ""}
+                    onChange={(e) =>
+                      handleImageUpload(e, (value) => {
+                        const next = [...(draftConfig.servicesPage?.showcase || [])];
+                        next[index] = { ...next[index], image: value };
+                        setDraftConfig((current) => ({
+                          ...current,
+                          servicesPage: {
+                            ...current.servicesPage,
+                            showcase: next,
+                          },
+                        }));
+                      })
+                    }
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </SectionCard>
@@ -1696,6 +1909,13 @@ export default function LandingPageManager() {
             <Field label="Hero description">
               <TextArea rows={4} value={draftConfig.portfolioPage?.hero?.description || ""} onChange={(e) => updatePortfolioPage("hero", "description", e.target.value)} />
             </Field>
+            <ImageField
+              label="Hero image"
+              value={draftConfig.portfolioPage?.hero?.image || ""}
+              onChange={(e) =>
+                handleImageUpload(e, (value) => updatePortfolioPage("hero", "image", value))
+              }
+            />
             <div className="grid gap-4 xl:grid-cols-2">
               <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
                 <h3 className="text-lg font-bold text-headingColor">Header</h3>
@@ -1715,6 +1935,79 @@ export default function LandingPageManager() {
                   <TextArea rows={4} value={draftConfig.portfolioPage?.method?.description || ""} onChange={(e) => updatePortfolioPage("method", "description", e.target.value)} />
                 </Field>
               </div>
+            </div>
+            <div className="grid gap-4 xl:grid-cols-2">
+              {(draftConfig.portfolioPage?.projects || []).map((project, index) => (
+                <div key={index} className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                  <h3 className="text-lg font-bold text-headingColor">Project {index + 1}</h3>
+                  <Field label={`Project ${index + 1} title`}>
+                    <TextInput
+                      value={project.title || ""}
+                      onChange={(e) => {
+                        const next = [...(draftConfig.portfolioPage?.projects || [])];
+                        next[index] = { ...next[index], title: e.target.value };
+                        setDraftConfig((current) => ({
+                          ...current,
+                          portfolioPage: {
+                            ...current.portfolioPage,
+                            projects: next,
+                          },
+                        }));
+                      }}
+                    />
+                  </Field>
+                  <Field label={`Project ${index + 1} category`}>
+                    <TextInput
+                      value={project.category || ""}
+                      onChange={(e) => {
+                        const next = [...(draftConfig.portfolioPage?.projects || [])];
+                        next[index] = { ...next[index], category: e.target.value };
+                        setDraftConfig((current) => ({
+                          ...current,
+                          portfolioPage: {
+                            ...current.portfolioPage,
+                            projects: next,
+                          },
+                        }));
+                      }}
+                    />
+                  </Field>
+                  <Field label={`Project ${index + 1} description`}>
+                    <TextArea
+                      rows={4}
+                      value={project.description || ""}
+                      onChange={(e) => {
+                        const next = [...(draftConfig.portfolioPage?.projects || [])];
+                        next[index] = { ...next[index], description: e.target.value };
+                        setDraftConfig((current) => ({
+                          ...current,
+                          portfolioPage: {
+                            ...current.portfolioPage,
+                            projects: next,
+                          },
+                        }));
+                      }}
+                    />
+                  </Field>
+                  <ImageField
+                    label={`Project ${index + 1} image`}
+                    value={project.image || ""}
+                    onChange={(e) =>
+                      handleImageUpload(e, (value) => {
+                        const next = [...(draftConfig.portfolioPage?.projects || [])];
+                        next[index] = { ...next[index], image: value };
+                        setDraftConfig((current) => ({
+                          ...current,
+                          portfolioPage: {
+                            ...current.portfolioPage,
+                            projects: next,
+                          },
+                        }));
+                      })
+                    }
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </SectionCard>
@@ -1736,6 +2029,13 @@ export default function LandingPageManager() {
             <Field label="Hero description">
               <TextArea rows={4} value={draftConfig.leadershipPage?.hero?.description || ""} onChange={(e) => updateLeadershipPage("hero", "description", e.target.value)} />
             </Field>
+            <ImageField
+              label="Hero image"
+              value={draftConfig.leadershipPage?.hero?.image || ""}
+              onChange={(e) =>
+                handleImageUpload(e, (value) => updateLeadershipPage("hero", "image", value))
+              }
+            />
             <div className="grid gap-4 xl:grid-cols-2">
               <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
                 <h3 className="text-lg font-bold text-headingColor">Leader</h3>
@@ -1748,6 +2048,15 @@ export default function LandingPageManager() {
                 <Field label="Leader description">
                   <TextArea rows={5} value={draftConfig.leadershipPage?.leader?.description || ""} onChange={(e) => updateLeadershipPage("leader", "description", e.target.value)} />
                 </Field>
+                <ImageField
+                  label="Leader portrait"
+                  value={draftConfig.leadershipPage?.leader?.heroImage || ""}
+                  onChange={(e) =>
+                    handleImageUpload(e, (value) =>
+                      updateLeadershipPage("leader", "heroImage", value)
+                    )
+                  }
+                />
               </div>
               <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
                 <h3 className="text-lg font-bold text-headingColor">Highlights</h3>
@@ -1786,6 +2095,148 @@ export default function LandingPageManager() {
                 ))}
               </div>
             </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="background-page"
+          title="Background Page"
+          description="Edit the public Background page content."
+          onSave={() => {
+            setConfig((current) => ({ ...current, backgroundPage: draftConfig.backgroundPage }));
+            toast.success("Background page saved!");
+          }}
+          saveLabel="Update Background Page"
+        >
+          <div className="space-y-6">
+            <Field label="Hero title">
+              <TextInput value={draftConfig.backgroundPage?.hero?.title || ""} onChange={(e) => updateBackgroundPage("hero", "title", e.target.value)} />
+            </Field>
+            <Field label="Hero description">
+              <TextArea rows={4} value={draftConfig.backgroundPage?.hero?.description || ""} onChange={(e) => updateBackgroundPage("hero", "description", e.target.value)} />
+            </Field>
+            <ImageField
+              label="Hero image"
+              value={draftConfig.backgroundPage?.hero?.image || ""}
+              onChange={(e) =>
+                handleImageUpload(e, (value) => updateBackgroundPage("hero", "image", value))
+              }
+            />
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="impact-page"
+          title="Impact Page"
+          description="Edit the public Impact page content."
+          onSave={() => {
+            setConfig((current) => ({ ...current, impactPage: draftConfig.impactPage }));
+            toast.success("Impact page saved!");
+          }}
+          saveLabel="Update Impact Page"
+        >
+          <div className="space-y-6">
+            <Field label="Hero title">
+              <TextInput value={draftConfig.impactPage?.hero?.title || ""} onChange={(e) => updateImpactPage("hero", "title", e.target.value)} />
+            </Field>
+            <Field label="Hero description">
+              <TextArea rows={4} value={draftConfig.impactPage?.hero?.description || ""} onChange={(e) => updateImpactPage("hero", "description", e.target.value)} />
+            </Field>
+            <ImageField
+              label="Hero image"
+              value={draftConfig.impactPage?.hero?.image || ""}
+              onChange={(e) =>
+                handleImageUpload(e, (value) => updateImpactPage("hero", "image", value))
+              }
+            />
+            <div className="grid gap-4 xl:grid-cols-2">
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Proof block</h3>
+                <Field label="Block title">
+                  <TextInput value={draftConfig.impactPage?.proof?.title || ""} onChange={(e) => updateImpactPage("proof", "title", e.target.value)} />
+                </Field>
+                <Field label="Block description">
+                  <TextArea rows={4} value={draftConfig.impactPage?.proof?.description || ""} onChange={(e) => updateImpactPage("proof", "description", e.target.value)} />
+                </Field>
+                <Field label="Visual label">
+                  <TextInput value={draftConfig.impactPage?.proof?.visualTitle || ""} onChange={(e) => updateImpactPage("proof", "visualTitle", e.target.value)} />
+                </Field>
+                <Field label="Visual heading">
+                  <TextInput value={draftConfig.impactPage?.proof?.visualHeading || ""} onChange={(e) => updateImpactPage("proof", "visualHeading", e.target.value)} />
+                </Field>
+                <Field label="Visual description">
+                  <TextArea rows={4} value={draftConfig.impactPage?.proof?.visualDescription || ""} onChange={(e) => updateImpactPage("proof", "visualDescription", e.target.value)} />
+                </Field>
+                <ImageField
+                  label="Proof image"
+                  value={draftConfig.impactPage?.proof?.image || ""}
+                  onChange={(e) =>
+                    handleImageUpload(e, (value) => updateImpactPage("proof", "image", value))
+                  }
+                />
+              </div>
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Benefits block</h3>
+                <Field label="Block title">
+                  <TextInput value={draftConfig.impactPage?.benefits?.title || ""} onChange={(e) => updateImpactPage("benefits", "title", e.target.value)} />
+                </Field>
+                <Field label="Block description">
+                  <TextArea rows={4} value={draftConfig.impactPage?.benefits?.description || ""} onChange={(e) => updateImpactPage("benefits", "description", e.target.value)} />
+                </Field>
+                <Field label="Payoff title">
+                  <TextInput value={draftConfig.impactPage?.benefits?.payoffTitle || ""} onChange={(e) => updateImpactPage("benefits", "payoffTitle", e.target.value)} />
+                </Field>
+                <Field label="Payoff description">
+                  <TextArea rows={4} value={draftConfig.impactPage?.benefits?.payoffDescription || ""} onChange={(e) => updateImpactPage("benefits", "payoffDescription", e.target.value)} />
+                </Field>
+                <Field label="Support title">
+                  <TextInput value={draftConfig.impactPage?.benefits?.supportTitle || ""} onChange={(e) => updateImpactPage("benefits", "supportTitle", e.target.value)} />
+                </Field>
+                <Field label="Support description">
+                  <TextArea rows={4} value={draftConfig.impactPage?.benefits?.supportDescription || ""} onChange={(e) => updateImpactPage("benefits", "supportDescription", e.target.value)} />
+                </Field>
+                {(draftConfig.impactPage?.benefits?.points || []).map((point, index) => (
+                  <Field key={index} label={`Point ${index + 1}`}>
+                    <TextArea
+                      rows={2}
+                      value={point}
+                      onChange={(e) => {
+                        const next = [...(draftConfig.impactPage?.benefits?.points || [])];
+                        next[index] = e.target.value;
+                        updateImpactPage("benefits", "points", next);
+                      }}
+                    />
+                  </Field>
+                ))}
+              </div>
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="who-we-serve-page"
+          title="Who We Serve Page"
+          description="Edit the public Who We Serve page content."
+          onSave={() => {
+            setConfig((current) => ({ ...current, whoWeServePage: draftConfig.whoWeServePage }));
+            toast.success("Who We Serve page saved!");
+          }}
+          saveLabel="Update Who We Serve Page"
+        >
+          <div className="space-y-6">
+            <Field label="Hero title">
+              <TextInput value={draftConfig.whoWeServePage?.hero?.title || ""} onChange={(e) => updateWhoWeServePage("hero", "title", e.target.value)} />
+            </Field>
+            <Field label="Hero description">
+              <TextArea rows={4} value={draftConfig.whoWeServePage?.hero?.description || ""} onChange={(e) => updateWhoWeServePage("hero", "description", e.target.value)} />
+            </Field>
+            <ImageField
+              label="Hero image"
+              value={draftConfig.whoWeServePage?.hero?.image || ""}
+              onChange={(e) =>
+                handleImageUpload(e, (value) => updateWhoWeServePage("hero", "image", value))
+              }
+            />
           </div>
         </SectionCard>
 
