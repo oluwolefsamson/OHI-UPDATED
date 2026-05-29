@@ -25,18 +25,18 @@ import brochurePage12 from "../../assets/company-profile-img/OHI Company Profile
 const Brochure = () => {
   const slides = useMemo(
     () => [
-      { src: brochurePage01, alt: "OHI company profile page 1" },
-      { src: brochurePage02, alt: "OHI company profile page 2" },
-      { src: brochurePage03, alt: "OHI company profile page 3" },
-      { src: brochurePage04, alt: "OHI company profile page 4" },
-      { src: brochurePage05, alt: "OHI company profile page 5" },
-      { src: brochurePage06, alt: "OHI company profile page 6" },
-      { src: brochurePage07, alt: "OHI company profile page 7" },
-      { src: brochurePage08, alt: "OHI company profile page 8" },
-      { src: brochurePage09, alt: "OHI company profile page 9" },
-      { src: brochurePage10, alt: "OHI company profile page 10" },
-      { src: brochurePage11, alt: "OHI company profile page 11" },
-      { src: brochurePage12, alt: "OHI company profile page 12" },
+      { src: brochurePage01, alt: "OHI documentary page 1" },
+      { src: brochurePage02, alt: "OHI documentary page 2" },
+      { src: brochurePage03, alt: "OHI documentary page 3" },
+      { src: brochurePage04, alt: "OHI documentary page 4" },
+      { src: brochurePage05, alt: "OHI documentary page 5" },
+      { src: brochurePage06, alt: "OHI documentary page 6" },
+      { src: brochurePage07, alt: "OHI documentary page 7" },
+      { src: brochurePage08, alt: "OHI documentary page 8" },
+      { src: brochurePage09, alt: "OHI documentary page 9" },
+      { src: brochurePage10, alt: "OHI documentary page 10" },
+      { src: brochurePage11, alt: "OHI documentary page 11" },
+      { src: brochurePage12, alt: "OHI documentary page 12" },
     ],
     []
   );
@@ -74,8 +74,8 @@ const Brochure = () => {
         <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
           <div className="max-w-2xl">
             <SectionHeader
-              title="Company Profile"
-              description="Browse the company profile in a page-by-page Swiper deck that presents OHI as a development storytelling partner for institutions, investors, and governments."
+              title="Documentary"
+              description="Browse the documentary in a page-by-page Swiper deck that presents OHI as a development storytelling partner for institutions, investors, and governments."
               className="mx-0 max-w-xl text-left"
             />
 

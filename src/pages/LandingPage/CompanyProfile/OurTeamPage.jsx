@@ -137,14 +137,14 @@ const OurTeamPage = () => {
         </div>
       }
     >
-      <div className="space-y-12">
-        <div className="text-center mb-8">
+      <section className="px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+        <div className="text-center">
           <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-[0.02em] text-[#2b313a]">
             Executive Team
           </h2>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {teamMembers.map((member) => (
             <div key={member.slug} className="flex flex-col items-center text-center">
               <div className="mb-4 w-40 h-40 rounded-full overflow-hidden border-4 border-[#bb7422]/10">
@@ -169,46 +169,44 @@ const OurTeamPage = () => {
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
       {/* Board of Trustees Section */}
-      <div className="w-screen relative left-[calc(-50vw+50%)] bg-[#bb7422] py-12 md:py-16">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="space-y-12">
-            <div className="text-center">
-              <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-[0.02em] text-white">
-                Board of Trustees
-              </h2>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {boardMembers.map((member) => (
-                <div key={member.slug} className="flex flex-col items-center text-center">
-                  <div className="mb-4 w-40 h-40 rounded-full overflow-hidden border-4 border-white/20">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <h3 className="text-sm font-bold uppercase tracking-[0.05em] text-white">
-                    {member.name}
-                  </h3>
-                  <p className="mt-1 text-xs font-semibold uppercase tracking-[0.02em] text-white/80">
-                    {member.title}
-                  </p>
-                  <Link
-                    to={`/team/${member.slug}`}
-                    className="mt-2 text-xs font-medium uppercase tracking-[0.02em] text-white hover:text-white/80 transition"
-                  >
-                    View Profile
-                  </Link>
+      <section className="w-screen relative left-[calc(-50vw+50%)] bg-[#bb7422] px-4 py-14 sm:px-6 sm:py-16 md:py-20 lg:px-8">
+        <div className="container mx-auto px-0">
+          <div className="text-center">
+            <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-[0.02em] text-white">
+              Board of Trustees
+            </h2>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {boardMembers.map((member) => (
+              <div key={member.slug} className="flex flex-col items-center text-center">
+                <div className="mb-4 w-40 h-40 rounded-full overflow-hidden border-4 border-white/20">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-              ))}
-            </div>
+                <h3 className="text-sm font-bold uppercase tracking-[0.05em] text-white">
+                  {member.name}
+                </h3>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.02em] text-white/80">
+                  {member.title}
+                </p>
+                <Link
+                  to={`/team/${member.slug}`}
+                  className="mt-2 text-xs font-medium uppercase tracking-[0.02em] text-white hover:text-white/80 transition"
+                >
+                  View Profile
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
     </ProfilePageShell>
   );
 };

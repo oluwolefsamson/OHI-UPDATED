@@ -106,7 +106,7 @@ const Hero = () => {
                   to={resolveCtaHref(
                     hero.primaryCtaHref,
                     hero.primaryCtaLabel,
-                    "/company-profile"
+                    "/documentary"
                   )}
                   className="hero_btn1 !mt-0 inline-flex w-full items-center justify-center transition duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(15,23,42,0.15)] sm:w-auto"
                 >

@@ -84,7 +84,7 @@ export const landingPageDefaults = {
       },
     ],
     primaryCtaLabel: "Explore Profile",
-    primaryCtaHref: "/company-profile",
+    primaryCtaHref: "/documentary",
     secondaryCtaLabel: "Our Story",
     secondaryCtaHref: "/about",
   },
@@ -229,7 +229,7 @@ export const landingPageDefaults = {
       eyebrow: "Why it works",
       title: "Built for institutions that need credibility, evidence, and reach",
       description:
-        "The gallery language mirrors the company profile: clear, professional, and grounded in the kind of visual evidence that helps partners communicate with confidence.",
+        "The gallery language mirrors the documentary: clear, professional, and grounded in the kind of visual evidence that helps partners communicate with confidence.",
       image: gallery02,
     },
     supportCards: [
@@ -337,6 +337,322 @@ export const landingPageDefaults = {
       "Accountability and leadership",
       "Creative excellence",
       "Institutional fluency",
+    ],
+  },
+  companyProfile: {
+    hero: {
+      title: "Documentary",
+      badgeEyebrow: "OHI documentary",
+      badgeDescription:
+        "Strategic visibility for development, investment, and impact communication.",
+      description:
+        "OHI creates development communication that helps institutions, partners, and communities understand the work being done, why it matters, and why it deserves attention from capital and policy actors.",
+      primaryCtaLabel: "View Portfolio",
+      primaryCtaHref: "/portfolio",
+      secondaryCtaLabel: "Contact Us",
+      secondaryCtaHref: "/contact",
+    },
+    difference: {
+      title: "The OHI difference",
+      description:
+        "OHI is not positioning itself as a generic production shop. The value is strategic visibility built for development, investor, and institutional audiences.",
+      points: [
+        "We translate complex programmes into decision-ready communication.",
+        "We work in the language of institutions, not campaign slogans.",
+        "We pair regional delivery with proof, governance, and trust signals.",
+      ],
+    },
+    overview: {
+      title: "A documentary that moves from credibility to action",
+      description:
+        "The documentary is designed as a guided entry point into OHI. It shows why the work matters for development, investment, and impact communication.",
+      stats: [
+        { label: "Projects delivered", value: "100+" },
+        { label: "Institutional clients", value: "70+" },
+        { label: "Repeat rate", value: "95%" },
+      ],
+      highlights: [
+        {
+          title: "Clarity first",
+          description:
+            "Each page is organized to help visitors move from the story, to the service, to the outcome.",
+        },
+        {
+          title: "Built for trust",
+          description:
+            "The content speaks to institutions, investors, and partners who need credible communication.",
+        },
+        {
+          title: "Designed to convert",
+          description:
+            "The structure makes it easy to move from discovery to portfolio, approach, and contact.",
+        },
+      ],
+    },
+    footprint: {
+      title: "Footprint",
+      description:
+        "A clearer view of where OHI already operates and how that scale supports institutional work.",
+      items: [
+        "Central Africa: Cameroon and neighboring markets",
+        "East Africa: Kenya, Uganda, Tanzania, Rwanda, and beyond",
+        "Southern Africa: Zambia and regional partners",
+        "USA: fundraising, partnerships, and institutional collaboration",
+      ],
+    },
+    portfolio: {
+      title: "Featured Story",
+      description:
+        "A highlighted selection that shows how OHI turns development, public-sector, and impact work into clear visual stories.",
+      projects: [
+        {
+          title: "Program visibility films",
+          category: "Development communication",
+          description:
+            "Clear communication that helps teams show results, context, and institutional value.",
+        },
+        {
+          title: "Stakeholder event coverage",
+          category: "Event production",
+          description:
+            "Fast, polished coverage for launches, convenings, and milestone moments.",
+        },
+        {
+          title: "Human-centered interviews",
+          category: "Story gathering",
+          description:
+            "Short-form stories that make complex initiatives feel relatable and real.",
+        },
+        {
+          title: "Campaign content packages",
+          category: "Multi-channel delivery",
+          description:
+            "Reusable content for reports, digital campaigns, and partner updates.",
+        },
+        {
+          title: "Field documentation",
+          category: "On-location production",
+          description:
+            "Visual reporting from communities, project sites, and implementation work.",
+        },
+        {
+          title: "Impact storytelling",
+          category: "Strategic visibility",
+          description:
+            "Editorial visuals built to support credibility, trust, and action.",
+        },
+      ],
+    },
+  },
+  aboutPage: {
+    hero: {
+      title: "About OHI",
+      description:
+        "OHI creates development communication that helps institutions, partners, and communities understand the work being done, why it matters, and why it deserves attention from capital and policy actors.",
+      primaryCtaLabel: "View Portfolio",
+      primaryCtaHref: "/portfolio",
+      secondaryCtaLabel: "Contact Us",
+      secondaryCtaHref: "/contact",
+      badgeEyebrow: "OHI profile",
+      badgeDescription:
+        "Strategic visibility for development, investment, and impact communication.",
+    },
+    intro: {
+      title: "We turn Africa's development story into strategic visibility",
+      description:
+        "OHI creates development communication that helps institutions, partners, and communities understand the work being done and why it matters.",
+      aboutLabel: "About OHI",
+      aboutText:
+        "We build visual stories that are clear, credible, and designed to move audiences from awareness to action.",
+      editorialLabel: "Editorial focus",
+      editorialText:
+        "OHI combines strategy, production, and field storytelling into one editorial workflow.",
+      ctaLabel: "Learn More",
+      ctaHref: "/portfolio",
+      ctaSecondaryLabel: "Start a Project",
+      ctaSecondaryHref: "/contact",
+    },
+    difference: {
+      title: "The OHI difference",
+      description:
+        "A sharper institutional story layer that makes the case for credibility, trust, and strategic visibility.",
+      principles: [
+        { title: "Credibility", description: "OHI produces stories that help institutions communicate with clarity, trust, and confidence." },
+        { title: "Human focus", description: "People stay at the center so technical work becomes relatable, memorable, and useful." },
+        { title: "Editorial craft", description: "Every frame is designed to feel intentional across film, photography, and digital storytelling." },
+      ],
+    },
+    snapshot: {
+      label: "OHI at a glance",
+      title: "The core principles that guide OHI",
+      description:
+        "The documentary positions OHI as a partner for institutions that need communication with clarity, trust, and confidence.",
+      stats: [
+        { value: "100+", label: "Projects delivered" },
+        { value: "70+", label: "Institutional clients" },
+        { value: "95%", label: "Repeat-client rate" },
+      ],
+      missionTitle: "Mission & vision",
+      missionItems: [
+        { title: "Field production", description: "Story capture in communities, project sites, and institutional spaces." },
+        { title: "Post-production", description: "Editing, motion, and finishing that keep the story clear and polished." },
+      ],
+    },
+    close: {
+      title: "A multilingual team fluent in English, French, and Pidgin",
+      description:
+        "OHI combines strategy, production, and editorial craft to help development work communicate with confidence across Africa.",
+      body:
+        "OHI is ready to turn your next project, campaign, or report into a story that decision-makers can trust and act on.",
+      ctaLabel: "Get a Quotation",
+      ctaHref: "/contact",
+    },
+  },
+  servicesPage: {
+    hero: {
+      title: "Services",
+      description:
+        "OHI creates development communication that helps institutions, partners, and communities understand the work being done, why it matters, and why it deserves attention from capital and policy actors.",
+      primaryCtaLabel: "View Portfolio",
+      primaryCtaHref: "/portfolio",
+      secondaryCtaLabel: "Contact Us",
+      secondaryCtaHref: "/contact",
+      badgeEyebrow: "OHI profile",
+      badgeDescription:
+        "Strategic visibility for development, investment, and impact communication.",
+    },
+    servicesIntro: {
+      title: "Core services",
+      description:
+        "OHI is a partner for institutions that need clear, credible, and investment-grade storytelling.",
+    },
+    formats: [
+      "Investment & programme visibility",
+      "Impact documentaries",
+      "ESG & social impact storytelling",
+      "Development programme communication",
+      "Donor & investor reporting films",
+      "Multilingual field production",
+    ],
+    travel: {
+      title: "How the work travels",
+      description:
+        "OHI frames each format as a communication asset, not just a video. The result is content that can be used across reports, websites, social channels, presentations, and stakeholder engagement.",
+      label: "Delivery approach",
+      body:
+        "Strategic, polished, and grounded in the realities of development work across the continent.",
+      ctaLabel: "See sectors",
+      ctaHref: "/who-we-serve",
+    },
+    showcase: [
+      {
+        title: "Impact Documentaries",
+        description:
+          "We produce documentaries that turn programme results into evidence-led narratives for institutional audiences.",
+      },
+      {
+        title: "Development Programme Communication",
+        description:
+          "OHI helps development programmes communicate objectives, implementation, and results with clarity and accountability.",
+      },
+      {
+        title: "Investment & Programme Visibility",
+        description:
+          "We craft investor-facing films that present projects as credible opportunities for financing and partnership.",
+      },
+      {
+        title: "ESG & Social Impact Storytelling",
+        description:
+          "Our content amplifies community voice and local ownership while supporting ESG and social impact reporting.",
+      },
+      {
+        title: "Donor & Investor Reporting Films",
+        description:
+          "We produce reporting films that support donor updates, investor confidence, and renewal conversations.",
+      },
+      {
+        title: "Multilingual Field Production",
+        description:
+          "OHI produces concise, evidence-driven reporting films across languages and regions.",
+      },
+      {
+        title: "Event & Mission Coverage",
+        description:
+          "From high-level forums to field missions, we document moments that matter with professional intent.",
+      },
+      {
+        title: "Social Media & Digital Campaigns",
+        description:
+          "We design digital-first content that extends project visibility across web, social, and stakeholder channels.",
+      },
+    ],
+  },
+  portfolioPage: {
+    hero: {
+      title: "Portfolio",
+      description:
+        "OHI presents a portfolio of development storytelling projects, case studies, and content packages that demonstrate institutional impact, visibility, and narrative clarity.",
+      primaryCtaLabel: "View Portfolio",
+      primaryCtaHref: "/portfolio",
+      secondaryCtaLabel: "Contact Us",
+      secondaryCtaHref: "/contact",
+      badgeEyebrow: "OHI portfolio",
+      badgeDescription:
+        "Strategic visibility for development, investment, and impact communication.",
+    },
+    header: {
+      title: "Portfolio highlights",
+      description:
+        "These sample projects reflect the kind of output OHI builds for public, institutional, and private-sector communication goals.",
+    },
+    projects: [
+      { title: "Program visibility films", category: "Development communication", description: "Clear communication that helps teams show results, context, and institutional value." },
+      { title: "Stakeholder event coverage", category: "Event production", description: "Fast, polished coverage for launches, convenings, and milestone moments." },
+      { title: "Human-centered interviews", category: "Story gathering", description: "Short-form stories that make complex initiatives feel relatable and real." },
+      { title: "Campaign content packages", category: "Multi-channel delivery", description: "Reusable content for reports, digital campaigns, and partner updates." },
+      { title: "Field documentation", category: "On-location production", description: "Visual reporting from communities, project sites, and implementation work." },
+      { title: "Impact storytelling", category: "Strategic visibility", description: "Editorial visuals built to support credibility, trust, and action." },
+    ],
+    method: {
+      title: "Built for clear, audience-ready storytelling",
+      description:
+        "The portfolio blends case-study storytelling, event coverage, and campaign assets that can move cleanly across reports, presentations, and digital channels.",
+      nextTitle: "Need a similar format for your project?",
+      nextDescription:
+        "OHI can shape a communication package around your audience, timeline, and intended outcome.",
+      ctaLabel: "Start a project",
+      ctaHref: "/contact",
+    },
+  },
+  leadershipPage: {
+    hero: {
+      title: "Leadership",
+      description:
+        "OHI is led with a clear institutional purpose: to turn strong production capability into trust, visibility, and decision-ready communication for development and impact audiences.",
+      primaryCtaLabel: "Contact OHI",
+      primaryCtaHref: "/contact",
+      secondaryCtaLabel: "View Services",
+      secondaryCtaHref: "/services",
+      badgeEyebrow: "Executive profile",
+      badgeDescription:
+        "Named leadership with the credibility procurement teams expect.",
+    },
+    leader: {
+      name: "Oliver Mbuya Litondo",
+      role: "President, Olympian House International",
+      description:
+        "Oliver Mbuya Litondo leads OHI with a focus on institutional credibility, regional delivery, and communication that helps partners explain complex work clearly. His role combines editorial judgment, team coordination, and client-facing oversight so projects stay aligned with strategic goals from brief to final output.",
+      credentials: [
+        "Leadership across African and international production and communication settings",
+        "Institutional storytelling for development, public-sector, and impact partners",
+        "Operational oversight of cross-border teams and regional delivery",
+      ],
+      heroImage: hero5,
+    },
+    highlights: [
+      { title: "Strategic direction", description: "Sets the tone for projects that need to satisfy institutional, donor, and partner expectations." },
+      { title: "Trust and governance", description: "Keeps delivery, reporting, and relationship management aligned with professional standards." },
+      { title: "Regional reach", description: "Works across West, Central, East, and Southern Africa with a practical understanding of local context." },
     ],
   },
   voices: {

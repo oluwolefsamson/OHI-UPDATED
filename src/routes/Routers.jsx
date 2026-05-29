@@ -37,7 +37,7 @@ const Routers = () => {
         {/* Public */}
         <Route index element={<Home />} />
         <Route path="home" element={<Home />} />
-        <Route path="company-profile" element={<CompanyProfile />} />
+        <Route path="documentary" element={<CompanyProfile />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="leadership" element={<LeadershipPage />} />
         <Route path="background" element={<BackgroundPage />} />

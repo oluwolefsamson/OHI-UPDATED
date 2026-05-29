@@ -3,39 +3,39 @@ import gallery11 from "../../assets/images/Gallery/gallery-11.jpeg";
 
 export const publicMenuSections = [
   {
-    label: "About",
+    label: "About OHI",
     href: "/about",
     items: [
-      { label: "Background", href: "/background" },
-      { label: "Our Team", href: "/our-team" },
-      { label: "Our Partners", href: "/our-partners" },
-      { label: "Our Platforms", href: "/our-platforms" },
+      { label: "Our Background", href: "/background" },
+      { label: "The Team", href: "/our-team" },
+      { label: "Partners", href: "/our-partners" },
+      { label: "Platforms", href: "/our-platforms" },
     ],
   },
   {
-    label: "Programmes",
+    label: "What We Do",
     href: "/services",
     heroImage: profileHeroMountain,
     items: [
       { label: "Services", href: "/services" },
-      { label: "Approach", href: "/approach" },
+      { label: "Our Approach", href: "/approach" },
       { label: "Impact", href: "/impact" },
     ],
   },
   {
-    label: "Documentaries",
+    label: "Our Work",
     href: "/portfolio",
     heroImage: gallery11,
     items: [
-      { label: "Documentaries", href: "/portfolio" },
+      { label: "Portfolio Highlights", href: "/portfolio" },
       { label: "Who We Serve", href: "/who-we-serve" },
-      { label: "Company Profile", href: "/company-profile" },
+      { label: "Documentary Work", href: "/documentary" },
     ],
   },
 ];
 
 export const publicUtilityLinks = [
-  { label: "Contact Us", href: "/contact" },
+  { label: "Start a Project", href: "/contact" },
 ];
 
 export const publicContactPoints = [

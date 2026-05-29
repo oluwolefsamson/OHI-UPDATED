@@ -18,6 +18,8 @@ import Reveal from "../../../components/ui/reveal";
 const ServicesPage = () => {
   const { config } = useLandingPageConfig();
   const { services } = config;
+  const servicesPage = config.servicesPage ?? {};
+  const hero = servicesPage.hero ?? {};
 
   const serviceFormats = [
     "Investment & programme visibility",
@@ -81,20 +83,20 @@ const ServicesPage = () => {
 
   return (
     <ProfilePageShell
-      title="Services"
+      title={hero.title ?? "Services"}
       heroImage={profileHeroMountain}
       heroImageAlt="OHI programmes hero"
-      description="OHI creates development communication that helps institutions, partners, and communities understand the work being done, why it matters, and why it deserves attention from capital and policy actors."
+      description={hero.description ?? "OHI creates development communication that helps institutions, partners, and communities understand the work being done, why it matters, and why it deserves attention from capital and policy actors."}
       descriptionClassName="text-white"
-      primaryCta={{ label: "View Portfolio", href: "/portfolio" }}
-      secondaryCta={{ label: "Contact Us", href: "/contact" }}
+      primaryCta={{ label: hero.primaryCtaLabel ?? "View Portfolio", href: hero.primaryCtaHref ?? "/portfolio" }}
+      secondaryCta={{ label: hero.secondaryCtaLabel ?? "Contact Us", href: hero.secondaryCtaHref ?? "/contact" }}
       heroBadge={
         <div className="space-y-1">
           <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
-            OHI profile
+            {hero.badgeEyebrow ?? "OHI profile"}
           </p>
           <p className="font-body text-sm leading-6 text-white/80">
-            Strategic visibility for development, investment, and impact communication.
+            {hero.badgeDescription ?? "Strategic visibility for development, investment, and impact communication."}
           </p>
         </div>
       }
@@ -104,7 +106,7 @@ const ServicesPage = () => {
         { eyebrow: "Retention", value: "95%", label: "Repeat-client rate" },
       ]}
     >
-      <section className="rounded-[36px] bg-[#fffaf5] p-4 sm:p-6">
+      <section className="rounded-[36px] bg-[#fffaf5] px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-18">
         <SectionHeader
           title="Core services"
           description="OHI is a partner for institutions that need clear, credible, and investment-grade storytelling."
@@ -126,7 +128,7 @@ const ServicesPage = () => {
       </section>
 
       <section
-        className="mt-12 relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-[#bb7422] py-8 sm:py-10 lg:py-12"
+        className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-[#bb7422] py-14 sm:py-16 lg:py-20"
       >
         <div className="container grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="border border-[#bb7422] bg-white p-6 text-white shadow-[0_12px_30px_rgba(15,23,42,0.08)]">
@@ -181,7 +183,7 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      <section className="mt-16 w-screen relative left-1/2 -translate-x-1/2 bg-[linear-gradient(180deg,#eef6fb_0%,#e3eff8_28%,#d8e8f5_100%)] px-4 sm:px-6 lg:px-8">
+      <section className="w-screen relative left-1/2 -translate-x-1/2 bg-[linear-gradient(180deg,#eef6fb_0%,#e3eff8_28%,#d8e8f5_100%)] px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <div className="mx-auto max-w-6xl">
           <SectionHeader
             title="Formats in practice"

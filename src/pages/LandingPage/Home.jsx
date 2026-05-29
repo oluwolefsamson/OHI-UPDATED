@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown, Play } from "lucide-react";
+import { motion } from "framer-motion";
 import { useLandingPageConfig } from "../../context/LandingPageConfigContext";
 import { landingPageDefaults } from "../../data/landingPageDefaults";
 import { Badge } from "../../components/ui/badge";
@@ -65,7 +66,7 @@ function Home() {
       image: gallery.items?.[1]?.image ?? about.image,
       description:
         "The homepage and the wider site are built to surface impact, show continuity, and make the editorial journey easy to follow.",
-      href: "/company-profile",
+      href: "/documentary",
     },
     {
       title: "The Voice of the Dreamer",
@@ -125,6 +126,25 @@ function Home() {
   }, [heroFrames.length]);
 
   const currentSlide = heroFrames[activeSlide];
+  const staggerContainer = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.05,
+      },
+    },
+  };
+
+  const staggerItem = {
+    hidden: { opacity: 0, y: 22, scale: 0.98 },
+    show: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
 
   return (
     <div className="overflow-hidden bg-[linear-gradient(180deg,#fffaf0_0%,#fcf6ea_28%,#f7f0e2_100%)] text-[#173145]">
@@ -240,10 +260,19 @@ function Home() {
             </p>
           </Reveal>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <motion.div
+            className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {cardItems.map((item) => (
-              <Reveal key={item.title}>
-                <article className="flex h-full min-h-[420px] flex-col overflow-hidden bg-white shadow-[0_12px_26px_rgba(15,23,42,0.14)]">
+              <motion.article
+                key={item.title}
+                variants={staggerItem}
+                className="flex h-full min-h-[420px] flex-col overflow-hidden bg-white shadow-[0_12px_26px_rgba(15,23,42,0.14)]"
+              >
                   <FallbackImage
                     src={item.image}
                     fallback={landingPageDefaults.gallery.items?.[0]?.image}
@@ -260,10 +289,9 @@ function Home() {
                       Learn More
                     </Link>
                   </div>
-                </article>
-              </Reveal>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -287,17 +315,24 @@ function Home() {
                 across communities and regions.
               </p>
               <Link
-                to="/company-profile"
+                to="/documentary"
                 className="mt-5 inline-flex h-8 items-center justify-center bg-[#e97a2f] px-4 text-xs font-semibold text-white transition hover:bg-[#d96f1f]"
               >
                 Virtual Tours
               </Link>
             </Reveal>
 
-            <Reveal className="grid grid-cols-4 gap-2">
+            <motion.div
+              className="grid grid-cols-4 gap-2"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+            >
               {heritageItems.map((item, index) => (
-                <div
+                <motion.div
                   key={item.id ?? item.title ?? index}
+                  variants={staggerItem}
                   className={`overflow-hidden rounded-[4px] ${
                     index === 1 || index === 6 ? "row-span-2" : ""
                   } ${index === 2 ? "col-span-2" : ""}`}
@@ -307,9 +342,9 @@ function Home() {
                     alt={item.title ?? `Heritage ${index + 1}`}
                     className="h-full w-full object-cover"
                   />
-                </div>
+                </motion.div>
               ))}
-            </Reveal>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -388,7 +423,7 @@ function Home() {
                 institutional outcomes.
               </p>
               <Link
-                to="/company-profile"
+                to="/documentary"
                 className="mt-5 inline-flex h-8 items-center justify-center bg-[#e97a2f] px-4 text-xs font-semibold text-white transition hover:bg-[#d96f1f]"
               >
                 Learn More
@@ -408,8 +443,14 @@ function Home() {
             Featured Programmes
           </UnderlinedHeading>
 
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
-            {[
+          <motion.div
+            className="mt-8 grid gap-5 md:grid-cols-3"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            {[ 
               {
                 title: "UNESCO World Heritage Volunteers Initiative",
                 image: heroImages.hero1,
@@ -429,8 +470,7 @@ function Home() {
                   "A cultural documentation platform that records African creative expression for public audiences, partners, and archival use.",
               },
             ].map((item) => (
-              <Reveal key={item.title}>
-                <article className="flex h-full min-h-[460px] flex-col overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_10px_24px_rgba(15,23,42,0.12)]">
+              <motion.article key={item.title} variants={staggerItem} className="flex h-full min-h-[460px] flex-col overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_10px_24px_rgba(15,23,42,0.12)]">
                   <img src={item.image} alt={item.title} className="h-60 w-full object-cover" />
                   <div className="flex flex-1 flex-col p-4">
                     <h3 className="text-sm font-bold leading-5 text-[#a75f1a]">{item.title}</h3>
@@ -442,10 +482,9 @@ function Home() {
                       Learn More
                     </Link>
                   </div>
-                </article>
-              </Reveal>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -461,10 +500,15 @@ function Home() {
               </p>
           </Reveal>
 
-          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <motion.div
+            className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {storytellers.map((story) => (
-              <Reveal key={story.name}>
-                <article className="flex h-full min-h-[460px] flex-col overflow-hidden bg-white shadow-[0_12px_24px_rgba(15,23,42,0.14)]">
+              <motion.article key={story.name} variants={staggerItem} className="flex h-full min-h-[460px] flex-col overflow-hidden bg-white shadow-[0_12px_24px_rgba(15,23,42,0.14)]">
                   <FallbackImage
                     src={story.image}
                     fallback={heroSlideFallbacks[0]}
@@ -478,10 +522,9 @@ function Home() {
                     <h3 className="mt-3 text-sm font-semibold text-[#2f3135]">{story.name}</h3>
                     <p className="mt-2 text-[11px] text-[#7b7b7b]">{story.role}</p>
                   </div>
-                </article>
-              </Reveal>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
 
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <Link

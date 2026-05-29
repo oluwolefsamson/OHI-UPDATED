@@ -8,7 +8,7 @@ const tiers = [
   {
     name: "Institutional credibility",
     id: "tier-expertise",
-    href: "/company-profile",
+    href: "/documentary",
     priceMonthly: "01",
     description:
       "Seasoned professionals delivering visual content for DFIs, multilaterals, governments, institutions, and private-sector actors.",

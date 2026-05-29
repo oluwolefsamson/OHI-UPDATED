@@ -8,11 +8,11 @@ import { cn } from "../../../lib/utils";
 
 const supporterLogos = [
   { name: "IFRC", src: ifrcLogo },
-  { name: "CORAF", src: corafLogo },
+  { name: "CORAF", src: corafLogo, key: "coraf-1" },
   { name: "WFP", src: wfpLogo },
   { name: "Sun King", src: sunKingLogo },
   { name: "WFP Extended", src: wfpLogo },
-  { name: "CORAF", src: corafLogo },
+  { name: "CORAF", src: corafLogo, key: "coraf-2" },
 ];
 
 const SupporterCard = ({ name, src }) => (
@@ -90,9 +90,9 @@ const Supporters = () => {
 
         <div className="relative mt-10 flex w-full items-center justify-center overflow-hidden rounded-[32px] bg-white/12 py-6">
           <LocalMarquee pauseOnHover className="[--duration:24s] px-2 py-2">
-            {supporterLogos.map((logo) => (
+            {supporterLogos.map((logo, index) => (
               <SupporterCard
-                key={logo.name}
+                key={logo.key ?? `${logo.name}-${index}`}
                 name={logo.name}
                 src={logo.src}
               />

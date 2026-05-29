@@ -58,10 +58,26 @@ const ApproachPage = () => {
         <SectionHeader
           title="How OHI works"
           description="Each project is designed to be practical for DFIs, governments, and institutions that need professional communication support without unnecessary complexity."
+          className="max-w-4xl"
+          textColorClassName="text-[#2f3135]"
         />
-        <div className="mt-10 grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="mt-10 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="max-w-2xl">
+            <div className="flex h-full flex-col justify-center p-6 sm:p-8">
+              <p className="font-body text-xs font-semibold uppercase tracking-[0.3em] text-[#d38a31]">
+                Workflow
+              </p>
+              <p className="font-body mt-4 max-w-3xl text-xl leading-9 text-justify text-[#5a5f66]">
+                OHI works through a clear process that starts with understanding the communication objective, the audience, and the practical constraints around timing, budget, and delivery. From there, the team shapes a concept that fits the brief and keeps the editorial direction steady from the first conversation through final handoff.
+              </p>
+              <p className="font-body mt-4 max-w-3xl text-xl leading-9 text-justify text-[#5a5f66]">
+                The result is a workflow that stays practical for institutions while still giving the work the polish and clarity needed to land with decision-makers. It keeps each stage focused, coordinated, and aligned with the final communication outcome.
+              </p>
+            </div>
+          </div>
+
           <div className="relative mx-auto w-full max-w-[560px]">
-            <div className="overflow-hidden rounded-[32px] border border-[#D9DCE2] bg-white shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
+            <div className="overflow-hidden rounded-none border border-[#D9DCE2] bg-white shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
               <img
                 src={approachVisual}
                 alt="Production workflow visual"
@@ -69,49 +85,32 @@ const ApproachPage = () => {
               />
             </div>
           </div>
-
-          <div className="max-w-2xl">
-            <div className="space-y-4">
-              <div className="rounded-[26px] border border-[#e8dcc8] bg-white p-5 shadow-[0_12px_30px_rgba(15,23,42,0.06)]">
-                <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-[#b16a18]">
-                  Workflow
-                </p>
-                <p className="font-body mt-3 text-base leading-7 text-[#4e5a67]">
-                  The approach section keeps the steps and deliverables easy to scan while staying aligned with the institutional narrative.
-                </p>
-              </div>
-              <div className="rounded-[26px] border border-[#e8dcc8] bg-[linear-gradient(180deg,#091826_0%,#12243a_100%)] p-5 text-white shadow-[0_12px_30px_rgba(15,23,42,0.12)]">
-                <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-white/80">
-                  Delivery style
-                </p>
-                <p className="font-body mt-3 text-base leading-7 text-white/80">
-                  OHI combines strategy, production, and editorial craft into one practical workflow for institutional clients.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
         <div className="mt-12 grid gap-4 lg:grid-cols-4">
           {steps.map((step, index) => (
             <article
               key={step.title}
-              className="rounded-[28px] border border-[#D9DCE2] bg-white p-6 shadow-sm"
+              className="bg-white p-6 shadow-[0_14px_34px_rgba(15,23,42,0.06)]"
             >
               <div className="flex items-center justify-between">
                 <step.icon className="h-5 w-5 text-primaryColor" />
-                <span className="text-sm font-semibold uppercase tracking-[0.18em] text-textColor">
+                <span className="inline-flex h-10 w-10 items-center justify-center bg-[#fff8ef] text-xs font-semibold uppercase tracking-[0.22em] text-[#b16a18]">
                   0{index + 1}
                 </span>
               </div>
-              <h3 className="mt-5 text-2xl font-bold text-headingColor">{step.title}</h3>
-              <p className="text__para">{step.description}</p>
+              <h3 className="mt-5 text-xl font-semibold tracking-[-0.02em] text-[#173145]">
+                {step.title}
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-[#5a5f66]">
+                {step.description}
+              </p>
             </article>
           ))}
         </div>
       </section>
 
       <section className="mt-12 grid gap-6 rounded-[36px] bg-[#f4f8fb] p-4 lg:grid-cols-[0.9fr_1.1fr] lg:p-6">
-        <div className="rounded-[28px] border border-[#D9DCE2] bg-[#0f172a] p-6 text-white shadow-sm">
+        <div className="border border-[#D9DCE2] bg-[#0f172a] p-6 text-white shadow-sm">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-yellow-300">
             Working style
           </p>
@@ -121,7 +120,7 @@ const ApproachPage = () => {
           </p>
         </div>
 
-        <div className="rounded-[28px] border border-[#D9DCE2] bg-white p-6 shadow-sm">
+        <div className="border border-[#D9DCE2] bg-white p-6 shadow-sm">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primaryColor">
             Deliverables
           </p>

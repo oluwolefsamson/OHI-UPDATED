@@ -42,9 +42,9 @@ export const ContactBand = () => {
                     Contact Page
                   </button>
                 </Link>
-                <Link to="/company-profile">
+                <Link to="/documentary">
                   <button className="hero_btn2 w-full sm:w-auto transition duration-300 ease-out hover:-translate-y-1">
-                    View Profile
+                    View Documentary
                   </button>
                 </Link>
               </div>

@@ -197,8 +197,8 @@ export default function ProfilePageShell({
       </section>
 
       {children ? (
-        <div className="container mx-auto px-4 pb-20 pt-8 sm:px-5 lg:px-20">
-          <div className="space-y-16">{children}</div>
+        <div className="space-y-16 py-12 sm:py-14 lg:py-16">
+          {children}
         </div>
       ) : null}
     </>

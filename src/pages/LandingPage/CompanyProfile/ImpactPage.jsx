@@ -1,9 +1,9 @@
 import React from "react";
 import { ArrowRight, CheckCircle2, ShieldCheck, Target } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useLandingPageConfig } from "../../../context/LandingPageConfigContext";
 import ProfilePageShell from "../../../components/LandingPage/Profile/ProfilePageShell";
 import SectionHeader from "../../../components/LandingPage/SectionHeader";
+import UnderlinedHeading from "../../../components/LandingPage/UnderlinedHeading";
 import impactVisual from "../../../assets/images/Gallery/gallery-05.jpeg";
 
 const impactReasons = [
@@ -15,9 +15,13 @@ const impactReasons = [
   "Showcase success stories",
 ];
 
-const ImpactPage = () => {
-  const { config } = useLandingPageConfig();
+const impactStats = [
+  { value: "100+", label: "Projects delivered" },
+  { value: "70+", label: "Institutional clients" },
+  { value: "95%", label: "Repeat-client rate" },
+];
 
+const ImpactPage = () => {
   return (
     <ProfilePageShell
       title="Impact"
@@ -47,17 +51,19 @@ const ImpactPage = () => {
         <SectionHeader
           title="Why organizations invest in storytelling"
           description="The profile makes a direct business case for visual communication, not just a creative one."
+          className="max-w-4xl"
+          textColorClassName="text-[#2f3135]"
         />
-        <div className="mt-10 overflow-hidden rounded-[32px] border border-[#e8dcc8] bg-white shadow-[0_16px_40px_rgba(15,23,42,0.06)]">
+        <div className="mt-10 overflow-hidden border border-[#e8dcc8] bg-white shadow-[0_16px_40px_rgba(15,23,42,0.06)]">
           <div className="grid gap-0 lg:grid-cols-[1.05fr_0.95fr]">
             <div className="p-6 sm:p-8 lg:p-10">
-              <p className="font-body text-sm font-semibold uppercase tracking-[0.22em] text-[#b16a18]">
+              <p className="font-body text-[11px] font-semibold uppercase tracking-[0.3em] text-[#d38a31]">
                 Visual proof
               </p>
-              <h3 className="font-display mt-4 text-3xl font-semibold tracking-[-0.03em] text-[#173145] sm:text-4xl">
+              <h3 className="font-display mt-3 text-3xl font-bold leading-tight tracking-[-0.04em] text-[#2f3135] sm:text-[38px]">
                 Stories that help teams show results clearly
               </h3>
-          <p className="font-body mt-4 max-w-2xl text-base leading-7 text-[#4e5a67]">
+              <p className="font-body mt-4 max-w-2xl text-sm leading-6 text-[#5a5f66]">
                 The profile now makes the case for why OHI is a strategic
                 communication partner, not a generic production supplier.
               </p>
@@ -72,51 +78,57 @@ const ImpactPage = () => {
             </div>
           </div>
         </div>
-        <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {impactReasons.map((reason) => (
             <div
               key={reason}
-              className="rounded-[28px] border border-[#e8dcc8] bg-white p-6 shadow-[0_12px_28px_rgba(15,23,42,0.06)]"
+              className="border border-[#e8dcc8] bg-white p-6 shadow-[0_12px_28px_rgba(15,23,42,0.06)]"
             >
               <CheckCircle2 className="h-5 w-5 text-[#b16a18]" />
-              <h3 className="font-display mt-4 text-xl font-semibold text-[#173145]">{reason}</h3>
+              <h3 className="font-display mt-4 text-lg font-semibold tracking-[-0.02em] text-[#173145]">
+                {reason}
+              </h3>
             </div>
           ))}
         </div>
       </section>
 
       <section className="mt-12 grid gap-6 rounded-[36px] bg-[#fff3e3] p-4 lg:grid-cols-[1.02fr_0.98fr] lg:p-6">
-        <div className="rounded-[28px] border border-[#e8dcc8] bg-[linear-gradient(180deg,#091826_0%,#12243a_100%)] p-6 text-white shadow-sm">
+        <div className="border border-[#e8dcc8] bg-[linear-gradient(180deg,#091826_0%,#12243a_100%)] p-6 text-white shadow-sm">
           <div className="flex items-center gap-3">
             <Target className="h-5 w-5 text-[#fbbf24]" />
-            <h3 className="font-display text-2xl font-semibold">What OHI helps you achieve</h3>
+            <h3 className="font-display text-2xl font-bold leading-tight tracking-[-0.04em] text-white">
+              What OHI helps you achieve
+            </h3>
           </div>
-          <p className="font-body mt-4 leading-7 text-white/80">
+          <p className="font-body mt-4 text-sm leading-6 text-white/80">
             OHI turns African projects into clear communication assets that support action, visibility, trust, and long-term value.
           </p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {config.hero.stats.map((stat) => (
-              <div key={stat.label} className="rounded-[24px] bg-white/10 p-4">
-                <p className="font-display text-3xl font-semibold text-white">{stat.value}</p>
-                <p className="font-body mt-2 text-sm leading-6 text-white/75">{stat.label}</p>
+            {impactStats.map((stat) => (
+              <div key={stat.label} className="bg-white/10 p-4">
+                <p className="font-display text-3xl font-semibold tracking-[-0.04em] text-white">{stat.value}</p>
+                <p className="font-body mt-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/75">{stat.label}</p>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="rounded-[28px] border border-[#e8dcc8] bg-white p-6 shadow-[0_12px_28px_rgba(15,23,42,0.06)]">
+        <div className="border border-[#e8dcc8] bg-white p-6 shadow-[0_12px_28px_rgba(15,23,42,0.06)]">
           <div className="flex items-center gap-3">
             <ShieldCheck className="h-5 w-5 text-[#b16a18]" />
-            <h3 className="font-display text-2xl font-semibold text-[#173145]">The communication payoff</h3>
+            <h3 className="font-display text-2xl font-bold leading-tight tracking-[-0.04em] text-[#2f3135]">
+              The communication payoff
+            </h3>
           </div>
-          <p className="font-body mt-4 text-base leading-7 text-[#4e5a67]">
+          <p className="font-body mt-4 text-sm leading-6 text-[#5a5f66]">
             Good storytelling helps a programme look like a programme that can be trusted, funded, shared, and scaled. That is the lens behind every project in the profile.
           </p>
-          <div className="mt-6 rounded-[24px] bg-[#fff8ef] p-5">
-            <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-[#b16a18]">
+          <div className="mt-6 bg-[#fff8ef] p-5">
+            <p className="font-body text-[11px] font-semibold uppercase tracking-[0.3em] text-[#d38a31]">
               Support for teams
             </p>
-            <p className="font-body mt-3 text-sm leading-6 text-[#4e5a67]">
+            <p className="font-body mt-3 text-sm leading-6 text-[#5a5f66]">
               Use the work across reports, launch materials, stakeholder meetings, digital campaigns, and partner communications.
             </p>
           </div>

@@ -15,7 +15,7 @@ import {
 import ProfilePageShell from "../../../components/LandingPage/Profile/ProfilePageShell";
 import Brochure from "../../../components/Brochure/Brochure";
 import SectionHeader from "../../../components/LandingPage/SectionHeader";
-import { Marquee } from "../../../components/LandingPage/magicui/marquee";
+import { useLandingPageConfig } from "../../../context/LandingPageConfigContext";
 import {
   Card,
   CardContent,
@@ -26,10 +26,6 @@ import {
 } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 import { Separator } from "../../../components/ui/separator";
-import ifrcLogo from "../../../assets/img/International_Federation_of_Red_Cross_and_Red_Crescent_Societies_Logo.png";
-import corafLogo from "../../../assets/img/logo-coraf.png";
-import sunKingLogo from "../../../assets/img/Sun-King_New_Logo-02.png";
-import wfpLogo from "../../../assets/img/wfp-logo-extended-blue-en.png";
 import portfolioImage01 from "../../../assets/images/Gallery/gallery-01.jpeg";
 import portfolioImage02 from "../../../assets/images/Gallery/gallery-02.jpeg";
 import portfolioImage03 from "../../../assets/images/Gallery/gallery-03.jpeg";
@@ -82,25 +78,6 @@ const profilePages = [
     path: "/contact",
     description: "Direct contact details and the easiest way to reach OHI.",
     icon: MapPinned,
-  },
-];
-
-const clientLogos = [
-  {
-    name: "World Food Programme",
-    image: wfpLogo,
-  },
-  {
-    name: "Sun King",
-    image: sunKingLogo,
-  },
-  {
-    name: "CORAF",
-    image: corafLogo,
-  },
-  {
-    name: "International Federation of Red Cross and Red Crescent Societies",
-    image: ifrcLogo,
   },
 ];
 
@@ -175,60 +152,71 @@ const portfolioProjects = [
 ];
 
 const CompanyProfile = () => {
+  const { config } = useLandingPageConfig();
+  const companyProfile = config.companyProfile ?? {};
+  const hero = companyProfile.hero ?? {};
+  const difference = companyProfile.difference ?? {};
+  const overview = companyProfile.overview ?? {};
+  const footprintConfig = companyProfile.footprint ?? {};
+
   return (
     <ProfilePageShell
-      title="Company Profile"
+      title={hero.title ?? "Documentary"}
       heroImage={companyHeroImage}
-      heroImageAlt="OHI company profile hero"
-      description="OHI creates development communication that helps institutions, partners, and communities understand the work being done, why it matters, and why it deserves attention from capital and policy actors."
+      heroImageAlt="OHI documentary hero"
+      description={hero.description ?? "OHI creates development communication that helps institutions, partners, and communities understand the work being done, why it matters, and why it deserves attention from capital and policy actors."}
       descriptionClassName="text-white"
-      primaryCta={{ label: "View Portfolio", href: "/portfolio" }}
-      secondaryCta={{ label: "Contact Us", href: "/contact" }}
+      primaryCta={{ label: hero.primaryCtaLabel ?? "View Portfolio", href: hero.primaryCtaHref ?? "/portfolio" }}
+      secondaryCta={{ label: hero.secondaryCtaLabel ?? "Contact Us", href: hero.secondaryCtaHref ?? "/contact" }}
       heroBadge={
         <div className="space-y-1">
           <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
-            OHI profile
+            {hero.badgeEyebrow ?? "OHI documentary"}
           </p>
           <p className="font-body text-sm leading-6 text-white/80">
-            Strategic visibility for development, investment, and impact communication.
+            {hero.badgeDescription ?? "Strategic visibility for development, investment, and impact communication."}
           </p>
         </div>
       }
     >
-      <section className="rounded-[36px] bg-[#091826] p-4 text-white sm:p-6">
-        <SectionHeader
-          title="The OHI difference"
-          description="OHI is not positioning itself as a generic production shop. The value is strategic visibility built for development, investor, and institutional audiences."
-          className="max-w-4xl text-left"
-        />
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {[
+      <section className="bg-[linear-gradient(180deg,#f6b56a_0%,#eb8e37_100%)] px-4 py-10 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeader
+            title={difference.title ?? "The OHI difference"}
+            description={difference.description ?? "OHI is not positioning itself as a generic production shop. The value is strategic visibility built for development, investor, and institutional audiences."}
+            className="max-w-4xl text-left"
+            textColorClassName="text-white"
+            descriptionClassName="text-white/80"
+          />
+
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {(difference.points ?? [
             "We translate complex programmes into decision-ready communication.",
             "We work in the language of institutions, not campaign slogans.",
             "We pair regional delivery with proof, governance, and trust signals.",
-          ].map((item) => (
+          ]).map((item) => (
             <div
               key={item}
-              className="rounded-[24px] border border-white/12 bg-white/6 p-5 text-sm leading-6 text-white/82 backdrop-blur-sm"
+              className="border border-[#e8dcc8] bg-white p-5 text-sm leading-6 text-[#4e5a67] shadow-[0_12px_30px_rgba(15,23,42,0.08)]"
             >
               {item}
             </div>
           ))}
         </div>
+        </div>
       </section>
 
-      <section className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="rounded-[32px] border border-[#D9DCE2] bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-8">
+      <section className="bg-[#fffaf5] px-4 py-4 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="border border-[#D9DCE2] bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-8">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primaryColor">
             Profile at a glance
           </p>
           <h2 className="mt-4 text-3xl font-bold tracking-[-0.03em] text-headingColor sm:text-4xl">
-            A company profile that moves from credibility to action
+            {overview.title ?? "A documentary that moves from credibility to action"}
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-textColor">
-            The company profile is designed as a guided entry point into OHI. It
-            gives visitors a fast read on who the team is, what they do, and why
-            their work matters for development, investment, and impact communication.
+          <p className="mt-4 max-w-2xl text-base leading-7 text-justify text-textColor">
+            {overview.description ?? "The documentary is designed as a guided entry point into OHI. It shows why the work matters for development, investment, and impact communication."}
           </p>
 
           <div className="mt-6">
@@ -242,10 +230,10 @@ const CompanyProfile = () => {
           </div>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            {profileStats.map((stat) => (
+            {(overview.stats ?? profileStats).map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-[24px] border border-[#E5E7EB] bg-[#F8FAFC] p-4 shadow-[0_10px_24px_rgba(15,23,42,0.03)]"
+                className="border border-[#E5E7EB] bg-[#F8FAFC] p-4 shadow-[0_10px_24px_rgba(15,23,42,0.03)]"
               >
                 <p className="text-3xl font-bold tracking-[-0.04em] text-headingColor">
                   {stat.value}
@@ -258,108 +246,111 @@ const CompanyProfile = () => {
           </div>
 
           <div className="mt-8 space-y-3">
-            {profileHighlights.map((highlight) => (
+            {(overview.highlights ?? profileHighlights).map((highlight) => (
               <div
                 key={highlight.title}
-                className="flex gap-4 rounded-[24px] border border-[#E5E7EB] bg-white p-4 shadow-[0_10px_28px_rgba(15,23,42,0.04)]"
+                className="flex gap-4 border border-[#E5E7EB] bg-white p-4 shadow-[0_10px_28px_rgba(15,23,42,0.04)]"
               >
-                <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#0f4c81]/10 text-primaryColor">
+                <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center bg-[#0f4c81]/10 text-primaryColor">
                   <Target className="h-5 w-5" />
                 </div>
                 <div>
                   <h3 className="text-base font-semibold text-headingColor">
                     {highlight.title}
                   </h3>
-                  <p className="mt-1 text-sm leading-6 text-textColor">
+                  <p className="mt-1 text-sm leading-6 text-justify text-textColor">
                     {highlight.description}
                   </p>
                 </div>
               </div>
             ))}
           </div>
-        </div>
+          </div>
 
-        <div className="rounded-[32px] border border-[#D9DCE2] bg-[linear-gradient(180deg,#0f172a_0%,#13283c_100%)] p-6 text-white shadow-[0_16px_40px_rgba(15,23,42,0.12)] sm:p-8">
+          <div className="border border-[#D9DCE2] bg-[linear-gradient(180deg,#0f172a_0%,#13283c_100%)] p-6 text-white shadow-[0_16px_40px_rgba(15,23,42,0.12)] sm:p-8">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#fbbf24]">
             What makes it stronger
           </p>
           <div className="mt-5 space-y-5">
-            <div className="rounded-[24px] bg-white/10 p-5 backdrop-blur-sm">
+            <div className="bg-white/10 p-5 backdrop-blur-sm">
               <div className="flex items-center gap-3">
                 <TrendingUp className="h-5 w-5 text-[#fbbf24]" />
                 <h3 className="text-lg font-semibold">Better discovery flow</h3>
               </div>
-              <p className="mt-3 text-sm leading-6 text-white/80">
+              <p className="mt-3 text-sm leading-6 text-justify text-white/80">
                 The first screen now explains the purpose of the profile before
                 sending visitors into the individual sections.
               </p>
             </div>
-            <div className="rounded-[24px] bg-white/10 p-5 backdrop-blur-sm">
+            <div className="bg-white/10 p-5 backdrop-blur-sm">
               <div className="flex items-center gap-3">
                 <Users className="h-5 w-5 text-[#7dd3fc]" />
                 <h3 className="text-lg font-semibold">Stronger client context</h3>
               </div>
-              <p className="mt-3 text-sm leading-6 text-white/80">
+              <p className="mt-3 text-sm leading-6 text-justify text-white/80">
                 The client strip and portfolio examples now read like proof, not
                 filler.
               </p>
             </div>
-            <div className="rounded-[24px] bg-white/10 p-5 backdrop-blur-sm">
+            <div className="bg-white/10 p-5 backdrop-blur-sm">
               <div className="flex items-center gap-3">
                 <ShieldCheck className="h-5 w-5 text-[#86efac]" />
                 <h3 className="text-lg font-semibold">Clearer positioning</h3>
               </div>
-              <p className="mt-3 text-sm leading-6 text-white/80">
+              <p className="mt-3 text-sm leading-6 text-justify text-white/80">
                 The profile keeps the language professional, compact, and easy to
                 scan on both desktop and mobile.
               </p>
             </div>
+          </div>
           </div>
         </div>
       </section>
 
       <Brochure />
 
-      <div className="mt-14">
-        <SectionHeader
-          title="Start with the section that matches your goal"
-          description="The profile is split into focused pages so each part reads clearly while keeping the same visual language as the landing page."
-        />
-      </div>
+      <section className="px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mt-14">
+            <SectionHeader
+              title="Start with the section that matches your goal"
+              description="The profile is split into focused pages so each part reads clearly while keeping the same visual language as the landing page."
+            />
+          </div>
 
-      <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {profilePages.map((page, index) => {
-          return (
-            <Card
-              key={page.path}
-              className="group overflow-hidden rounded-[28px] border-[#D9DCE2] bg-white shadow-[0_16px_40px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#c9ced7] hover:shadow-[0_24px_70px_rgba(15,23,42,0.12)]"
-            >
-              <CardHeader className="pb-4">
+          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {profilePages.map((page, index) => {
+              return (
+                <Card
+                  key={page.path}
+                  className="group overflow-hidden border-[#D9DCE2] bg-white shadow-[0_16px_40px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#c9ced7] hover:bg-[#bb7422] hover:text-white hover:shadow-[0_24px_70px_rgba(15,23,42,0.12)]"
+                >
+                  <CardHeader className="pb-4">
                 <div className="flex items-start justify-between gap-4">
-                  <div className="rounded-2xl border border-[#E5E7EB] bg-[#F9FAFB] p-3 text-slate-700 shadow-[0_10px_24px_rgba(15,23,42,0.04)] transition duration-300 group-hover:border-[#d6dbe3] group-hover:bg-white">
+                  <div className="border border-[#E5E7EB] bg-[#F9FAFB] p-3 text-slate-700 shadow-[0_10px_24px_rgba(15,23,42,0.04)] transition duration-300 group-hover:border-white/30 group-hover:bg-white/15 group-hover:text-white">
                     <page.icon className="h-5 w-5" />
                   </div>
-                  <span className="text-xs font-semibold uppercase tracking-[0.22em] text-textColor">
+                  <span className="text-xs font-semibold uppercase tracking-[0.22em] text-textColor transition-colors duration-300 group-hover:text-white/90">
                     0{index + 1}
                   </span>
                 </div>
               </CardHeader>
 
               <CardContent className="space-y-4">
-                <CardTitle className="text-2xl font-semibold tracking-[-0.02em] text-headingColor">
+                <CardTitle className="text-2xl font-semibold tracking-[-0.02em] text-headingColor transition-colors duration-300 group-hover:text-white">
                   {page.label}
                 </CardTitle>
-                <CardDescription className="text-base leading-7 text-textColor">
+                <CardDescription className="text-base leading-7 text-textColor transition-colors duration-300 group-hover:text-white/85">
                   {page.description}
                 </CardDescription>
               </CardContent>
 
               <CardFooter className="flex items-center justify-between gap-4 pt-0">
-                <Separator className="flex-1 bg-black/10" />
+                <Separator className="flex-1 bg-black/10 transition-colors duration-300 group-hover:bg-white/30" />
                 <Button
                   asChild
                   variant="ghost"
-                  className="group/btn h-10 rounded-full px-0 text-sm font-semibold text-slate-700 hover:bg-transparent hover:text-slate-900"
+                  className="group/btn h-10 rounded-full px-0 text-sm font-semibold text-slate-700 transition-colors duration-300 hover:bg-transparent hover:text-white"
                 >
                   <Link to={page.path} className="inline-flex items-center gap-2">
                     Explore
@@ -367,105 +358,52 @@ const CompanyProfile = () => {
                   </Link>
                 </Button>
               </CardFooter>
-            </Card>
-          );
-        })}
-      </div>
-
-      <section
-        id="supporters"
-        className="mt-16 rounded-[32px] border border-[#e8dcc8] bg-[#f4f8fb] p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-8"
-      >
-        <SectionHeader
-          title="Our Partners / Supporters"
-          description="A moving strip of organizations and institutions that support or align with OHI's work."
-          className="max-w-3xl"
-        />
-
-        <div className="mt-8 grid gap-4 sm:grid-cols-3">
-          <div className="rounded-[24px] border border-[#e8dcc8] bg-white p-4 shadow-[0_10px_24px_rgba(15,23,42,0.03)]">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b16a18]">
-              Collaboration
-            </p>
-            <p className="mt-2 text-sm leading-6 text-[#4e5a67]">
-              Trusted by institutions working across development, public-sector,
-              and impact communication.
-            </p>
-          </div>
-          <div className="rounded-[24px] border border-[#e8dcc8] bg-white p-4 shadow-[0_10px_24px_rgba(15,23,42,0.03)]">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b16a18]">
-              Support
-            </p>
-            <p className="mt-2 text-sm leading-6 text-[#4e5a67]">
-              Logos are shown as part of a broader supporter strip, not an isolated
-              gallery.
-            </p>
-          </div>
-          <div className="rounded-[24px] border border-[#e8dcc8] bg-white p-4 shadow-[0_10px_24px_rgba(15,23,42,0.03)]">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b16a18]">
-              Signal
-            </p>
-            <p className="mt-2 text-sm leading-6 text-[#4e5a67]">
-              The section reinforces the profile's credibility at a glance.
-            </p>
+                </Card>
+              );
+            })}
           </div>
         </div>
+      </section>
 
-        <div className="relative mt-10 overflow-hidden">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent" />
-
-          <Marquee pauseOnHover className="[--duration:28s] px-0 py-0">
-            {clientLogos.map((client) => (
+      <section className="bg-[#bb7422] px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeader
+            title={footprintConfig.title ?? "Footprint"}
+            description={footprintConfig.description ?? "A clearer view of where OHI already operates and how that scale supports institutional work."}
+            className="max-w-4xl"
+            textColorClassName="text-white"
+            descriptionClassName="text-white/85"
+          />
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {(footprintConfig.items ?? footprint).map((item) => (
               <div
-                key={client.name}
-                className="flex h-28 w-56 items-center justify-center rounded-[24px] border border-[#e8dcc8] bg-white px-6 shadow-[0_14px_40px_rgba(15,23,42,0.06)]"
+                key={item}
+                className="border border-white/20 bg-white/10 p-5 shadow-[0_12px_28px_rgba(15,23,42,0.06)] backdrop-blur-sm"
               >
-                <img
-                  src={client.image}
-                  alt={client.name}
-                  className="max-h-12 w-full object-contain"
-                />
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-white/80">
+                  Coverage
+                </p>
+                <p className="mt-3 text-sm leading-6 text-white">{item}</p>
               </div>
             ))}
-          </Marquee>
+          </div>
         </div>
       </section>
 
-      <section className="rounded-[36px] bg-[#fffaf5] p-4 sm:p-6">
-        <SectionHeader
-          title="Footprint"
-          description="A clearer view of where OHI already operates and how that scale supports institutional work."
-          className="max-w-4xl"
-        />
-        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {footprint.map((item) => (
-            <div
-              key={item}
-              className="rounded-[28px] border border-[#e8dcc8] bg-white p-5 shadow-[0_12px_28px_rgba(15,23,42,0.06)]"
-            >
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#b16a18]">
-                Coverage
-              </p>
-              <p className="mt-3 text-sm leading-6 text-[#4e5a67]">{item}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <section id="featured-story" className="mt-16 bg-[#fffaf5] px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeader
+            title={portfolioConfig.title ?? "Featured Story"}
+            description={portfolioConfig.description ?? "A highlighted selection that shows how OHI turns development, public-sector, and impact work into clear visual stories."}
+            className="max-w-4xl"
+          />
 
-      <section id="featured-story" className="mt-16 rounded-[36px] bg-[#fffaf5] p-4 sm:p-6">
-        <SectionHeader
-          title="Featured Story"
-          description="A highlighted selection that shows how OHI turns development, public-sector, and impact work into clear visual stories."
-          className="max-w-4xl"
-        />
-
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {portfolioProjects.map((project) => (
-            <Card
-              key={project.title}
-              className="group overflow-hidden rounded-[28px] border-[#D9DCE2] bg-white shadow-[0_16px_40px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#c9ced7] hover:shadow-[0_24px_70px_rgba(15,23,42,0.12)]"
-            >
+          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {(portfolioConfig.projects ?? portfolioProjects).map((project) => (
+              <Card
+                key={project.title}
+                className="group overflow-hidden border-[#D9DCE2] bg-white shadow-[0_16px_40px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#c9ced7] hover:shadow-[0_24px_70px_rgba(15,23,42,0.12)]"
+              >
               <div className="relative h-[250px] overflow-hidden">
                 <img
                   src={project.image}
@@ -496,8 +434,9 @@ const CompanyProfile = () => {
                 </span>
                 <ArrowRight className="h-4 w-4 text-primaryColor transition-transform group-hover:translate-x-1" />
               </CardFooter>
-            </Card>
-          ))}
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
     </ProfilePageShell>

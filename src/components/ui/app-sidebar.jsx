@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
+  BriefcaseBusiness,
   Images,
   PaletteIcon,
   PartyPopper,
@@ -42,16 +43,16 @@ const mainItems = [
     icon: ShieldCheck,
   },
   {
-    title: "Homepage Editor",
+    title: "Site Pages",
     url: "/dashboard/landing-page",
     icon: PaletteIcon,
   },
 ];
 
 const sectionItems = [
-  { title: "Hero", url: "/dashboard/landing-page#hero-content", icon: Sparkles },
+  { title: "Home Hero", url: "/dashboard/landing-page#hero-content", icon: Sparkles },
   { title: "Theme", url: "/dashboard/landing-page#theme-settings", icon: SwatchBook },
-  { title: "About OHI", url: "/dashboard/landing-page#about-ohi", icon: PenSquare },
+  { title: "About Page", url: "/dashboard/landing-page#about-page", icon: PenSquare },
   { title: "Why OHI", url: "/dashboard/landing-page#why-ohi", icon: PartyPopper },
   {
     title: "Who We Serve",
@@ -78,6 +79,26 @@ const sectionItems = [
   {
     title: "Footer",
     url: "/dashboard/landing-page#footer-settings",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Documentary",
+    url: "/dashboard/landing-page#company-profile",
+    icon: Sparkles,
+  },
+  {
+    title: "Services Page",
+    url: "/dashboard/landing-page#services-page",
+    icon: BriefcaseBusiness,
+  },
+  {
+    title: "Portfolio Page",
+    url: "/dashboard/landing-page#portfolio-page",
+    icon: Images,
+  },
+  {
+    title: "Leadership Page",
+    url: "/dashboard/landing-page#leadership-page",
     icon: ShieldCheck,
   },
 ];

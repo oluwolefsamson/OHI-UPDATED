@@ -8,6 +8,7 @@ const SectionHeader = ({
   className = "",
   showPattern = true,
   textColorClassName = "text-[#173145]",
+  descriptionClassName = "text-[#4e5a67]",
 }) => {
   return (
     <Reveal className={`mx-auto max-w-3xl text-center ${className}`.trim()}>
@@ -20,7 +21,7 @@ const SectionHeader = ({
         {title}
       </UnderlinedHeading>
       {description ? (
-        <p className="font-body mx-auto mt-4 max-w-2xl text-base leading-7 text-[#4e5a67] sm:text-lg">
+        <p className={`font-body mx-auto mt-4 max-w-2xl text-base leading-7 sm:text-lg ${descriptionClassName}`.trim()}>
           {description}
         </p>
       ) : null}

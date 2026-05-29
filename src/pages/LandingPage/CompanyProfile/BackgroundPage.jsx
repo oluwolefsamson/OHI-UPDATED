@@ -1,6 +1,9 @@
 import React from "react";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import ProfilePageShell from "../../../components/LandingPage/Profile/ProfilePageShell";
 import SectionHeader from "../../../components/LandingPage/SectionHeader";
+import ourStoryImage from "../../../assets/images/our-story.jpeg";
 
 const BackgroundPage = () => {
   return (
@@ -21,22 +24,40 @@ const BackgroundPage = () => {
         </div>
       }
     >
-      <div className="space-y-12">
-        <SectionHeader
-          title="Our Background"
-          description="The history and institutional foundation that shaped Olympian House International"
-        />
+      <section className="grid gap-8 rounded-[36px] bg-[#fffaf5] px-4 py-14 sm:px-6 sm:py-16 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:py-20">
+        <div className="max-w-2xl">
+          <SectionHeader
+            title="Our Background"
+            description="The history and institutional foundation that shaped Olympian House International"
+            className="max-w-none text-left"
+          />
 
-        <div className="space-y-6 rounded-[32px] border border-[#e8dcc8] bg-white p-6 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-8">
-          <p className="font-body text-lg leading-relaxed text-[#4e5a67]">
+          <div className="mt-8 space-y-6">
+          <p className="font-body text-lg leading-relaxed text-justify text-[#4e5a67]">
             Olympian House International was established to provide credible communication support for institutions, partners, and development programmes across Africa and beyond. The organization has grown around a consistent commitment to clarity, evidence, and disciplined execution.
           </p>
 
-          <p className="font-body text-lg leading-relaxed text-[#4e5a67]">
+          <p className="font-body text-lg leading-relaxed text-justify text-[#4e5a67]">
             Over time, that work expanded into Central, East, and Southern Africa, as well as the United States. The background of the organization is rooted in understanding local context, respecting regional differences, and building communication systems that can support long-term institutional goals.
           </p>
+          </div>
+
+          <div className="mt-8">
+            <Link to="/our-team" className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.08em] text-[#bb7422]">
+              Meet the team <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
-      </div>
+
+        <div className="relative min-h-[320px] overflow-hidden rounded-none border border-[#e8dcc8] bg-white shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:min-h-[420px]">
+          <img
+            src={ourStoryImage}
+            alt="OHI background visual"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,15,0.06)_0%,rgba(8,10,15,0.24)_100%)]" />
+        </div>
+      </section>
     </ProfilePageShell>
   );
 };

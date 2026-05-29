@@ -16,9 +16,9 @@ import footerVideoThumb from "../../../assets/images/Gallery/gallery-11.jpeg";
 const quickLinks = [
   { label: "Membership", href: "/about" },
   { label: "Ongoing Projects", href: "/services" },
-  { label: "Resources", href: "/company-profile" },
+  { label: "Resources", href: "/documentary" },
   { label: "SEI", href: "/impact" },
-  { label: "Download Brochure", href: "/company-profile" },
+  { label: "Download Brochure", href: "/documentary" },
   { label: "Webmail", href: "mailto:contact@olympianhouseintl.com" },
   { label: "Gallery", href: "/portfolio" },
   { label: "Privacy Policy", href: "/contact" },

@@ -121,6 +121,10 @@ export default function LandingPageManager() {
   const location = useLocation();
 
   useEffect(() => {
+    setDraftConfig(config);
+  }, [config]);
+
+  useEffect(() => {
     if (!location.hash) return;
 
     const targetId = location.hash.replace("#", "");
@@ -392,6 +396,91 @@ export default function LandingPageManager() {
     }));
   };
 
+  const updateCompanyProfile = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      companyProfile: {
+        ...current.companyProfile,
+        [key]: value,
+      },
+    }));
+  };
+
+  const updateCompanyProfileSection = (section, key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      companyProfile: {
+        ...current.companyProfile,
+        [section]: {
+          ...current.companyProfile?.[section],
+          [key]: value,
+        },
+      },
+    }));
+  };
+
+  const updateAboutPage = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      aboutPage: {
+        ...current.aboutPage,
+        [key]: value,
+      },
+    }));
+  };
+
+  const updateAboutPageSection = (section, key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      aboutPage: {
+        ...current.aboutPage,
+        [section]: {
+          ...current.aboutPage?.[section],
+          [key]: value,
+        },
+      },
+    }));
+  };
+
+  const updateServicesPage = (section, key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      servicesPage: {
+        ...current.servicesPage,
+        [section]: {
+          ...current.servicesPage?.[section],
+          [key]: value,
+        },
+      },
+    }));
+  };
+
+  const updatePortfolioPage = (section, key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      portfolioPage: {
+        ...current.portfolioPage,
+        [section]: {
+          ...current.portfolioPage?.[section],
+          [key]: value,
+        },
+      },
+    }));
+  };
+
+  const updateLeadershipPage = (section, key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      leadershipPage: {
+        ...current.leadershipPage,
+        [section]: {
+          ...current.leadershipPage?.[section],
+          [key]: value,
+        },
+      },
+    }));
+  };
+
   const updateVoices = (key, value) => {
     setDraftConfig((current) => ({
       ...current,
@@ -442,14 +531,13 @@ export default function LandingPageManager() {
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primaryColor">
-              OHI Homepage Manager
+              OHI Site Manager
             </p>
             <h1 className="mt-3 text-4xl font-bold tracking-tight text-headingColor sm:text-5xl">
-              <AnimatedText text="Control the public OHI homepage from one focused editor" />
+              <AnimatedText text="Control the public OHI site from one focused editor" />
             </h1>
             <p className="mt-4 max-w-3xl text__para">
-              Edit the homepage sections from one place. Changes save in this
-              browser and show on the public site.
+              Edit the public site pages and shared sections from one place. Changes save in this browser and show on the public site.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button
@@ -458,7 +546,7 @@ export default function LandingPageManager() {
                 onClick={async () => {
                   await resetConfig();
                   setDraftConfig(landingPageDefaults);
-                  toast.success("Homepage content reset to defaults");
+                  toast.success("Site content reset to defaults");
                 }}
               >
                 <RotateCcwIcon className="h-4 w-4" />
@@ -498,7 +586,7 @@ export default function LandingPageManager() {
                 Scope
               </p>
               <p className="mt-2 text-sm leading-6 text-textColor">
-                Homepage, theme settings, and content blocks.
+                Site pages, shared sections, theme settings, and content blocks.
               </p>
             </div>
           </div>
@@ -508,22 +596,22 @@ export default function LandingPageManager() {
       <SectionCard
         id="what-can-be-edited"
         title="What can be edited now"
-        description="The sections currently connected to the admin draftConfig."
+        description="The site pages and shared sections currently connected to the admin draftConfig."
       >
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {[
-            "Hero copy, CTAs, stats, and images",
+            "Home hero copy, CTAs, stats, and images",
             "About page copy, image, and overlay card",
             "Why OHI cards, links, and icons",
             "Who We Serve cards and copy",
-            "Documentaries / Portfolio gallery, stories, and strip items",
+            "Documentary page sections and featured story blocks",
+            "Services page copy, formats, and showcase",
+            "Portfolio page highlights and project cards",
+            "Leadership page hero, bio, and highlights",
             "Video / reel content and clips",
             "Mission, vision, and values",
-            "Partners / reviews and quotes",
-            "Colors",
-            "Footer copy and contact details",
-            "Logo and favicon are handled in the app shell",
-            "FAQ, testimonial, and feature sections stay code-managed",
+            "Selected Voices reviews and quotes",
+            "Theme colors and footer copy",
           ].map((item) => (
             <div
               key={item}
@@ -539,7 +627,7 @@ export default function LandingPageManager() {
         <SectionCard
           id="theme-settings"
           title="Theme Settings"
-          description="Set the colors used by the public homepage."
+          description="Set the colors used across the public site."
           onSave={() => {
             setConfig((current) => ({ ...current, theme: draftConfig.theme }));
             toast.success("Theme Settings saved!");
@@ -569,14 +657,14 @@ export default function LandingPageManager() {
 
         <SectionCard
           id="hero-content"
-          title="Hero Slides"
-          description="Update the rotating homepage slides, buttons, and slide images."
+          title="Home Hero Slides"
+          description="Update the rotating home slides, buttons, and slide images."
           onSave={() => {
             setConfig((current) => ({ ...current, hero: draftConfig.hero }));
-            toast.success("Hero Slides saved!");
-            addNotification("Hero slides, CTAs, and images have been updated.", "success", "Hero Slides Saved");
+            toast.success("Home hero saved!");
+            addNotification("Home hero slides, CTAs, and images have been updated.", "success", "Home Hero Saved");
           }}
-          saveLabel="Update Hero Slides"
+          saveLabel="Update Home Hero"
         >
           <div className="grid gap-4 xl:grid-cols-2">
             {(draftConfig.hero.slides ?? []).map((slide, index) => (
@@ -622,107 +710,85 @@ export default function LandingPageManager() {
             ))}
             <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-4 xl:col-span-2">
               <p className="text-sm leading-6 text-slate-600">
-                The homepage now reads from the slide deck above. The old title-line and stat fields were removed from the editor because the public hero no longer uses them.
+                The home page now reads from the slide deck above. The old title-line and stat fields were removed from the editor because the public hero no longer uses them.
               </p>
             </div>
           </div>
         </SectionCard>
 
         <SectionCard
-          id="about-ohi"
-          title="About Section"
-          description="Edit the About page block below the hero."
+          id="about-page"
+          title="About Page"
+          description="Edit the public About page content."
           onSave={() => {
-            setConfig((current) => ({ ...current, about: draftConfig.about }));
-            toast.success("About Section saved!");
-            addNotification("About section copy and overlay card have been updated.", "success", "About Section Saved");
+            setConfig((current) => ({ ...current, aboutPage: draftConfig.aboutPage }));
+            toast.success("About page saved!");
+            addNotification("About page content has been updated.", "success", "About Page Saved");
           }}
-          saveLabel="Update About Section"
+          saveLabel="Update About Page"
         >
-          <div className="grid gap-6 xl:grid-cols-2">
-            <div className="space-y-5">
-              <Field label="Section title">
+          <div className="space-y-8">
+            <div className="grid gap-4 xl:grid-cols-2">
+              <Field label="Hero title">
                 <TextInput
-                  value={draftConfig.about.title}
-                  onChange={(e) => updateAbout("title", e.target.value)}
+                  value={draftConfig.aboutPage?.hero?.title || ""}
+                  onChange={(e) => updateAboutPageSection("hero", "title", e.target.value)}
                 />
               </Field>
-              {draftConfig.about.paragraphs.map((paragraph, index) => (
-                <Field key={index} label={`About paragraph ${index + 1}`}>
-                  <TextArea
-                    rows={5}
-                    value={paragraph}
-                    onChange={(e) => {
-                      const next = [...draftConfig.about.paragraphs];
-                      next[index] = e.target.value;
-                      updateAbout("paragraphs", next);
-                    }}
-                  />
-                </Field>
-              ))}
-              <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                  About image
-                </p>
-                <p className="mt-2 text-sm leading-6 text-slate-600">
-                  This image is permanent and follows the local code default.
-                </p>
-                <div className="mt-4 overflow-hidden rounded-2xl border border-slate-100">
-                  <img
-                    src={draftConfig.about.image}
-                    alt="About section"
-                    className="h-40 w-full object-cover"
-                  />
-                </div>
-              </div>
+              <Field label="Hero description">
+                <TextArea
+                  rows={4}
+                  value={draftConfig.aboutPage?.hero?.description || ""}
+                  onChange={(e) => updateAboutPageSection("hero", "description", e.target.value)}
+                />
+              </Field>
+              <Field label="Hero eyebrow">
+                <TextInput
+                  value={draftConfig.aboutPage?.hero?.badgeEyebrow || ""}
+                  onChange={(e) => updateAboutPageSection("hero", "badgeEyebrow", e.target.value)}
+                />
+              </Field>
+              <Field label="Hero badge description">
+                <TextArea
+                  rows={3}
+                  value={draftConfig.aboutPage?.hero?.badgeDescription || ""}
+                  onChange={(e) => updateAboutPageSection("hero", "badgeDescription", e.target.value)}
+                />
+              </Field>
             </div>
 
-            <div className="space-y-5 rounded-2xl border border-slate-200 bg-slate-50 p-5">
-              <h3 className="text-lg font-bold text-headingColor">About card</h3>
-              <Field label="Since label">
-                <TextInput
-                  value={draftConfig.about.overlay.since}
-                  onChange={(e) => updateAboutOverlay("since", e.target.value)}
-                />
-              </Field>
-              <Field label="Tagline">
-                <TextInput
-                  value={draftConfig.about.overlay.tagline}
-                  onChange={(e) => updateAboutOverlay("tagline", e.target.value)}
-                />
-              </Field>
-              <Field label="Trust label">
-                <TextInput
-                  value={draftConfig.about.overlay.trustLabel}
-                  onChange={(e) =>
-                    updateAboutOverlay("trustLabel", e.target.value)
-                  }
-                />
-              </Field>
-              <Field label="Role label">
-                <TextInput
-                  value={draftConfig.about.overlay.role}
-                  onChange={(e) => updateAboutOverlay("role", e.target.value)}
-                />
-              </Field>
-              <ImageField
-                label="About card icon"
-                value={draftConfig.about.overlay.icon}
-                onChange={(e) =>
-                  handleImageUpload(e, (value) =>
-                    updateAboutOverlay("icon", value)
-                  )
-                }
-              />
-              <ImageField
-                label="About card avatar"
-                value={draftConfig.about.overlay.avatar}
-                onChange={(e) =>
-                  handleImageUpload(e, (value) =>
-                    updateAboutOverlay("avatar", value)
-                  )
-                }
-              />
+            <div className="grid gap-4 xl:grid-cols-2">
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Intro block</h3>
+                <Field label="Section title">
+                  <TextInput value={draftConfig.aboutPage?.intro?.title || ""} onChange={(e) => updateAboutPageSection("intro", "title", e.target.value)} />
+                </Field>
+                <Field label="Section description">
+                  <TextArea rows={4} value={draftConfig.aboutPage?.intro?.description || ""} onChange={(e) => updateAboutPageSection("intro", "description", e.target.value)} />
+                </Field>
+                <Field label="About label">
+                  <TextInput value={draftConfig.aboutPage?.intro?.aboutLabel || ""} onChange={(e) => updateAboutPageSection("intro", "aboutLabel", e.target.value)} />
+                </Field>
+                <Field label="About text">
+                  <TextArea rows={4} value={draftConfig.aboutPage?.intro?.aboutText || ""} onChange={(e) => updateAboutPageSection("intro", "aboutText", e.target.value)} />
+                </Field>
+              </div>
+
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Difference / close</h3>
+                <Field label="Difference title">
+                  <TextInput value={draftConfig.aboutPage?.difference?.title || ""} onChange={(e) => updateAboutPageSection("difference", "title", e.target.value)} />
+                </Field>
+                <Field label="Difference description">
+                  <TextArea rows={4} value={draftConfig.aboutPage?.difference?.description || ""} onChange={(e) => updateAboutPageSection("difference", "description", e.target.value)} />
+                </Field>
+                <Field label="Close title">
+                  <TextInput value={draftConfig.aboutPage?.close?.title || ""} onChange={(e) => updateAboutPageSection("close", "title", e.target.value)} />
+                </Field>
+                <Field label="Close body">
+                  <TextArea rows={4} value={draftConfig.aboutPage?.close?.body || ""} onChange={(e) => updateAboutPageSection("close", "body", e.target.value)} />
+                </Field>
+              </div>
             </div>
           </div>
         </SectionCard>
@@ -1153,7 +1219,7 @@ export default function LandingPageManager() {
         <SectionCard
           id="video-section"
           title="Video / Reel"
-          description="Edit the homepage video area for reels and promo clips."
+          description="Edit the public video and reel content area for clips and promo materials."
           onSave={() => {
             setConfig((current) => ({ ...current, video: draftConfig.video }));
             toast.success("Video Section saved!");
@@ -1444,6 +1510,284 @@ export default function LandingPageManager() {
                   />
                 </div>
               ))}
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="services-page"
+          title="Services Page"
+          description="Edit the public Services page content."
+          onSave={() => {
+            setConfig((current) => ({ ...current, servicesPage: draftConfig.servicesPage }));
+            toast.success("Services page saved!");
+          }}
+          saveLabel="Update Services Page"
+        >
+          <div className="space-y-6">
+            <Field label="Hero title">
+              <TextInput value={draftConfig.servicesPage?.hero?.title || ""} onChange={(e) => updateServicesPage("hero", "title", e.target.value)} />
+            </Field>
+            <Field label="Hero description">
+              <TextArea rows={4} value={draftConfig.servicesPage?.hero?.description || ""} onChange={(e) => updateServicesPage("hero", "description", e.target.value)} />
+            </Field>
+            <div className="grid gap-4 xl:grid-cols-2">
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Intro</h3>
+                <Field label="Section title">
+                  <TextInput value={draftConfig.servicesPage?.servicesIntro?.title || ""} onChange={(e) => updateServicesPage("servicesIntro", "title", e.target.value)} />
+                </Field>
+                <Field label="Section description">
+                  <TextArea rows={4} value={draftConfig.servicesPage?.servicesIntro?.description || ""} onChange={(e) => updateServicesPage("servicesIntro", "description", e.target.value)} />
+                </Field>
+              </div>
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Travel block</h3>
+                <Field label="Travel title">
+                  <TextInput value={draftConfig.servicesPage?.travel?.title || ""} onChange={(e) => updateServicesPage("travel", "title", e.target.value)} />
+                </Field>
+                <Field label="Travel description">
+                  <TextArea rows={4} value={draftConfig.servicesPage?.travel?.description || ""} onChange={(e) => updateServicesPage("travel", "description", e.target.value)} />
+                </Field>
+              </div>
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="portfolio-page"
+          title="Portfolio Page"
+          description="Edit the public Portfolio page content."
+          onSave={() => {
+            setConfig((current) => ({ ...current, portfolioPage: draftConfig.portfolioPage }));
+            toast.success("Portfolio page saved!");
+          }}
+          saveLabel="Update Portfolio Page"
+        >
+          <div className="space-y-6">
+            <Field label="Hero title">
+              <TextInput value={draftConfig.portfolioPage?.hero?.title || ""} onChange={(e) => updatePortfolioPage("hero", "title", e.target.value)} />
+            </Field>
+            <Field label="Hero description">
+              <TextArea rows={4} value={draftConfig.portfolioPage?.hero?.description || ""} onChange={(e) => updatePortfolioPage("hero", "description", e.target.value)} />
+            </Field>
+            <div className="grid gap-4 xl:grid-cols-2">
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Header</h3>
+                <Field label="Header title">
+                  <TextInput value={draftConfig.portfolioPage?.header?.title || ""} onChange={(e) => updatePortfolioPage("header", "title", e.target.value)} />
+                </Field>
+                <Field label="Header description">
+                  <TextArea rows={4} value={draftConfig.portfolioPage?.header?.description || ""} onChange={(e) => updatePortfolioPage("header", "description", e.target.value)} />
+                </Field>
+              </div>
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Method</h3>
+                <Field label="Method title">
+                  <TextInput value={draftConfig.portfolioPage?.method?.title || ""} onChange={(e) => updatePortfolioPage("method", "title", e.target.value)} />
+                </Field>
+                <Field label="Method description">
+                  <TextArea rows={4} value={draftConfig.portfolioPage?.method?.description || ""} onChange={(e) => updatePortfolioPage("method", "description", e.target.value)} />
+                </Field>
+              </div>
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="leadership-page"
+          title="Leadership Page"
+          description="Edit the public Leadership page content."
+          onSave={() => {
+            setConfig((current) => ({ ...current, leadershipPage: draftConfig.leadershipPage }));
+            toast.success("Leadership page saved!");
+          }}
+          saveLabel="Update Leadership Page"
+        >
+          <div className="space-y-6">
+            <Field label="Hero title">
+              <TextInput value={draftConfig.leadershipPage?.hero?.title || ""} onChange={(e) => updateLeadershipPage("hero", "title", e.target.value)} />
+            </Field>
+            <Field label="Hero description">
+              <TextArea rows={4} value={draftConfig.leadershipPage?.hero?.description || ""} onChange={(e) => updateLeadershipPage("hero", "description", e.target.value)} />
+            </Field>
+            <div className="grid gap-4 xl:grid-cols-2">
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Leader</h3>
+                <Field label="Leader name">
+                  <TextInput value={draftConfig.leadershipPage?.leader?.name || ""} onChange={(e) => updateLeadershipPage("leader", "name", e.target.value)} />
+                </Field>
+                <Field label="Leader role">
+                  <TextInput value={draftConfig.leadershipPage?.leader?.role || ""} onChange={(e) => updateLeadershipPage("leader", "role", e.target.value)} />
+                </Field>
+                <Field label="Leader description">
+                  <TextArea rows={5} value={draftConfig.leadershipPage?.leader?.description || ""} onChange={(e) => updateLeadershipPage("leader", "description", e.target.value)} />
+                </Field>
+              </div>
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Highlights</h3>
+                {(draftConfig.leadershipPage?.highlights || []).map((item, index) => (
+                  <div key={index} className="space-y-3 rounded-2xl border border-slate-200 bg-white p-4">
+                    <Field label={`Highlight ${index + 1} title`}>
+                      <TextInput
+                        value={item.title || ""}
+                        onChange={(e) => {
+                          const next = [...(draftConfig.leadershipPage?.highlights || [])];
+                          next[index] = { ...next[index], title: e.target.value };
+                          setDraftConfig((current) => ({
+                            ...current,
+                            leadershipPage: {
+                              ...current.leadershipPage,
+                              highlights: next,
+                            },
+                          }));
+                        }}
+                      />
+                    </Field>
+                    <Field label={`Highlight ${index + 1} description`}>
+                      <TextArea rows={3} value={item.description || ""} onChange={(e) => {
+                        const next = [...(draftConfig.leadershipPage?.highlights || [])];
+                        next[index] = { ...next[index], description: e.target.value };
+                        setDraftConfig((current) => ({
+                          ...current,
+                          leadershipPage: {
+                            ...current.leadershipPage,
+                            highlights: next,
+                          },
+                        }));
+                      }} />
+                    </Field>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="company-profile"
+          title="Documentary / Company Profile"
+          description="Edit the main documentary page content shown under Start with the section that matches your goal."
+          onSave={() => {
+            setConfig((current) => ({ ...current, companyProfile: draftConfig.companyProfile }));
+            toast.success("Documentary content saved!");
+            addNotification("Company profile content has been updated.", "success", "Documentary Saved");
+          }}
+          saveLabel="Update Documentary"
+        >
+          <div className="space-y-8">
+            <div className="grid gap-4 xl:grid-cols-2">
+              <Field label="Hero title">
+                <TextInput
+                  value={draftConfig.companyProfile?.hero?.title || ""}
+                  onChange={(e) => updateCompanyProfileSection("hero", "title", e.target.value)}
+                />
+              </Field>
+              <Field label="Hero eyebrow">
+                <TextInput
+                  value={draftConfig.companyProfile?.hero?.badgeEyebrow || ""}
+                  onChange={(e) => updateCompanyProfileSection("hero", "badgeEyebrow", e.target.value)}
+                />
+              </Field>
+              <Field label="Hero badge description">
+                <TextArea
+                  rows={3}
+                  value={draftConfig.companyProfile?.hero?.badgeDescription || ""}
+                  onChange={(e) => updateCompanyProfileSection("hero", "badgeDescription", e.target.value)}
+                />
+              </Field>
+              <Field label="Hero description">
+                <TextArea
+                  rows={4}
+                  value={draftConfig.companyProfile?.hero?.description || ""}
+                  onChange={(e) => updateCompanyProfileSection("hero", "description", e.target.value)}
+                />
+              </Field>
+            </div>
+
+            <div className="grid gap-4 xl:grid-cols-2">
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Difference block</h3>
+                <Field label="Section title">
+                  <TextInput
+                    value={draftConfig.companyProfile?.difference?.title || ""}
+                    onChange={(e) => updateCompanyProfileSection("difference", "title", e.target.value)}
+                  />
+                </Field>
+                <Field label="Section description">
+                  <TextArea
+                    rows={4}
+                    value={draftConfig.companyProfile?.difference?.description || ""}
+                    onChange={(e) => updateCompanyProfileSection("difference", "description", e.target.value)}
+                  />
+                </Field>
+                {(draftConfig.companyProfile?.difference?.points || []).map((point, index) => (
+                  <Field key={index} label={`Point ${index + 1}`}>
+                    <TextArea
+                      rows={2}
+                      value={point}
+                      onChange={(e) => {
+                        const next = [...(draftConfig.companyProfile?.difference?.points || [])];
+                        next[index] = e.target.value;
+                        updateCompanyProfileSection("difference", "points", next);
+                      }}
+                    />
+                  </Field>
+                ))}
+              </div>
+
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Overview block</h3>
+                <Field label="Overview title">
+                  <TextInput
+                    value={draftConfig.companyProfile?.overview?.title || ""}
+                    onChange={(e) => updateCompanyProfileSection("overview", "title", e.target.value)}
+                  />
+                </Field>
+                <Field label="Overview description">
+                  <TextArea
+                    rows={4}
+                    value={draftConfig.companyProfile?.overview?.description || ""}
+                    onChange={(e) => updateCompanyProfileSection("overview", "description", e.target.value)}
+                  />
+                </Field>
+              </div>
+            </div>
+
+            <div className="grid gap-4 xl:grid-cols-2">
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Footprint block</h3>
+                <Field label="Block title">
+                  <TextInput
+                    value={draftConfig.companyProfile?.footprint?.title || ""}
+                    onChange={(e) => updateCompanyProfileSection("footprint", "title", e.target.value)}
+                  />
+                </Field>
+                <Field label="Block description">
+                  <TextArea
+                    rows={4}
+                    value={draftConfig.companyProfile?.footprint?.description || ""}
+                    onChange={(e) => updateCompanyProfileSection("footprint", "description", e.target.value)}
+                  />
+                </Field>
+              </div>
+
+              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <h3 className="text-lg font-bold text-headingColor">Featured story block</h3>
+                <Field label="Block title">
+                  <TextInput
+                    value={draftConfig.companyProfile?.portfolio?.title || ""}
+                    onChange={(e) => updateCompanyProfileSection("portfolio", "title", e.target.value)}
+                  />
+                </Field>
+                <Field label="Block description">
+                  <TextArea
+                    rows={4}
+                    value={draftConfig.companyProfile?.portfolio?.description || ""}
+                    onChange={(e) => updateCompanyProfileSection("portfolio", "description", e.target.value)}
+                  />
+                </Field>
+              </div>
             </div>
           </div>
         </SectionCard>
