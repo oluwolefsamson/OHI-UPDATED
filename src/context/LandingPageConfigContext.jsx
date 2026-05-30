@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { landingPageDefaults } from "../data/landingPageDefaults";
 import { supabase } from "../lib/supabase";
+import { useAdminAuth } from "./AdminAuthContext";
 
 const IS_PRODUCTION = import.meta.env.PROD;
 const LEGACY_VIDEO_TITLE =
@@ -26,6 +27,7 @@ const LEGACY_HERO_CTA_HREFS = {
 const CONFIG_SYNC_CHANNEL = "landing_page_config_sync";
 const CONFIG_SYNC_STORAGE_KEY = "landing_page_config_snapshot";
 const CONFIG_POLL_INTERVAL_MS = 5000;
+const ADMIN_SESSION_EXPIRED_EVENT = "admin-session-expired";
 
 const LandingPageConfigContext = createContext(null);
 
@@ -215,6 +217,7 @@ function publishConfigSnapshot(snapshot) {
 export function LandingPageConfigProvider({ children }) {
   const [config, setConfigState] = useState(landingPageDefaults);
   const [loading, setLoading] = useState(true);
+  const { isAuthenticated, loading: authLoading } = useAdminAuth();
 
   const loadConfigFromDb = async () => {
     const { data, error } = await supabase
@@ -236,6 +239,13 @@ export function LandingPageConfigProvider({ children }) {
     let isMounted = true;
 
     async function loadFromDb() {
+      if (!isAuthenticated) {
+        if (isMounted) {
+          setLoading(false);
+        }
+        return;
+      }
+
       try {
         if (!isMounted) return;
         await loadConfigFromDb();
@@ -254,7 +264,7 @@ export function LandingPageConfigProvider({ children }) {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     const applySnapshot = (payload) => {
@@ -267,9 +277,24 @@ export function LandingPageConfigProvider({ children }) {
     };
 
     const refreshFromDb = async () => {
+      if (!isAuthenticated) {
+        return;
+      }
+
       try {
         await loadConfigFromDb();
       } catch (error) {
+        if (error?.code === "PGRST303" || error?.status === 401) {
+          window.dispatchEvent(
+            new CustomEvent(ADMIN_SESSION_EXPIRED_EVENT, {
+              detail: {
+                message: "Your admin session expired. Please sign in again.",
+              },
+            }),
+          );
+          return;
+        }
+
         console.error("Failed to refresh landing page config:", error);
       }
     };
@@ -292,6 +317,14 @@ export function LandingPageConfigProvider({ children }) {
         ? new window.BroadcastChannel(CONFIG_SYNC_CHANNEL)
         : null;
     channel?.addEventListener("message", handleBroadcastMessage);
+
+    if (authLoading || !isAuthenticated) {
+      return () => {
+        window.removeEventListener("storage", handleStorageChange);
+        channel?.removeEventListener("message", handleBroadcastMessage);
+        channel?.close();
+      };
+    }
 
     const pollId = window.setInterval(refreshFromDb, CONFIG_POLL_INTERVAL_MS);
 

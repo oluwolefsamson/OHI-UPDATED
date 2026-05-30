@@ -5,11 +5,15 @@ import React, {
   useMemo,
   useState,
 } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
+import { useNotifications } from "./NotificationContext";
 
 const AdminAuthContext = createContext(null);
 
 export function AdminAuthProvider({ children }) {
+  const navigate = useNavigate();
+  const { addNotification } = useNotifications();
   const [session, setSession] = useState({
     isAuthenticated: false,
     user: null,
@@ -39,6 +43,33 @@ export function AdminAuthProvider({ children }) {
 
     return () => subscription.unsubscribe();
   }, []);
+
+  useEffect(() => {
+    let handlingExpiration = false;
+
+    const handleSessionExpired = async (event) => {
+      if (handlingExpiration) return;
+      handlingExpiration = true;
+
+      const message =
+        event?.detail?.message || "Your admin session expired. Please sign in again.";
+
+      addNotification(message, "warning", "Session Expired");
+      await supabase.auth.signOut();
+      setSession({
+        isAuthenticated: false,
+        user: null,
+        loading: false,
+      });
+      navigate("/admin/login", { replace: true });
+    };
+
+    window.addEventListener("admin-session-expired", handleSessionExpired);
+
+    return () => {
+      window.removeEventListener("admin-session-expired", handleSessionExpired);
+    };
+  }, [addNotification, navigate]);
 
   const value = useMemo(() => {
     const login = async ({ email, password }) => {

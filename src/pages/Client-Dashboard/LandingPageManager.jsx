@@ -57,10 +57,10 @@ function SectionCard({ id, title, description, children, onSave, saveLabel = "Sa
     <motion.div variants={itemVariants}>
       <Card
         id={id}
-        className="scroll-mt-24 overflow-hidden border-border/80 bg-card/95 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur"
+        className="scroll-mt-24 w-full overflow-hidden border-border/80 bg-card/95 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur"
       >
       <div className="h-1 bg-[linear-gradient(90deg,#0f4c81,#118ab2,#f4b942)]" />
-      <CardHeader className="border-b border-border/60 px-6 py-5">
+      <CardHeader className="border-b border-border/60 px-4 py-4 sm:px-6 sm:py-5">
         <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
           Section editor
         </p>
@@ -71,11 +71,11 @@ function SectionCard({ id, title, description, children, onSave, saveLabel = "Sa
           </CardDescription>
         )}
       </CardHeader>
-      <CardContent className="px-6 py-6">
+      <CardContent className="px-4 py-4 sm:px-6 sm:py-6">
         {children}
         {onSave && (
-          <div className="mt-8 flex justify-end border-t border-border/40 pt-5">
-            <Button onClick={onSave} className="rounded-xl px-6 font-semibold shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-[#05c1ff] text-white hover:brightness-110 transition">
+          <div className="mt-6 flex flex-col gap-3 border-t border-border/40 pt-5 sm:flex-row sm:justify-end">
+            <Button onClick={onSave} className="w-full rounded-xl px-6 font-semibold shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-[#05c1ff] text-white hover:brightness-110 transition sm:w-auto">
               {saveLabel}
             </Button>
           </div>
@@ -639,9 +639,9 @@ export default function LandingPageManager() {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8"
+      className="mx-auto w-full max-w-7xl overflow-x-hidden px-3 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8"
     >
-      <motion.div variants={itemVariants} className="mb-8 overflow-hidden rounded-[32px] border border-slate-200/80 bg-white/95 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur">
+      <motion.div variants={itemVariants} className="mb-6 overflow-hidden rounded-[28px] border border-slate-200/80 bg-white/95 p-4 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur sm:p-6">
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primaryColor">
@@ -653,10 +653,10 @@ export default function LandingPageManager() {
             <p className="mt-4 max-w-3xl text__para">
               Edit the public site pages and shared sections from one place. Changes save in this browser and show on the public site.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button
                 type="button"
-                className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold shadow-[0_16px_40px_rgba(15,76,129,0.24)] transition hover:translate-y-[-1px] hover:brightness-110"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold shadow-[0_16px_40px_rgba(15,76,129,0.24)] transition hover:translate-y-[-1px] hover:brightness-110 sm:w-auto"
                 onClick={async () => {
                   await resetConfig();
                   setDraftConfig(landingPageDefaults);
@@ -666,7 +666,7 @@ export default function LandingPageManager() {
                 <RotateCcwIcon className="h-4 w-4" />
                 Reset defaults
               </Button>
-              <Button asChild variant="outline" className="rounded-full px-5 py-3 text-sm font-semibold">
+              <Button asChild variant="outline" className="w-full rounded-full px-5 py-3 text-sm font-semibold sm:w-auto">
                 <Link to="/dashboard/overview">
                   Back to overview
                   <ArrowRightIcon className="h-4 w-4" />
@@ -737,7 +737,7 @@ export default function LandingPageManager() {
         </div>
       </SectionCard>
 
-      <div className="space-y-6">
+      <div className="space-y-6 min-w-0">
         <SectionCard id="home-hero" title="Hero" description="Edit the homepage hero slide deck." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, hero: draftConfig.hero })); toast.success("Hero saved!"); }, "Hero")} saveLabel="Update Hero">
           <div className="grid gap-4 xl:grid-cols-2">
             {(draftConfig.hero.slides ?? []).map((slide, index) => (
