@@ -15,6 +15,16 @@ import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { Textarea } from "../../components/ui/textarea";
 import { FileInput } from "../../components/ui/file-input";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "../../components/ui/alert-dialog";
 import { motion } from "framer-motion";
 import { AnimatedText } from "../../components/ui/AnimatedText";
 import { useNotifications } from "../../context/NotificationContext";
@@ -115,14 +125,23 @@ function ImageField({ label, value, onChange, hint }) {
 }
 
 export default function LandingPageManager() {
-  const { config, setConfig, resetConfig } = useLandingPageConfig();
+  const { config, setConfig, resetConfig, loading } = useLandingPageConfig();
   const { addNotification } = useNotifications();
   const [draftConfig, setDraftConfig] = React.useState(config);
+  const [confirmOpen, setConfirmOpen] = React.useState(false);
+  const [pendingSave, setPendingSave] = React.useState(null);
+  const [pendingSaveLabel, setPendingSaveLabel] = React.useState("");
   const location = useLocation();
+  const hasInitializedDraft = React.useRef(false);
 
   useEffect(() => {
+    if (loading || hasInitializedDraft.current) {
+      return;
+    }
+
     setDraftConfig(config);
-  }, [config]);
+    hasInitializedDraft.current = true;
+  }, [config, loading]);
 
   useEffect(() => {
     if (!location.hash) return;
@@ -599,6 +618,22 @@ export default function LandingPageManager() {
     }
   };
 
+  const requestSave = (saveAction, label) => {
+    setPendingSave(() => saveAction);
+    setPendingSaveLabel(label);
+    setConfirmOpen(true);
+  };
+
+  const confirmSave = async () => {
+    if (!pendingSave) return;
+
+    const saveAction = pendingSave;
+    setConfirmOpen(false);
+    setPendingSave(null);
+    setPendingSaveLabel("");
+    await saveAction();
+  };
+
   return (
     <motion.div 
       initial="hidden"
@@ -703,7 +738,7 @@ export default function LandingPageManager() {
       </SectionCard>
 
       <div className="space-y-6">
-        <SectionCard id="home-hero" title="Hero" description="Edit the homepage hero slide deck." onSave={() => { setConfig((current) => ({ ...current, hero: draftConfig.hero })); toast.success("Hero saved!"); }} saveLabel="Update Hero">
+        <SectionCard id="home-hero" title="Hero" description="Edit the homepage hero slide deck." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, hero: draftConfig.hero })); toast.success("Hero saved!"); }, "Hero")} saveLabel="Update Hero">
           <div className="grid gap-4 xl:grid-cols-2">
             {(draftConfig.hero.slides ?? []).map((slide, index) => (
               <div key={`${slide.kicker}-${index}`} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
@@ -723,7 +758,7 @@ export default function LandingPageManager() {
           </div>
         </SectionCard>
 
-        <SectionCard id="home-about" title="Olympian House International" description="Edit the homepage introduction block." onSave={() => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("About section saved!"); }} saveLabel="Update Section">
+        <SectionCard id="home-about" title="Olympian House International" description="Edit the homepage introduction block." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("About section saved!"); }, "Olympian House International")} saveLabel="Update Section">
           <div className="space-y-4">
             <Field label="Title"><TextInput value={draftConfig.homePage?.about?.title || ""} onChange={(e) => updateHomePage("about", "title", e.target.value)} /></Field>
             <Field label="Description"><TextArea rows={4} value={draftConfig.homePage?.about?.description || ""} onChange={(e) => updateHomePage("about", "description", e.target.value)} /></Field>
@@ -739,7 +774,7 @@ export default function LandingPageManager() {
           </div>
         </SectionCard>
 
-        <SectionCard id="home-difference" title="The OHI difference" description="Edit the homepage difference block." onSave={() => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("Difference section saved!"); }} saveLabel="Update Section">
+        <SectionCard id="home-difference" title="The OHI difference" description="Edit the homepage difference block." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("Difference section saved!"); }, "The OHI difference")} saveLabel="Update Section">
           <div className="space-y-4">
             <Field label="Title"><TextInput value={draftConfig.homePage?.difference?.title || ""} onChange={(e) => updateHomePage("difference", "title", e.target.value)} /></Field>
             <Field label="Description"><TextInput value={draftConfig.homePage?.difference?.description || ""} onChange={(e) => updateHomePage("difference", "description", e.target.value)} /></Field>
@@ -756,7 +791,7 @@ export default function LandingPageManager() {
           </div>
         </SectionCard>
 
-        <SectionCard id="home-heritage" title="OHI Google Arts & Culture Heritage Collection" description="Edit the heritage collection block." onSave={() => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("Heritage section saved!"); }} saveLabel="Update Section">
+        <SectionCard id="home-heritage" title="OHI Google Arts & Culture Heritage Collection" description="Edit the heritage collection block." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("Heritage section saved!"); }, "OHI Google Arts & Culture Heritage Collection")} saveLabel="Update Section">
           <div className="space-y-4">
             <Field label="Title"><TextInput value={draftConfig.homePage?.heritage?.title || ""} onChange={(e) => updateHomePage("heritage", "title", e.target.value)} /></Field>
             <Field label="Description"><TextArea rows={4} value={draftConfig.homePage?.heritage?.description || ""} onChange={(e) => updateHomePage("heritage", "description", e.target.value)} /></Field>
@@ -787,7 +822,7 @@ export default function LandingPageManager() {
           </div>
         </SectionCard>
 
-        <SectionCard id="home-leadership" title="Leadership and storytellers" description="Edit the leadership feature block." onSave={() => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("Leadership section saved!"); }} saveLabel="Update Section">
+        <SectionCard id="home-leadership" title="Leadership and storytellers" description="Edit the leadership feature block." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("Leadership section saved!"); }, "Leadership and storytellers")} saveLabel="Update Section">
           <div className="space-y-4">
             <Field label="Eyebrow"><TextInput value={draftConfig.homePage?.leadership?.eyebrow || ""} onChange={(e) => updateHomePage("leadership", "eyebrow", e.target.value)} /></Field>
             <Field label="Title"><TextInput value={draftConfig.homePage?.leadership?.title || ""} onChange={(e) => updateHomePage("leadership", "title", e.target.value)} /></Field>
@@ -804,7 +839,7 @@ export default function LandingPageManager() {
           </div>
         </SectionCard>
 
-        <SectionCard id="home-programmes" title="Featured Programmes" description="Edit the featured programme cards." onSave={() => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("Programmes saved!"); }} saveLabel="Update Section">
+        <SectionCard id="home-programmes" title="Featured Programmes" description="Edit the featured programme cards." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("Programmes saved!"); }, "Featured Programmes")} saveLabel="Update Section">
           <div className="space-y-4">
             <Field label="Title"><TextInput value={draftConfig.homePage?.programmes?.title || ""} onChange={(e) => updateHomePage("programmes", "title", e.target.value)} /></Field>
             {(draftConfig.homePage?.programmes?.items || []).map((item, index) => (
@@ -825,7 +860,7 @@ export default function LandingPageManager() {
           </div>
         </SectionCard>
 
-        <SectionCard id="home-storytellers" title="OHI Storytellers" description="Edit the public storyteller block text." onSave={() => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("Storytellers saved!"); }} saveLabel="Update Section">
+        <SectionCard id="home-storytellers" title="OHI Storytellers" description="Edit the public storyteller block text." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("Storytellers saved!"); }, "OHI Storytellers")} saveLabel="Update Section">
           <div className="space-y-4">
             <Field label="Title"><TextInput value={draftConfig.homePage?.storytellers?.title || ""} onChange={(e) => updateHomePage("storytellers", "title", e.target.value)} /></Field>
             <Field label="Description"><TextArea rows={4} value={draftConfig.homePage?.storytellers?.description || ""} onChange={(e) => updateHomePage("storytellers", "description", e.target.value)} /></Field>
@@ -841,7 +876,7 @@ export default function LandingPageManager() {
           </div>
         </SectionCard>
 
-        <SectionCard id="home-news" title="News & Blog" description="Edit the homepage news block text." onSave={() => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("News section saved!"); }} saveLabel="Update Section">
+        <SectionCard id="home-news" title="News & Blog" description="Edit the homepage news block text." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("News section saved!"); }, "News & Blog")} saveLabel="Update Section">
           <div className="space-y-4">
             <Field label="Title"><TextInput value={draftConfig.homePage?.news?.title || ""} onChange={(e) => updateHomePage("news", "title", e.target.value)} /></Field>
             <Field label="Description"><TextArea rows={4} value={draftConfig.homePage?.news?.description || ""} onChange={(e) => updateHomePage("news", "description", e.target.value)} /></Field>
@@ -861,7 +896,7 @@ export default function LandingPageManager() {
           </div>
         </SectionCard>
 
-        <SectionCard id="home-supporters" title="OurPartners / Supporters" description="Edit the support strip on the homepage." onSave={() => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("Supporters saved!"); }} saveLabel="Update Section">
+        <SectionCard id="home-supporters" title="OurPartners / Supporters" description="Edit the support strip on the homepage." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("Supporters saved!"); }, "OurPartners / Supporters")} saveLabel="Update Section">
           <div className="space-y-4">
             <Field label="Title"><TextInput value={draftConfig.homePage?.supporters?.title || ""} onChange={(e) => updateHomePage("supporters", "title", e.target.value)} /></Field>
             <Field label="Description"><TextArea rows={4} value={draftConfig.homePage?.supporters?.description || ""} onChange={(e) => updateHomePage("supporters", "description", e.target.value)} /></Field>
@@ -874,11 +909,11 @@ export default function LandingPageManager() {
           id="theme-settings"
           title="Theme Settings"
           description="Set the colors used across the public site."
-          onSave={() => {
+          onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, theme: draftConfig.theme }));
             toast.success("Theme Settings saved!");
             addNotification("Theme colors have been updated.", "success", "Theme Settings Saved");
-          }}
+          }, "Theme Settings")}
           saveLabel="Update Theme Settings"
         >
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
@@ -905,11 +940,11 @@ export default function LandingPageManager() {
           id="hero-content"
           title="Home Hero Slides"
           description="Update the rotating home slides, buttons, and slide images."
-          onSave={() => {
+          onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, hero: draftConfig.hero }));
             toast.success("Home hero saved!");
             addNotification("Home hero slides, CTAs, and images have been updated.", "success", "Home Hero Saved");
-          }}
+          }, "Home Hero Slides")}
           saveLabel="Update Home Hero"
         >
           <div className="grid gap-4 xl:grid-cols-2">
@@ -966,11 +1001,11 @@ export default function LandingPageManager() {
           id="about-page"
           title="About Page"
           description="Edit the public About page content."
-          onSave={() => {
+          onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, aboutPage: draftConfig.aboutPage }));
             toast.success("About page saved!");
             addNotification("About page content has been updated.", "success", "About Page Saved");
-          }}
+          }, "About Page")}
           saveLabel="Update About Page"
         >
           <div className="space-y-8">
@@ -1064,11 +1099,11 @@ export default function LandingPageManager() {
           id="why-ohi"
           title="Why OHI Section"
           description="Adjust the feature cards below About."
-          onSave={() => {
+          onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, whyChoose: draftConfig.whyChoose }));
             toast.success("Why OHI Section saved!");
             addNotification("Why OHI feature cards have been updated.", "success", "Why OHI Section Saved");
-          }}
+          }, "Why OHI Section")}
           saveLabel="Update Why OHI Section"
         >
           <div className="space-y-5">
@@ -1138,10 +1173,10 @@ export default function LandingPageManager() {
           id="who-we-serve"
           title="Who We Serve"
           description="Edit the audience and services block shown on the public Who We Serve page."
-          onSave={() => {
+          onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, services: draftConfig.services }));
             toast.success("Who We Serve saved!");
-          }}
+          }, "Who We Serve")}
           saveLabel="Update Who We Serve"
         >
           <div className="space-y-5">
@@ -1213,11 +1248,11 @@ export default function LandingPageManager() {
           id="gallery"
           title="Documentaries / Portfolio"
           description="Control the main visual grid for the documentaries and portfolio-style sections."
-          onSave={() => {
+          onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, gallery: draftConfig.gallery }));
             toast.success("Gallery saved!");
             addNotification("Gallery grid and items have been updated.", "success", "Gallery Saved");
-          }}
+          }, "Documentaries / Portfolio")}
           saveLabel="Update Gallery"
         >
           <div className="space-y-5">
@@ -1283,10 +1318,10 @@ export default function LandingPageManager() {
           id="gallery-stories"
           title="Documentaries Story Strip"
           description="Edit the story-led documentary strip and feature cards."
-          onSave={() => {
+          onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, galleryStories: draftConfig.galleryStories }));
             toast.success("Gallery Stories saved!");
-          }}
+          }, "Documentaries Story Strip")}
           saveLabel="Update Gallery Stories"
         >
           <div className="space-y-5">
@@ -1487,11 +1522,11 @@ export default function LandingPageManager() {
           id="video-section"
           title="Video / Reel"
           description="Edit the public video and reel content area for clips and promo materials."
-          onSave={() => {
+          onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, video: draftConfig.video }));
             toast.success("Video Section saved!");
             addNotification("Video section and clips have been updated.", "success", "Video Section Saved");
-          }}
+          }, "Video / Reel")}
           saveLabel="Update Video Section"
         >
           <div className="space-y-5">
@@ -1612,11 +1647,11 @@ export default function LandingPageManager() {
           id="mission-vision-values"
           title="Mission, Vision & Values"
           description="Edit the profile block that supports the About page and company story."
-          onSave={() => {
+          onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, profile: draftConfig.profile }));
             toast.success("Mission, Vision & Values saved!");
             addNotification("Mission, vision, and values have been updated.", "success", "Mission & Values Saved");
-          }}
+          }, "Mission, Vision & Values")}
           saveLabel="Update Mission, Vision & Values"
         >
           <div className="space-y-5">
@@ -1714,11 +1749,11 @@ export default function LandingPageManager() {
           id="selected-voices"
           title="Partners / Reviews"
           description="Edit the testimonial-style quotes and partner reviews."
-          onSave={() => {
+          onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, voices: draftConfig.voices }));
             toast.success("Selected Voices saved!");
             addNotification("Testimonial quotes and reviews have been updated.", "success", "Selected Voices Saved");
-          }}
+          }, "Partners / Reviews")}
           saveLabel="Update Selected Voices"
         >
           <div className="space-y-5">
@@ -1785,10 +1820,10 @@ export default function LandingPageManager() {
           id="services-page"
           title="Services Page"
           description="Edit the public Services page content."
-          onSave={() => {
+          onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, servicesPage: draftConfig.servicesPage }));
             toast.success("Services page saved!");
-          }}
+          }, "Services Page")}
           saveLabel="Update Services Page"
         >
           <div className="space-y-6">
@@ -1896,10 +1931,10 @@ export default function LandingPageManager() {
           id="portfolio-page"
           title="Portfolio Page"
           description="Edit the public Portfolio page content."
-          onSave={() => {
+          onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, portfolioPage: draftConfig.portfolioPage }));
             toast.success("Portfolio page saved!");
-          }}
+          }, "Portfolio Page")}
           saveLabel="Update Portfolio Page"
         >
           <div className="space-y-6">
@@ -2016,10 +2051,10 @@ export default function LandingPageManager() {
           id="leadership-page"
           title="Leadership Page"
           description="Edit the public Leadership page content."
-          onSave={() => {
+          onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, leadershipPage: draftConfig.leadershipPage }));
             toast.success("Leadership page saved!");
-          }}
+          }, "Leadership Page")}
           saveLabel="Update Leadership Page"
         >
           <div className="space-y-6">
@@ -2102,10 +2137,10 @@ export default function LandingPageManager() {
           id="background-page"
           title="Background Page"
           description="Edit the public Background page content."
-          onSave={() => {
+          onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, backgroundPage: draftConfig.backgroundPage }));
             toast.success("Background page saved!");
-          }}
+          }, "Background Page")}
           saveLabel="Update Background Page"
         >
           <div className="space-y-6">
@@ -2129,10 +2164,10 @@ export default function LandingPageManager() {
           id="impact-page"
           title="Impact Page"
           description="Edit the public Impact page content."
-          onSave={() => {
+          onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, impactPage: draftConfig.impactPage }));
             toast.success("Impact page saved!");
-          }}
+          }, "Impact Page")}
           saveLabel="Update Impact Page"
         >
           <div className="space-y-6">
@@ -2217,10 +2252,10 @@ export default function LandingPageManager() {
           id="who-we-serve-page"
           title="Who We Serve Page"
           description="Edit the public Who We Serve page content."
-          onSave={() => {
+          onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, whoWeServePage: draftConfig.whoWeServePage }));
             toast.success("Who We Serve page saved!");
-          }}
+          }, "Who We Serve Page")}
           saveLabel="Update Who We Serve Page"
         >
           <div className="space-y-6">
@@ -2244,11 +2279,11 @@ export default function LandingPageManager() {
           id="company-profile"
           title="Documentary / Company Profile"
           description="Edit the main documentary page content shown under Start with the section that matches your goal."
-          onSave={() => {
+          onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, companyProfile: draftConfig.companyProfile }));
             toast.success("Documentary content saved!");
             addNotification("Company profile content has been updated.", "success", "Documentary Saved");
-          }}
+          }, "Documentary / Company Profile")}
           saveLabel="Update Documentary"
         >
           <div className="space-y-8">
@@ -2427,11 +2462,11 @@ export default function LandingPageManager() {
           id="footer-settings"
           title="Footer Settings"
           description="Control the footer copy on the public site."
-          onSave={() => {
+          onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, footer: draftConfig.footer }));
             toast.success("Footer Settings saved!");
             addNotification("Footer text and contact details have been updated.", "success", "Footer Settings Saved");
-          }}
+          }, "Footer Settings")}
           saveLabel="Update Footer Settings"
         >
           <div className="grid gap-4 lg:grid-cols-2">
@@ -2448,6 +2483,31 @@ export default function LandingPageManager() {
           </div>
         </SectionCard>
       </div>
+
+      <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Confirm update</AlertDialogTitle>
+            <AlertDialogDescription>
+              Save the changes for <strong>{pendingSaveLabel || "this section"}</strong>?
+              The public site will use the updated content immediately after saving.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel
+              onClick={() => {
+                setPendingSave(null);
+                setPendingSaveLabel("");
+              }}
+            >
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={confirmSave}>
+              Confirm update
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </motion.div>
   );
 }
