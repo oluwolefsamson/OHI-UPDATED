@@ -639,7 +639,7 @@ export default function LandingPageManager() {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="mx-auto w-full max-w-7xl overflow-x-hidden px-3 pt-8 pb-4 sm:px-6 sm:pt-10 sm:pb-6 lg:px-8 lg:pt-12 lg:pb-8"
+      className="mx-auto w-full max-w-7xl overflow-x-hidden px-3 pt-4 pb-4 sm:px-6 sm:pt-6 sm:pb-6 lg:px-8 lg:pt-8 lg:pb-8"
     >
       <motion.div variants={itemVariants} className="mb-6 overflow-hidden rounded-[28px] border border-slate-200/80 bg-white/95 p-4 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur sm:p-6">
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
