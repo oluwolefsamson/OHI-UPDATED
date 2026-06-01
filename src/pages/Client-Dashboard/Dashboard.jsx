@@ -51,7 +51,7 @@ export default function Dashboard() {
             searchQuery={searchQuery}
             onSearchQueryChange={setSearchQuery}
           />
-          <div className="relative mt-3 flex min-h-dvh flex-1 flex-col overflow-hidden bg-[linear-gradient(180deg,#f7fafc_0%,#eef4fb_46%,#e8f0f8_100%)] pt-4 transition-colors duration-300 dark:bg-[linear-gradient(180deg,#020617_0%,#0f172a_46%,#111827_100%)] sm:mt-4 sm:pt-6">
+          <div className="relative mt-3 flex min-h-dvh flex-1 flex-col overflow-hidden bg-[linear-gradient(180deg,#f7fafc_0%,#eef4fb_46%,#e8f0f8_100%)] pt-20 transition-colors duration-300 dark:bg-[linear-gradient(180deg,#020617_0%,#0f172a_46%,#111827_100%)] sm:mt-4 sm:pt-20">
             <div className="pointer-events-none absolute inset-0">
               <div className="absolute -top-24 right-[-4rem] h-72 w-72 rounded-full bg-[#0f4c81]/8 blur-3xl dark:bg-[#0f4c81]/18" />
               <div className="absolute bottom-[-6rem] left-[-5rem] h-80 w-80 rounded-full bg-[#118ab2]/10 blur-3xl dark:bg-[#118ab2]/18" />

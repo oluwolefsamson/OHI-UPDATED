@@ -130,8 +130,8 @@ export function SiteHeader({ theme = "light", onThemeChange, searchQuery = "", o
   };
 
   return (
-    <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center border-b border-border/80 bg-background/85 backdrop-blur-xl">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0f4c81]/25 to-transparent" />
+    <header className="fixed inset-x-0 top-0 z-50 flex h-16 w-full shrink-0 items-center border-b border-border/80 bg-background/85 backdrop-blur-xl">
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0f4c81]/25 to-transparent" />
 
       <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
         <DialogContent className="w-[calc(100%-2rem)] max-w-2xl rounded-3xl border border-border bg-white p-4 shadow-2xl dark:bg-white">
@@ -187,7 +187,7 @@ export function SiteHeader({ theme = "light", onThemeChange, searchQuery = "", o
 
       <div className="relative z-10 flex w-full items-center justify-between gap-3 px-4 sm:px-5 lg:px-6">
         <div className="flex min-w-0 items-center gap-3 sm:gap-4">
-          <SidebarTrigger className="h-9 w-9 rounded-full p-1.5 hover:bg-muted" />
+          <SidebarTrigger className="h-9 w-9 rounded-full p-1.5 hover:bg-muted dark:text-white dark:hover:bg-white/10" />
           <Separator orientation="vertical" className="h-6 w-px" />
           <div className="min-w-0">
             <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
