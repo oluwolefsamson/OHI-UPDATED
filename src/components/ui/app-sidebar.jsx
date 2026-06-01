@@ -177,8 +177,9 @@ export function AppSidebar({ searchQuery = "", onSearchQueryChange, ...props }) 
   }, [location.pathname]);
 
   const sidebarUser = {
-    name: user?.name || "OHI Admin",
-    email: user?.email || "admin@olympianhouseintl.com",
+    name: profile?.full_name || user?.name || "OHI Admin",
+    email: profile?.email || user?.email || "admin@olympianhouseintl.com",
+    role: profile?.role || "Editor",
     avatar: profile?.avatar_url || null,
   };
 
@@ -381,6 +382,9 @@ export function AppSidebar({ searchQuery = "", onSearchQueryChange, ...props }) 
               </p>
               <p className="truncate text-xs text-muted-foreground">
                 {sidebarUser.email}
+              </p>
+              <p className="truncate text-[11px] uppercase tracking-[0.18em] text-muted-foreground/80">
+                {sidebarUser.role}
               </p>
             </div>
           )}

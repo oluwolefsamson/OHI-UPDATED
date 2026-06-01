@@ -59,28 +59,33 @@ function SectionCard({ id, title, description, children, onSave, saveLabel = "Sa
         id={id}
         className="scroll-mt-24 w-full overflow-hidden border-border/80 bg-card/95 text-card-foreground shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur dark:shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
       >
-      <div className="h-1 bg-[linear-gradient(90deg,#0f4c81,#118ab2,#f4b942)]" />
-      <CardHeader className="border-b border-border/60 px-4 py-4 sm:px-6 sm:py-5">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-          Section editor
-        </p>
-        <CardTitle className="mt-2 text-2xl text-foreground">{title}</CardTitle>
-        {description && (
-          <CardDescription className="mt-2 max-w-3xl text-sm leading-6">
-            {description}
-          </CardDescription>
-        )}
-      </CardHeader>
-      <CardContent className="px-4 py-4 sm:px-6 sm:py-6">
-        {children}
-        {onSave && (
-          <div className="mt-6 flex flex-col gap-3 border-t border-border/40 pt-5 sm:flex-row sm:justify-end">
-            <Button onClick={onSave} className="w-full rounded-xl px-6 font-semibold shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-[#05c1ff] text-white hover:brightness-110 transition sm:w-auto">
-              {saveLabel}
-            </Button>
-          </div>
-        )}
-      </CardContent>
+        <div className="h-1 bg-[linear-gradient(90deg,#0f4c81,#118ab2,#f4b942)]" />
+        <CardHeader className="border-b border-border/60 px-3 py-4 sm:px-6 sm:py-5">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground sm:text-[11px] sm:tracking-[0.24em]">
+            Section editor
+          </p>
+          <CardTitle className="mt-2 text-xl leading-tight text-foreground sm:text-2xl">
+            {title}
+          </CardTitle>
+          {description && (
+            <CardDescription className="mt-2 max-w-3xl text-sm leading-6">
+              {description}
+            </CardDescription>
+          )}
+        </CardHeader>
+        <CardContent className="px-3 py-4 sm:px-6 sm:py-6">
+          {children}
+          {onSave && (
+            <div className="mt-6 flex flex-col gap-3 border-t border-border/40 pt-5 sm:flex-row sm:justify-end">
+              <Button
+                onClick={onSave}
+                className="w-full rounded-xl px-6 font-semibold shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-[#05c1ff] text-white transition hover:brightness-110 sm:w-auto"
+              >
+                {saveLabel}
+              </Button>
+            </div>
+          )}
+        </CardContent>
       </Card>
     </motion.div>
   );
@@ -765,9 +770,9 @@ export default function LandingPageManager() {
 
       <div className="space-y-6 min-w-0">
         <SectionCard id="home-hero" title="Hero" description="Edit the homepage hero slide deck." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, hero: draftConfig.hero })); toast.success("Hero saved!"); }, "Hero")} saveLabel="Update Hero">
-          <div className="grid gap-4 xl:grid-cols-2">
+          <div className="grid gap-4 lg:grid-cols-2">
             {(draftConfig.hero.slides ?? []).map((slide, index) => (
-              <div key={`${slide.kicker}-${index}`} className="rounded-2xl border border-border bg-muted/40 p-4">
+              <div key={`${slide.kicker}-${index}`} className="rounded-2xl border border-border bg-muted/40 p-3 sm:p-4">
                 <Field label={`Slide ${index + 1} kicker`}><TextInput value={slide.kicker} onChange={(e) => updateHeroSlide(index, "kicker", e.target.value)} /></Field>
                 <Field label={`Slide ${index + 1} title`}><TextInput value={slide.title} onChange={(e) => updateHeroSlide(index, "title", e.target.value)} /></Field>
                 <Field label={`Slide ${index + 1} subtitle`}><TextInput value={slide.subtitle} onChange={(e) => updateHeroSlide(index, "subtitle", e.target.value)} /></Field>
