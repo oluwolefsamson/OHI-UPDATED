@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Logo from "../Logo/logo.jsx";
 import { publicContactPoints, publicMenuSections, publicUtilityLinks } from "../afidffData";
+import { useLandingPageConfig } from "../../../context/LandingPageConfigContext";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -24,13 +25,15 @@ import {
   DropdownMenuSeparator,
 } from "../../ui/dropdown-menu";
 
-const socialLinks = [
-  { label: "Facebook", icon: Facebook, href: "https://facebook.com" },
-  { label: "X", icon: X, href: "https://x.com" },
-  { label: "YouTube", icon: Youtube, href: "https://youtube.com" },
-  { label: "LinkedIn", icon: Linkedin, href: "https://linkedin.com" },
-  { label: "Instagram", icon: Instagram, href: "https://instagram.com" },
-];
+const socialIconMap = {
+  Facebook,
+  X,
+  YouTube: Youtube,
+  LinkedIn: Linkedin,
+  Instagram,
+  Email: Mail,
+  Phone,
+};
 
 const searchablePages = [
   { label: "Home", path: "/", keywords: ["home", "landing"] },
@@ -120,6 +123,7 @@ const searchablePages = [
 ];
 
 const Header = () => {
+  const { config } = useLandingPageConfig();
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
@@ -180,6 +184,12 @@ const Header = () => {
       navigate(exactMatch.path);
     }
   };
+
+  const socialLinks = (config.footer?.socialLinks ?? []).map((item) => ({
+    label: item.label,
+    href: item.path,
+    icon: socialIconMap[item.label] ?? X,
+  }));
 
   return (
     <>

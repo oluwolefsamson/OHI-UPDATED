@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { Eye, EyeOff } from "lucide-react";
 import { Skeleton } from "../../components/ui/skeleton";
 import defaultProfile from "../../assets/images/ProfileSettingImg/Profile-image.png";
 import { useProfile } from "../../context/ProfileContext";
@@ -40,6 +41,7 @@ const ProfileSetting = () => {
   
   const [draftProfile, setDraftProfile] = useState(profile);
   const [newPassword, setNewPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isSavingPassword, setIsSavingPassword] = useState(false);
   
@@ -99,6 +101,7 @@ const ProfileSetting = () => {
   const handleDiscard = () => {
     setDraftProfile(profile);
     setNewPassword("");
+    setShowPassword(false);
     toast.info("Changes discarded.");
   };
 
@@ -425,13 +428,24 @@ const ProfileSetting = () => {
                       Enter a new password below to securely update your account access.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-3">
-                      <input
-                        type="password"
-                        placeholder="New password (min 6 chars)"
-                        className="w-full max-w-sm p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05c1ff]/30 focus:border-[#05c1ff] outline-none transition"
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
-                      />
+                      <div className="relative w-full max-w-sm">
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          placeholder="New password (min 6 chars)"
+                          className="w-full p-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05c1ff]/30 focus:border-[#05c1ff] outline-none transition"
+                          value={newPassword}
+                          onChange={(e) => setNewPassword(e.target.value)}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword((current) => !current)}
+                          className="absolute inset-y-0 right-0 flex items-center justify-center px-3 text-gray-500 hover:text-gray-800 transition-colors"
+                          aria-label={showPassword ? "Hide password" : "Show password"}
+                          title={showPassword ? "Hide password" : "Show password"}
+                        >
+                          {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                        </button>
+                      </div>
                       <button 
                         onClick={handlePasswordChange}
                         disabled={isSavingPassword || !newPassword}

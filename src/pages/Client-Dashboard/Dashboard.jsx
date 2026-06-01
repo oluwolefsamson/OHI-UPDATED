@@ -4,35 +4,75 @@ import { AnimatePresence, motion } from "framer-motion";
 import { AppSidebar } from "../../components/ui/app-sidebar";
 import { SiteHeader } from "../../components/ui/site-header";
 import { SidebarInset, SidebarProvider } from "../../components/ui/sidebar";
+
+const DASHBOARD_THEME_STORAGE_KEY = "ohi-admin-dashboard-theme";
+
+function getStoredTheme() {
+  if (typeof window === "undefined") return "light";
+
+  const savedTheme = window.localStorage.getItem(DASHBOARD_THEME_STORAGE_KEY);
+  if (savedTheme === "dark" || savedTheme === "light") {
+    return savedTheme;
+  }
+
+  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
 export default function Dashboard() {
   const location = useLocation();
+  const [theme, setTheme] = React.useState(getStoredTheme);
+  const [searchQuery, setSearchQuery] = React.useState("");
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(DASHBOARD_THEME_STORAGE_KEY, theme);
+  }, [theme]);
+
+  React.useLayoutEffect(() => {
+    if (typeof document === "undefined") return;
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    return () => {
+      document.documentElement.classList.remove("dark");
+    };
+  }, [theme]);
 
   return (
-    <SidebarProvider>
-      <AppSidebar variant="inset" />
-      <SidebarInset className="min-h-dvh">
-        <SiteHeader />
-        <div className="relative mt-3 flex min-h-dvh flex-1 flex-col overflow-hidden bg-[linear-gradient(180deg,#f7fafc_0%,#eef4fb_46%,#e8f0f8_100%)] pt-4 sm:mt-4 sm:pt-6">
-          <div className="pointer-events-none absolute inset-0">
-            <div className="absolute -top-24 right-[-4rem] h-72 w-72 rounded-full bg-[#0f4c81]/8 blur-3xl" />
-            <div className="absolute bottom-[-6rem] left-[-5rem] h-80 w-80 rounded-full bg-[#118ab2]/10 blur-3xl" />
+    <div className={theme === "dark" ? "dark" : ""}>
+      <SidebarProvider>
+        <AppSidebar
+          variant="inset"
+          searchQuery={searchQuery}
+          onSearchQueryChange={setSearchQuery}
+        />
+        <SidebarInset className="min-h-dvh">
+          <SiteHeader
+            theme={theme}
+            onThemeChange={setTheme}
+            searchQuery={searchQuery}
+            onSearchQueryChange={setSearchQuery}
+          />
+          <div className="relative mt-3 flex min-h-dvh flex-1 flex-col overflow-hidden bg-[linear-gradient(180deg,#f7fafc_0%,#eef4fb_46%,#e8f0f8_100%)] pt-4 transition-colors duration-300 dark:bg-[linear-gradient(180deg,#020617_0%,#0f172a_46%,#111827_100%)] sm:mt-4 sm:pt-6">
+            <div className="pointer-events-none absolute inset-0">
+              <div className="absolute -top-24 right-[-4rem] h-72 w-72 rounded-full bg-[#0f4c81]/8 blur-3xl dark:bg-[#0f4c81]/18" />
+              <div className="absolute bottom-[-6rem] left-[-5rem] h-80 w-80 rounded-full bg-[#118ab2]/10 blur-3xl dark:bg-[#118ab2]/18" />
+            </div>
+            <div className="@container/main relative z-10 flex flex-1 flex-col gap-2">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={location.pathname}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex h-full flex-1 flex-col"
+                >
+                  <Outlet />
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
-          <div className="@container/main relative z-10 flex flex-1 flex-col gap-2">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={location.pathname}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
-                className="flex flex-1 flex-col h-full"
-              >
-                <Outlet />
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-      </SidebarInset>
-    </SidebarProvider>
+        </SidebarInset>
+      </SidebarProvider>
+    </div>
   );
 }

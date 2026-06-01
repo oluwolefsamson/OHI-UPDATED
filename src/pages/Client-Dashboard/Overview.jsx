@@ -113,10 +113,10 @@ export function Overview() {
     >
       {/* Hero Banner */}
       <motion.div variants={itemVariants}>
-        <Card className="relative overflow-hidden border-border/80 bg-card/95 shadow-[0_24px_70px_rgba(15,23,42,0.08)] backdrop-blur">
+        <Card className="relative overflow-hidden border-border/80 bg-card/95 text-card-foreground shadow-[0_24px_70px_rgba(15,23,42,0.08)] backdrop-blur dark:shadow-[0_24px_70px_rgba(0,0,0,0.35)]">
           <div className="pointer-events-none absolute inset-0">
-            <div className="absolute -right-16 -top-20 h-56 w-56 rounded-full bg-[#0f4c81]/8 blur-3xl" />
-            <div className="absolute bottom-0 left-0 h-48 w-48 rounded-full bg-[#118ab2]/10 blur-3xl" />
+            <div className="absolute -right-16 -top-20 h-56 w-56 rounded-full bg-[#0f4c81]/8 blur-3xl dark:bg-[#0f4c81]/18" />
+            <div className="absolute bottom-0 left-0 h-48 w-48 rounded-full bg-[#118ab2]/10 blur-3xl dark:bg-[#118ab2]/18" />
           </div>
           <CardContent className="relative grid gap-8 p-6 lg:grid-cols-[1.2fr_0.8fr]">
             <div className="max-w-3xl">
@@ -150,7 +150,7 @@ export function Overview() {
               </div>
 
               <div className="mt-6 flex flex-wrap gap-3">
-                <Card className="border-border bg-muted/40">
+                <Card className="border-border bg-muted/40 text-card-foreground dark:bg-card/70">
                   <CardContent className="px-4 py-3">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                       Sections
@@ -160,7 +160,7 @@ export function Overview() {
                     </p>
                   </CardContent>
                 </Card>
-                <Card className="border-border bg-muted/40">
+                <Card className="border-border bg-muted/40 text-card-foreground dark:bg-card/70">
                   <CardContent className="px-4 py-3">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                       Sync
@@ -170,7 +170,7 @@ export function Overview() {
                     </p>
                   </CardContent>
                 </Card>
-                <Card className="border-border bg-muted/40">
+                <Card className="border-border bg-muted/40 text-card-foreground dark:bg-card/70">
                   <CardContent className="px-4 py-3">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                       State
@@ -183,7 +183,7 @@ export function Overview() {
               </div>
             </div>
 
-            <Card className="rounded-[28px] border-border bg-muted/40">
+            <Card className="rounded-[28px] border-border bg-muted/40 text-card-foreground dark:bg-card/70">
               <CardHeader className="flex flex-row items-center justify-between space-y-0">
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
@@ -196,7 +196,7 @@ export function Overview() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-3">
-                <Card className="bg-background shadow-sm">
+                <Card className="bg-background text-card-foreground shadow-sm dark:bg-muted/40">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
                       <LayoutGridIcon className="h-4 w-4 text-[#0f4c81]" />
@@ -210,7 +210,7 @@ export function Overview() {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-background shadow-sm">
+                <Card className="bg-background text-card-foreground shadow-sm dark:bg-muted/40">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
                       <Clock3Icon className="h-4 w-4 text-[#0f4c81]" />
@@ -236,7 +236,7 @@ export function Overview() {
       >
         {editableItems.map((item) => (
           <motion.div variants={itemVariants} key={item.title}>
-            <Card className="group border-border/80 bg-card/90 shadow-[0_16px_50px_rgba(15,23,42,0.06)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_60px_rgba(15,23,42,0.1)] h-full">
+            <Card className="group border-border/80 bg-card/90 text-card-foreground shadow-[0_16px_50px_rgba(15,23,42,0.06)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_60px_rgba(15,23,42,0.1)] dark:shadow-[0_16px_50px_rgba(0,0,0,0.3)] h-full">
               <CardContent className="p-5">
                 <div className="flex items-start gap-4">
                   <div className="rounded-2xl bg-primaryColor/10 p-3 text-primaryColor ring-1 ring-primaryColor/10">
@@ -276,7 +276,7 @@ export function Overview() {
         className="mt-8 grid gap-6 lg:grid-cols-[1.08fr_0.92fr]"
       >
         <motion.div variants={itemVariants}>
-          <Card className="border-border/80 bg-card/95 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur h-full">
+          <Card className="border-border/80 bg-card/95 text-card-foreground shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur dark:shadow-[0_18px_50px_rgba(0,0,0,0.35)] h-full">
             <CardHeader>
               <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
                 Editor scope
@@ -291,7 +291,7 @@ export function Overview() {
                 {scopeItems.map((item) => (
                   <div
                     key={item}
-                    className="rounded-2xl border border-border bg-muted/40 px-4 py-3 text-sm leading-6 text-muted-foreground"
+                    className="rounded-2xl border border-border bg-muted/40 px-4 py-3 text-sm leading-6 text-muted-foreground dark:bg-muted/70 dark:text-slate-200"
                   >
                     {item}
                   </div>
@@ -302,7 +302,7 @@ export function Overview() {
         </motion.div>
 
         <motion.div variants={itemVariants}>
-          <Card className="border-border/80 bg-card/95 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur h-full">
+          <Card className="border-border/80 bg-card/95 text-card-foreground shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur dark:shadow-[0_18px_50px_rgba(0,0,0,0.35)] h-full">
             <CardHeader>
               <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
                 Snapshot
@@ -310,7 +310,7 @@ export function Overview() {
               <CardTitle className="mt-2 text-2xl">Current homepage state</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <Card className="bg-muted/40">
+              <Card className="bg-muted/40 text-card-foreground dark:bg-muted/70">
                 <CardContent className="p-4">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                     Hero

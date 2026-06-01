@@ -908,16 +908,24 @@ export const landingPageDefaults = {
       "Copyright {year} Olympian House International. Development storytelling and strategic visibility across Africa.",
     socialLinks: [
       {
+        label: "Facebook",
         path: "https://olympianhouseintl.com",
       },
       {
+        label: "Email",
         path: "mailto:contact@olympianhouseintl.com",
       },
       {
+        label: "Phone",
         path: "tel:+237671646331",
       },
       {
+        label: "LinkedIn",
         path: "https://www.linkedin.com",
+      },
+      {
+        label: "X",
+        path: "https://x.com/IntHouse40288",
       },
     ],
   },

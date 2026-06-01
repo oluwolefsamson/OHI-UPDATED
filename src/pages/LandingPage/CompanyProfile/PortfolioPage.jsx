@@ -17,8 +17,7 @@ import portfolioImage05 from "../../../assets/images/Gallery/gallery-05.jpeg";
 import portfolioImage06 from "../../../assets/images/Gallery/gallery-06.jpeg";
 
 const brochurePdfHref = "/OHI-Company-Profile.pdf";
-
-const portfolioProjects = [
+const defaultPortfolioProjects = [
   {
     title: "Program visibility films",
     category: "Development communication",
@@ -57,11 +56,25 @@ const portfolioProjects = [
   },
 ];
 
+function normalizeProject(project, fallback) {
+  return {
+    title: project?.title?.trim() || fallback.title,
+    category: project?.category?.trim() || fallback.category,
+    image: project?.image || fallback.image,
+    description: project?.description?.trim() || fallback.description,
+  };
+}
+
 const PortfolioPage = () => {
   const { config } = useLandingPageConfig();
   const portfolioPage = config.portfolioPage ?? {};
   const hero = portfolioPage.hero ?? {};
   const heroImage = hero.image ?? portfolioImage02;
+  const header = portfolioPage.header ?? {};
+  const method = portfolioPage.method ?? {};
+  const projects = (portfolioPage.projects?.length ? portfolioPage.projects : defaultPortfolioProjects).map((project, index) =>
+    normalizeProject(project, defaultPortfolioProjects[index] ?? defaultPortfolioProjects[0])
+  );
   return (
     <ProfilePageShell
       title={hero.title ?? "Portfolio"}
@@ -82,18 +95,25 @@ const PortfolioPage = () => {
         </div>
       }
       statCards={[
-        { eyebrow: "Projects", value: "100+", label: "Projects delivered" },
-        { eyebrow: "Clients", value: "70+", label: "Institutional clients" },
-        { eyebrow: "Retention", value: "95%", label: "Repeat-client rate" },
+        ...((portfolioPage.stats?.length
+          ? portfolioPage.stats
+          : [
+              { eyebrow: "Projects", value: "100+", label: "Projects delivered" },
+              { eyebrow: "Clients", value: "70+", label: "Institutional clients" },
+              { eyebrow: "Retention", value: "95%", label: "Repeat-client rate" },
+            ])),
       ]}
     >
       <section className="bg-[#bb7422] p-4 sm:p-6">
         <div className="mx-auto max-w-6xl">
           <SectionHeader
-            title="Portfolio highlights"
+            title={header.title ?? "Portfolio highlights"}
             textColorClassName="text-white"
             descriptionClassName="text-white/80"
-            description="These sample projects reflect the kind of output OHI builds for public, institutional, and private-sector communication goals."
+            description={
+              header.description ??
+              "These sample projects reflect the kind of output OHI builds for public, institutional, and private-sector communication goals."
+            }
           />
 
           <div className="mt-6 flex justify-start">
@@ -107,7 +127,7 @@ const PortfolioPage = () => {
           </div>
 
           <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {portfolioProjects.map((project, index) => (
+            {projects.map((project, index) => (
               <Reveal key={project.title} delay={0.05 + index * 0.04}>
                 <Card className="group overflow-hidden border border-[#e8dcc8] bg-white shadow-[0_12px_30px_rgba(15,23,42,0.06)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(201,107,23,0.1)]">
                   <div className="relative h-[240px] overflow-hidden bg-slate-100">
@@ -155,13 +175,14 @@ const PortfolioPage = () => {
           <Reveal delay={0.06}>
             <div className="bg-[#fff8ef] p-6">
               <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-[#b16a18]">
-                Working method
+                {method.eyebrow ?? "Working method"}
               </p>
               <h3 className="font-display mt-4 text-3xl font-semibold tracking-[-0.03em] text-[#173145]">
-                Built for clear, audience-ready storytelling
+                {method.title ?? "Built for clear, audience-ready storytelling"}
               </h3>
               <p className="font-body mt-4 text-base leading-7 text-justify text-[#4e5a67]">
-                The portfolio blends case-study storytelling, event coverage, and campaign assets that can move cleanly across reports, presentations, and digital channels.
+                {method.description ??
+                  "The portfolio blends case-study storytelling, event coverage, and campaign assets that can move cleanly across reports, presentations, and digital channels."}
               </p>
             </div>
           </Reveal>
@@ -169,18 +190,19 @@ const PortfolioPage = () => {
           <Reveal delay={0.12}>
             <div className="border border-[#e8dcc8] bg-[linear-gradient(180deg,#091826_0%,#12243a_100%)] p-6 text-white shadow-sm transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(15,23,42,0.18)]">
               <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-[#fbbf24]">
-                Next step
+                {method.nextEyebrow ?? "Next step"}
               </p>
               <h3 className="font-display mt-4 text-3xl font-semibold tracking-[-0.03em]">
-                Need a similar format for your project?
+                {method.nextTitle ?? "Need a similar format for your project?"}
               </h3>
               <p className="font-body mt-4 leading-7 text-justify text-white/80">
-                OHI can shape a communication package around your audience, timeline, and intended outcome.
+                {method.nextDescription ??
+                  "OHI can shape a communication package around your audience, timeline, and intended outcome."}
               </p>
               <div className="mt-6">
-                <Link to="/contact">
+                <Link to={method.ctaHref ?? "/contact"}>
                   <button className="btn inline-flex items-center gap-2 transition duration-300 ease-out hover:-translate-y-0.5">
-                    Start a project <ArrowRight className="h-4 w-4" />
+                    {method.ctaLabel ?? "Start a project"} <ArrowRight className="h-4 w-4" />
                   </button>
                 </Link>
               </div>

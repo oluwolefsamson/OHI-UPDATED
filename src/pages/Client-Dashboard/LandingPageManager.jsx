@@ -57,7 +57,7 @@ function SectionCard({ id, title, description, children, onSave, saveLabel = "Sa
     <motion.div variants={itemVariants}>
       <Card
         id={id}
-        className="scroll-mt-24 w-full overflow-hidden border-border/80 bg-card/95 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur"
+        className="scroll-mt-24 w-full overflow-hidden border-border/80 bg-card/95 text-card-foreground shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur dark:shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
       >
       <div className="h-1 bg-[linear-gradient(90deg,#0f4c81,#118ab2,#f4b942)]" />
       <CardHeader className="border-b border-border/60 px-4 py-4 sm:px-6 sm:py-5">
@@ -274,6 +274,20 @@ export default function LandingPageManager() {
         [key]: value,
       },
     }));
+  };
+
+  const updateFooterSocialLink = (index, key, value) => {
+    setDraftConfig((current) => {
+      const socialLinks = [...(current.footer?.socialLinks || [])];
+      socialLinks[index] = { ...socialLinks[index], [key]: value };
+      return {
+        ...current,
+        footer: {
+          ...current.footer,
+          socialLinks,
+        },
+      };
+    });
   };
 
   const updateServices = (key, value) => {
@@ -641,16 +655,16 @@ export default function LandingPageManager() {
       variants={containerVariants}
       className="mx-auto w-full max-w-7xl overflow-x-hidden px-3 pt-2 pb-4 sm:px-6 sm:pt-4 sm:pb-6 lg:px-8 lg:pt-6 lg:pb-8"
     >
-      <motion.div variants={itemVariants} className="mb-6 overflow-hidden rounded-[28px] border border-slate-200/80 bg-white/95 p-4 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur sm:p-6">
+      <motion.div variants={itemVariants} className="mb-6 overflow-hidden rounded-[28px] border border-border/80 bg-card/95 p-4 text-card-foreground shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur dark:shadow-[0_20px_60px_rgba(0,0,0,0.35)] sm:p-6">
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primaryColor">
               OHI Site Manager
             </p>
-            <h1 className="mt-3 text-4xl font-bold tracking-tight text-headingColor sm:text-5xl">
+            <h1 className="mt-3 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
               <AnimatedText text="Control the public OHI site from one focused editor" />
             </h1>
-            <p className="mt-4 max-w-3xl text__para">
+            <p className="mt-4 max-w-3xl text__para text-muted-foreground">
               Edit the public site pages and shared sections from one place. Changes save in this browser and show on the public site.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -672,34 +686,46 @@ export default function LandingPageManager() {
                   <ArrowRightIcon className="h-4 w-4" />
                 </Link>
               </Button>
+              <Button asChild variant="outline" className="w-full rounded-full px-5 py-3 text-sm font-semibold sm:w-auto">
+                <Link to="#footer-settings">
+                  Jump to footer settings
+                  <ArrowRightIcon className="h-4 w-4" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="w-full rounded-full px-5 py-3 text-sm font-semibold sm:w-auto">
+                <Link to="#theme-settings">
+                  Jump to theme settings
+                  <ArrowRightIcon className="h-4 w-4" />
+                </Link>
+              </Button>
             </div>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-            <div className="rounded-2xl bg-slate-50/80 p-4">
+            <div className="rounded-2xl bg-muted/40 p-4 dark:bg-muted/70">
               <div className="flex items-center gap-2">
                 <SparklesIcon className="h-4 w-4 text-[#0f4c81]" />
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                   Live preview
                 </p>
               </div>
-              <p className="mt-2 text-sm leading-6 text-textColor">
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
                 Changes update immediately in the browser.
               </p>
             </div>
-            <div className="rounded-2xl bg-slate-50/80 p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+            <div className="rounded-2xl bg-muted/40 p-4 dark:bg-muted/70">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                 Focus
               </p>
-              <p className="mt-2 text-sm leading-6 text-textColor">
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
                 Cleaner hierarchy, less repetition, clearer editing flow.
               </p>
             </div>
-            <div className="rounded-2xl bg-slate-50/80 p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+            <div className="rounded-2xl bg-muted/40 p-4 dark:bg-muted/70">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                 Scope
               </p>
-              <p className="mt-2 text-sm leading-6 text-textColor">
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
                 Site pages, shared sections, theme settings, and content blocks.
               </p>
             </div>
@@ -725,11 +751,11 @@ export default function LandingPageManager() {
             "Video / reel content and clips",
             "Mission, vision, and values",
             "Selected Voices reviews and quotes",
-            "Theme colors and footer copy",
+            "Footer social links",
           ].map((item) => (
             <div
               key={item}
-              className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-textColor"
+              className="rounded-2xl border border-border bg-muted/40 p-4 text-sm leading-6 text-muted-foreground"
             >
               {item}
             </div>
@@ -741,7 +767,7 @@ export default function LandingPageManager() {
         <SectionCard id="home-hero" title="Hero" description="Edit the homepage hero slide deck." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, hero: draftConfig.hero })); toast.success("Hero saved!"); }, "Hero")} saveLabel="Update Hero">
           <div className="grid gap-4 xl:grid-cols-2">
             {(draftConfig.hero.slides ?? []).map((slide, index) => (
-              <div key={`${slide.kicker}-${index}`} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <div key={`${slide.kicker}-${index}`} className="rounded-2xl border border-border bg-muted/40 p-4">
                 <Field label={`Slide ${index + 1} kicker`}><TextInput value={slide.kicker} onChange={(e) => updateHeroSlide(index, "kicker", e.target.value)} /></Field>
                 <Field label={`Slide ${index + 1} title`}><TextInput value={slide.title} onChange={(e) => updateHeroSlide(index, "title", e.target.value)} /></Field>
                 <Field label={`Slide ${index + 1} subtitle`}><TextInput value={slide.subtitle} onChange={(e) => updateHeroSlide(index, "subtitle", e.target.value)} /></Field>
@@ -781,7 +807,7 @@ export default function LandingPageManager() {
             <ImageField label="Section image" value={draftConfig.homePage?.difference?.image || ""} onChange={(e) => handleImageUpload(e, (value) => updateHomePage("difference", "image", value))} />
             <div className="grid gap-4 lg:grid-cols-2">
               {(draftConfig.homePage?.difference?.cards || []).map((card, index) => (
-                <div key={index} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <div key={index} className="rounded-2xl border border-border bg-muted/40 p-4">
                   <Field label={`Card ${index + 1} title`}><TextInput value={card.title || ""} onChange={(e) => updateHomePageArrayItem("difference", "cards", index, "title", e.target.value)} /></Field>
                   <Field label={`Card ${index + 1} description`}><TextArea rows={4} value={card.description || ""} onChange={(e) => updateHomePageArrayItem("difference", "cards", index, "description", e.target.value)} /></Field>
                   <ImageField label={`Card ${index + 1} image`} value={card.image || ""} onChange={(e) => handleImageUpload(e, (value) => updateHomePageArrayItem("difference", "cards", index, "image", value))} />
@@ -797,23 +823,23 @@ export default function LandingPageManager() {
             <Field label="Description"><TextArea rows={4} value={draftConfig.homePage?.heritage?.description || ""} onChange={(e) => updateHomePage("heritage", "description", e.target.value)} /></Field>
             <Field label="Button label"><TextInput value={draftConfig.homePage?.heritage?.ctaLabel || ""} onChange={(e) => updateHomePage("heritage", "ctaLabel", e.target.value)} /></Field>
             <Field label="Button link"><TextInput value={draftConfig.homePage?.heritage?.ctaHref || ""} onChange={(e) => updateHomePage("heritage", "ctaHref", e.target.value)} /></Field>
-            <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+            <div className="rounded-2xl border border-dashed border-border bg-background p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                 Heritage images
               </p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
                 These images come from the shared Gallery section and are shown here as a preview. Edit the actual images in the Gallery editor below.
               </p>
               <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                 {(draftConfig.gallery?.items || []).slice(4, 12).map((item, index) => (
-                  <div key={item.title || index} className="overflow-hidden rounded-2xl bg-slate-50 shadow-[0_8px_24px_rgba(15,23,42,0.06)]">
+                  <div key={item.title || index} className="overflow-hidden rounded-2xl bg-muted/40 shadow-[0_8px_24px_rgba(15,23,42,0.06)]">
                     <img
                       src={item.image || ""}
                       alt={item.title || `Heritage ${index + 1}`}
                       className="h-32 w-full object-cover"
                     />
                     <div className="p-3">
-                      <p className="text-xs font-medium text-slate-700">{item.title || `Heritage ${index + 1}`}</p>
+                      <p className="text-xs font-medium text-foreground">{item.title || `Heritage ${index + 1}`}</p>
                     </div>
                   </div>
                 ))}
@@ -843,7 +869,7 @@ export default function LandingPageManager() {
           <div className="space-y-4">
             <Field label="Title"><TextInput value={draftConfig.homePage?.programmes?.title || ""} onChange={(e) => updateHomePage("programmes", "title", e.target.value)} /></Field>
             {(draftConfig.homePage?.programmes?.items || []).map((item, index) => (
-              <div key={index} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <div key={index} className="rounded-2xl border border-border bg-muted/40 p-4">
                 <Field label={`Programme ${index + 1} title`}><TextInput value={item.title || ""} onChange={(e) => updateHomePageArrayItem("programmes", "items", index, "title", e.target.value)} /></Field>
                 <Field label={`Programme ${index + 1} description`}><TextArea rows={4} value={item.description || ""} onChange={(e) => updateHomePageArrayItem("programmes", "items", index, "description", e.target.value)} /></Field>
                 <ImageField
@@ -880,14 +906,14 @@ export default function LandingPageManager() {
           <div className="space-y-4">
             <Field label="Title"><TextInput value={draftConfig.homePage?.news?.title || ""} onChange={(e) => updateHomePage("news", "title", e.target.value)} /></Field>
             <Field label="Description"><TextArea rows={4} value={draftConfig.homePage?.news?.description || ""} onChange={(e) => updateHomePage("news", "description", e.target.value)} /></Field>
-            <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">News images</p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
+            <div className="rounded-2xl border border-dashed border-border bg-background p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">News images</p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
                 These images show the current cards used in the scrolling news block. Edit the Gallery items if you want to replace the source images.
               </p>
               <div className="mt-4 grid gap-3 md:grid-cols-3">
                 {(draftConfig.homePage?.news?.images || []).map((image, index) => (
-                  <div key={index} className="overflow-hidden rounded-2xl bg-slate-50 shadow-[0_8px_24px_rgba(15,23,42,0.06)]">
+                  <div key={index} className="overflow-hidden rounded-2xl bg-muted/40 shadow-[0_8px_24px_rgba(15,23,42,0.06)]">
                     <img src={image || ""} alt={`News ${index + 1}`} className="h-28 w-full object-cover" />
                   </div>
                 ))}
@@ -906,37 +932,6 @@ export default function LandingPageManager() {
         </SectionCard>
 
         <SectionCard
-          id="theme-settings"
-          title="Theme Settings"
-          description="Set the colors used across the public site."
-          onSave={() => requestSave(async () => {
-            setConfig((current) => ({ ...current, theme: draftConfig.theme }));
-            toast.success("Theme Settings saved!");
-            addNotification("Theme colors have been updated.", "success", "Theme Settings Saved");
-          }, "Theme Settings")}
-          saveLabel="Update Theme Settings"
-        >
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            <Field label="Primary color">
-              <Input
-                type="color"
-                value={draftConfig.theme.primaryColor}
-                onChange={(e) => updateTheme("primaryColor", e.target.value)}
-                className="h-12 w-full rounded-xl bg-background p-1"
-              />
-            </Field>
-            <Field label="Accent color">
-              <Input
-                type="color"
-                value={draftConfig.theme.accentColor}
-                onChange={(e) => updateTheme("accentColor", e.target.value)}
-                className="h-12 w-full rounded-xl bg-background p-1"
-              />
-            </Field>
-          </div>
-        </SectionCard>
-
-        <SectionCard
           id="hero-content"
           title="Home Hero Slides"
           description="Update the rotating home slides, buttons, and slide images."
@@ -949,8 +944,8 @@ export default function LandingPageManager() {
         >
           <div className="grid gap-4 xl:grid-cols-2">
             {(draftConfig.hero.slides ?? []).map((slide, index) => (
-              <div key={`${slide.kicker}-${index}`} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <div className="mb-4 overflow-hidden rounded-2xl border border-slate-200">
+              <div key={`${slide.kicker}-${index}`} className="rounded-2xl border border-border bg-muted/40 p-4">
+                <div className="mb-4 overflow-hidden rounded-2xl border border-border">
                   <img src={slide.image} alt={slide.title} className="h-36 w-full object-cover" />
                 </div>
                 <div className="grid gap-4">
@@ -989,8 +984,8 @@ export default function LandingPageManager() {
                 </div>
               </div>
             ))}
-            <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-4 xl:col-span-2">
-              <p className="text-sm leading-6 text-slate-600">
+            <div className="rounded-2xl border border-dashed border-border bg-background p-4 xl:col-span-2">
+              <p className="text-sm leading-6 text-muted-foreground">
                 The home page now reads from the slide deck above. The old title-line and stat fields were removed from the editor because the public hero no longer uses them.
               </p>
             </div>
@@ -1039,8 +1034,8 @@ export default function LandingPageManager() {
             </div>
 
             <div className="grid gap-4 xl:grid-cols-2">
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Intro block</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Intro block</h3>
                 <Field label="Section title">
                   <TextInput value={draftConfig.aboutPage?.intro?.title || ""} onChange={(e) => updateAboutPageSection("intro", "title", e.target.value)} />
                 </Field>
@@ -1069,8 +1064,8 @@ export default function LandingPageManager() {
                 />
               </div>
 
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Difference / close</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Difference / close</h3>
                 <Field label="Difference title">
                   <TextInput value={draftConfig.aboutPage?.difference?.title || ""} onChange={(e) => updateAboutPageSection("difference", "title", e.target.value)} />
                 </Field>
@@ -1122,7 +1117,7 @@ export default function LandingPageManager() {
             </Field>
             <div className="grid gap-4 lg:grid-cols-3">
               {draftConfig.whyChoose.cards.map((card, index) => (
-                <div key={card.title} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                <div key={card.title} className="rounded-2xl border border-border bg-muted/40 p-4">
                   <Field label={`Card ${index + 1} title`}>
                     <TextInput
                       value={card.title}
@@ -1148,8 +1143,8 @@ export default function LandingPageManager() {
                       }
                     />
                   </Field>
-                  <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-3">
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                  <div className="rounded-2xl border border-dashed border-border bg-background p-3">
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                       Card {index + 1} media icon
                     </p>
                     <div className="mt-3 flex items-center gap-3">
@@ -1158,7 +1153,7 @@ export default function LandingPageManager() {
                           <card.icon className="h-6 w-6" aria-hidden="true" />
                         ) : null}
                       </div>
-                      <p className="text-sm leading-6 text-slate-600">
+                      <p className="text-sm leading-6 text-muted-foreground">
                         This icon is permanent and follows the code defaults.
                       </p>
                     </div>
@@ -1197,7 +1192,7 @@ export default function LandingPageManager() {
               {draftConfig.services.cards.map((card, index) => (
                 <div
                   key={card.name}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                  className="rounded-2xl border border-border bg-muted/40 p-4"
                 >
                   <Field label={`Card ${index + 1} title`}>
                     <TextInput
@@ -1273,7 +1268,7 @@ export default function LandingPageManager() {
               {draftConfig.gallery.items.map((item, index) => (
                 <div
                   key={item.title}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                  className="rounded-2xl border border-border bg-muted/40 p-4"
                 >
                   <Field label={`Item ${index + 1} title`}>
                     <TextInput
@@ -1341,8 +1336,8 @@ export default function LandingPageManager() {
               />
             </Field>
             <div className="grid gap-4 xl:grid-cols-2">
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Lead story</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Lead story</h3>
                 <Field label="Lead title">
                   <TextInput
                     value={draftConfig.galleryStories.lead.title}
@@ -1377,8 +1372,8 @@ export default function LandingPageManager() {
                 />
               </div>
 
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">
                   Support intro
                 </h3>
                 <Field label="Eyebrow">
@@ -1412,7 +1407,7 @@ export default function LandingPageManager() {
               {draftConfig.galleryStories.supportCards.map((card, index) => (
                 <div
                   key={card.title}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                  className="rounded-2xl border border-border bg-muted/40 p-4"
                 >
                   <Field label={`Support card ${index + 1} title`}>
                     <TextInput
@@ -1456,8 +1451,8 @@ export default function LandingPageManager() {
               ))}
             </div>
             <div className="grid gap-4 xl:grid-cols-2">
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Strip</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Strip</h3>
                 <Field label="Strip title">
                   <TextInput
                     value={draftConfig.galleryStories.stripTitle}
@@ -1479,7 +1474,7 @@ export default function LandingPageManager() {
                 {draftConfig.galleryStories.stripItems.map((item, index) => (
                   <div
                     key={item.label}
-                    className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                    className="rounded-2xl border border-border bg-muted/40 p-4"
                   >
                     <Field label={`Strip item ${index + 1} label`}>
                       <TextInput
@@ -1544,8 +1539,8 @@ export default function LandingPageManager() {
               />
             </Field>
             <div className="grid gap-4 xl:grid-cols-2">
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Lead video</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Lead video</h3>
                 <Field label="Lead title">
                   <TextInput
                     value={draftConfig.video.lead.title}
@@ -1586,8 +1581,8 @@ export default function LandingPageManager() {
                   }
                 />
               </div>
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Icon</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Icon</h3>
                 <ImageField
                   label="Video icon"
                   value={draftConfig.video.icon}
@@ -1601,7 +1596,7 @@ export default function LandingPageManager() {
               {draftConfig.video.clips.map((clip, index) => (
                 <div
                   key={clip.title}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                  className="rounded-2xl border border-border bg-muted/40 p-4"
                 >
                   <Field label={`Clip ${index + 1} title`}>
                     <TextInput
@@ -1669,8 +1664,8 @@ export default function LandingPageManager() {
               />
             </Field>
             <div className="grid gap-4 xl:grid-cols-3">
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Story</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Story</h3>
                 <Field label="Story title">
                   <TextInput
                     value={draftConfig.profile.storyTitle}
@@ -1687,8 +1682,8 @@ export default function LandingPageManager() {
                   />
                 </Field>
               </div>
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Mission</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Mission</h3>
                 <Field label="Mission title">
                   <TextInput
                     value={draftConfig.profile.missionTitle}
@@ -1707,8 +1702,8 @@ export default function LandingPageManager() {
                   />
                 </Field>
               </div>
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Vision</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Vision</h3>
                 <Field label="Vision title">
                   <TextInput
                     value={draftConfig.profile.visionTitle}
@@ -1774,7 +1769,7 @@ export default function LandingPageManager() {
               {draftConfig.voices.reviews.map((review, index) => (
                 <div
                   key={review.username}
-                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                  className="rounded-2xl border border-border bg-muted/40 p-4"
                 >
                   <Field label={`Review ${index + 1} name`}>
                     <TextInput
@@ -1841,8 +1836,8 @@ export default function LandingPageManager() {
               }
             />
             <div className="grid gap-4 xl:grid-cols-2">
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Intro</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Intro</h3>
                 <Field label="Section title">
                   <TextInput value={draftConfig.servicesPage?.servicesIntro?.title || ""} onChange={(e) => updateServicesPage("servicesIntro", "title", e.target.value)} />
                 </Field>
@@ -1857,8 +1852,8 @@ export default function LandingPageManager() {
                   }
                 />
               </div>
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Travel block</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Travel block</h3>
                 <Field label="Travel title">
                   <TextInput value={draftConfig.servicesPage?.travel?.title || ""} onChange={(e) => updateServicesPage("travel", "title", e.target.value)} />
                 </Field>
@@ -1869,8 +1864,8 @@ export default function LandingPageManager() {
             </div>
             <div className="grid gap-4 xl:grid-cols-2">
               {(draftConfig.servicesPage?.showcase || []).map((item, index) => (
-                <div key={index} className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                  <h3 className="text-lg font-bold text-headingColor">Showcase {index + 1}</h3>
+                <div key={index} className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                  <h3 className="text-lg font-bold text-foreground">Showcase {index + 1}</h3>
                   <Field label={`Showcase ${index + 1} title`}>
                     <TextInput
                       value={item.title || ""}
@@ -1952,8 +1947,8 @@ export default function LandingPageManager() {
               }
             />
             <div className="grid gap-4 xl:grid-cols-2">
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Header</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Header</h3>
                 <Field label="Header title">
                   <TextInput value={draftConfig.portfolioPage?.header?.title || ""} onChange={(e) => updatePortfolioPage("header", "title", e.target.value)} />
                 </Field>
@@ -1961,8 +1956,8 @@ export default function LandingPageManager() {
                   <TextArea rows={4} value={draftConfig.portfolioPage?.header?.description || ""} onChange={(e) => updatePortfolioPage("header", "description", e.target.value)} />
                 </Field>
               </div>
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Method</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Method</h3>
                 <Field label="Method title">
                   <TextInput value={draftConfig.portfolioPage?.method?.title || ""} onChange={(e) => updatePortfolioPage("method", "title", e.target.value)} />
                 </Field>
@@ -1973,8 +1968,8 @@ export default function LandingPageManager() {
             </div>
             <div className="grid gap-4 xl:grid-cols-2">
               {(draftConfig.portfolioPage?.projects || []).map((project, index) => (
-                <div key={index} className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                  <h3 className="text-lg font-bold text-headingColor">Project {index + 1}</h3>
+                <div key={index} className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                  <h3 className="text-lg font-bold text-foreground">Project {index + 1}</h3>
                   <Field label={`Project ${index + 1} title`}>
                     <TextInput
                       value={project.title || ""}
@@ -2072,8 +2067,8 @@ export default function LandingPageManager() {
               }
             />
             <div className="grid gap-4 xl:grid-cols-2">
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Leader</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Leader</h3>
                 <Field label="Leader name">
                   <TextInput value={draftConfig.leadershipPage?.leader?.name || ""} onChange={(e) => updateLeadershipPage("leader", "name", e.target.value)} />
                 </Field>
@@ -2093,10 +2088,10 @@ export default function LandingPageManager() {
                   }
                 />
               </div>
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Highlights</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Highlights</h3>
                 {(draftConfig.leadershipPage?.highlights || []).map((item, index) => (
-                  <div key={index} className="space-y-3 rounded-2xl border border-slate-200 bg-white p-4">
+                  <div key={index} className="space-y-3 rounded-2xl border border-border bg-background p-4">
                     <Field label={`Highlight ${index + 1} title`}>
                       <TextInput
                         value={item.title || ""}
@@ -2185,8 +2180,8 @@ export default function LandingPageManager() {
               }
             />
             <div className="grid gap-4 xl:grid-cols-2">
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Proof block</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Proof block</h3>
                 <Field label="Block title">
                   <TextInput value={draftConfig.impactPage?.proof?.title || ""} onChange={(e) => updateImpactPage("proof", "title", e.target.value)} />
                 </Field>
@@ -2210,8 +2205,8 @@ export default function LandingPageManager() {
                   }
                 />
               </div>
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Benefits block</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Benefits block</h3>
                 <Field label="Block title">
                   <TextInput value={draftConfig.impactPage?.benefits?.title || ""} onChange={(e) => updateImpactPage("benefits", "title", e.target.value)} />
                 </Field>
@@ -2326,8 +2321,8 @@ export default function LandingPageManager() {
             </div>
 
             <div className="grid gap-4 xl:grid-cols-2">
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Difference block</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Difference block</h3>
                 <Field label="Section title">
                   <TextInput
                     value={draftConfig.companyProfile?.difference?.title || ""}
@@ -2356,8 +2351,8 @@ export default function LandingPageManager() {
                 ))}
               </div>
 
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Overview block</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Overview block</h3>
                 <Field label="Overview title">
                   <TextInput
                     value={draftConfig.companyProfile?.overview?.title || ""}
@@ -2375,8 +2370,8 @@ export default function LandingPageManager() {
             </div>
 
             <div className="grid gap-4 xl:grid-cols-2">
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Footprint block</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Footprint block</h3>
                 <Field label="Block title">
                   <TextInput
                     value={draftConfig.companyProfile?.footprint?.title || ""}
@@ -2392,8 +2387,8 @@ export default function LandingPageManager() {
                 </Field>
               </div>
 
-              <div className="space-y-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <h3 className="text-lg font-bold text-headingColor">Featured story block</h3>
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Featured story block</h3>
                 <Field label="Block title">
                   <TextInput
                     value={draftConfig.companyProfile?.portfolio?.title || ""}
@@ -2408,7 +2403,7 @@ export default function LandingPageManager() {
                   />
                 </Field>
                 {(draftConfig.companyProfile?.portfolio?.projects || []).map((project, index) => (
-                  <div key={index} className="space-y-3 rounded-2xl border border-slate-200 bg-white p-4">
+                  <div key={index} className="space-y-3 rounded-2xl border border-border bg-background p-4">
                     <Field label={`Project ${index + 1} title`}>
                       <TextInput
                         value={project.title || ""}
@@ -2461,7 +2456,7 @@ export default function LandingPageManager() {
         <SectionCard
           id="footer-settings"
           title="Footer Settings"
-          description="Control the footer copy on the public site."
+          description="Control the footer copy and social links on the public site."
           onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, footer: draftConfig.footer }));
             toast.success("Footer Settings saved!");
@@ -2480,6 +2475,30 @@ export default function LandingPageManager() {
                 onChange={(e) => updateFooter("description", e.target.value)}
               />
             </Field>
+          </div>
+          <div className="mt-6 space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+            <h3 className="text-lg font-bold text-foreground">Social links</h3>
+            <p className="text-sm text-muted-foreground">
+              These links drive the social icons shown in the header and footer.
+            </p>
+            {(draftConfig.footer?.socialLinks || []).map((link, index) => (
+              <div key={`${link.label || "social"}-${index}`} className="grid gap-4 md:grid-cols-2">
+                <Field label={`Link ${index + 1} label`}>
+                  <TextInput
+                    value={link.label || ""}
+                    onChange={(e) => updateFooterSocialLink(index, "label", e.target.value)}
+                    placeholder="X"
+                  />
+                </Field>
+                <Field label={`Link ${index + 1} URL`}>
+                  <TextInput
+                    value={link.path || ""}
+                    onChange={(e) => updateFooterSocialLink(index, "path", e.target.value)}
+                    placeholder="https://x.com/IntHouse40288"
+                  />
+                </Field>
+              </div>
+            ))}
           </div>
         </SectionCard>
       </div>
@@ -2511,3 +2530,5 @@ export default function LandingPageManager() {
     </motion.div>
   );
 }
+
+

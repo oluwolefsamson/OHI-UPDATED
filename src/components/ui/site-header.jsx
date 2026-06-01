@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
   House,
+  MoonStar,
   Search,
   User,
   X,
@@ -12,6 +13,7 @@ import {
   AlertTriangle,
   Trash2,
   CheckCheck,
+  SunMedium,
 } from "lucide-react";
 import { Separator } from "../../components/ui/separator";
 import { SidebarTrigger } from "../../components/ui/sidebar";
@@ -45,6 +47,18 @@ import { useAdminAuth } from "../../context/AdminAuthContext";
 import { useProfile } from "../../context/ProfileContext";
 import { useNotifications } from "../../context/NotificationContext";
 import { motion, AnimatePresence } from "framer-motion";
+
+const dashboardSearchItems = [
+  { title: "Overview", description: "Dashboard home and editor shortcuts", route: "/dashboard/overview" },
+  { title: "Home", description: "Hero, About, gallery, video, and footer", route: "/dashboard/landing-page#hero-content" },
+  { title: "Documentary", description: "Hero, difference, overview, footprint", route: "/dashboard/landing-page#company-profile" },
+  { title: "About", description: "About page sections", route: "/dashboard/landing-page#about-page" },
+  { title: "Services", description: "Services page sections", route: "/dashboard/landing-page#services-page" },
+  { title: "Portfolio", description: "Portfolio page sections", route: "/dashboard/landing-page#portfolio-page" },
+  { title: "Leadership", description: "Leadership page sections", route: "/dashboard/landing-page#leadership-page" },
+  { title: "Theme and footer", description: "Theme settings and footer copy", route: "/dashboard/landing-page#theme-settings" },
+  { title: "Profile settings", description: "Admin profile and dashboard identity", route: "/dashboard/profile-setting" },
+];
 
 const typeConfig = {
   success: {
@@ -83,7 +97,7 @@ function timeAgo(date) {
   return `${Math.floor(hours / 24)}d ago`;
 }
 
-export function SiteHeader() {
+export function SiteHeader({ theme = "light", onThemeChange, searchQuery = "", onSearchQueryChange }) {
   const [isSearchOpen, setIsSearchOpen] = React.useState(false);
   const [notifOpen, setNotifOpen] = React.useState(false);
   const navigate = useNavigate();
@@ -93,6 +107,21 @@ export function SiteHeader() {
 
   const displayName = profile?.full_name || user?.name || "OHI Admin";
   const avatarUrl = profile?.avatar_url || null;
+  const isDark = theme === "dark";
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+  const searchResults = React.useMemo(() => {
+    if (!normalizedQuery) return dashboardSearchItems;
+    return dashboardSearchItems.filter((item) => {
+      return `${item.title} ${item.description} ${item.route}`.toLowerCase().includes(normalizedQuery);
+    });
+  }, [normalizedQuery]);
+
+  const handleSearchSubmit = () => {
+    const next = searchResults[0];
+    if (!next) return;
+    navigate(next.route);
+    setIsSearchOpen(false);
+  };
 
   const handleOpenNotif = () => {
     setNotifOpen(true);
@@ -105,7 +134,7 @@ export function SiteHeader() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0f4c81]/25 to-transparent" />
 
       <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
-        <DialogContent className="w-[calc(100%-2rem)] max-w-2xl rounded-3xl border border-border bg-card p-4 shadow-2xl">
+        <DialogContent className="w-[calc(100%-2rem)] max-w-2xl rounded-3xl border border-border bg-white p-4 shadow-2xl dark:bg-white">
           <DialogHeader className="sr-only">
             <DialogTitle>Search workspace</DialogTitle>
           </DialogHeader>
@@ -114,10 +143,44 @@ export function SiteHeader() {
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 placeholder="Search OHI content..."
-                className="rounded-full border-border bg-muted pl-9 focus-visible:ring-2 focus-visible:ring-[#0f4c81]/20 focus-visible:ring-offset-0"
+                className="rounded-full border-border bg-white pl-9 text-black placeholder:text-slate-500 focus-visible:ring-2 focus-visible:ring-[#0f4c81]/20 focus-visible:ring-offset-0 dark:bg-white dark:text-black dark:placeholder:text-slate-500"
                 autoFocus
+                value={searchQuery}
+                onChange={(event) => onSearchQueryChange?.(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    event.preventDefault();
+                    handleSearchSubmit();
+                  }
+                }}
               />
             </div>
+            {searchQuery && (
+              <div className="max-h-72 overflow-y-auto rounded-2xl border border-border bg-white p-2 dark:bg-white">
+                {searchResults.length > 0 ? (
+                  searchResults.map((item) => (
+                    <button
+                      key={item.route}
+                      type="button"
+                      className="group flex w-full flex-col rounded-xl px-3 py-2 text-left transition-colors hover:bg-[#0f4c81]"
+                      onClick={() => {
+                        navigate(item.route);
+                        setIsSearchOpen(false);
+                      }}
+                    >
+                      <span className="text-sm font-semibold text-black transition-colors group-hover:text-white">
+                        {item.title}
+                      </span>
+                      <span className="text-xs text-slate-600 transition-colors group-hover:text-white">
+                        {item.description}
+                      </span>
+                    </button>
+                  ))
+                ) : (
+                  <p className="px-3 py-2 text-sm text-slate-600 dark:text-slate-600">No matches found.</p>
+                )}
+              </div>
+            )}
           </div>
         </DialogContent>
       </Dialog>
@@ -139,12 +202,15 @@ export function SiteHeader() {
         <div className="hidden flex-1 max-w-2xl mx-8 md:flex">
           <div className="relative w-full">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              placeholder="Search OHI content..."
-              className="rounded-full border-border bg-muted/90 pl-9 focus-visible:ring-2 focus-visible:ring-[#0f4c81]/20 focus-visible:ring-offset-0"
-            />
+              <Input
+                placeholder="Search OHI content..."
+                className="rounded-full border-border bg-muted/90 pl-9 focus-visible:ring-2 focus-visible:ring-[#0f4c81]/20 focus-visible:ring-offset-0"
+                value={searchQuery}
+                onChange={(event) => onSearchQueryChange?.(event.target.value)}
+                onFocus={() => setIsSearchOpen(true)}
+              />
+            </div>
           </div>
-        </div>
 
         <div className="flex items-center gap-4">
           <Button
@@ -158,6 +224,21 @@ export function SiteHeader() {
           </Button>
 
           <div className="flex items-center gap-3 sm:gap-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-full hover:bg-[#0f4c81]/10"
+              onClick={() => onThemeChange?.(isDark ? "light" : "dark")}
+              aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+              title={isDark ? "Light theme" : "Dark theme"}
+            >
+              {isDark ? (
+                <SunMedium className="h-5 w-5 text-muted-foreground" />
+              ) : (
+                <MoonStar className="h-5 w-5 text-muted-foreground" />
+              )}
+            </Button>
+
             {/* Notification Bell */}
             <Popover open={notifOpen} onOpenChange={setNotifOpen}>
               <PopoverTrigger asChild>

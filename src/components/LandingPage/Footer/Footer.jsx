@@ -9,6 +9,7 @@ import {
   Youtube,
 } from "lucide-react";
 import Logo from "../Logo/logo.jsx";
+import { useLandingPageConfig } from "../../../context/LandingPageConfigContext";
 import { partnerCountryNames } from "../afidffData";
 import corafLogo from "../../../assets/img/logo-coraf.png";
 import footerVideoThumb from "../../../assets/images/Gallery/gallery-11.jpeg";
@@ -27,13 +28,13 @@ const quickLinks = [
   { label: "Opportunities", href: "/impact" },
 ];
 
-const socialLinks = [
-  { label: "Facebook", icon: Facebook, href: "https://facebook.com" },
-  { label: "Instagram", icon: Instagram, href: "https://instagram.com" },
-  { label: "Twitter", icon: Twitter, href: "https://x.com" },
-  { label: "LinkedIn", icon: Linkedin, href: "https://linkedin.com" },
-  { label: "YouTube", icon: Youtube, href: "https://youtube.com" },
-];
+const socialIconMap = {
+  Facebook,
+  Instagram,
+  X: Twitter,
+  LinkedIn: Linkedin,
+  YouTube: Youtube,
+};
 
 const partnerCountryTiles = [
   ["NG", "bg-[#0b8f3a]"],
@@ -70,7 +71,13 @@ function ExternalLink({ href, children, className }) {
 }
 
 const Footer = () => {
+  const { config } = useLandingPageConfig();
   const year = new Date().getFullYear();
+  const socialLinks = (config.footer?.socialLinks ?? []).map((item) => ({
+    label: item.label,
+    href: item.path,
+    icon: socialIconMap[item.label] ?? Twitter,
+  }));
 
   return (
     <footer className="border-t border-[#b96d1d] bg-[#141211] text-white">

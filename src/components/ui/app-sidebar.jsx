@@ -37,8 +37,8 @@ import {
   useSidebar,
 } from "../../components/ui/sidebar";
 import OhiLogo from "../LandingPage/Logo/logo";
-import profileImage from "../../assets/images/ProfileSettingImg/Profile-image.png";
 import { useAdminAuth } from "../../context/AdminAuthContext";
+import { useProfile } from "../../context/ProfileContext";
 
 const mainItems = [
   {
@@ -135,11 +135,17 @@ function isActivePath(location, url) {
   return location.pathname === url;
 }
 
-export function AppSidebar(props) {
+function normalizeQuery(value) {
+  return value.trim().toLowerCase();
+}
+
+export function AppSidebar({ searchQuery = "", onSearchQueryChange, ...props }) {
   const { state, openMobile, setOpenMobile } = useSidebar();
   const { user } = useAdminAuth();
+  const { profile } = useProfile();
   const location = useLocation();
   const collapsed = state === "collapsed";
+  const normalizedQuery = normalizeQuery(searchQuery);
   const [openSections, setOpenSections] = React.useState({
     Home: true,
     Documentary: true,
@@ -173,13 +179,43 @@ export function AppSidebar(props) {
   const sidebarUser = {
     name: user?.name || "OHI Admin",
     email: user?.email || "admin@olympianhouseintl.com",
-    avatar: profileImage,
+    avatar: profile?.avatar_url || null,
   };
+
+  const filteredMainItems = React.useMemo(() => {
+    if (!normalizedQuery) return mainItems;
+    return mainItems.filter((item) => {
+      const haystack = `${item.title} ${item.url}`.toLowerCase();
+      return haystack.includes(normalizedQuery);
+    });
+  }, [normalizedQuery]);
+
+  const filteredSitePages = React.useMemo(() => {
+    if (!normalizedQuery) return sitePages;
+
+    return sitePages
+      .map((page) => {
+        const pageMatches =
+          `${page.title} ${page.url}`.toLowerCase().includes(normalizedQuery);
+        const sections = page.sections.filter((section) => {
+          const haystack = `${section.title} ${section.url}`.toLowerCase();
+          return haystack.includes(normalizedQuery);
+        });
+
+        if (!pageMatches && sections.length === 0) return null;
+
+        return {
+          ...page,
+          sections: pageMatches ? page.sections : sections,
+        };
+      })
+      .filter(Boolean);
+  }, [normalizedQuery]);
 
   if (loading) {
     return (
       <Sidebar collapsible="icon" {...props} className="flex min-h-dvh flex-col">
-        <SidebarHeader className="sticky top-0 z-10 !items-start border-b border-border bg-background/95 backdrop-blur">
+        <SidebarHeader className="sticky top-0 z-10 !items-start border-b border-sidebar-border bg-sidebar/95 backdrop-blur">
           <div className="flex w-full flex-col items-center gap-3 px-3 py-3">
             <div className={cn("flex w-full items-center gap-2", collapsed ? "justify-center" : "justify-start")}>
               <SidebarMenuSkeleton showIcon />
@@ -198,14 +234,14 @@ export function AppSidebar(props) {
             )}
           </div>
         </SidebarHeader>
-        <SidebarContent className="flex h-full flex-col overflow-y-auto text-sm">
+        <SidebarContent className="scrollbar-hide flex h-full flex-col overflow-y-auto text-sm">
           <div className="flex flex-1 min-h-0 flex-col gap-2 px-2 py-4">
             {Array.from({ length: 8 }).map((_, index) => (
               <SidebarMenuSkeleton key={index} showIcon />
             ))}
           </div>
         </SidebarContent>
-        <SidebarFooter className="border-t border-border px-4 py-4">
+        <SidebarFooter className="border-t border-sidebar-border px-4 py-4">
           <div className="flex items-center gap-3">
             <SidebarMenuSkeleton showIcon />
             <div className="flex flex-1 flex-col gap-2">
@@ -220,7 +256,7 @@ export function AppSidebar(props) {
 
   return (
     <Sidebar collapsible="icon" {...props} className="flex min-h-dvh flex-col">
-      <SidebarHeader className="sticky top-0 z-10 !items-start border-b border-border bg-background/95 backdrop-blur">
+      <SidebarHeader className="sticky top-0 z-10 !items-start border-b border-sidebar-border bg-sidebar/95 backdrop-blur">
         <div className={cn("flex w-full flex-col gap-3", collapsed ? "px-1 py-2" : "px-3 py-3")}>
           <div className={cn("flex items-center gap-2", collapsed ? "justify-center" : "justify-start")}>
             <OhiLogo className={cn("transition-all", collapsed ? "h-8 w-8" : "h-9 w-32")} />
@@ -249,7 +285,8 @@ export function AppSidebar(props) {
                   type="text"
                   placeholder="Search workspace"
                   className="rounded-full pl-9"
-                  disabled
+                  value={searchQuery}
+                  onChange={(event) => onSearchQueryChange?.(event.target.value)}
                 />
               </div>
             )}
@@ -257,13 +294,13 @@ export function AppSidebar(props) {
         </div>
       </SidebarHeader>
 
-      <SidebarContent className="flex h-full flex-col overflow-y-auto text-sm">
+      <SidebarContent className="scrollbar-hide flex h-full flex-col overflow-y-auto text-sm">
         <SidebarGroup className="px-0">
           <SidebarGroupLabel className="px-5 pt-5 text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
             Workspace
           </SidebarGroupLabel>
           <SidebarMenu className="px-3">
-            {mainItems.map((item) => {
+            {filteredMainItems.map((item) => {
               const active = isActivePath(location, item.url);
               const Icon = item.icon;
               return (
@@ -280,7 +317,7 @@ export function AppSidebar(props) {
           </SidebarMenu>
         </SidebarGroup>
 
-        {sitePages.map((page) => (
+        {filteredSitePages.map((page) => (
           <SidebarGroup key={page.title} className="px-0">
             <SidebarGroupLabel className="px-5 pt-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
               {page.title}
@@ -324,12 +361,17 @@ export function AppSidebar(props) {
             </SidebarMenu>
           </SidebarGroup>
         ))}
+        {normalizedQuery && filteredMainItems.length === 0 && filteredSitePages.length === 0 && (
+          <div className="px-5 py-6 text-sm text-muted-foreground">
+            No dashboard items match "{searchQuery}".
+          </div>
+        )}
       </SidebarContent>
 
-      <SidebarFooter className="border-t border-border bg-background/80 backdrop-blur">
+      <SidebarFooter className="border-t border-sidebar-border bg-sidebar/80 backdrop-blur">
         <div className="flex items-center gap-3 px-3 py-3">
           <Avatar className="h-10 w-10">
-            <AvatarImage src={sidebarUser.avatar} alt={sidebarUser.name} />
+            {sidebarUser.avatar && <AvatarImage src={sidebarUser.avatar} alt={sidebarUser.name} />}
             <AvatarFallback>{sidebarUser.name.slice(0, 2).toUpperCase()}</AvatarFallback>
           </Avatar>
           {!collapsed && (
