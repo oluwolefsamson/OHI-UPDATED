@@ -38,12 +38,6 @@ const brochurePdfHref = "/OHI-Company-Profile.pdf";
 
 const profilePages = [
   {
-    label: "Leadership",
-    path: "/leadership",
-    description: "A named executive profile with the accountability institutional buyers expect.",
-    icon: ShieldCheck,
-  },
-  {
     label: "Services",
     path: "/services",
     description: "The production formats and storytelling services OHI delivers.",
@@ -100,10 +94,9 @@ const profileHighlights = [
 ];
 
 const footprint = [
-  "Central Africa: Cameroon and neighboring markets",
-  "East Africa: Kenya, Uganda, Tanzania, Rwanda, and beyond",
-  "Southern Africa: Zambia and regional partners",
-  "USA: fundraising, partnerships, and institutional collaboration",
+  "West and Central Africa: Cameroon and neighboring markets",
+  "East and Southern Africa: regional partner coverage and delivery",
+  "International partnerships and institutional collaboration",
 ];
 
 const profileStats = [
