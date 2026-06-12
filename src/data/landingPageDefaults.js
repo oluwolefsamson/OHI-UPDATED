@@ -251,6 +251,68 @@ export const landingPageDefaults = {
       },
     ],
   },
+  valueProposition: {
+    title: "Why institutions choose OHI",
+    description: "Investment-grade storytelling at the intersection of impact, investment, and communication.",
+    tiers: [
+      {
+        id: "tier-expertise",
+        name: "Capital-Fluent Expertise",
+        number: "01",
+        description:
+          "We understand donor compliance, DFI communication frameworks, and the psychology of institutional decision-making. Our perspective is informed by direct participation in high-level investment forums, including the Africa Investment Forum.",
+        features: [
+          "Donor compliance and DFI framework fluency",
+          "Participation in Africa Investment Forum",
+          "Speaks the language of capital, not just communication",
+        ],
+        href: "/documentary",
+        featured: false,
+      },
+      {
+        id: "tier-strategic",
+        name: "Cinematic Precision, Strategic Intent",
+        number: "02",
+        description:
+          "We pair film-grade craft with development-sector fluency — a rare combination that turns complex programmes into narratives investors and partners trust.",
+        features: [
+          "Film-grade production quality",
+          "Development-sector narrative fluency",
+          "Stories that investors and partners trust",
+        ],
+        href: "/impact",
+        featured: true,
+      },
+      {
+        id: "tier-proof",
+        name: "Proof, Not Just Content",
+        number: "03",
+        description:
+          "We demonstrate that capital is working, communities are changing, and programmes are delivering — the evidence institutions need to report results and mobilise more.",
+        features: [
+          "Evidence institutions need to report results",
+          "Capital visibly working and accountable",
+          "Stories that mobilise further investment",
+        ],
+        href: "/portfolio",
+        featured: false,
+      },
+      {
+        id: "tier-institutional",
+        name: "Built to Institutional Standard",
+        number: "04",
+        description:
+          "Every production is designed to meet the compliance, evidence, and reporting expectations of DFIs, multilaterals, and governments — without compromising on craft.",
+        features: [
+          "DFI and multilateral compliance ready",
+          "Evidence and reporting expectations met",
+          "Crafted without compromising on quality",
+        ],
+        href: "/approach",
+        featured: false,
+      },
+    ],
+  },
   gallery: {
     title: "Selected Visual Moments",
     description:

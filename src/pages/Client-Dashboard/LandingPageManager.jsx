@@ -598,6 +598,46 @@ export default function LandingPageManager() {
     }));
   };
 
+  const updateValueProposition = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      valueProposition: {
+        ...current.valueProposition,
+        [key]: value,
+      },
+    }));
+  };
+
+  const updateValuePropositionTier = (index, key, value) => {
+    setDraftConfig((current) => {
+      const tiers = [...(current.valueProposition?.tiers ?? [])];
+      tiers[index] = { ...tiers[index], [key]: value };
+      return {
+        ...current,
+        valueProposition: {
+          ...current.valueProposition,
+          tiers,
+        },
+      };
+    });
+  };
+
+  const updateValuePropositionTierFeature = (tierIndex, featureIndex, value) => {
+    setDraftConfig((current) => {
+      const tiers = [...(current.valueProposition?.tiers ?? [])];
+      const features = [...(tiers[tierIndex]?.features ?? [])];
+      features[featureIndex] = value;
+      tiers[tierIndex] = { ...tiers[tierIndex], features };
+      return {
+        ...current,
+        valueProposition: {
+          ...current.valueProposition,
+          tiers,
+        },
+      };
+    });
+  };
+
   const updateVoices = (key, value) => {
     setDraftConfig((current) => ({
       ...current,
@@ -692,6 +732,12 @@ export default function LandingPageManager() {
                 </Link>
               </Button>
               <Button asChild variant="outline" className="w-full rounded-full px-5 py-3 text-sm font-semibold sm:w-auto">
+                <Link to="#value-proposition">
+                  Jump to value proposition
+                  <ArrowRightIcon className="h-4 w-4" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="w-full rounded-full px-5 py-3 text-sm font-semibold sm:w-auto">
                 <Link to="#footer-settings">
                   Jump to footer settings
                   <ArrowRightIcon className="h-4 w-4" />
@@ -749,6 +795,7 @@ export default function LandingPageManager() {
             "About page copy, image, and overlay card",
             "Why OHI cards, links, and icons",
             "Who We Serve cards and copy",
+            "Why Institutions Choose OHI — 4 differentiator cards",
             "Documentary page sections and featured story blocks",
             "Services page copy, formats, and showcase",
             "Portfolio page highlights and project cards",
@@ -1237,6 +1284,77 @@ export default function LandingPageManager() {
                         className="h-12 w-full rounded-xl bg-background p-1"
                       />
                     </Field>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="value-proposition"
+          title="Why Institutions Choose OHI"
+          description="Edit the four differentiator cards shown in the Value Proposition section."
+          onSave={() => requestSave(async () => {
+            setConfig((current) => ({ ...current, valueProposition: draftConfig.valueProposition }));
+            toast.success("Value Proposition saved!");
+            addNotification("Why institutions choose OHI section has been updated.", "success", "Value Proposition Saved");
+          }, "Why Institutions Choose OHI")}
+          saveLabel="Update Value Proposition"
+        >
+          <div className="space-y-5">
+            <Field label="Section title">
+              <TextInput
+                value={draftConfig.valueProposition?.title || ""}
+                onChange={(e) => updateValueProposition("title", e.target.value)}
+              />
+            </Field>
+            <Field label="Section description">
+              <TextArea
+                rows={3}
+                value={draftConfig.valueProposition?.description || ""}
+                onChange={(e) => updateValueProposition("description", e.target.value)}
+              />
+            </Field>
+            <div className="grid gap-4 lg:grid-cols-2">
+              {(draftConfig.valueProposition?.tiers ?? []).map((tier, index) => (
+                <div key={tier.id || index} className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl font-bold text-muted-foreground">{tier.number}</span>
+                    <h3 className="text-base font-bold text-foreground">{tier.name}</h3>
+                    {tier.featured && (
+                      <span className="ml-auto rounded-full bg-black px-2 py-0.5 text-[10px] font-semibold text-white">Featured</span>
+                    )}
+                  </div>
+                  <Field label="Card title">
+                    <TextInput
+                      value={tier.name || ""}
+                      onChange={(e) => updateValuePropositionTier(index, "name", e.target.value)}
+                    />
+                  </Field>
+                  <Field label="Card description">
+                    <TextArea
+                      rows={4}
+                      value={tier.description || ""}
+                      onChange={(e) => updateValuePropositionTier(index, "description", e.target.value)}
+                    />
+                  </Field>
+                  <Field label="Link href">
+                    <TextInput
+                      value={tier.href || ""}
+                      onChange={(e) => updateValuePropositionTier(index, "href", e.target.value)}
+                    />
+                  </Field>
+                  <div className="space-y-2">
+                    <p className="text-sm font-semibold text-foreground">Bullet points</p>
+                    {(tier.features ?? []).map((feature, fi) => (
+                      <TextInput
+                        key={fi}
+                        value={feature}
+                        onChange={(e) => updateValuePropositionTierFeature(index, fi, e.target.value)}
+                        placeholder={`Bullet ${fi + 1}`}
+                      />
+                    ))}
                   </div>
                 </div>
               ))}
