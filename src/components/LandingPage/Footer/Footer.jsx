@@ -15,17 +15,12 @@ import corafLogo from "../../../assets/img/logo-coraf.png";
 import footerVideoThumb from "../../../assets/images/Gallery/gallery-11.jpeg";
 
 const quickLinks = [
-  { label: "Membership", href: "/about" },
-  { label: "Ongoing Projects", href: "/services" },
-  { label: "Resources", href: "/documentary" },
-  { label: "SEI", href: "/impact" },
-  { label: "Download Brochure", href: "/documentary" },
-  { label: "Webmail", href: "mailto:contact@olympianhouseintl.com" },
-  { label: "Gallery", href: "/portfolio" },
-  { label: "Privacy Policy", href: "/contact" },
-  { label: "SUKUR Heritage Site", href: "/who-we-serve" },
-  { label: "Become A Volunteer", href: "/contact" },
-  { label: "Opportunities", href: "/impact" },
+  { label: "Home", href: "/" },
+  { label: "Work", href: "/portfolio" },
+  { label: "Services", href: "/services" },
+  { label: "About", href: "/about" },
+  { label: "Clients", href: "/our-partners" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const socialIconMap = {
@@ -86,6 +81,11 @@ const Footer = () => {
           <div className="max-w-sm">
             <Logo className="h-11 brightness-0 invert" />
 
+            <div className="mt-4">
+              <p className="text-xl font-bold tracking-[-0.03em] text-white">Stories that move capital.</p>
+              <p className="mt-1 text-xs italic text-white/50">Together, let's tell meaningful stories that build the Africa we imagine.</p>
+            </div>
+
             <div className="mt-5 space-y-4 text-sm leading-7 text-white/84">
               <p>
                 Location: Mendong MAETUR - Yaounde, Cameroon.
@@ -117,15 +117,6 @@ const Footer = () => {
                   className="font-semibold text-white transition hover:text-[#f6b14c]"
                 >
                   contact@olympianhouseintl.com
-                </a>
-              </p>
-              <p>
-                Alternate Email:{" "}
-                <a
-                  href="mailto:fbanns1@gmail.com"
-                  className="font-semibold text-white transition hover:text-[#f6b14c]"
-                >
-                  fbanns1@gmail.com
                 </a>
               </p>
             </div>

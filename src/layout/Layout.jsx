@@ -18,6 +18,10 @@ const Layout = () => {
     location.pathname.startsWith(path)
   );
 
+  // Only show Supporters strip on selected pages
+  const supportersRoutes = ["/", "/our-partners"];
+  const shouldShowSupporters = supportersRoutes.includes(location.pathname);
+
   return (
     <>
       <AnimatePresence mode="wait">
@@ -48,7 +52,7 @@ const Layout = () => {
         </AnimatePresence>
       </main>
       <AnimatePresence mode="wait">
-        {!shouldHideHeaderFooter && (
+        {!shouldHideHeaderFooter && shouldShowSupporters && (
           <motion.div
             key="site-supporters"
             initial={{ opacity: 0, y: 16 }}

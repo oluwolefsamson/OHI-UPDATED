@@ -6,44 +6,44 @@ import Reveal from "../../ui/reveal";
 
 const tiers = [
   {
-    name: "Institutional credibility",
+    name: "Capital-Fluent Expertise",
     id: "tier-expertise",
     href: "/documentary",
     priceMonthly: "01",
     description:
-      "Seasoned professionals delivering visual content for DFIs, multilaterals, governments, institutions, and private-sector actors.",
+      "We understand donor compliance, DFI communication frameworks, and the psychology of institutional decision-making. Our perspective is informed by direct participation in high-level investment forums, including the Africa Investment Forum.",
     features: [
-      "Nearly a decade of experience",
-      "UN, EU, and private-sector project exposure",
-      "Trusted delivery across Africa",
+      "Donor compliance and DFI framework fluency",
+      "Participation in Africa Investment Forum",
+      "Speaks the language of capital, not just communication",
     ],
     featured: false,
   },
   {
-    name: "Strategic fluency",
+    name: "Cinematic Precision, Strategic Intent",
     id: "tier-strategic",
     href: "/impact",
     priceMonthly: "02",
     description:
-      "We combine narrative craft with communication strategy so every film supports a clear institutional objective.",
+      "We pair film-grade craft with development-sector fluency — a rare combination that turns complex programmes into narratives investors and partners trust.",
     features: [
-      "Storytelling grounded in strategy",
-      "Content tailored to audiences and outcomes",
-      "Designed to improve visibility and traction",
+      "Film-grade production quality",
+      "Development-sector narrative fluency",
+      "Stories that investors and partners trust",
     ],
     featured: true,
   },
   {
-    name: "Multilingual delivery",
-    id: "tier-flexible",
+    name: "Built to Institutional Standard",
+    id: "tier-institutional",
     href: "/approach",
     priceMonthly: "03",
     description:
-      "We adapt to your timelines, budgets, and communication standards without compromising quality.",
+      "Every production is designed to meet the compliance, evidence, and reporting expectations of DFIs, multilaterals, and governments — without compromising on craft.",
     features: [
-      "Tailored project scoping",
-      "End-to-end production support",
-      "Results aligned to your goals",
+      "DFI and multilateral compliance ready",
+      "Evidence and reporting expectations met",
+      "Proof, not just content",
     ],
     featured: false,
   },
@@ -60,8 +60,8 @@ export default function ValueProposition() {
       className="relative isolate bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8"
     >
       <SectionHeader
-        title="Our Value Proposition"
-        description="OHI combines creativity, credibility, and flexibility to help projects communicate with clarity and impact."
+        title="Why institutions choose OHI"
+        description="Investment-grade storytelling at the intersection of impact, investment, and communication."
       />
 
       <div className="mx-auto mt-12 grid max-w-lg grid-cols-1 items-center gap-y-6 sm:mt-16 lg:max-w-6xl lg:grid-cols-3">

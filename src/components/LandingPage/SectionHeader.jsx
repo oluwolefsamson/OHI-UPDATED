@@ -8,6 +8,7 @@ const SectionHeader = ({
   className = "",
   align = "center",
   showPattern = true,
+  showBorder = true,
   textColorClassName = "text-[#173145]",
   descriptionClassName = "text-[#4e5a67]",
 }) => {
@@ -21,6 +22,7 @@ const SectionHeader = ({
         textClassName="font-display"
         textColorClassName={textColorClassName}
         patternClassName={showPattern ? "" : "hidden"}
+        showBorder={showBorder}
       >
         {title}
       </UnderlinedHeading>

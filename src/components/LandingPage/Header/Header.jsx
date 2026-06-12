@@ -471,7 +471,7 @@ const Header = () => {
               className="mt-4 inline-flex h-12 items-center justify-center rounded-xl bg-[linear-gradient(180deg,#f59d21_0%,#c96b17_100%)] px-6 text-sm font-bold uppercase tracking-[0.02em] text-white"
               onClick={() => setIsDrawerOpen(false)}
             >
-              Contact Us
+              Start a conversation
             </Link>
           </div>
         </div>

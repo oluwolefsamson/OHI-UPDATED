@@ -18,25 +18,27 @@ const ContactPage = () => {
         secondaryCta={{ label: "View Map", href: "#contact-map" }}
         heroBadge={
           <div className="space-y-1">
-            <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
               OHI profile
             </p>
-            <p className="font-body text-sm leading-6 text-white/80">
+            <p className="text-sm leading-6 text-white/80">
               Strategic visibility for development, investment, and institutional communication.
             </p>
           </div>
         }
       />
 
-      <div className="bg-[#bb7422]">
-        <div className="mx-auto max-w-6xl space-y-16 px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-          <div id="contact-form">
-            <Contact />
+      <div className="bg-[#bb7422] py-16 sm:py-20">
+        <div className="container">
+          <div className="bg-white p-6 shadow-[0_16px_40px_rgba(0,0,0,0.12)] sm:p-10 space-y-16">
+            <div id="contact-form">
+              <Contact />
+            </div>
+            <div id="contact-map">
+              <ContactMap />
+            </div>
+            <ContactForm />
           </div>
-          <div id="contact-map">
-            <ContactMap />
-          </div>
-          <ContactForm />
         </div>
       </div>
     </>

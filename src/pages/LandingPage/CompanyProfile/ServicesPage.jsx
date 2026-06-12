@@ -20,7 +20,6 @@ const ServicesPage = () => {
   const { services } = config;
   const servicesPage = config.servicesPage ?? {};
   const hero = servicesPage.hero ?? {};
-  const introImage = servicesPage.introImage ?? profileHeroMountain;
 
   const serviceFormats = [
     "Investment & programme visibility",
@@ -34,50 +33,42 @@ const ServicesPage = () => {
   const serviceShowcase = [
     {
       title: "Impact Documentaries",
-      description:
-        "We produce documentaries that turn programme results into evidence-led narratives for institutional audiences.",
+      description: "We produce documentaries that turn programme results into evidence-led narratives for institutional audiences.",
       image: serviceImage01,
     },
     {
       title: "Development Programme Communication",
-      description:
-        "OHI helps development programmes communicate objectives, implementation, and results with clarity and accountability.",
+      description: "OHI helps development programmes communicate objectives, implementation, and results with clarity and accountability.",
       image: serviceImage02,
     },
     {
       title: "Investment & Programme Visibility",
-      description:
-        "We craft investor-facing films that present projects as credible opportunities for financing and partnership.",
+      description: "We craft investor-facing films that present projects as credible opportunities for financing and partnership.",
       image: serviceImage03,
     },
     {
       title: "ESG & Social Impact Storytelling",
-      description:
-        "Our content amplifies community voice and local ownership while supporting ESG and social impact reporting.",
+      description: "Our content amplifies community voice and local ownership while supporting ESG and social impact reporting.",
       image: serviceImage04,
     },
     {
       title: "Donor & Investor Reporting Films",
-      description:
-        "We produce reporting films that support donor updates, investor confidence, and renewal conversations.",
+      description: "We produce reporting films that support donor updates, investor confidence, and renewal conversations.",
       image: serviceImage05,
     },
     {
       title: "Multilingual Field Production",
-      description:
-        "OHI produces concise, evidence-driven reporting films across languages and regions.",
+      description: "OHI produces concise, evidence-driven reporting films across languages and regions.",
       image: serviceImage06,
     },
     {
       title: "Event & Mission Coverage",
-      description:
-        "From high-level forums to field missions, we document moments that matter with professional intent.",
+      description: "From high-level forums to field missions, we document moments that matter with professional intent.",
       image: serviceImage07,
     },
     {
       title: "Social Media & Digital Campaigns",
-      description:
-        "We design digital-first content that extends project visibility across web, social, and stakeholder channels.",
+      description: "We design digital-first content that extends project visibility across web, social, and stakeholder channels.",
       image: serviceImage08,
     },
   ];
@@ -93,22 +84,18 @@ const ServicesPage = () => {
       secondaryCta={{ label: hero.secondaryCtaLabel ?? "Contact Us", href: hero.secondaryCtaHref ?? "/contact" }}
       heroBadge={
         <div className="space-y-1">
-          <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
-            {hero.badgeEyebrow ?? "OHI profile"}
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
+            {hero.badgeEyebrow ?? "OHI Services"}
           </p>
-          <p className="font-body text-sm leading-6 text-white/80">
+          <p className="text-sm leading-6 text-white/80">
             {hero.badgeDescription ?? "Strategic visibility for development, investment, and impact communication."}
           </p>
         </div>
       }
-      statCards={[
-        { eyebrow: "Projects", value: "100+", label: "Projects delivered" },
-        { eyebrow: "Clients", value: "70+", label: "Institutional clients" },
-        { eyebrow: "Retention", value: "95%", label: "Repeat-client rate" },
-      ]}
     >
-      <section className="bg-[#fffaf5] px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-18">
-        <div className="mx-auto max-w-6xl">
+      {/* Core services */}
+      <section className="bg-white py-16 sm:py-20">
+        <div className="container">
           <SectionHeader
             title="Core services"
             description="OHI is a partner for institutions that need clear, credible, and investment-grade storytelling."
@@ -116,13 +103,10 @@ const ServicesPage = () => {
           <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {services.cards.map((card, index) => (
               <Reveal key={card.name} delay={0.04 + index * 0.04}>
-                <article className="bg-white p-6 shadow-[0_12px_28px_rgba(15,23,42,0.06)] transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(201,107,23,0.1)]">
-                  <div
-                    className="h-2 w-20"
-                    style={{ backgroundColor: card.textColor }}
-                  />
-                  <h3 className="font-display mt-5 text-2xl font-semibold text-[#173145]">{card.name}</h3>
-                  <p className="font-body mt-4 text-base leading-7 text-[#4e5a67]">{card.desc}</p>
+                <article className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(15,23,42,0.12)]">
+                  <div className="h-1.5 w-16" style={{ backgroundColor: card.textColor }} />
+                  <h3 className="mt-5 text-lg font-bold tracking-[-0.02em] text-[#2e3135]">{card.name}</h3>
+                  <p className="mt-3 text-sm leading-7 text-[#4e5a67]">{card.desc}</p>
                 </article>
               </Reveal>
             ))}
@@ -130,93 +114,89 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      <section className="overflow-hidden bg-[#bb7422] py-14 sm:py-16 lg:py-20">
-        <div className="mx-auto grid max-w-6xl gap-6 px-4 lg:grid-cols-[1.1fr_0.9fr] sm:px-6 lg:px-8">
-          <div className="bg-white p-6 text-white shadow-[0_12px_30px_rgba(15,23,42,0.08)]">
-            <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-[#173145]">
+      {/* Formats */}
+      <section className="bg-[#0a0c12] py-16 sm:py-20">
+        <div className="container grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="bg-white p-6 sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#F07F1A]">
               Communication formats
             </p>
-            <h3 className="font-display mt-4 text-3xl font-semibold tracking-[-0.03em] text-[#173145]">
+            <h3 className="mt-4 text-2xl font-bold tracking-[-0.03em] text-[#2e3135]">
               Visual formats built for clarity
             </h3>
-            <p className="font-body mt-4 leading-7 text-[#4e5a67]">
+            <p className="mt-4 text-sm leading-7 text-[#4e5a67]">
               Each format is chosen to match the communication objective, whether the goal is public awareness, stakeholder trust, donor reporting, or investor confidence.
             </p>
-            <div className="mt-6 space-y-3">
+            <div className="mt-6 space-y-2">
               {serviceFormats.map((item, index) => (
                 <Reveal key={item} delay={0.05 + index * 0.03}>
-                  <div className="flex items-center gap-3 bg-[#fff8ef] px-4 py-3 transition duration-300 ease-out hover:bg-white">
-                    <VideoIcon className="h-4 w-4 text-[#bb7422]" />
-                    <span className="font-body text-sm font-medium text-[#173145]">{item}</span>
+                  <div className="flex items-center gap-3 bg-[#f8f9fb] px-4 py-3 transition hover:bg-white">
+                    <VideoIcon className="h-4 w-4 shrink-0 text-[#F07F1A]" />
+                    <span className="text-sm font-medium text-[#2e3135]">{item}</span>
                   </div>
                 </Reveal>
               ))}
             </div>
           </div>
 
-          <div className="bg-white p-6 text-white shadow-[0_12px_30px_rgba(15,23,42,0.08)]">
+          <div className="bg-white p-6 sm:p-8">
             <div className="flex items-center gap-3">
-              <Megaphone className="h-5 w-5 text-[#bb7422]" />
-              <h3 className="font-display text-2xl font-semibold tracking-[-0.03em] text-[#173145]">How the work travels</h3>
+              <Megaphone className="h-5 w-5 text-[#F07F1A]" />
+              <h3 className="text-xl font-bold tracking-[-0.03em] text-[#2e3135]">How the work travels</h3>
             </div>
-            <p className="font-body mt-4 text-base leading-7 text-[#4e5a67]">
+            <p className="mt-4 text-sm leading-7 text-[#4e5a67]">
               OHI frames each format as a communication asset, not just a video. The result is content that can be used across reports, websites, social channels, presentations, and stakeholder engagement.
             </p>
-            <div className="mt-6 bg-[#fff8ef] p-5">
+            <div className="mt-6 bg-[#f8f9fb] p-5">
               <div className="flex items-center gap-3">
-                <Film className="h-5 w-5 text-[#bb7422]" />
-                <p className="font-body text-sm font-semibold uppercase tracking-[0.2em] text-[#bb7422]">
+                <Film className="h-5 w-5 text-[#F07F1A]" />
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#F07F1A]">
                   Delivery approach
                 </p>
               </div>
-              <p className="font-body mt-3 text-sm leading-6 text-[#4e5a67]">
+              <p className="mt-3 text-sm leading-6 text-[#4e5a67]">
                 Strategic, polished, and grounded in the realities of development work across the continent.
               </p>
             </div>
             <div className="mt-6">
-              <Link to="/who-we-serve">
-                <button className="btn inline-flex items-center gap-2">
-                  See sectors <ArrowRight className="h-4 w-4" />
-                </button>
+              <Link
+                to="/who-we-serve"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-[#F07F1A] transition hover:text-[#d96d10]"
+              >
+                See sectors <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-[linear-gradient(180deg,#eef6fb_0%,#e3eff8_28%,#d8e8f5_100%)] px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-        <div className="mx-auto max-w-6xl">
+      {/* Formats in practice */}
+      <section className="bg-[#bb7422] py-16 sm:py-20">
+        <div className="container">
           <SectionHeader
             title="Formats in practice"
             description="A closer look at how OHI adapts each format to the communication objective, audience, and sector."
+            textColorClassName="text-white"
+            descriptionClassName="text-white/80"
           />
-
           <div className="mt-10 space-y-5">
             {serviceShowcase.map((item, index) => (
-              <Reveal key={item.title} delay={0.06 + index * 0.05}>
-        <article className="overflow-hidden rounded-[24px] border border-white/20 bg-white shadow-[0_12px_30px_rgba(15,23,42,0.08)] transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(201,107,23,0.1)]">
+              <Reveal key={item.title} delay={0.06 + index * 0.04}>
+                <article className="overflow-hidden bg-white shadow-[0_10px_28px_rgba(15,23,42,0.08)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(15,23,42,0.12)]">
                   <div className="grid items-stretch md:grid-cols-2">
-                    <div
-                      className={`relative min-h-[220px] md:min-h-[200px] ${
-                        index % 2 === 1 ? "md:order-2" : ""
-                      }`}
-                    >
+                    <div className={`relative min-h-[220px] ${index % 2 === 1 ? "md:order-2" : ""}`}>
                       <img
-                        src={item.image ?? serviceShowcase[index]?.image ?? introImage}
+                        src={item.image}
                         alt={item.title}
-                        className="h-full w-full object-cover transition duration-500 ease-out"
+                        className="h-full w-full object-cover"
                       />
                     </div>
-                    <div
-                      className={`flex items-center p-6 sm:p-8 ${
-                        index % 2 === 1 ? "md:order-1" : ""
-                      }`}
-                    >
-                      <div className="max-w-xl">
-                        <h3 className="font-display text-2xl font-semibold tracking-[-0.02em] text-[#bb7422]">
+                    <div className={`flex items-center p-6 sm:p-8 ${index % 2 === 1 ? "md:order-1" : ""}`}>
+                      <div>
+                        <h3 className="text-xl font-bold tracking-[-0.02em] text-[#F07F1A]">
                           {item.title}
                         </h3>
-                        <p className="font-body mt-3 text-sm leading-7 text-[#4e5a67] sm:text-[15px]">
+                        <p className="mt-3 text-sm leading-7 text-[#4e5a67]">
                           {item.description}
                         </p>
                       </div>

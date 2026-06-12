@@ -183,9 +183,26 @@ function Home() {
               {currentSlide.description}
             </p>
 
-            <div className="font-body mt-8 inline-flex items-center gap-2 text-[18px] font-medium text-white/92">
-              <span>Explore More</span>
-              <ChevronDown className="h-6 w-6" />
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Link
+                to="/contact"
+                className="inline-flex h-11 items-center justify-center bg-[#f07f1a] px-6 text-sm font-bold text-white shadow-[0_8px_24px_rgba(240,127,26,0.4)] transition hover:bg-[#d96d10]"
+              >
+                Start a conversation
+              </Link>
+              <Link
+                to="/portfolio"
+                className="inline-flex h-11 items-center justify-center border border-white/50 bg-white/10 px-6 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-white/20"
+              >
+                View our work
+              </Link>
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] font-medium uppercase tracking-[0.2em] text-white/60">
+              <span className="text-white/40">Trusted by:</span>
+              {["WFP", "EU", "IFRC", "Olam", "OFI", "Sun King", "API"].map((name) => (
+                <span key={name} className="text-white/75">{name}</span>
+              ))}
             </div>
           </Reveal>
 
@@ -206,6 +223,20 @@ function Home() {
 
       </section>
 
+      <section
+        id="conviction-strip"
+        className="bg-[#0a0c12] py-12 sm:py-14"
+      >
+        <div className="container">
+          <Reveal className="mx-auto max-w-3xl text-center">
+            <p className="font-heading text-2xl font-bold leading-snug tracking-[-0.03em] text-white sm:text-3xl lg:text-[36px]">
+              Africa's development story is worth billions.{" "}
+              <span className="text-[#1FA8DD]">Most of it is never told well enough to unlock that value.</span>
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       <section id="about" className="bg-white py-16 sm:py-20">
         <div className="container">
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
@@ -219,17 +250,30 @@ function Home() {
             </Reveal>
 
             <Reveal className="max-w-2xl space-y-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#1FA8DD]">
+                {homePage.about.eyebrow ?? "Who we are"}
+              </p>
               <UnderlinedHeading as="h2" className="text-2xl font-bold leading-tight tracking-[-0.03em] text-[#2e3135] sm:text-3xl lg:text-[34px]" showBorder={true}>
                 {homePage.about.title}
               </UnderlinedHeading>
               <p className="text-sm leading-6 text-[#4e4e4e] sm:text-[15px]">
                 {homePage.about.description}
               </p>
+              {homePage.about.founderQuote && (
+                <blockquote className="border-l-4 border-[#F07F1A] pl-4">
+                  <p className="text-sm font-medium italic leading-6 text-[#4e4e4e]">
+                    "{homePage.about.founderQuote}"
+                  </p>
+                  <footer className="mt-2 text-xs font-semibold text-[#F07F1A]">
+                    {homePage.about.founderByline}
+                  </footer>
+                </blockquote>
+              )}
               <Link
                 to={homePage.about.ctaHref ?? "/about"}
-                className="inline-flex h-8 items-center justify-center bg-[#e97a2f] px-4 text-xs font-semibold text-white transition hover:bg-[#d96f1f]"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#F07F1A] transition hover:text-[#d96d10]"
               >
-                {homePage.about.ctaLabel ?? "Learn More"}
+                {homePage.about.ctaLabel ?? "Read our full story"} →
               </Link>
             </Reveal>
           </div>
@@ -365,27 +409,22 @@ function Home() {
         id="turn-programme-into-proof"
         className="relative overflow-hidden bg-cover bg-center py-16 text-white sm:py-20"
         style={{
-          backgroundImage: `linear-gradient(rgba(10,12,18,0.56), rgba(10,12,18,0.72)), url(${heroImages.hero4})`,
+          backgroundImage: `linear-gradient(rgba(10,12,18,0.62), rgba(10,12,18,0.78)), url(${heroImages.hero4})`,
         }}
       >
         <div className="container">
-          <Reveal className="max-w-xl">
-            <h2 className="text-3xl font-bold leading-[0.95] tracking-[-0.04em] text-white sm:text-4xl lg:text-[44px]">
-              Turn your next programme into proof
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold leading-tight tracking-[-0.04em] text-white sm:text-4xl lg:text-[44px]">
+              Let's tell the story your impact deserves.
             </h2>
-            <p className="mt-4 max-w-md text-sm leading-6 text-white/86">
-              OHI helps institutions show results clearly through documentary work,
-              strategic visibility, and communication designed for decision-makers.
-            </p>
-            <p className="mt-4 max-w-md text-sm leading-6 text-white/86">
-              If you need communication that reads like institutional proof, the team
-              is ready to support the brief.
+            <p className="mt-4 max-w-lg mx-auto text-base leading-7 text-white/80">
+              Share your programme objectives, and we'll show you what's possible — no commitment.
             </p>
             <Link
               to="/contact"
-              className="mt-5 inline-flex h-8 items-center justify-center bg-[#f58e1b] px-4 text-xs font-semibold text-white transition hover:bg-[#d76418]"
+              className="mt-7 inline-flex h-11 items-center justify-center bg-[#F07F1A] px-8 text-sm font-bold text-white shadow-[0_8px_24px_rgba(240,127,26,0.4)] transition hover:bg-[#d96d10]"
             >
-              Contact Us
+              Start a conversation
             </Link>
           </Reveal>
         </div>
@@ -429,13 +468,25 @@ function Home() {
 
       <section className="bg-white py-10 sm:py-14">
         <div className="container">
-          <UnderlinedHeading
-            as="h2"
-            className="text-center text-2xl font-medium tracking-[-0.03em] text-[#2f3135] sm:text-[28px]"
-            showBorder={true}
-          >
-            {homePage.programmes.title}
-          </UnderlinedHeading>
+          <div className="text-center">
+            {homePage.programmes.eyebrow && (
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#1FA8DD]">
+                {homePage.programmes.eyebrow}
+              </p>
+            )}
+            <UnderlinedHeading
+              as="h2"
+              className="mt-1 text-center text-2xl font-medium tracking-[-0.03em] text-[#2f3135] sm:text-[28px]"
+              showBorder={true}
+            >
+              {homePage.programmes.title}
+            </UnderlinedHeading>
+            {homePage.programmes.subline && (
+              <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-[#6b7280]">
+                {homePage.programmes.subline}
+              </p>
+            )}
+          </div>
 
           <motion.div
             className="mt-8 grid gap-5 md:grid-cols-3"
@@ -628,18 +679,17 @@ function Home() {
 
         <div className="bg-[#c98722] py-6">
           <div className="container">
-            <div className="grid gap-4 text-center text-white sm:grid-cols-4">
+            <div className="grid gap-4 text-center text-white sm:grid-cols-5">
               {[
-                ["OHI at a glance", ""],
                 ["100+", "Projects delivered"],
                 ["70+", "Institutional clients"],
-                ["4", "Regional footprints"],
-              ].map(([value, label], index) => (
-                <div key={value} className="space-y-1">
+                ["1M+", "Viewers reached"],
+                ["95%", "Repeat-client rate"],
+                ["100+", "Missions & showcases"],
+              ].map(([value, label]) => (
+                <div key={label} className="space-y-1">
                   <p className="text-xl font-bold">{value}</p>
-                  <p className="text-xs uppercase tracking-[0.18em] text-white/86">
-                    {index === 0 ? " " : label}
-                  </p>
+                  <p className="text-xs uppercase tracking-[0.18em] text-white/86">{label}</p>
                 </div>
               ))}
             </div>

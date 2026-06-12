@@ -44,57 +44,60 @@ export const landingPageDefaults = {
     slides: [
       {
         image: hero1,
-        kicker: "Development storytelling",
-        title: "Africa's development story",
-        subtitle: "deserves investment-grade visibility",
+        kicker: "Africa's premier development storytelling & strategic visibility firm",
+        title: "Stories that move capital.",
+        subtitle: "",
         description:
-          "OHI turns complex programmes into cinematic proof that builds trust, demonstrates results, and mobilises capital.",
+          "We turn Africa's development programmes into investment-grade visual narratives that build trust, demonstrate results, and mobilise action.",
       },
       {
         image: hero2,
-        kicker: "Impact storytelling",
-        title: "Strategic visibility for institutions",
-        subtitle: "that need proof, clarity, and reach",
+        kicker: "Impact documentaries & strategic content",
+        title: "Proof you can watch.",
+        subtitle: "",
         description:
-          "We package delivery, learning, and outcomes into public-facing stories that help partners communicate with confidence.",
+          "For multilateral agencies — translating complex programmes into credible, human-centred films that move institutional audiences.",
       },
       {
         image: hero3,
-        kicker: "Multilingual production",
-        title: "English, French, and Pidgin coverage",
-        subtitle: "for field realities that need reach",
+        kicker: "Multilingual field production",
+        title: "English, French, and Pidgin.",
+        subtitle: "",
         description:
           "Our field production keeps stories accessible across audiences without losing the nuance of the original context.",
       },
       {
         image: hero4,
-        kicker: "ESG and social impact",
-        title: "Stories that show responsibility",
-        subtitle: "alignment, and real-world contribution",
+        kicker: "ESG & social impact storytelling",
+        title: "Stories that show responsibility.",
+        subtitle: "",
         description:
-          "We help private-sector and institutional partners show how their work contributes to measurable social value.",
+          "For private-sector actors operating in Africa — evidencing the social and environmental value of your work.",
       },
       {
         image: profileHeroMountain,
-        kicker: "Investor and donor reporting",
-        title: "Evidence-led films for decision makers",
-        subtitle: "who expect clarity and accountability",
+        kicker: "Investor-facing & donor-reporting films",
+        title: "Built to institutional standard.",
+        subtitle: "",
         description:
-          "OHI creates reporting films that communicate results, learning, and accountability with precision.",
+          "Productions built to the highest institutional standards — designed for the boardroom, the forum, and the funding decision.",
       },
     ],
-    primaryCtaLabel: "Explore Profile",
-    primaryCtaHref: "/documentary",
-    secondaryCtaLabel: "Our Story",
-    secondaryCtaHref: "/about",
+    primaryCtaLabel: "Start a conversation",
+    primaryCtaHref: "/contact",
+    secondaryCtaLabel: "View our work",
+    secondaryCtaHref: "/portfolio",
   },
   homePage: {
     about: {
-      title: "Olympian House International",
+      eyebrow: "Who we are",
+      title: "Founded on a conviction about Africa's story.",
       description:
-        "Olympian House International (OHI) creates development communication that helps institutions, partners, and communities understand what is being delivered, why it matters, and why it deserves sustained support.",
-      ctaLabel: "Learn More",
-      ctaHref: "/about",
+        "Fombang Banns N. founded Olympian House International in 2015 on a belief that stories move people — and when people move, change follows. Today, OHI is Africa's premier development storytelling firm, combining cinematic excellence with deep fluency in the language of DFI communication, donor compliance, and institutional decision-making.",
+      founderQuote: "Together, let's tell the stories that build the Africa we imagine.",
+      founderByline: "Fombang Banns N., Founder & CEO",
+      ctaLabel: "Read our full story",
+      ctaHref: "/background",
       image: gallery11,
     },
     difference: {
@@ -142,7 +145,9 @@ export const landingPageDefaults = {
       image: gallery12,
     },
     programmes: {
-      title: "Featured Programmes",
+      title: "Proof you can watch.",
+      eyebrow: "Our work",
+      subline: "Selected films and showcases produced for institutions across the continent.",
       items: [
         {
           title: "UNESCO World Heritage Volunteers Initiative",
@@ -188,8 +193,9 @@ export const landingPageDefaults = {
   about: {
     title: "Our Story",
     paragraphs: [
-      "Olympian House International was founded in 2015 by filmmaker and development communication specialist Fombang Banns N. on a conviction that has only deepened over a decade of work: the quality of a story is inseparable from the quality of the capital, partnerships, and policy decisions it attracts.",
-      "We make Africa's development and investment journeys visible through strategic, multilingual visual narratives that turn technical programmes into credible proof for institutions, investors, partners, and the communities they serve.",
+      "I founded Olympian House International in 2015 driven by a simple but powerful belief: stories have the ability to move people — and when people move, change follows.",
+      "Over a decade at the heart of the continent's development and investment landscape, that belief has matured into a conviction: the quality of a story is inseparable from the quality of the capital, partnerships, and policy decisions it attracts. Africa's development journeys deserve to be seen, trusted, and funded — and that is the standard we hold ourselves to on every project.",
+      "I lead a multilingual team that combines cinematic excellence with deep fluency in the language of development and investment. We understand donor compliance, DFI communication frameworks, and the psychology of institutional decision-making — because great storytelling for development is not just about beauty. It is about credibility, evidence, and impact at scale.",
     ],
     image: gallery11,
     overlay: {
@@ -202,43 +208,44 @@ export const landingPageDefaults = {
     },
   },
   services: {
-    title: "What We Do",
+    title: "What we do",
+    subtitle: "Investment-grade storytelling at the intersection of impact, investment, and communication.",
     description:
       "We help DFIs, governments, multilaterals, and private-sector partners turn programmes into proof.",
     cards: [
       {
         name: "Investment & Programme Visibility",
-        desc: "Films and content packages for DFIs and bilateral institutions that need proof of delivery, stakeholder confidence, and stronger public-facing visibility.",
+        desc: "For DFIs and bilateral development institutions — making capital, results, and reach visible to the partners who fund them.",
         bgColor: "rgba(249, 161, 27, 0.14)",
         textColor: "#F9A11B",
       },
       {
-        name: "Impact Documentaries",
-        desc: "Cinematic documentary work that translates programme complexity into human stories, measurable change, and institutional trust.",
+        name: "Impact Documentaries & Strategic Content",
+        desc: "For multilateral agencies — translating complex programmes into credible, human-centred films.",
         bgColor: "rgba(5, 193, 255, 0.14)",
         textColor: "#05C1FF",
       },
       {
         name: "ESG & Social Impact Storytelling",
-        desc: "Strategic storytelling for private-sector actors operating in Africa who need to show responsibility, alignment, and real-world contribution.",
+        desc: "For private-sector actors operating in Africa — evidencing the social and environmental value of your work.",
         bgColor: "rgba(5, 193, 255, 0.12)",
         textColor: "#0296CC",
       },
       {
         name: "Development Programme Communication",
-        desc: "Clear communication for governments and implementing partners across the project lifecycle, from launch to reporting.",
+        desc: "For governments and implementing partners — communicating delivery, transparency, and impact at scale.",
         bgColor: "rgba(249, 161, 27, 0.12)",
         textColor: "#F9A11B",
       },
       {
-        name: "Donor & Investor Reporting Films",
-        desc: "Evidence-led films that communicate results, learning, and accountability with the precision institutional audiences expect.",
+        name: "Investor-Facing & Donor-Reporting Films",
+        desc: "Productions built to the highest institutional standards — designed for the boardroom, the forum, and the funding decision.",
         bgColor: "rgba(249, 161, 27, 0.14)",
         textColor: "#F9A11B",
       },
       {
-        name: "Multilingual Field Production",
-        desc: "English, French, and Pidgin coverage that captures field realities and makes stories accessible across audiences.",
+        name: "Strategic Visibility & Advisory",
+        desc: "Beyond production — guidance on how to position a programme so the right capital, partners, and policymakers take notice.",
         bgColor: "rgba(5, 193, 255, 0.14)",
         textColor: "#05C1FF",
       },
@@ -418,22 +425,25 @@ export const landingPageDefaults = {
     title: "Mission, Vision and Values",
     description:
       "The profile is built around credibility, evidence, and strategic visibility. These are the principles that shape every OHI project.",
-    storyTitle: "Our Story",
+    storyTitle: "A Word from the Founder",
     storyDescription:
-      "Founded in 2015 by filmmaker and development communication specialist Fombang Banns N., OHI was built on the belief that strong stories attract stronger capital, partnerships, and policy attention.",
-    missionTitle: "Amplify Africa's stories",
+      "Founded in 2015 by Fombang Banns N., Olympian House International was built on a simple but powerful belief: stories have the ability to move people — and when people move, change follows.",
+    founderName: "Fombang Banns N.",
+    founderRole: "Founder & CEO, Olympian House International",
+    missionTitle: "Our Mission",
     missionDescription:
-      "To amplify Africa's development and investment stories with authenticity, excellence, and strategic clarity so impactful projects gain the visibility, credibility, and support they deserve.",
-    visionTitle: "Vision",
+      "To make Africa's development and investment stories visible, credible, and actionable — ensuring impactful programmes attract the capital, partnerships, and policy support they deserve.",
+    visionTitle: "Our Vision",
     visionDescription:
-      "To be Africa's leading partner in investment-grade development storytelling and strategic visibility.",
-    valuesTitle: "Core values",
+      "To be Africa's definitive partner in investment-grade and development storytelling — shaping how capital, institutions, and communities engage with transformative projects across the continent.",
+    valuesTitle: "Our Values",
     values: [
-      "Evidence over assumption",
-      "Cultural respect and inclusion",
-      "Accountability and leadership",
-      "Creative excellence",
-      "Institutional fluency",
+      { title: "Authentic Storytelling", description: "We tell stories that matter, representing people and communities with honesty and respect." },
+      { title: "Accountability & Leadership", description: "We take ownership, lead with clarity, and deliver on our promises." },
+      { title: "Cultural Respect & Inclusion", description: "We celebrate diverse voices and tell stories that reflect shared humanity." },
+      { title: "Creative Excellence", description: "Every frame, sound, and story is crafted to the highest standard." },
+      { title: "Collaboration", description: "We build strong partnerships to deliver meaningful, lasting results." },
+      { title: "Evidence & Credibility", description: "We treat proof as a creative discipline. Every claim we visualise is one our clients can stand behind." },
     ],
   },
   companyProfile: {
@@ -464,9 +474,11 @@ export const landingPageDefaults = {
       description:
         "The documentary is designed as a guided entry point into OHI. It shows why the work matters for development, investment, and impact communication.",
       stats: [
-        { label: "Projects delivered", value: "100+" },
-        { label: "Institutional clients", value: "70+" },
-        { label: "Repeat rate", value: "95%" },
+        { label: "Projects delivered across Cameroon and Africa", value: "100+" },
+        { label: "Institutional clients served", value: "70+" },
+        { label: "Viewers reached through impact content", value: "1M+" },
+        { label: "Repeat-client rate", value: "95%" },
+        { label: "Missions, documentaries & investment showcases", value: "100+" },
       ],
       highlights: [
         {
@@ -595,6 +607,7 @@ export const landingPageDefaults = {
       stats: [
         { value: "100+", label: "Projects delivered" },
         { value: "70+", label: "Institutional clients" },
+        { value: "1M+", label: "Viewers reached" },
         { value: "95%", label: "Repeat-client rate" },
       ],
       missionTitle: "Mission & vision",
@@ -819,7 +832,7 @@ export const landingPageDefaults = {
         "Strengthen stakeholder alignment",
         "Build trust with communities",
         "Drive policy influence",
-        "Showcase success stories",
+        "Showcase success stories that justify continued investment",
       ],
       payoffTitle: "The communication payoff",
       payoffDescription:

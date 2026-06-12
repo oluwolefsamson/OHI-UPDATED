@@ -3,40 +3,45 @@ import gallery11 from "../../assets/images/Gallery/gallery-11.jpeg";
 
 export const publicMenuSections = [
   {
-    label: "About OHI",
-    href: "/about",
+    label: "Work",
+    href: "/portfolio",
+    heroImage: gallery11,
     items: [
-      { label: "About Us", href: "/about" },
-      { label: "Our Background", href: "/background" },
-      { label: "The Team", href: "/our-team" },
-      { label: "Partners", href: "/our-partners" },
-      { label: "Platforms", href: "/our-platforms" },
+      { label: "Portfolio Highlights", href: "/portfolio" },
+      { label: "Company Overview", href: "/documentary" },
     ],
   },
   {
-    label: "What We Do",
+    label: "Services",
     href: "/services",
     heroImage: profileHeroMountain,
     items: [
-      { label: "Services", href: "/services" },
+      { label: "What We Do", href: "/services" },
       { label: "Our Approach", href: "/approach" },
       { label: "Impact", href: "/impact" },
     ],
   },
   {
-    label: "Our Work",
-    href: "/portfolio",
-    heroImage: gallery11,
+    label: "About",
+    href: "/about",
     items: [
-      { label: "Portfolio Highlights", href: "/portfolio" },
+      { label: "About OHI", href: "/about" },
+      { label: "Our Background", href: "/background" },
+      { label: "The Team", href: "/our-team" },
+    ],
+  },
+  {
+    label: "Clients",
+    href: "/our-partners",
+    items: [
+      { label: "Our Partners", href: "/our-partners" },
       { label: "Who We Serve", href: "/who-we-serve" },
-      { label: "Documentary Work", href: "/documentary" },
     ],
   },
 ];
 
 export const publicUtilityLinks = [
-  { label: "Start a Project", href: "/contact" },
+  { label: "Start a conversation", href: "/contact" },
 ];
 
 export const publicContactPoints = [

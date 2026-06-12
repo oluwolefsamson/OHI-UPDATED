@@ -16,22 +16,27 @@ const partnerLogos = [
 ];
 
 const supportHighlights = [
-  "Institutional visibility",
-  "Shared storytelling goals",
-  "Long-term collaboration",
+  "Development Finance Institutions",
+  "Multilateral & UN Agencies",
+  "Bilateral Development Institutions",
+  "Governments & Implementing Partners",
+  "Foundations",
+  "Private-Sector ESG & Social-Impact Programmes",
 ];
 
-const LogoCard = ({ logo, name }) => {
-  return (
-    <div className="group flex h-28 w-56 items-center justify-center rounded-[26px] border border-[#ead9c0] bg-[linear-gradient(180deg,#fffdf8_0%,#fff6ea_100%)] px-6 shadow-[0_12px_30px_rgba(15,23,42,0.06)] transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(15,23,42,0.1)]">
-      <img
-        src={logo}
-        alt={name}
-        className="max-h-12 max-w-[80%] object-contain opacity-90 transition duration-300 group-hover:opacity-100"
-      />
-    </div>
-  );
-};
+const clientList = [
+  "Sun King", "Olam", "Olam Food Ingredients (OFI)", "IFRC", "CRTV",
+  "Les Laboratoires Biopharma", "EU Civil Protection & Humanitarian Aid", "HOFNA",
+  "#defyhatenow", "African Wildlife Foundation", "World Food Programme", "CORAF",
+  "Cosmos Educational Press", "International Rescue Committee", "AfriYAN",
+  "Cameroon Investment Promotion Agency (API)",
+];
+
+const LogoCard = ({ logo, name }) => (
+  <div className="flex h-24 w-52 items-center justify-center border border-[#e5e5e5] bg-white px-6 shadow-[0_4px_12px_rgba(15,23,42,0.06)] transition hover:shadow-[0_8px_24px_rgba(15,23,42,0.1)]">
+    <img src={logo} alt={name} className="max-h-10 max-w-[75%] object-contain opacity-80 transition hover:opacity-100" />
+  </div>
+);
 
 const OurPartnersPage = () => {
   return (
@@ -43,61 +48,65 @@ const OurPartnersPage = () => {
       secondaryCta={{ label: "Our Team", href: "/our-team" }}
       heroBadge={
         <div className="space-y-1">
-          <p className="font-body text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
             OHI profile
           </p>
-          <p className="font-body text-sm leading-6 text-white/80">
+          <p className="text-sm leading-6 text-white/80">
             Strategic visibility for development, investment, and impact communication.
           </p>
         </div>
       }
     >
-      <div className="mx-auto max-w-6xl space-y-10 p-4 sm:p-6 lg:p-8">
-        <SectionHeader
-          title="Our Partners"
-          description="OHI collaborates with a network of partners including international organizations, government agencies, and community groups."
-        />
+      {/* Who we serve */}
+      <section className="bg-white py-16 sm:py-20">
+        <div className="container">
+          <SectionHeader
+            title="Who we serve"
+            description="A 95% repeat-client rate, built on trust earned across nearly a decade of institutional work."
+          />
 
-        <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="bg-white p-6 shadow-[0_14px_34px_rgba(15,23,42,0.06)] sm:p-8">
-            <p className="font-body text-sm font-semibold uppercase tracking-[0.24em] text-[#b16a18]">
-              Why it works
-            </p>
-            <p className="font-display mt-3 text-2xl font-semibold tracking-[-0.03em] text-[#173145] sm:text-[30px]">
-              Partnerships give the work more reach, clarity, and durability.
-            </p>
-            <p className="font-body mt-4 text-base leading-7 text-[#4e5a67]">
-              These relationships help OHI deliver communication that is aligned with
-              institutional goals, audience needs, and programme objectives.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {supportHighlights.map((item) => (
-                <span
-                  key={item}
-                  className="inline-flex items-center rounded-full border border-[#ead9c0] bg-[#fff8ef] px-3 py-1 text-xs font-semibold text-[#8b5a1e]"
-                >
-                  {item}
-                </span>
-              ))}
+          <div className="mt-10 grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
+            <div className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] sm:p-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#F07F1A]">
+                Sectors we serve
+              </p>
+              <h3 className="mt-3 text-2xl font-bold tracking-[-0.03em] text-[#2e3135]">
+                Partners at the intersection of impact, investment, and communication.
+              </h3>
+              <p className="mt-4 text-sm leading-7 text-[#4e5a67]">
+                OHI works with institutions that need credible, human-centred visual narratives to demonstrate impact, attract financing, and strengthen stakeholder trust.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {supportHighlights.map((item) => (
+                  <span
+                    key={item}
+                    className="inline-flex items-center border border-[#e5e5e5] bg-[#f8f9fb] px-3 py-1.5 text-xs font-semibold text-[#2e3135]"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-[#0a0c12] p-6 text-white shadow-[0_10px_28px_rgba(15,23,42,0.12)] sm:p-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#F07F1A]">
+                Great storytelling for development
+              </p>
+              <h3 className="mt-3 text-2xl font-bold tracking-[-0.03em] text-white">
+                The difference between a programme that is completed and one that is seen, trusted, and funded again.
+              </h3>
+              <p className="mt-4 text-sm leading-7 text-white/78">
+                It is not about beauty alone. It is about credibility, evidence, and impact at scale.
+              </p>
             </div>
           </div>
-
-          <div className="bg-[linear-gradient(180deg,#091826_0%,#12243a_100%)] p-6 text-white shadow-[0_14px_34px_rgba(15,23,42,0.12)] sm:p-8">
-            <p className="font-body text-sm font-semibold uppercase tracking-[0.24em] text-[#fbbf24]">
-              Supporters
-            </p>
-            <p className="font-display mt-3 text-2xl font-semibold tracking-[-0.03em] sm:text-[30px]">
-              A partner set that signals scale and institutional trust.
-            </p>
-            <p className="font-body mt-4 text-base leading-7 text-white/78">
-              The supporter strip presents the relationships as proof of operating
-              context rather than decorative branding.
-            </p>
-          </div>
         </div>
+      </section>
 
-        <div className="mt-2 overflow-hidden bg-[linear-gradient(180deg,#fffdf8_0%,#fff6ea_100%)] p-4 shadow-[0_16px_40px_rgba(15,23,42,0.06)] sm:p-6">
-          <div className="relative flex w-full items-center justify-center overflow-hidden">
+      {/* Logo marquee */}
+      <section className="bg-[#bb7422] py-14 sm:py-16">
+        <div className="container">
+          <div className="overflow-hidden">
             <Marquee pauseOnHover className="[--duration:28s]">
               {partnerLogos.map((partner) => (
                 <LogoCard key={partner.id} logo={partner.logo} name={partner.name} />
@@ -105,7 +114,31 @@ const OurPartnersPage = () => {
             </Marquee>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Client list */}
+      <section className="bg-white py-16 sm:py-20">
+        <div className="container">
+          <div className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#F07F1A]">
+              Our clients
+            </p>
+            <h3 className="mt-3 text-xl font-bold tracking-[-0.02em] text-[#2e3135]">
+              Trusted by leading institutions across Africa and beyond
+            </h3>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {clientList.map((client) => (
+                <span
+                  key={client}
+                  className="inline-flex items-center border border-[#e5e5e5] bg-[#f8f9fb] px-4 py-2 text-sm font-medium text-[#2e3135]"
+                >
+                  {client}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
     </ProfilePageShell>
   );
 };

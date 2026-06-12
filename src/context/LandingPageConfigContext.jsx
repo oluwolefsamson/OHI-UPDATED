@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { landingPageDefaults } from "../data/landingPageDefaults";
 import { supabase } from "../lib/supabase";
 import { useAdminAuth } from "./AdminAuthContext";
@@ -218,6 +219,8 @@ export function LandingPageConfigProvider({ children }) {
   const [config, setConfigState] = useState(landingPageDefaults);
   const [loading, setLoading] = useState(true);
   const { isAuthenticated, loading: authLoading } = useAdminAuth();
+  const { pathname } = useLocation();
+  const isOnDashboard = pathname.startsWith("/dashboard");
 
   const loadConfigFromDb = async () => {
     const { data, error } = await supabase
@@ -239,7 +242,10 @@ export function LandingPageConfigProvider({ children }) {
     let isMounted = true;
 
     async function loadFromDb() {
-      if (!isAuthenticated) {
+      // Only load DB config when inside the admin dashboard.
+      // The public site always renders from landingPageDefaults so code changes
+      // are reflected immediately without needing a Supabase sync.
+      if (!isAuthenticated || !isOnDashboard) {
         if (isMounted) {
           setLoading(false);
         }
@@ -318,7 +324,7 @@ export function LandingPageConfigProvider({ children }) {
         : null;
     channel?.addEventListener("message", handleBroadcastMessage);
 
-    if (authLoading || !isAuthenticated) {
+    if (authLoading || !isAuthenticated || !isOnDashboard) {
       return () => {
         window.removeEventListener("storage", handleStorageChange);
         channel?.removeEventListener("message", handleBroadcastMessage);
