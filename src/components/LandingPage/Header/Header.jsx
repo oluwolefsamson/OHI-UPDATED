@@ -376,7 +376,7 @@ const Header = () => {
             <Link
                 key={item.label}
                 to={item.href}
-                className="inline-flex h-11 items-center justify-center rounded-xl bg-[linear-gradient(180deg,#f59d21_0%,#c96b17_100%)] px-6 text-sm font-bold uppercase tracking-[0.02em] text-white shadow-[0_12px_28px_rgba(201,107,23,0.3)] transition hover:brightness-105"
+                className="inline-flex h-11 items-center justify-center bg-[linear-gradient(180deg,#f59d21_0%,#c96b17_100%)] px-6 text-sm font-bold uppercase tracking-[0.02em] text-white shadow-[0_12px_28px_rgba(201,107,23,0.3)] transition hover:brightness-105"
               >
                 {item.label}
               </Link>
@@ -468,7 +468,7 @@ const Header = () => {
             ))}
             <Link
               to="/contact"
-              className="mt-4 inline-flex h-12 items-center justify-center rounded-xl bg-[linear-gradient(180deg,#f59d21_0%,#c96b17_100%)] px-6 text-sm font-bold uppercase tracking-[0.02em] text-white"
+              className="mt-4 inline-flex h-12 items-center justify-center bg-[linear-gradient(180deg,#f59d21_0%,#c96b17_100%)] px-6 text-sm font-bold uppercase tracking-[0.02em] text-white"
               onClick={() => setIsDrawerOpen(false)}
             >
               Start a conversation

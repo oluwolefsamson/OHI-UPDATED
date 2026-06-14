@@ -242,16 +242,6 @@ export function LandingPageConfigProvider({ children }) {
     let isMounted = true;
 
     async function loadFromDb() {
-      // Only load DB config when inside the admin dashboard.
-      // The public site always renders from landingPageDefaults so code changes
-      // are reflected immediately without needing a Supabase sync.
-      if (!isAuthenticated || !isOnDashboard) {
-        if (isMounted) {
-          setLoading(false);
-        }
-        return;
-      }
-
       try {
         if (!isMounted) return;
         await loadConfigFromDb();
@@ -270,7 +260,7 @@ export function LandingPageConfigProvider({ children }) {
     return () => {
       isMounted = false;
     };
-  }, [isAuthenticated]);
+  }, []);
 
   useEffect(() => {
     const applySnapshot = (payload) => {
