@@ -136,6 +136,7 @@ export default function LandingPageManager() {
   const [confirmOpen, setConfirmOpen] = React.useState(false);
   const [pendingSave, setPendingSave] = React.useState(null);
   const [pendingSaveLabel, setPendingSaveLabel] = React.useState("");
+  const [resetConfirmOpen, setResetConfirmOpen] = React.useState(false);
   const location = useLocation();
   const hasInitializedDraft = React.useRef(false);
 
@@ -716,11 +717,7 @@ export default function LandingPageManager() {
               <Button
                 type="button"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold shadow-[0_16px_40px_rgba(15,76,129,0.24)] transition hover:translate-y-[-1px] hover:brightness-110 sm:w-auto"
-                onClick={async () => {
-                  await resetConfig();
-                  setDraftConfig(landingPageDefaults);
-                  toast.success("Site content reset to defaults");
-                }}
+                onClick={() => setResetConfirmOpen(true)}
               >
                 <RotateCcwIcon className="h-4 w-4" />
                 Reset defaults
@@ -819,7 +816,7 @@ export default function LandingPageManager() {
         <SectionCard id="home-hero" title="Hero" description="Edit the homepage hero slide deck." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, hero: draftConfig.hero })); toast.success("Hero saved!"); }, "Hero")} saveLabel="Update Hero">
           <div className="grid gap-4 lg:grid-cols-2">
             {(draftConfig.hero.slides ?? []).map((slide, index) => (
-              <div key={`${slide.kicker}-${index}`} className="rounded-2xl border border-border bg-muted/40 p-3 sm:p-4">
+              <div key={index} className="rounded-2xl border border-border bg-muted/40 p-3 sm:p-4">
                 <Field label={`Slide ${index + 1} kicker`}><TextInput value={slide.kicker} onChange={(e) => updateHeroSlide(index, "kicker", e.target.value)} /></Field>
                 <Field label={`Slide ${index + 1} title`}><TextInput value={slide.title} onChange={(e) => updateHeroSlide(index, "title", e.target.value)} /></Field>
                 <Field label={`Slide ${index + 1} subtitle`}><TextInput value={slide.subtitle} onChange={(e) => updateHeroSlide(index, "subtitle", e.target.value)} /></Field>
@@ -996,7 +993,7 @@ export default function LandingPageManager() {
         >
           <div className="grid gap-4 xl:grid-cols-2">
             {(draftConfig.hero.slides ?? []).map((slide, index) => (
-              <div key={`${slide.kicker}-${index}`} className="rounded-2xl border border-border bg-muted/40 p-4">
+              <div key={index} className="rounded-2xl border border-border bg-muted/40 p-4">
                 <div className="mb-4 overflow-hidden rounded-2xl border border-border">
                   <img src={slide.image} alt={slide.title} className="h-36 w-full object-cover" />
                 </div>
@@ -2646,6 +2643,29 @@ export default function LandingPageManager() {
             </AlertDialogCancel>
             <AlertDialogAction onClick={confirmSave}>
               Confirm update
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      <AlertDialog open={resetConfirmOpen} onOpenChange={setResetConfirmOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Reset to defaults?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This will permanently overwrite all your current content with the original default values. This cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={async () => {
+                await resetConfig();
+                setDraftConfig(landingPageDefaults);
+                toast.success("Site content reset to defaults");
+              }}
+            >
+              Yes, reset everything
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
