@@ -32,7 +32,7 @@ const UnderlinedHeading = ({
 
     return (
       <>
-        <span className={`relative z-10 inline-block ${textColorClassName} ${textClassName}`.trim()}>{head} </span>
+        <span className={`relative z-10 inline-block ${textColorClassName} ${textClassName}`.trim()}>{head}</span>{" "}
         <span className={`relative z-10 inline-block ${textColorClassName}`.trim()}>{tail}</span>
       </>
     );

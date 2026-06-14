@@ -250,7 +250,7 @@ const Header = () => {
                   end
                   className={({ isActive }) =>
                     [
-                      "inline-flex h-10 w-10 items-center justify-center rounded-full transition",
+                      "inline-flex h-10 w-10 items-center justify-center rounded-full transition focus:outline-none",
                       isActive ? "text-[#bb7422]" : "text-[#2b313a] hover:text-[#bb7422]",
                     ].join(" ")
                   }
@@ -263,7 +263,7 @@ const Header = () => {
               {publicMenuSections.map((section) => (
                 <li key={section.label}>
                   <DropdownMenu>
-                    <DropdownMenuTrigger className="inline-flex items-center gap-1 rounded-md px-1.5 py-2 text-[14px] font-medium uppercase tracking-[0.02em] text-[#2b313a] transition hover:text-[#bb7422]">
+                    <DropdownMenuTrigger className="inline-flex items-center gap-1 rounded-md px-1.5 py-2 text-[14px] font-medium uppercase tracking-[0.02em] text-[#2b313a] transition hover:text-[#bb7422] focus:outline-none">
                       <span>{section.label}</span>
                       <ChevronDown className="h-4 w-4 opacity-80" />
                     </DropdownMenuTrigger>
