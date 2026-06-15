@@ -58,30 +58,6 @@ export const landingPageDefaults = {
         description:
           "For multilateral agencies — translating complex programmes into credible, human-centred films that move institutional audiences.",
       },
-      {
-        image: hero3,
-        kicker: "Multilingual field production",
-        title: "English, French, and Pidgin.",
-        subtitle: "",
-        description:
-          "Our field production keeps stories accessible across audiences without losing the nuance of the original context.",
-      },
-      {
-        image: hero4,
-        kicker: "ESG & social impact storytelling",
-        title: "Stories that show responsibility.",
-        subtitle: "",
-        description:
-          "For private-sector actors operating in Africa — evidencing the social and environmental value of your work.",
-      },
-      {
-        image: profileHeroMountain,
-        kicker: "Investor-facing & donor-reporting films",
-        title: "Built to institutional standard.",
-        subtitle: "",
-        description:
-          "Productions built to the highest institutional standards — designed for the boardroom, the forum, and the funding decision.",
-      },
     ],
     primaryCtaLabel: "Start a conversation",
     primaryCtaHref: "/contact",

@@ -148,6 +148,9 @@ function normalizeConfig(config) {
     ? {
         ...config.hero,
         ...(config.hero.images ? { images: { ...config.hero.images } } : {}),
+        ...(Array.isArray(config.hero.slides)
+          ? { slides: config.hero.slides.slice(0, landingPageDefaults.hero.slides.length) }
+          : {}),
       }
     : null;
 

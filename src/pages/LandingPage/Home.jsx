@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown, Play } from "lucide-react";
 import { motion } from "framer-motion";
@@ -8,6 +8,58 @@ import { Badge } from "../../components/ui/badge";
 import Reveal from "../../components/ui/reveal";
 import { Marquee } from "../../components/LandingPage/magicui/marquee";
 import UnderlinedHeading from "../../components/LandingPage/UnderlinedHeading";
+
+function useTypewriter(text, { typeSpeed = 38, deleteSpeed = 18, pauseAfterType = 1800, pauseAfterDelete = 400 } = {}) {
+  const [displayed, setDisplayed] = useState("");
+  const containerRef = useRef(null);
+  const stateRef = useRef({ phase: "idle", index: 0 });
+  const timerRef = useRef(null);
+
+  useEffect(() => {
+    const tick = () => {
+      const s = stateRef.current;
+
+      if (s.phase === "typing") {
+        s.index += 1;
+        setDisplayed(text.slice(0, s.index));
+        if (s.index >= text.length) {
+          s.phase = "pause-after-type";
+          timerRef.current = setTimeout(() => { s.phase = "deleting"; tick(); }, pauseAfterType);
+          return;
+        }
+      } else if (s.phase === "deleting") {
+        s.index -= 1;
+        setDisplayed(text.slice(0, s.index));
+        if (s.index <= 0) {
+          s.phase = "pause-after-delete";
+          timerRef.current = setTimeout(() => { s.phase = "typing"; tick(); }, pauseAfterDelete);
+          return;
+        }
+      }
+
+      const delay = s.phase === "typing" ? typeSpeed : deleteSpeed;
+      timerRef.current = setTimeout(tick, delay);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && stateRef.current.phase === "idle") {
+          stateRef.current = { phase: "typing", index: 0 };
+          tick();
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => {
+      observer.disconnect();
+      clearTimeout(timerRef.current);
+    };
+  }, [text, typeSpeed, deleteSpeed, pauseAfterType, pauseAfterDelete]);
+
+  return { displayed, containerRef };
+}
 
 function FallbackImage({ src, fallback, alt, className, ...props }) {
   return (
@@ -25,8 +77,12 @@ function FallbackImage({ src, fallback, alt, className, ...props }) {
   );
 }
 
+const CONVICTION_TEXT =
+  "Africa's development story is worth billions. Most of it is never told well enough to unlock that value.";
+
 function Home() {
   const { config } = useLandingPageConfig();
+  const { displayed, containerRef: convictionRef } = useTypewriter(CONVICTION_TEXT, { typeSpeed: 38, deleteSpeed: 18, pauseAfterType: 1800, pauseAfterDelete: 400 });
   const homePage = config.homePage ?? landingPageDefaults.homePage;
   const hero = config.hero ?? landingPageDefaults.hero;
   const about = config.about ?? landingPageDefaults.about;
@@ -149,7 +205,7 @@ function Home() {
 
   return (
     <div className="overflow-hidden bg-[linear-gradient(180deg,#fffaf0_0%,#fcf6ea_28%,#f7f0e2_100%)] text-[#173145]">
-      <section className="relative min-h-[calc(100vh-140px)] overflow-hidden bg-[#091826] py-0 text-white">
+      <section className="relative min-h-[65vh] overflow-hidden bg-[#091826] py-0 text-white">
         <div className="absolute inset-0">
           <FallbackImage
             src={currentSlide.image}
@@ -160,7 +216,7 @@ function Home() {
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,15,0.38)_0%,rgba(8,10,15,0.56)_42%,rgba(8,10,15,0.82)_100%)]" />
         </div>
 
-        <div className="relative mx-auto flex min-h-[calc(100vh-140px)] max-w-7xl flex-col items-center justify-center px-5 py-10">
+        <div className="relative mx-auto flex min-h-[65vh] max-w-7xl flex-col items-center justify-center px-5 py-10">
           <Reveal className="max-w-5xl text-center">
             <p className="font-body text-[11px] font-semibold uppercase tracking-[0.34em] text-white/78">
               {currentSlide.kicker}
@@ -225,15 +281,15 @@ function Home() {
 
       <section
         id="conviction-strip"
-        className="bg-[#0a0c12] py-12 sm:py-14"
+        className="bg-[#bb7422] py-12 sm:py-14"
       >
         <div className="container">
-          <Reveal className="mx-auto max-w-3xl text-center">
-            <p className="font-heading text-2xl font-bold leading-snug tracking-[-0.03em] text-white sm:text-3xl lg:text-[36px]">
-              Africa's development story is worth billions.{" "}
-              <span className="text-[#1FA8DD]">Most of it is never told well enough to unlock that value.</span>
+          <div className="mx-auto max-w-3xl text-center" ref={convictionRef}>
+            <p className="text-2xl leading-snug text-white sm:text-3xl lg:text-[36px]" style={{ fontFamily: "'Special Elite', cursive" }}>
+              {displayed}
+              <span className="animate-pulse">|</span>
             </p>
-          </Reveal>
+          </div>
         </div>
       </section>
 
