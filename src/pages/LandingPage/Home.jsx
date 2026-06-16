@@ -1,5 +1,4 @@
 import React from "react";
-import heroVideo from "../../assets/img/OHI-video.mp4";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown, Play } from "lucide-react";
 import { motion } from "framer-motion";
@@ -150,7 +149,7 @@ function Home() {
             playsInline
             className="h-full w-full object-cover opacity-50"
           >
-            <source src={hero.videoUrl || heroVideo} type="video/mp4" />
+            {hero.videoUrl && <source src={hero.videoUrl} type="video/mp4" />}
           </video>
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,15,0.38)_0%,rgba(8,10,15,0.56)_42%,rgba(8,10,15,0.82)_100%)]" />
         </div>
