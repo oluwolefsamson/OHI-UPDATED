@@ -59,6 +59,7 @@ export const landingPageDefaults = {
           "For multilateral agencies — translating complex programmes into credible, human-centred films that move institutional audiences.",
       },
     ],
+    videoUrl: "",
     primaryCtaLabel: "Start a conversation",
     primaryCtaHref: "/contact",
     secondaryCtaLabel: "View our work",

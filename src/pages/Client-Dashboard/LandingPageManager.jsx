@@ -813,23 +813,25 @@ export default function LandingPageManager() {
       </SectionCard>
 
       <div className="space-y-6 min-w-0">
-        <SectionCard id="home-hero" title="Hero" description="Edit the homepage hero slide deck." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, hero: draftConfig.hero })); toast.success("Hero saved!"); }, "Hero")} saveLabel="Update Hero">
+        <SectionCard id="home-hero" title="Hero" description="Edit the homepage hero content. The hero displays a single slide over a video background — only Slide 1 is shown publicly." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, hero: draftConfig.hero })); toast.success("Hero saved!"); }, "Hero")} saveLabel="Update Hero">
           <div className="grid gap-4 lg:grid-cols-2">
-            {(draftConfig.hero.slides ?? []).map((slide, index) => (
+            {(draftConfig.hero.slides ?? []).slice(0, 1).map((slide, index) => (
               <div key={index} className="rounded-2xl border border-border bg-muted/40 p-3 sm:p-4">
-                <Field label={`Slide ${index + 1} kicker`}><TextInput value={slide.kicker} onChange={(e) => updateHeroSlide(index, "kicker", e.target.value)} /></Field>
-                <Field label={`Slide ${index + 1} title`}><TextInput value={slide.title} onChange={(e) => updateHeroSlide(index, "title", e.target.value)} /></Field>
-                <Field label={`Slide ${index + 1} subtitle`}><TextInput value={slide.subtitle} onChange={(e) => updateHeroSlide(index, "subtitle", e.target.value)} /></Field>
-                <Field label={`Slide ${index + 1} description`}><TextArea rows={4} value={slide.description} onChange={(e) => updateHeroSlide(index, "description", e.target.value)} /></Field>
-                <ImageField
-                  label={`Slide ${index + 1} image`}
-                  value={slide.image || ""}
-                  onChange={(e) =>
-                    handleImageUpload(e, (value) => updateHeroSlide(index, "image", value))
-                  }
-                />
+                <Field label="Kicker"><TextInput value={slide.kicker} onChange={(e) => updateHeroSlide(index, "kicker", e.target.value)} /></Field>
+                <Field label="Title"><TextInput value={slide.title} onChange={(e) => updateHeroSlide(index, "title", e.target.value)} /></Field>
+                <Field label="Subtitle"><TextInput value={slide.subtitle} onChange={(e) => updateHeroSlide(index, "subtitle", e.target.value)} /></Field>
+                <Field label="Description"><TextArea rows={4} value={slide.description} onChange={(e) => updateHeroSlide(index, "description", e.target.value)} /></Field>
               </div>
             ))}
+            <div className="rounded-2xl border border-border bg-muted/40 p-3 sm:p-4">
+              <Field label="Background video URL" hint="Paste a direct MP4 URL (e.g. from Cloudinary). Leave blank to use the default OHI-video.mp4.">
+                <TextInput
+                  value={draftConfig.hero.videoUrl ?? ""}
+                  placeholder="https://res.cloudinary.com/your-cloud/video/upload/..."
+                  onChange={(e) => updateHero("videoUrl", e.target.value)}
+                />
+              </Field>
+            </div>
           </div>
         </SectionCard>
 
@@ -982,61 +984,55 @@ export default function LandingPageManager() {
 
         <SectionCard
           id="hero-content"
-          title="Home Hero Slides"
-          description="Update the rotating home slides, buttons, and slide images."
+          title="Home Hero"
+          description="Edit the hero copy and content. The public hero shows Slide 1 only over a video background — there is no rotation."
           onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, hero: draftConfig.hero }));
             toast.success("Home hero saved!");
-            addNotification("Home hero slides, CTAs, and images have been updated.", "success", "Home Hero Saved");
-          }, "Home Hero Slides")}
+            addNotification("Home hero content has been updated.", "success", "Home Hero Saved");
+          }, "Home Hero")}
           saveLabel="Update Home Hero"
         >
           <div className="grid gap-4 xl:grid-cols-2">
-            {(draftConfig.hero.slides ?? []).map((slide, index) => (
+            {(draftConfig.hero.slides ?? []).slice(0, 1).map((slide, index) => (
               <div key={index} className="rounded-2xl border border-border bg-muted/40 p-4">
-                <div className="mb-4 overflow-hidden rounded-2xl border border-border">
-                  <img src={slide.image} alt={slide.title} className="h-36 w-full object-cover" />
-                </div>
                 <div className="grid gap-4">
-                  <Field label={`Slide ${index + 1} kicker`}>
+                  <Field label="Kicker">
                     <TextInput
                       value={slide.kicker}
                       onChange={(e) => updateHeroSlide(index, "kicker", e.target.value)}
                     />
                   </Field>
-                  <Field label={`Slide ${index + 1} title`}>
+                  <Field label="Title">
                     <TextInput
                       value={slide.title}
                       onChange={(e) => updateHeroSlide(index, "title", e.target.value)}
                     />
                   </Field>
-                  <Field label={`Slide ${index + 1} subtitle`}>
+                  <Field label="Subtitle">
                     <TextInput
                       value={slide.subtitle}
                       onChange={(e) => updateHeroSlide(index, "subtitle", e.target.value)}
                     />
                   </Field>
-                  <Field label={`Slide ${index + 1} description`}>
+                  <Field label="Description">
                     <TextArea
                       rows={4}
                       value={slide.description}
                       onChange={(e) => updateHeroSlide(index, "description", e.target.value)}
                     />
                   </Field>
-                  <ImageField
-                    label={`Slide ${index + 1} image`}
-                    value={slide.image}
-                    onChange={(e) =>
-                      handleImageUpload(e, (value) => updateHeroSlide(index, "image", value))
-                    }
-                  />
                 </div>
               </div>
             ))}
-            <div className="rounded-2xl border border-dashed border-border bg-background p-4 xl:col-span-2">
-              <p className="text-sm leading-6 text-muted-foreground">
-                The home page now reads from the slide deck above. The old title-line and stat fields were removed from the editor because the public hero no longer uses them.
-              </p>
+            <div className="rounded-2xl border border-border bg-muted/40 p-4 xl:col-span-2">
+              <Field label="Background video URL" hint="Paste a direct MP4 URL (e.g. from Cloudinary). Leave blank to use the default OHI-video.mp4.">
+                <TextInput
+                  value={draftConfig.hero.videoUrl ?? ""}
+                  placeholder="https://res.cloudinary.com/your-cloud/video/upload/..."
+                  onChange={(e) => updateHero("videoUrl", e.target.value)}
+                />
+              </Field>
             </div>
           </div>
         </SectionCard>

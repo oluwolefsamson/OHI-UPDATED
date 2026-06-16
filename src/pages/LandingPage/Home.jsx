@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
+import heroVideo from "../../assets/img/OHI-video.mp4";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronDown, Play } from "lucide-react";
 import { motion } from "framer-motion";
@@ -9,57 +10,6 @@ import Reveal from "../../components/ui/reveal";
 import { Marquee } from "../../components/LandingPage/magicui/marquee";
 import UnderlinedHeading from "../../components/LandingPage/UnderlinedHeading";
 
-function useTypewriter(text, { typeSpeed = 38, deleteSpeed = 18, pauseAfterType = 1800, pauseAfterDelete = 400 } = {}) {
-  const [displayed, setDisplayed] = useState("");
-  const containerRef = useRef(null);
-  const stateRef = useRef({ phase: "idle", index: 0 });
-  const timerRef = useRef(null);
-
-  useEffect(() => {
-    const tick = () => {
-      const s = stateRef.current;
-
-      if (s.phase === "typing") {
-        s.index += 1;
-        setDisplayed(text.slice(0, s.index));
-        if (s.index >= text.length) {
-          s.phase = "pause-after-type";
-          timerRef.current = setTimeout(() => { s.phase = "deleting"; tick(); }, pauseAfterType);
-          return;
-        }
-      } else if (s.phase === "deleting") {
-        s.index -= 1;
-        setDisplayed(text.slice(0, s.index));
-        if (s.index <= 0) {
-          s.phase = "pause-after-delete";
-          timerRef.current = setTimeout(() => { s.phase = "typing"; tick(); }, pauseAfterDelete);
-          return;
-        }
-      }
-
-      const delay = s.phase === "typing" ? typeSpeed : deleteSpeed;
-      timerRef.current = setTimeout(tick, delay);
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && stateRef.current.phase === "idle") {
-          stateRef.current = { phase: "typing", index: 0 };
-          tick();
-        }
-      },
-      { threshold: 0.4 }
-    );
-
-    if (containerRef.current) observer.observe(containerRef.current);
-    return () => {
-      observer.disconnect();
-      clearTimeout(timerRef.current);
-    };
-  }, [text, typeSpeed, deleteSpeed, pauseAfterType, pauseAfterDelete]);
-
-  return { displayed, containerRef };
-}
 
 function FallbackImage({ src, fallback, alt, className, ...props }) {
   return (
@@ -77,12 +27,8 @@ function FallbackImage({ src, fallback, alt, className, ...props }) {
   );
 }
 
-const CONVICTION_TEXT =
-  "Africa's development story is worth billions. Most of it is never told well enough to unlock that value.";
-
 function Home() {
   const { config } = useLandingPageConfig();
-  const { displayed, containerRef: convictionRef } = useTypewriter(CONVICTION_TEXT, { typeSpeed: 38, deleteSpeed: 18, pauseAfterType: 1800, pauseAfterDelete: 400 });
   const homePage = config.homePage ?? landingPageDefaults.homePage;
   const hero = config.hero ?? landingPageDefaults.hero;
   const about = config.about ?? landingPageDefaults.about;
@@ -101,8 +47,7 @@ function Home() {
   };
   const heroSlideFallbacks = landingPageDefaults.hero.slides.map((slide) => slide.image);
 
-  const [activeSlide, setActiveSlide] = useState(0);
-  const heroFrames = heroSlides;
+  const currentSlide = heroSlides[0];
   const cardItems = [
     {
       title: "Vision Statement",
@@ -174,15 +119,6 @@ function Home() {
     },
   ];
 
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActiveSlide((current) => (current + 1) % heroFrames.length);
-    }, 6500);
-
-    return () => window.clearInterval(timer);
-  }, [heroFrames.length]);
-
-  const currentSlide = heroFrames[activeSlide];
   const staggerContainer = {
     hidden: {},
     show: {
@@ -207,12 +143,15 @@ function Home() {
     <div className="overflow-hidden bg-[linear-gradient(180deg,#fffaf0_0%,#fcf6ea_28%,#f7f0e2_100%)] text-[#173145]">
       <section className="relative min-h-[65vh] overflow-hidden bg-[#091826] py-0 text-white">
         <div className="absolute inset-0">
-          <FallbackImage
-            src={currentSlide.image}
-            fallback={heroSlideFallbacks[0]}
-            alt={currentSlide.title}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
             className="h-full w-full object-cover opacity-50"
-          />
+          >
+            <source src={hero.videoUrl || heroVideo} type="video/mp4" />
+          </video>
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,15,0.38)_0%,rgba(8,10,15,0.56)_42%,rgba(8,10,15,0.82)_100%)]" />
         </div>
 
@@ -262,19 +201,6 @@ function Home() {
             </div>
           </Reveal>
 
-          <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-2">
-            {heroFrames.map((slide, index) => (
-              <button
-                key={`${slide.kicker}-${index}`}
-                type="button"
-                onClick={() => setActiveSlide(index)}
-                aria-label={`Go to slide ${index + 1}`}
-                className={`h-3 w-3 rounded-full transition ${
-                  index === activeSlide ? "bg-white" : "bg-white/35 hover:bg-white/60"
-                }`}
-              />
-            ))}
-          </div>
         </div>
 
       </section>
@@ -284,10 +210,9 @@ function Home() {
         className="bg-[#bb7422] py-12 sm:py-14"
       >
         <div className="container">
-          <div className="mx-auto max-w-3xl text-center" ref={convictionRef}>
-            <p className="text-2xl leading-snug text-white sm:text-3xl lg:text-[36px]" style={{ fontFamily: "'Special Elite', cursive" }}>
-              {displayed}
-              <span className="animate-pulse">|</span>
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-2xl leading-snug text-white sm:text-3xl lg:text-[36px]">
+              Africa's development story is worth billions. Most of it is never told well enough to unlock that value.
             </p>
           </div>
         </div>
