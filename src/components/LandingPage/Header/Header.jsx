@@ -263,8 +263,25 @@ const Header = () => {
               {publicMenuSections.map((section) => (
                 <li key={section.label}>
                   <DropdownMenu>
-                    <DropdownMenuTrigger className="inline-flex items-center gap-1 rounded-md px-1.5 py-2 text-[14px] font-medium uppercase tracking-[0.02em] text-[#2b313a] transition hover:text-[#bb7422] focus:outline-none">
-                      <span>{section.label}</span>
+                    <DropdownMenuTrigger className="group inline-flex items-center gap-1 rounded-md px-1.5 py-2 text-[14px] font-medium uppercase tracking-[0.02em] text-[#2b313a] transition hover:text-[#bb7422] focus:outline-none">
+                      <span className="relative inline-block">
+                        {section.label}
+                        <svg
+                          className="absolute -bottom-2 left-0 w-full opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                          viewBox="0 0 300 8"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M2 6 C60 2, 140 2, 298 6"
+                            stroke="#bb7422"
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                            fill="none"
+                          />
+                        </svg>
+                      </span>
                       <ChevronDown className="h-4 w-4 opacity-80" />
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-72 overflow-hidden p-0">
