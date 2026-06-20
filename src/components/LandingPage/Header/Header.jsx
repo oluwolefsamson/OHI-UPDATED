@@ -193,7 +193,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="relative z-50 bg-[#bb7422] text-white">
+      <div className="relative z-50 text-white" style={{ backgroundImage: "url('/header.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container flex h-11 items-center justify-between gap-4 text-sm">
           <div className="flex items-center gap-4">
             {socialLinks.map((item) => {
@@ -233,9 +233,10 @@ const Header = () => {
       </div>
 
       <header
-        className={`inset-x-0 z-40 border-b border-[#e9e0d1] bg-white shadow-[0_10px_24px_rgba(15,23,42,0.06)] ${
+        className={`inset-x-0 z-40 border-b border-[#e9e0d1] shadow-[0_10px_24px_rgba(15,23,42,0.06)] ${
           isPinned ? "fixed top-0" : "relative"
         }`}
+        style={{ backgroundImage: "url('/navlink-bg.png')", backgroundSize: "cover", backgroundPosition: "center" }}
       >
         <div className="container flex h-[96px] items-center justify-between gap-5">
           <Link to="/" className="shrink-0" aria-label="Go to home page">

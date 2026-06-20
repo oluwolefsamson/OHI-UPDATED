@@ -117,7 +117,7 @@ const BackgroundPage = () => {
       </section>
 
       {/* About OHI */}
-      <section className="bg-[#bb7422] py-16 sm:py-20">
+      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/yellow-bg.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container grid gap-6 lg:grid-cols-2">
           <div className="bg-white p-6 shadow-[0_4px_14px_rgba(15,23,42,0.06)] sm:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1FA8DD]">

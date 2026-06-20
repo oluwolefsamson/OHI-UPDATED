@@ -49,7 +49,7 @@ const ImpactPage = () => {
       }
     >
       {/* Visual proof */}
-      <section className="bg-white py-16 sm:py-20">
+      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg3.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <SectionHeader
             title={proof.title ?? "Why organisations invest in storytelling"}
@@ -94,7 +94,7 @@ const ImpactPage = () => {
       </section>
 
       {/* Payoff */}
-      <section className="bg-[#bb7422] py-16 sm:py-20">
+      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/africa-dev.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
           <div className="bg-[#0a0c12] p-6 text-white shadow-[0_10px_28px_rgba(15,23,42,0.12)] sm:p-8">
             <div className="flex items-center gap-3">

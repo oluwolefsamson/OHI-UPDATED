@@ -28,7 +28,7 @@ const ContactPage = () => {
         }
       />
 
-      <div className="bg-[#bb7422] py-16 sm:py-20">
+      <div className="py-16 sm:py-20" style={{ backgroundImage: "url('/yellow-bg.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <div className="bg-white p-6 shadow-[0_16px_40px_rgba(0,0,0,0.12)] sm:p-10 space-y-16">
             <div id="contact-form">

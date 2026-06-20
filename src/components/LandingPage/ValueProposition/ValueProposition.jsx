@@ -18,7 +18,8 @@ export default function ValueProposition() {
   return (
     <div
       id="approach"
-      className="relative isolate bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8"
+      className="relative isolate px-4 py-16 sm:px-6 sm:py-20 lg:px-8"
+      style={{ backgroundImage: "url('/white-bg2.png')", backgroundSize: "cover", backgroundPosition: "center" }}
     >
       <SectionHeader
         title={vp.title}

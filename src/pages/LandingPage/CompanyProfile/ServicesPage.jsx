@@ -94,7 +94,7 @@ const ServicesPage = () => {
       }
     >
       {/* Core services */}
-      <section className="bg-white py-16 sm:py-20">
+      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg1.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <SectionHeader
             title="Core services"
@@ -171,7 +171,7 @@ const ServicesPage = () => {
       </section>
 
       {/* Formats in practice */}
-      <section className="bg-[#bb7422] py-16 sm:py-20">
+      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/yellow-bg.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <SectionHeader
             title="Formats in practice"

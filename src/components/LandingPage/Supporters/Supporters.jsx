@@ -67,7 +67,7 @@ const LocalMarquee = ({
 
 const Supporters = () => {
   return (
-    <section className="relative my-14 overflow-hidden border-b border-[#a8611a] bg-[#bb7422] py-14">
+    <section className="relative my-14 overflow-hidden border-b border-[#a8611a] py-14" style={{ backgroundImage: "url('/africa-dev.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
       <div className="container relative">
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-body text-[11px] font-semibold uppercase tracking-[0.32em] text-white/80">

@@ -22,7 +22,7 @@ const OurPlatformsPage = () => {
         </div>
       }
     >
-      <section className="bg-[#bb7422] py-16 sm:py-20">
+      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/header.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container grid items-start gap-8 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <SectionHeader

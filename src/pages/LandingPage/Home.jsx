@@ -206,7 +206,8 @@ function Home() {
 
       <section
         id="conviction-strip"
-        className="bg-[#bb7422] py-12 sm:py-14"
+        className="py-12 sm:py-14"
+        style={{ backgroundImage: "url('/africa-dev.png')", backgroundSize: "cover", backgroundPosition: "center" }}
       >
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
@@ -217,7 +218,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="about" className="bg-white py-16 sm:py-20">
+      <section id="about" className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg1.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <Reveal className="overflow-hidden rounded-[18px] bg-white shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
@@ -260,7 +261,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="ohi-difference" className="bg-[linear-gradient(180deg,#d69547_0%,#cf8a3d_100%)] py-14 sm:py-16">
+      <section id="ohi-difference" className="py-14 sm:py-16" style={{ backgroundImage: "url('/yellow-bg.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <Reveal className="mx-auto max-w-3xl text-center text-white">
             <UnderlinedHeading
@@ -322,7 +323,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="heritage-collection" className="bg-white py-16 sm:py-20">
+      <section id="heritage-collection" className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg2.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <Reveal className="max-w-xl">
@@ -371,7 +372,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="support-ohi" className="bg-[linear-gradient(180deg,#e1b06d_0%,#d39a4c_100%)] py-4 text-[#3a2413]">
+      <section id="support-ohi" className="py-4 text-[#3a2413]" style={{ backgroundImage: "url('/header.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container flex flex-wrap items-center justify-center gap-4 text-center">
           <p className="text-[13px] font-semibold">
             {homePage.supporters.title}
@@ -389,7 +390,7 @@ function Home() {
         id="turn-programme-into-proof"
         className="relative overflow-hidden bg-cover bg-center py-16 text-white sm:py-20"
         style={{
-          backgroundImage: `linear-gradient(rgba(10,12,18,0.62), rgba(10,12,18,0.78)), url(${heroImages.hero4})`,
+          backgroundImage: "url('/story.png')",
         }}
       >
         <div className="container">
@@ -410,7 +411,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="leadership-storytellers" className="bg-white py-14 sm:py-16">
+      <section id="leadership-storytellers" className="py-14 sm:py-16" style={{ backgroundImage: "url('/white-bg3.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <Reveal className="overflow-hidden rounded-[10px] bg-white shadow-[0_12px_28px_rgba(15,23,42,0.12)]">
@@ -446,7 +447,15 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-white py-10 sm:py-14">
+      <section id="africa-story-banner" className="w-full overflow-hidden p-0 m-0">
+        <img
+          src="/section2.png"
+          alt="Telling Africa's Development Story"
+          className="w-full block object-cover"
+        />
+      </section>
+
+      <section className="py-10 sm:py-14" style={{ backgroundImage: "url('/white-bg2.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <div className="text-center">
             {homePage.programmes.eyebrow && (
@@ -494,7 +503,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-[linear-gradient(180deg,#e9b164_0%,#e1a156_100%)] py-12 sm:py-14">
+      <section className="py-12 sm:py-14" style={{ backgroundImage: "url('/africa-dev.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <Reveal className="mx-auto max-w-3xl text-center">
               <h2 className="text-2xl font-bold tracking-[-0.03em] text-white sm:text-[30px]">
@@ -548,7 +557,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="news-blog" className="bg-white py-14 sm:py-16">
+      <section id="news-blog" className="py-14 sm:py-16" style={{ backgroundImage: "url('/white-bg1.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <div className="flex items-end justify-between gap-4">
             <UnderlinedHeading
@@ -619,7 +628,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="ohi-video" className="relative overflow-hidden bg-[#111] py-0 text-white">
+      <section id="ohi-video" className="relative overflow-hidden py-0 text-white" style={{ backgroundImage: "url('/black-bg.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div
           className="bg-cover bg-center"
           style={{
@@ -657,7 +666,7 @@ function Home() {
           </div>
         </div>
 
-        <div className="bg-[#c98722] py-6">
+        <div className="py-6" style={{ backgroundImage: "url('/yellow-bg.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
           <div className="container">
             <div className="grid gap-4 text-center text-white sm:grid-cols-5">
               {[

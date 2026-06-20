@@ -77,7 +77,7 @@ const OurTeamPage = () => {
       }
     >
       {/* Executive Team */}
-      <section className="bg-white py-16 sm:py-20">
+      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg3.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <SectionHeader
             title="Executive Team"
@@ -93,7 +93,7 @@ const OurTeamPage = () => {
       </section>
 
       {/* Board of Trustees */}
-      <section className="bg-[#bb7422] py-16 sm:py-20">
+      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/yellow-bg.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <SectionHeader
             title="Board of Trustees"

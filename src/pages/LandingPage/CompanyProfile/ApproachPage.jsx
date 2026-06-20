@@ -58,7 +58,7 @@ const ApproachPage = () => {
       }
     >
       {/* How OHI works */}
-      <section className="bg-white py-16 sm:py-20">
+      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg2.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <SectionHeader
             title="How OHI works"
@@ -114,7 +114,7 @@ const ApproachPage = () => {
       </section>
 
       {/* DFI standards + deliverables */}
-      <section className="bg-[#bb7422] py-16 sm:py-20">
+      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/header.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="bg-[#0a0c12] p-6 text-white shadow-[0_10px_28px_rgba(15,23,42,0.12)] sm:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#F07F1A]">

@@ -58,7 +58,7 @@ const OurPartnersPage = () => {
       }
     >
       {/* Who we serve */}
-      <section className="bg-white py-16 sm:py-20">
+      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg1.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <SectionHeader
             title="Who we serve"
@@ -104,7 +104,7 @@ const OurPartnersPage = () => {
       </section>
 
       {/* Logo marquee */}
-      <section className="bg-[#bb7422] py-14 sm:py-16">
+      <section className="py-14 sm:py-16" style={{ backgroundImage: "url('/header.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <div className="overflow-hidden">
             <Marquee pauseOnHover className="[--duration:28s]">
@@ -117,7 +117,7 @@ const OurPartnersPage = () => {
       </section>
 
       {/* Client list */}
-      <section className="bg-white py-16 sm:py-20">
+      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg2.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <div className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] sm:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#F07F1A]">

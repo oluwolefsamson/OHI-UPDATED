@@ -76,7 +76,7 @@ const WhoWeServePage = () => {
       }
     >
       {/* Sector cards */}
-      <section className="bg-white py-16 sm:py-20">
+      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg3.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <SectionHeader
             title="Sectors OHI works with"
@@ -114,7 +114,7 @@ const WhoWeServePage = () => {
       </section>
 
       {/* Strengths + Capital-fluent */}
-      <section className="bg-[#bb7422] py-16 sm:py-20">
+      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/header.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] sm:p-8">
             <div className="flex items-center gap-3">
@@ -161,7 +161,7 @@ const WhoWeServePage = () => {
       </section>
 
       {/* Client list */}
-      <section className="bg-white py-16 sm:py-20">
+      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg1.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <div className="mb-6 flex items-center gap-3">
             <Users className="h-5 w-5 text-[#F07F1A]" />
