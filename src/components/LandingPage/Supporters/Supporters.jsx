@@ -18,11 +18,11 @@ const categories = [
 ];
 
 const LogoCard = ({ name, src }) => (
-  <div className="mx-2 flex h-[130px] w-44 shrink-0 items-center justify-center bg-[#3a4a6b]/60 p-5 transition duration-300 hover:bg-[#3a4a6b]/90">
+  <div className="mx-1 flex h-[80px] w-28 shrink-0 items-center justify-center bg-[#3a4a6b]/60 p-3 transition duration-300 hover:bg-[#3a4a6b]/90 sm:mx-2 sm:h-[130px] sm:w-44 sm:p-5">
     <img
       src={src}
       alt={name}
-      className="max-h-14 w-full object-contain grayscale opacity-70 transition duration-300 hover:grayscale-0 hover:opacity-100"
+      className="max-h-8 w-full object-contain grayscale opacity-70 transition duration-300 hover:grayscale-0 hover:opacity-100 sm:max-h-14"
     />
   </div>
 );
@@ -62,7 +62,7 @@ const CategorySection = ({ label, logos }) => (
 
 const Supporters = () => {
   return (
-    <section className="py-16" style={{ backgroundColor: "#0a1628" }}>
+    <section className="my-10 py-16" style={{ backgroundColor: "#0a1628" }}>
       <div className="container">
         {categories.map((cat) => (
           <CategorySection key={cat.label} label={cat.label} logos={cat.logos} />

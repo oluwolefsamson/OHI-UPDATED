@@ -156,7 +156,7 @@ function Home() {
 
         <div className="relative mx-auto flex min-h-[65vh] max-w-7xl flex-col items-center justify-center px-5 py-10">
           <Reveal className="max-w-5xl text-center">
-            <p className="font-body text-[11px] font-semibold uppercase tracking-[0.34em] text-white/78">
+            <p className="font-body hidden sm:block text-[11px] font-semibold uppercase tracking-[0.34em] text-white/78">
               {currentSlide.kicker}
             </p>
             <UnderlinedHeading
@@ -192,7 +192,7 @@ function Home() {
               </Link>
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] font-medium uppercase tracking-[0.2em] text-white/60">
+            <div className="mt-6 hidden sm:flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] font-medium uppercase tracking-[0.2em] text-white/60">
               <span className="text-white/40">Trusted by:</span>
               {["WFP", "EU", "IFRC", "Olam", "OFI", "Sun King", "API"].map((name) => (
                 <span key={name} className="text-white/75">{name}</span>
@@ -220,7 +220,7 @@ function Home() {
       <section id="about" className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg1.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-            <Reveal className="overflow-hidden rounded-[18px] bg-white shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
+            <Reveal className="overflow-hidden bg-white shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
               <FallbackImage
                 src={homePage.about.image ?? about.image}
                 fallback={landingPageDefaults.about.image}
