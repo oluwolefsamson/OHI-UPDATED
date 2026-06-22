@@ -206,8 +206,7 @@ function Home() {
 
       <section
         id="conviction-strip"
-        className="py-12 sm:py-14"
-        style={{ backgroundImage: "url('/africa-dev.png')", backgroundSize: "cover", backgroundPosition: "center" }}
+        className="py-12 sm:py-14 bg-[#1a2744]"
       >
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
@@ -261,7 +260,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="ohi-difference" className="py-14 sm:py-16" style={{ backgroundImage: "url('/yellow-bg.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <section id="ohi-difference" className="py-14 sm:py-16" style={{ backgroundImage: "url('/story.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <Reveal className="mx-auto max-w-3xl text-center text-white">
             <UnderlinedHeading
@@ -372,7 +371,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="support-ohi" className="py-4 text-[#3a2413]" style={{ backgroundImage: "url('/header.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <section id="support-ohi" className="py-4 bg-[#f59d21] text-[#3a2413]">
         <div className="container flex flex-wrap items-center justify-center gap-4 text-center">
           <p className="text-[13px] font-semibold">
             {homePage.supporters.title}
@@ -503,7 +502,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="py-12 sm:py-14" style={{ backgroundImage: "url('/africa-dev.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <section className="py-12 sm:py-14" style={{ backgroundImage: "url('/story.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <Reveal className="mx-auto max-w-3xl text-center">
               <h2 className="text-2xl font-bold tracking-[-0.03em] text-white sm:text-[30px]">

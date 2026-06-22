@@ -171,7 +171,7 @@ const ServicesPage = () => {
       </section>
 
       {/* Formats in practice */}
-      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/yellow-bg.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/story.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <SectionHeader
             title="Formats in practice"

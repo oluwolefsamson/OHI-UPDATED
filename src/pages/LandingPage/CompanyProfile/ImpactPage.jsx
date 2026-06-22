@@ -94,7 +94,7 @@ const ImpactPage = () => {
       </section>
 
       {/* Payoff */}
-      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/africa-dev.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/story.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
           <div className="bg-[#0a0c12] p-6 text-white shadow-[0_10px_28px_rgba(15,23,42,0.12)] sm:p-8">
             <div className="flex items-center gap-3">

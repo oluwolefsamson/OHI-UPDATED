@@ -93,7 +93,7 @@ const OurTeamPage = () => {
       </section>
 
       {/* Board of Trustees */}
-      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/yellow-bg.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/story.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <SectionHeader
             title="Board of Trustees"

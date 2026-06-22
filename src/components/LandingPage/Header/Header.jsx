@@ -193,7 +193,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="relative z-50 text-white" style={{ backgroundImage: "url('/header.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <div className="relative z-50 bg-[#f59d21] text-white">
         <div className="container flex h-11 items-center justify-between gap-4 text-sm">
           <div className="flex items-center gap-4">
             {socialLinks.map((item) => {

@@ -3,104 +3,70 @@ import ifrcLogo from "../../../assets/img/International_Federation_of_Red_Cross_
 import corafLogo from "../../../assets/img/logo-coraf.png";
 import sunKingLogo from "../../../assets/img/Sun-King_New_Logo-02.png";
 import wfpLogo from "../../../assets/img/wfp-logo-extended-blue-en.png";
-import UnderlinedHeading from "../UnderlinedHeading";
-import { cn } from "../../../lib/utils";
 
-const supporterLogos = [
+const allLogos = [
   { name: "IFRC", src: ifrcLogo },
-  { name: "CORAF", src: corafLogo, key: "coraf-1" },
-  { name: "WFP", src: wfpLogo },
+  { name: "CORAF", src: corafLogo },
   { name: "Sun King", src: sunKingLogo },
-  { name: "WFP Extended", src: wfpLogo },
-  { name: "CORAF", src: corafLogo, key: "coraf-2" },
+  { name: "WFP", src: wfpLogo },
 ];
 
-const SupporterCard = ({ name, src }) => (
-  <div className="group flex h-24 w-44 shrink-0 items-center justify-center border border-[#ead9c0] bg-[linear-gradient(180deg,#fffdf8_0%,#fff6ea_100%)] px-6 shadow-[0_12px_30px_rgba(15,23,42,0.06)] transition duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(15,23,42,0.1)]">
+const categories = [
+  { label: "Consumer & Corporate Clients", logos: allLogos },
+  { label: "Social Impact / Sustainability Clients", logos: allLogos },
+  { label: "Public Sector Clients", logos: allLogos },
+];
+
+const LogoCard = ({ name, src }) => (
+  <div className="mx-2 flex h-[130px] w-44 shrink-0 items-center justify-center bg-[#3a4a6b]/60 p-5 transition duration-300 hover:bg-[#3a4a6b]/90">
     <img
       src={src}
       alt={name}
-      className="max-h-12 w-full object-contain opacity-90 transition duration-300 group-hover:opacity-100"
+      className="max-h-14 w-full object-contain grayscale opacity-70 transition duration-300 hover:grayscale-0 hover:opacity-100"
     />
   </div>
 );
 
-const LocalMarquee = ({
-  className,
-  reverse = false,
-  pauseOnHover = false,
-  children,
-  vertical = false,
-  repeat = 4,
-  ...props
-}) => {
+const LogoMarquee = ({ logos }) => {
+  const repeated = [...logos, ...logos, ...logos, ...logos, ...logos];
   return (
-    <div
-      {...props}
-      className={cn(
-        "group flex overflow-hidden p-2 [--duration:40s] [--gap:1rem] [gap:var(--gap)]",
-        {
-          "flex-row": !vertical,
-          "flex-col": vertical,
-        },
-        className
-      )}
-    >
-      {Array(repeat)
-        .fill(0)
-        .map((_, i) => (
-          <div
-            key={i}
-            className={cn("flex shrink-0 justify-around [gap:var(--gap)]", {
-              "animate-marquee flex-row": !vertical,
-              "animate-marquee-vertical flex-col": vertical,
-              "group-hover:[animation-play-state:paused]": pauseOnHover,
-              "[animation-direction:reverse]": reverse,
-            })}
-          >
-            {children}
-          </div>
-        ))}
+    <div className="group flex overflow-hidden [--duration:40s] [--gap:0.5rem]">
+      {[0, 1].map((i) => (
+        <div
+          key={i}
+          className="flex shrink-0 animate-marquee [gap:var(--gap)] group-hover:[animation-play-state:paused]"
+        >
+          {repeated.map((logo, index) => (
+            <LogoCard key={`${i}-${logo.name}-${index}`} name={logo.name} src={logo.src} />
+          ))}
+        </div>
+      ))}
     </div>
   );
 };
 
+const CategorySection = ({ label, logos }) => (
+  <div className="mb-14">
+    <div className="mb-7 flex items-center gap-5">
+      <h2 className="shrink-0 text-xl font-bold text-white">{label}</h2>
+      <div className="h-[2px] flex-1 bg-[#f59d21]" />
+    </div>
+    <div className="relative overflow-hidden">
+      <LogoMarquee logos={logos} />
+
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#0a1628] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#0a1628] to-transparent" />
+    </div>
+  </div>
+);
+
 const Supporters = () => {
   return (
-    <section className="relative my-14 overflow-hidden border-b border-[#a8611a] py-14" style={{ backgroundImage: "url('/africa-dev.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
-      <div className="container relative">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="font-body text-[11px] font-semibold uppercase tracking-[0.32em] text-white/80">
-            Trusted network
-          </p>
-          <UnderlinedHeading
-            as="h2"
-            className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-white sm:text-[38px]"
-            textClassName="font-display"
-            textColorClassName="text-white"
-            showBorder={false}
-            patternClassName="hidden"
-          >
-            Our Partners / Supporters
-          </UnderlinedHeading>
-          <p className="font-body mt-4 text-sm leading-7 text-white/85 sm:text-base">
-            Organizations and institutions that help OHI amplify credible stories, build trust, and extend impact.
-          </p>
-        </div>
-
-        <div className="relative mt-10 flex w-full items-center justify-center overflow-hidden rounded-[32px] bg-white/12 py-6">
-          <LocalMarquee pauseOnHover className="[--duration:24s] px-2 py-2">
-            {supporterLogos.map((logo, index) => (
-              <SupporterCard
-                key={logo.key ?? `${logo.name}-${index}`}
-                name={logo.name}
-                src={logo.src}
-              />
-            ))}
-          </LocalMarquee>
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#bb7422] to-transparent sm:w-36" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#bb7422] to-transparent sm:w-36" />
-        </div>
+    <section className="py-16" style={{ backgroundColor: "#0a1628" }}>
+      <div className="container">
+        {categories.map((cat) => (
+          <CategorySection key={cat.label} label={cat.label} logos={cat.logos} />
+        ))}
       </div>
     </section>
   );

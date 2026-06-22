@@ -103,20 +103,7 @@ const OurPartnersPage = () => {
         </div>
       </section>
 
-      {/* Logo marquee */}
-      <section className="py-14 sm:py-16" style={{ backgroundImage: "url('/header.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
-        <div className="container">
-          <div className="overflow-hidden">
-            <Marquee pauseOnHover className="[--duration:28s]">
-              {partnerLogos.map((partner) => (
-                <LogoCard key={partner.id} logo={partner.logo} name={partner.name} />
-              ))}
-            </Marquee>
-          </div>
-        </div>
-      </section>
-
-      {/* Client list */}
+{/* Client list */}
       <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg2.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <div className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] sm:p-8">

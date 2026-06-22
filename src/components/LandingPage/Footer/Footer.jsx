@@ -75,7 +75,7 @@ const Footer = () => {
   }));
 
   return (
-    <footer className="border-t border-[#b96d1d] bg-[#141211] text-white">
+    <footer className="bg-black text-white">
       <div className="container py-14">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.8fr_0.95fr_0.95fr]">
           <div className="max-w-sm">

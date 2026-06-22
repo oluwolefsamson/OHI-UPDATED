@@ -218,7 +218,7 @@ const AboutPage = () => {
       </section>
 
       {/* Closing CTA */}
-      <section className="py-14 sm:py-16" style={{ backgroundImage: "url('/africa-dev.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <section className="py-14 sm:py-16" style={{ backgroundImage: "url('/story.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <SectionHeader
             title={close.title ?? "A multilingual team fluent in English, French, and Pidgin"}
