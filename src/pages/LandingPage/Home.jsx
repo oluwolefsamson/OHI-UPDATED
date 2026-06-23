@@ -206,7 +206,8 @@ function Home() {
 
       <section
         id="conviction-strip"
-        className="py-12 sm:py-14 bg-[#1a2744]"
+        className="py-12 sm:py-14"
+        style={{ backgroundImage: "url('/side-blue.png')", backgroundSize: "cover", backgroundPosition: "center" }}
       >
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
@@ -217,7 +218,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="about" className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg1.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <section id="about" className="py-16 sm:py-20 bg-white">
         <div className="container">
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <Reveal className="overflow-hidden bg-white shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
@@ -322,7 +323,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="heritage-collection" className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg2.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <section id="heritage-collection" className="py-16 sm:py-20 bg-white">
         <div className="container">
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <Reveal className="max-w-xl">
@@ -410,7 +411,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="leadership-storytellers" className="py-14 sm:py-16" style={{ backgroundImage: "url('/white-bg3.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <section id="leadership-storytellers" className="py-14 sm:py-16 bg-white">
         <div className="container">
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <Reveal className="overflow-hidden rounded-[10px] bg-white shadow-[0_12px_28px_rgba(15,23,42,0.12)]">
@@ -454,7 +455,7 @@ function Home() {
         />
       </section>
 
-      <section className="py-10 sm:py-14" style={{ backgroundImage: "url('/white-bg2.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <section className="py-10 sm:py-14 bg-white">
         <div className="container">
           <div className="text-center">
             {homePage.programmes.eyebrow && (
@@ -556,7 +557,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="news-blog" className="py-14 sm:py-16" style={{ backgroundImage: "url('/white-bg1.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <section id="news-blog" className="py-14 sm:py-16 bg-white">
         <div className="container">
           <div className="flex items-end justify-between gap-4">
             <UnderlinedHeading
@@ -665,7 +666,7 @@ function Home() {
           </div>
         </div>
 
-        <div className="py-6" style={{ backgroundImage: "url('/yellow-bg.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+        <div className="py-6 bg-[#f59d21]">
           <div className="container">
             <div className="grid gap-4 text-center text-white sm:grid-cols-5">
               {[
