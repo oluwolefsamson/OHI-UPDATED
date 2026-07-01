@@ -1,8 +1,10 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { ArrowRight, ClipboardList, Handshake, Rocket, WalletCards } from "lucide-react";
 import { Link } from "react-router-dom";
 import ProfilePageShell from "../../../components/LandingPage/Profile/ProfilePageShell";
 import SectionHeader from "../../../components/LandingPage/SectionHeader";
+import Reveal from "../../../components/ui/reveal";
 import { useLandingPageConfig } from "../../../context/LandingPageConfigContext";
 import { landingPageDefaults } from "../../../data/landingPageDefaults";
 import approachVisual from "../../../assets/images/Gallery/gallery-06.jpeg";
@@ -28,6 +30,15 @@ const ApproachPage = () => {
   const workingStyle = approachPage.workingStyle ?? landingPageDefaults.approachPage.workingStyle;
   const deliverables = approachPage.deliverables ?? landingPageDefaults.approachPage.deliverables;
   const deliverableItems = deliverables.items ?? [];
+
+  const staggerContainer = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+  };
+  const staggerItem = {
+    hidden: { opacity: 0, y: 22, scale: 0.98 },
+    show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+  };
 
   return (
     <ProfilePageShell
@@ -59,7 +70,7 @@ const ApproachPage = () => {
           />
 
           <div className="mt-10 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-            <div className="flex flex-col justify-center">
+            <Reveal x={-30} className="flex flex-col justify-center">
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#F07F1A]">
                 How we work
               </p>
@@ -69,23 +80,30 @@ const ApproachPage = () => {
               <p className="mt-4 text-base leading-8 text-[#4e5a67]">
                 {howWeWork.body2 ?? "From there, we shape a narrative concept and action plan, align on scope and budget, and deliver institution-grade storytelling from field to final cut — keeping every stage aligned with your reporting and investment goals."}
               </p>
-            </div>
+            </Reveal>
 
-            <div className="overflow-hidden bg-white shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
+            <Reveal x={30} className="overflow-hidden bg-white shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
               <img
                 src={approachVisual}
                 alt="Production workflow visual"
-                className="h-[400px] w-full object-cover sm:h-[460px]"
+                className="h-[400px] w-full object-cover sm:h-[460px] transition duration-500 hover:scale-105"
               />
-            </div>
+            </Reveal>
           </div>
 
           {/* 4-step cards */}
-          <div className="mt-12 grid gap-4 lg:grid-cols-4">
+          <motion.div
+            className="mt-12 grid gap-4 lg:grid-cols-4"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+          >
             {steps.map((step, index) => (
-              <article
+              <motion.article
                 key={step.title}
-                className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)]"
+                variants={staggerItem}
+                className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] transition-transform duration-300 hover:-translate-y-1"
               >
                 <div className="flex items-center justify-between">
                   <step.icon className="h-5 w-5 text-[#1FA8DD]" />
@@ -99,16 +117,16 @@ const ApproachPage = () => {
                 <p className="mt-3 text-sm leading-6 text-[#4e5a67]">
                   {step.description}
                 </p>
-              </article>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* DFI standards + deliverables */}
       <section className="py-16 sm:py-20 bg-[#f59d21]">
         <div className="container grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="bg-[#0a0c12] p-6 text-white shadow-[0_10px_28px_rgba(15,23,42,0.12)] sm:p-8">
+          <Reveal x={-30} className="bg-[#0a0c12] p-6 text-white shadow-[0_10px_28px_rgba(15,23,42,0.12)] sm:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#F07F1A]">
               {workingStyle.label ?? "Working style"}
             </p>
@@ -118,9 +136,9 @@ const ApproachPage = () => {
             <p className="mt-4 text-sm leading-7 text-white/80">
               {workingStyle.description ?? "The profile notes a project management approach that aligns with communication standards expected by development partners, DFIs, and institutional teams."}
             </p>
-          </div>
+          </Reveal>
 
-          <div className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] sm:p-8">
+          <Reveal x={30} className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] sm:p-8">
             <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
               {deliverables.label ?? "Deliverables"}
             </p>
@@ -139,7 +157,7 @@ const ApproachPage = () => {
                 {deliverables.ctaLabel ?? "View all services"} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
     </ProfilePageShell>

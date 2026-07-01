@@ -11,7 +11,9 @@
       "Bash(ls /c/Users/PC/AppData/Roaming/npm/node_modules/ 2>/dev/null | grep -i \"puppeteer\\\\|playwright\\\\|chrome\" | head -5)",
       "Read(//c/Users/PC/AppData/Roaming/npm/node_modules//**)",
       "PowerShell(Get-Command msedge, chrome, chromium 2>$null)",
-      "Bash(npm init *)"
+      "Bash(npm init *)",
+      "Bash(node -e ' *)",
+      "Bash(npx vite *)"
     ]
   }
 }

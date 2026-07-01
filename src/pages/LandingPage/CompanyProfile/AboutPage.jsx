@@ -1,8 +1,10 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, BadgeCheck, HeartHandshake, Sparkles } from "lucide-react";
 import ProfilePageShell from "../../../components/LandingPage/Profile/ProfilePageShell";
 import SectionHeader from "../../../components/LandingPage/SectionHeader";
+import Reveal from "../../../components/ui/reveal";
 import { useLandingPageConfig } from "../../../context/LandingPageConfigContext";
 import aboutHeroImage from "../../../assets/images/profile-hero-mountain.jpg";
 import storyVisual from "../../../assets/images/Gallery/gallery-11.jpeg";
@@ -46,6 +48,15 @@ const AboutPage = () => {
     { value: "95%", label: "Repeat-client rate" },
   ];
 
+  const staggerContainer = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+  };
+  const staggerItem = {
+    hidden: { opacity: 0, y: 22, scale: 0.98 },
+    show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+  };
+
   return (
     <ProfilePageShell
       eyebrow={hero.eyebrow ?? "OHI profile"}
@@ -71,7 +82,7 @@ const AboutPage = () => {
       <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg1.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-            <div className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] sm:p-8">
+            <Reveal x={-30} className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] sm:p-8">
               <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
                 {intro.aboutLabel ?? "About OHI"}
               </p>
@@ -113,9 +124,9 @@ const AboutPage = () => {
                   {intro.ctaSecondaryLabel ?? "Start a conversation"}
                 </Link>
               </div>
-            </div>
+            </Reveal>
 
-            <div className="space-y-4">
+            <Reveal x={30} className="space-y-4">
               <div className="overflow-hidden bg-white shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
                 <img
                   src={intro.image ?? storyVisual}
@@ -136,7 +147,7 @@ const AboutPage = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -148,9 +159,15 @@ const AboutPage = () => {
             title={difference.title ?? "The OHI difference"}
             description={difference.description ?? "A sharper institutional story layer that makes the case for credibility, trust, and strategic visibility."}
           />
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
+          <motion.div
+            className="mt-10 grid gap-4 md:grid-cols-3"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+          >
             {differencePrinciples.map((item) => (
-              <div key={item.title} className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
+              <motion.div key={item.title} variants={staggerItem} className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] transition-transform duration-300 hover:-translate-y-1">
                 <div className="flex h-14 w-14 items-center justify-center bg-[#fff4ec] text-[#F07F1A]">
                   <item.icon className="h-7 w-7" />
                 </div>
@@ -160,9 +177,9 @@ const AboutPage = () => {
                 <p className="mt-3 text-sm leading-6 text-[#4e5a67]">
                   {item.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -170,7 +187,7 @@ const AboutPage = () => {
       <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg2.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <div className="grid gap-8 lg:grid-cols-[1fr_1.05fr]">
-            <div className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] sm:p-8">
+            <Reveal x={-30} className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] sm:p-8">
               <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
                 {snapshot.label ?? "OHI at a glance"}
               </p>
@@ -192,9 +209,9 @@ const AboutPage = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </Reveal>
 
-            <div className="bg-[#0a0c12] p-6 text-white shadow-[0_10px_28px_rgba(15,23,42,0.12)] sm:p-8">
+            <Reveal x={30} className="bg-[#0a0c12] p-6 text-white shadow-[0_10px_28px_rgba(15,23,42,0.12)] sm:p-8">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/60">
                 {snapshot.missionTitle ?? "Mission & vision"}
               </p>
@@ -212,7 +229,7 @@ const AboutPage = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -228,7 +245,7 @@ const AboutPage = () => {
             descriptionClassName="text-white/80"
             showBorder={false}
           />
-          <div className="mt-8 bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
+          <Reveal className="mt-8 bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
             <p className="text-sm leading-7 text-[#4e5a67]">
               {close.body ?? "OHI is ready to turn your next project, campaign, or report into a story that decision-makers can trust and act on."}
             </p>
@@ -240,7 +257,7 @@ const AboutPage = () => {
                 {close.ctaLabel ?? "Start a conversation"} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
     </ProfilePageShell>

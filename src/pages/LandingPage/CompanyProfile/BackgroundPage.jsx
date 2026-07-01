@@ -1,8 +1,10 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import ProfilePageShell from "../../../components/LandingPage/Profile/ProfilePageShell";
 import SectionHeader from "../../../components/LandingPage/SectionHeader";
+import Reveal from "../../../components/ui/reveal";
 import { useLandingPageConfig } from "../../../context/LandingPageConfigContext";
 import ourStoryImage from "../../../assets/images/our-story.jpeg";
 import founderImage from "../../../assets/images/Gallery/gallery-09.jpeg";
@@ -13,6 +15,15 @@ const BackgroundPage = () => {
   const { config } = useLandingPageConfig();
   const backgroundPage = config.backgroundPage ?? {};
   const hero = backgroundPage.hero ?? {};
+
+  const staggerContainer = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+  };
+  const staggerItem = {
+    hidden: { opacity: 0, y: 24, scale: 0.98 },
+    show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+  };
 
   return (
     <ProfilePageShell
@@ -37,7 +48,7 @@ const BackgroundPage = () => {
       <section className="bg-[#f8f9fb] py-16 sm:py-20">
         <div className="container">
           <div className="grid items-start gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-            <div>
+            <Reveal x={-30}>
               <SectionHeader
                 title="A Word from the Founder"
                 description="Fombang Banns N. · Founder & CEO, Olympian House International · Founded 2015"
@@ -76,42 +87,48 @@ const BackgroundPage = () => {
                   Meet the team <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
-            </div>
+            </Reveal>
 
-            <div className="flex flex-col gap-3">
-              <div className="relative overflow-hidden shadow-[0_16px_40px_rgba(15,23,42,0.10)] min-h-[200px] sm:min-h-[220px]">
+            <motion.div
+              className="flex flex-col gap-3"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.1 }}
+            >
+              <motion.div variants={staggerItem} className="relative overflow-hidden shadow-[0_16px_40px_rgba(15,23,42,0.10)] min-h-[200px] sm:min-h-[220px]">
                 <img
                   src={ourStoryImage}
                   alt="OHI background visual"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full object-cover transition duration-500 hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,15,0.04)_0%,rgba(8,10,15,0.22)_100%)]" />
-              </div>
-              <div className="relative overflow-hidden shadow-[0_16px_40px_rgba(15,23,42,0.10)] min-h-[200px] sm:min-h-[220px]">
+              </motion.div>
+              <motion.div variants={staggerItem} className="relative overflow-hidden shadow-[0_16px_40px_rgba(15,23,42,0.10)] min-h-[200px] sm:min-h-[220px]">
                 <img
                   src={founderImage}
                   alt="OHI founder visual"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full object-cover transition duration-500 hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,15,0.04)_0%,rgba(8,10,15,0.22)_100%)]" />
-              </div>
-              <div className="relative overflow-hidden shadow-[0_16px_40px_rgba(15,23,42,0.10)] min-h-[200px] sm:min-h-[220px]">
+              </motion.div>
+              <motion.div variants={staggerItem} className="relative overflow-hidden shadow-[0_16px_40px_rgba(15,23,42,0.10)] min-h-[200px] sm:min-h-[220px]">
                 <img
                   src={founderImage2}
                   alt="OHI team visual"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full object-cover transition duration-500 hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,15,0.04)_0%,rgba(8,10,15,0.22)_100%)]" />
-              </div>
-              <div className="relative overflow-hidden shadow-[0_16px_40px_rgba(15,23,42,0.10)] min-h-[200px] sm:min-h-[220px]">
+              </motion.div>
+              <motion.div variants={staggerItem} className="relative overflow-hidden shadow-[0_16px_40px_rgba(15,23,42,0.10)] min-h-[200px] sm:min-h-[220px]">
                 <img
                   src={founderImage3}
                   alt="OHI story visual"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full object-cover transition duration-500 hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,15,0.04)_0%,rgba(8,10,15,0.22)_100%)]" />
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -119,7 +136,7 @@ const BackgroundPage = () => {
       {/* About OHI */}
       <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/story.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container grid gap-6 lg:grid-cols-2">
-          <div className="bg-white p-6 shadow-[0_4px_14px_rgba(15,23,42,0.06)] sm:p-8">
+          <Reveal x={-30} className="bg-white p-6 shadow-[0_4px_14px_rgba(15,23,42,0.06)] sm:p-8">
             <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
               Our foundation
             </p>
@@ -129,9 +146,9 @@ const BackgroundPage = () => {
             <p className="mt-4 text-sm leading-7 text-[#4e5a67]">
               OHI was established in 2015 in Cameroon with a focus on documentary production, strategic communication, and institutional visibility for development and investment-focused organizations across Africa.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="bg-[#0a0c12] p-6 text-white shadow-[0_4px_14px_rgba(15,23,42,0.12)] sm:p-8">
+          <Reveal x={30} className="bg-[#0a0c12] p-6 text-white shadow-[0_4px_14px_rgba(15,23,42,0.12)] sm:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#F07F1A]">
               What drives us
             </p>
@@ -141,7 +158,7 @@ const BackgroundPage = () => {
             <p className="mt-4 text-sm leading-7 text-white/80">
               A 95% repeat-client rate and a growing roster of institutional partners across multilateral, government, and private-sector audiences. The work is shaped by a belief that Africa's development narrative deserves to be told well enough to unlock the capital and credibility it merits.
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
     </ProfilePageShell>

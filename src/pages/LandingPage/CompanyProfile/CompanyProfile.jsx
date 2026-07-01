@@ -1,6 +1,8 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { ArrowRight, BriefcaseBusiness, Handshake, Image, MapPinned, ShieldCheck, Sparkles, Target, TrendingUp, Users } from "lucide-react";
 import { Link } from "react-router-dom";
+import Reveal from "../../../components/ui/reveal";
 import ProfilePageShell from "../../../components/LandingPage/Profile/ProfilePageShell";
 import Brochure from "../../../components/Brochure/Brochure";
 import SectionHeader from "../../../components/LandingPage/SectionHeader";
@@ -60,6 +62,15 @@ const CompanyProfile = () => {
   const footprintConfig = companyProfile.footprint ?? {};
   const portfolioConfig = companyProfile.portfolio ?? {};
 
+  const staggerContainer = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+  };
+  const staggerItem = {
+    hidden: { opacity: 0, y: 22, scale: 0.98 },
+    show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+  };
+
   return (
     <ProfilePageShell
       title={hero.title ?? "Company Overview"}
@@ -94,24 +105,30 @@ const CompanyProfile = () => {
               {difference.description ?? "OHI is not positioning itself as a generic production shop. The value is strategic visibility built for development, investor, and institutional audiences."}
             </p>
           </div>
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
+          <motion.div
+            className="mt-10 grid gap-4 md:grid-cols-3"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+          >
             {(difference.points ?? [
               "We translate complex programmes into decision-ready communication.",
               "We work in the language of institutions, not campaign slogans.",
               "We pair regional delivery with proof, governance, and trust signals.",
             ]).map((item) => (
-              <div key={item} className="bg-white p-5 text-sm leading-6 text-[#4e5a67] shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
+              <motion.div key={item} variants={staggerItem} className="bg-white p-5 text-sm leading-6 text-[#4e5a67] shadow-[0_10px_28px_rgba(15,23,42,0.08)] transition-transform duration-300 hover:-translate-y-1">
                 {item}
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Profile at a glance */}
       <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg1.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] sm:p-8">
+          <Reveal x={-30} className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] sm:p-8">
             <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
               Profile at a glance
             </p>
@@ -154,9 +171,9 @@ const CompanyProfile = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </Reveal>
 
-          <div className="bg-[#0a0c12] p-6 text-white shadow-[0_10px_28px_rgba(15,23,42,0.12)] sm:p-8">
+          <Reveal x={30} className="bg-[#0a0c12] p-6 text-white shadow-[0_10px_28px_rgba(15,23,42,0.12)] sm:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#F07F1A]">
               What makes it stronger
             </p>
@@ -189,7 +206,7 @@ const CompanyProfile = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -204,12 +221,18 @@ const CompanyProfile = () => {
             textColorClassName="text-white"
             descriptionClassName="text-white/80"
           />
-          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <motion.div
+            className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+          >
             {profilePages.map((page, index) => (
+              <motion.div key={page.path} variants={staggerItem}>
               <Link
-                key={page.path}
                 to={page.path}
-                className="group bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] transition hover:-translate-y-0.5 hover:bg-[#0a0c12] hover:shadow-[0_18px_40px_rgba(0,0,0,0.3)]"
+                className="group block bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] transition hover:-translate-y-0.5 hover:bg-[#0a0c12] hover:shadow-[0_18px_40px_rgba(0,0,0,0.3)]"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex h-10 w-10 items-center justify-center bg-[#f8f9fb] text-[#2e3135] transition group-hover:bg-white/20 group-hover:text-white">
@@ -229,8 +252,9 @@ const CompanyProfile = () => {
                   Explore <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </div>
               </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -244,14 +268,20 @@ const CompanyProfile = () => {
             textColorClassName="text-white"
             descriptionClassName="text-white/75"
           />
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
+          <motion.div
+            className="mt-10 grid gap-4 md:grid-cols-3"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+          >
             {(footprintConfig.items ?? footprint).map((item) => (
-              <div key={item} className="bg-white p-5 shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
+              <motion.div key={item} variants={staggerItem} className="bg-white p-5 shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#F07F1A]">Coverage</p>
                 <p className="mt-3 text-sm leading-6 text-[#4e5a67]">{item}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -263,9 +293,15 @@ const CompanyProfile = () => {
             description={portfolioConfig.description ?? "A highlighted selection that shows how OHI turns development, public-sector, and impact work into clear visual stories."}
             className="max-w-4xl"
           />
-          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <motion.div
+            className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+          >
             {(portfolioConfig.projects ?? portfolioProjects).map((project) => (
-              <article key={project.title} className="group overflow-hidden bg-white shadow-[0_10px_28px_rgba(15,23,42,0.08)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(15,23,42,0.12)]">
+              <motion.article key={project.title} variants={staggerItem} className="group overflow-hidden bg-white shadow-[0_10px_28px_rgba(15,23,42,0.08)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(15,23,42,0.12)]">
                 <div className="relative h-[220px] overflow-hidden">
                   <img
                     src={project.image}
@@ -284,9 +320,9 @@ const CompanyProfile = () => {
                     View case <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
-              </article>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
     </ProfilePageShell>

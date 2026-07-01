@@ -220,11 +220,11 @@ function Home() {
         style={{ backgroundImage: "url('/side-blue.png')", backgroundSize: "cover", backgroundPosition: "center" }}
       >
         <div className="container">
-          <div className="mx-auto max-w-3xl text-center">
+          <Reveal className="mx-auto max-w-3xl text-center">
             <p className="text-2xl leading-snug text-white sm:text-3xl lg:text-[36px]">
               Africa's development story is worth billions. Most of it is never told well enough to unlock that value.
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -701,9 +701,15 @@ function Home() {
           </div>
 
           {/* Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+          >
             {newsCards.map((card, index) => (
-              <article key={card.title} className="flex flex-col">
+              <motion.article key={card.title} variants={staggerItem} className="flex flex-col">
 
                 {/* Image + category overlay */}
                 <div className="relative overflow-hidden rounded-2xl">
@@ -739,9 +745,9 @@ function Home() {
                     Read More &#8594;
                   </Link>
                 </div>
-              </article>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
 
         </div>
       </section>
@@ -754,7 +760,7 @@ function Home() {
           }}
         >
           <div className="container grid gap-6 py-28 sm:py-36 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
-            <div className="max-w-xl">
+            <Reveal x={-30} className="max-w-xl">
               <h2 className="text-4xl font-black uppercase leading-[0.95] tracking-[-0.05em] text-white sm:text-5xl">
                 This is OHI
               </h2>
@@ -762,9 +768,9 @@ function Home() {
                 Strategic visibility for development partners, public institutions,
                 and impact-led organisations.
               </p>
-            </div>
+            </Reveal>
 
-            <div className="relative h-[220px] overflow-hidden rounded-[10px] bg-black shadow-[0_16px_38px_rgba(0,0,0,0.4)]">
+            <Reveal x={30} className="relative h-[220px] overflow-hidden rounded-[10px] bg-black shadow-[0_16px_38px_rgba(0,0,0,0.4)]">
               <FallbackImage
                 src={heroImages.hero2}
                 fallback={heroSlideFallbacks[1]}
@@ -780,7 +786,7 @@ function Home() {
                   <Play className="h-4 w-4 fill-current" />
                 </button>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
 

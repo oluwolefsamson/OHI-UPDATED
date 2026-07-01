@@ -1,4 +1,5 @@
 import React from "react";
+import Reveal from "../../ui/reveal";
 import ifrcLogo from "../../../assets/img/International_Federation_of_Red_Cross_and_Red_Crescent_Societies_Logo.png";
 import corafLogo from "../../../assets/img/logo-coraf.png";
 import sunKingLogo from "../../../assets/img/Sun-King_New_Logo-02.png";
@@ -47,10 +48,10 @@ const LogoMarquee = ({ logos }) => {
 
 const CategorySection = ({ label, logos }) => (
   <div className="mb-14">
-    <div className="mb-7 flex items-center gap-5">
+    <Reveal className="mb-7 flex items-center gap-5">
       <h2 className="shrink-0 text-xl font-bold text-[#0a1628]">{label}</h2>
       <div className="h-[2px] flex-1 bg-[#f59d21]" />
-    </div>
+    </Reveal>
     <div className="relative overflow-hidden">
       <LogoMarquee logos={logos} />
 
