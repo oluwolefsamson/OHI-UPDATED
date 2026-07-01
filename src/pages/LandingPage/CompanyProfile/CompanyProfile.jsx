@@ -87,7 +87,7 @@ const CompanyProfile = () => {
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#F07F1A]">
               Documentary focus
             </p>
-            <h2 className="mt-4 text-2xl font-bold tracking-[-0.03em] text-white sm:text-3xl">
+            <h2 className="mt-4 text-5xl font-black uppercase text-white tracking-tight leading-none">
               {difference.title ?? "The OHI difference"}
             </h2>
             <p className="mt-4 text-sm leading-7 text-white/80">
@@ -112,10 +112,10 @@ const CompanyProfile = () => {
       <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg1.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] sm:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1FA8DD]">
+            <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
               Profile at a glance
             </p>
-            <h2 className="mt-4 text-2xl font-bold tracking-[-0.03em] text-[#2e3135] sm:text-3xl">
+            <h2 className="mt-4 text-5xl font-black uppercase text-[#0d1f2d] tracking-tight leading-none">
               {overview.title ?? "A documentary that moves from credibility to action"}
             </h2>
             <p className="mt-4 text-sm leading-7 text-[#4e5a67]">

@@ -122,7 +122,7 @@ export const landingPageDefaults = {
       image: gallery12,
     },
     programmes: {
-      title: "Proof you can watch.",
+      title: "OUR PROOF",
       eyebrow: "Our work",
       subline: "Selected films and showcases produced for institutions across the continent.",
       items: [
@@ -159,6 +159,29 @@ export const landingPageDefaults = {
       description:
         "OHI continues to shape public-facing documentary communication and heritage documentation for institutional audiences.",
       images: [gallery01, gallery02, gallery03],
+      cards: [
+        {
+          slug: "virtual-tour-heritage-sites",
+          title: "OHI Launches Virtual Tour of Nigerian Heritage Sites on Google Arts & Culture Nigeria",
+          date: "June 5, 2023",
+          categories: ["Business", "Creative", "Strategy"],
+          description: "We at Olympian House International take pride in creating videos that are full of smiles and fun, while still producing the be...",
+        },
+        {
+          slug: "video-awareness-market-leads",
+          title: "Why is video one of the best ways of creating awareness and generating market leads?",
+          date: "February 8, 2023",
+          categories: ["Business", "Creative", "Strategy"],
+          description: "Video is a powerful tool for marketing your business, product or service. It can help you reach a large and diverse audience, convey...",
+        },
+        {
+          slug: "corporate-video-importance",
+          title: "Why is a company's corporate video important?",
+          date: "November 5, 2022",
+          categories: ["Business", "Creative", "Strategy"],
+          description: "A company cooperates video is a powerful tool to showcase your brand, values, products, and services to your potential...",
+        },
+      ],
     },
     supporters: {
       title: "OurPartners / Supporters",
@@ -954,6 +977,53 @@ export const landingPageDefaults = {
         href: "/approach",
       },
     ],
+  },
+  approachPage: {
+    hero: {
+      title: "Our Approach",
+      description:
+        "We give your programme the visibility it deserves, the viability it needs, and the credibility it demands.",
+      primaryCtaLabel: "View Portfolio",
+      primaryCtaHref: "/portfolio",
+      secondaryCtaLabel: "Contact Us",
+      secondaryCtaHref: "/contact",
+      badgeEyebrow: "OHI profile",
+      badgeDescription:
+        "Strategic visibility for development, investment, and impact communication.",
+    },
+    howWeWork: {
+      title: "How OHI works",
+      description:
+        "Each project is designed to be practical for DFIs, governments, and institutions that need professional communication support without unnecessary complexity.",
+      body1:
+        "Each project is designed to be practical for DFIs, governments, and institutions that need professional communication support without unnecessary complexity. We start by understanding your objectives, your stakeholders, and the decisions your story must influence.",
+      body2:
+        "From there, we shape a narrative concept and action plan, align on scope and budget, and deliver institution-grade storytelling from field to final cut — keeping every stage aligned with your reporting and investment goals.",
+    },
+    steps: [
+      { title: "Understand", description: "Your objectives, your stakeholders, and the decisions your story must influence." },
+      { title: "Strategise", description: "A narrative concept and action plan aligned with your reporting and investment goals." },
+      { title: "Align", description: "A tailored scope and budget matched to your timeline and compliance requirements." },
+      { title: "Deliver", description: "End-to-end, institution-grade storytelling and production, from field to final cut." },
+    ],
+    workingStyle: {
+      label: "Working style",
+      title: "Aligned with institutional and DFI standards",
+      description:
+        "The profile notes a project management approach that aligns with communication standards expected by development partners, DFIs, and institutional teams.",
+    },
+    deliverables: {
+      label: "Deliverables",
+      items: [
+        "Documentary films and mission coverage",
+        "Visibility content for programmes and institutions",
+        "Testimonial stories and community-focused edits",
+        "Campaign-ready outputs for digital channels",
+        "Stakeholder communication assets for reporting and presentations",
+      ],
+      ctaLabel: "View all services",
+      ctaHref: "/services",
+    },
   },
   footer: {
     description:

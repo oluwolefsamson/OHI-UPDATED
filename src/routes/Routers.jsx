@@ -16,6 +16,7 @@ import WhoWeServePage from "../pages/LandingPage/CompanyProfile/WhoWeServePage";
 import ImpactPage from "../pages/LandingPage/CompanyProfile/ImpactPage";
 import ApproachPage from "../pages/LandingPage/CompanyProfile/ApproachPage";
 import ContactPage from "../pages/LandingPage/CompanyProfile/ContactPage";
+import ArticlePage from "../pages/LandingPage/CompanyProfile/ArticlePage";
 import Dashboard from "../pages/Client-Dashboard/Dashboard";
 import ProfileSetting from "../pages/Client-Dashboard/ProfileSetting";
 import { Overview } from "../pages/Client-Dashboard/Overview";
@@ -42,6 +43,7 @@ const Routers = () => {
         <Route path="impact" element={<ImpactPage />} />
         <Route path="approach" element={<ApproachPage />} />
         <Route path="contact" element={<ContactPage />} />
+        <Route path="news/:slug" element={<ArticlePage />} />
         <Route path="admin/login" element={<AdminLogin />} />
 
         {/* Dashboard */}

@@ -599,6 +599,91 @@ export default function LandingPageManager() {
     }));
   };
 
+  const updateApproachPage = (section, key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      approachPage: {
+        ...current.approachPage,
+        [section]: {
+          ...current.approachPage?.[section],
+          [key]: value,
+        },
+      },
+    }));
+  };
+
+  const updateApproachPageRoot = (key, value) => {
+    setDraftConfig((current) => ({
+      ...current,
+      approachPage: {
+        ...current.approachPage,
+        [key]: value,
+      },
+    }));
+  };
+
+  const updateApproachPageStep = (index, key, value) => {
+    setDraftConfig((current) => {
+      const steps = [...(current.approachPage?.steps ?? [])];
+      steps[index] = { ...steps[index], [key]: value };
+      return {
+        ...current,
+        approachPage: {
+          ...current.approachPage,
+          steps,
+        },
+      };
+    });
+  };
+
+  const updateApproachPageDeliverableItem = (index, value) => {
+    setDraftConfig((current) => {
+      const items = [...(current.approachPage?.deliverables?.items ?? [])];
+      items[index] = value;
+      return {
+        ...current,
+        approachPage: {
+          ...current.approachPage,
+          deliverables: {
+            ...current.approachPage?.deliverables,
+            items,
+          },
+        },
+      };
+    });
+  };
+
+  const updateHomePageNewsCard = (index, key, value) => {
+    setDraftConfig((current) => {
+      const cards = [...(current.homePage?.news?.cards ?? [])];
+      cards[index] = { ...cards[index], [key]: value };
+      return {
+        ...current,
+        homePage: {
+          ...current.homePage,
+          news: {
+            ...current.homePage?.news,
+            cards,
+          },
+        },
+      };
+    });
+  };
+
+  const updateProfileValue = (index, key, value) => {
+    setDraftConfig((current) => {
+      const values = [...(current.profile?.values ?? [])];
+      values[index] = { ...values[index], [key]: value };
+      return {
+        ...current,
+        profile: {
+          ...current.profile,
+          values,
+        },
+      };
+    });
+  };
+
   const updateValueProposition = (key, value) => {
     setDraftConfig((current) => ({
       ...current,
@@ -746,6 +831,18 @@ export default function LandingPageManager() {
                   <ArrowRightIcon className="h-4 w-4" />
                 </Link>
               </Button>
+              <Button asChild variant="outline" className="w-full rounded-full px-5 py-3 text-sm font-semibold sm:w-auto">
+                <Link to="#approach-page">
+                  Jump to approach page
+                  <ArrowRightIcon className="h-4 w-4" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="w-full rounded-full px-5 py-3 text-sm font-semibold sm:w-auto">
+                <Link to="#background-page">
+                  Jump to background page
+                  <ArrowRightIcon className="h-4 w-4" />
+                </Link>
+              </Button>
             </div>
           </div>
 
@@ -789,14 +886,17 @@ export default function LandingPageManager() {
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {[
             "Home hero copy, CTAs, stats, and images",
+            "Home news cards — title, date, categories, description",
             "About page copy, image, and overlay card",
             "Why OHI cards, links, and icons",
             "Who We Serve cards and copy",
             "Why Institutions Choose OHI — 4 differentiator cards",
             "Documentary page sections and featured story blocks",
+            "Approach page — hero, steps, working style, deliverables",
             "Services page copy, formats, and showcase",
             "Portfolio page highlights and project cards",
             "Leadership page hero, bio, and highlights",
+            "Background page hero and CTA fields",
             "Video / reel content and clips",
             "Mission, vision, and values",
             "Selected Voices reviews and quotes",
@@ -953,19 +1053,34 @@ export default function LandingPageManager() {
           </div>
         </SectionCard>
 
-        <SectionCard id="home-news" title="News & Blog" description="Edit the homepage news block text." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("News section saved!"); }, "News & Blog")} saveLabel="Update Section">
+        <SectionCard id="home-news" title="News & Blog" description="Edit the homepage news block text and article cards." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("News section saved!"); }, "News & Blog")} saveLabel="Update Section">
           <div className="space-y-4">
             <Field label="Title"><TextInput value={draftConfig.homePage?.news?.title || ""} onChange={(e) => updateHomePage("news", "title", e.target.value)} /></Field>
             <Field label="Description"><TextArea rows={4} value={draftConfig.homePage?.news?.description || ""} onChange={(e) => updateHomePage("news", "description", e.target.value)} /></Field>
             <div className="rounded-2xl border border-dashed border-border bg-background p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">News images</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">News card images</p>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                These images show the current cards used in the scrolling news block. Edit the Gallery items if you want to replace the source images.
+                Card images come from the shared Gallery items (items 1–3). Edit the Gallery section below to replace them.
               </p>
-              <div className="mt-4 grid gap-3 md:grid-cols-3">
-                {(draftConfig.homePage?.news?.images || []).map((image, index) => (
-                  <div key={index} className="overflow-hidden rounded-2xl bg-muted/40 shadow-[0_8px_24px_rgba(15,23,42,0.06)]">
-                    <img src={image || ""} alt={`News ${index + 1}`} className="h-28 w-full object-cover" />
+            </div>
+            <div className="space-y-3">
+              <p className="text-sm font-semibold text-foreground">Article cards</p>
+              <div className="grid gap-4 lg:grid-cols-3">
+                {(draftConfig.homePage?.news?.cards ?? []).map((card, index) => (
+                  <div key={index} className="space-y-3 rounded-2xl border border-border bg-muted/40 p-4">
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">Card {index + 1}</p>
+                    <Field label="Title">
+                      <TextArea rows={3} value={card.title || ""} onChange={(e) => updateHomePageNewsCard(index, "title", e.target.value)} />
+                    </Field>
+                    <Field label="Date">
+                      <TextInput value={card.date || ""} onChange={(e) => updateHomePageNewsCard(index, "date", e.target.value)} />
+                    </Field>
+                    <Field label="Description">
+                      <TextArea rows={3} value={card.description || ""} onChange={(e) => updateHomePageNewsCard(index, "description", e.target.value)} />
+                    </Field>
+                    <Field label="URL slug" hint="e.g. virtual-tour-heritage-sites">
+                      <TextInput value={card.slug || ""} onChange={(e) => updateHomePageNewsCard(index, "slug", e.target.value)} />
+                    </Field>
                   </div>
                 ))}
               </div>
@@ -1090,9 +1205,29 @@ export default function LandingPageManager() {
                 <Field label="About label">
                   <TextInput value={draftConfig.aboutPage?.intro?.aboutLabel || ""} onChange={(e) => updateAboutPageSection("intro", "aboutLabel", e.target.value)} />
                 </Field>
-              <Field label="About text">
+                <Field label="About text">
                   <TextArea rows={4} value={draftConfig.aboutPage?.intro?.aboutText || ""} onChange={(e) => updateAboutPageSection("intro", "aboutText", e.target.value)} />
                 </Field>
+                <Field label="Editorial label">
+                  <TextInput value={draftConfig.aboutPage?.intro?.editorialLabel || ""} onChange={(e) => updateAboutPageSection("intro", "editorialLabel", e.target.value)} />
+                </Field>
+                <Field label="Editorial text">
+                  <TextArea rows={3} value={draftConfig.aboutPage?.intro?.editorialText || ""} onChange={(e) => updateAboutPageSection("intro", "editorialText", e.target.value)} />
+                </Field>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Field label="Primary CTA label">
+                    <TextInput value={draftConfig.aboutPage?.intro?.ctaLabel || ""} onChange={(e) => updateAboutPageSection("intro", "ctaLabel", e.target.value)} />
+                  </Field>
+                  <Field label="Primary CTA link">
+                    <TextInput value={draftConfig.aboutPage?.intro?.ctaHref || ""} onChange={(e) => updateAboutPageSection("intro", "ctaHref", e.target.value)} />
+                  </Field>
+                  <Field label="Secondary CTA label">
+                    <TextInput value={draftConfig.aboutPage?.intro?.ctaSecondaryLabel || ""} onChange={(e) => updateAboutPageSection("intro", "ctaSecondaryLabel", e.target.value)} />
+                  </Field>
+                  <Field label="Secondary CTA link">
+                    <TextInput value={draftConfig.aboutPage?.intro?.ctaSecondaryHref || ""} onChange={(e) => updateAboutPageSection("intro", "ctaSecondaryHref", e.target.value)} />
+                  </Field>
+                </div>
                 <ImageField
                   label="Intro image"
                   value={draftConfig.aboutPage?.intro?.image || ""}
@@ -1110,19 +1245,107 @@ export default function LandingPageManager() {
               </div>
 
               <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
-                <h3 className="text-lg font-bold text-foreground">Difference / close</h3>
+                <h3 className="text-lg font-bold text-foreground">Difference block</h3>
                 <Field label="Difference title">
                   <TextInput value={draftConfig.aboutPage?.difference?.title || ""} onChange={(e) => updateAboutPageSection("difference", "title", e.target.value)} />
                 </Field>
                 <Field label="Difference description">
                   <TextArea rows={4} value={draftConfig.aboutPage?.difference?.description || ""} onChange={(e) => updateAboutPageSection("difference", "description", e.target.value)} />
                 </Field>
-                <Field label="Close title">
+                <div className="space-y-3">
+                  <p className="text-sm font-semibold text-foreground">Principles</p>
+                  {(draftConfig.aboutPage?.difference?.principles ?? []).map((principle, index) => (
+                    <div key={index} className="space-y-2 rounded-2xl border border-border bg-background p-3">
+                      <Field label={`Principle ${index + 1} title`}>
+                        <TextInput
+                          value={principle.title || ""}
+                          onChange={(e) => {
+                            const next = [...(draftConfig.aboutPage?.difference?.principles ?? [])];
+                            next[index] = { ...next[index], title: e.target.value };
+                            updateAboutPageSection("difference", "principles", next);
+                          }}
+                        />
+                      </Field>
+                      <Field label={`Principle ${index + 1} description`}>
+                        <TextArea
+                          rows={3}
+                          value={principle.description || ""}
+                          onChange={(e) => {
+                            const next = [...(draftConfig.aboutPage?.difference?.principles ?? [])];
+                            next[index] = { ...next[index], description: e.target.value };
+                            updateAboutPageSection("difference", "principles", next);
+                          }}
+                        />
+                      </Field>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid gap-4 xl:grid-cols-2">
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Snapshot / stats block</h3>
+                <Field label="Label">
+                  <TextInput value={draftConfig.aboutPage?.snapshot?.label || ""} onChange={(e) => updateAboutPageSection("snapshot", "label", e.target.value)} />
+                </Field>
+                <Field label="Title">
+                  <TextInput value={draftConfig.aboutPage?.snapshot?.title || ""} onChange={(e) => updateAboutPageSection("snapshot", "title", e.target.value)} />
+                </Field>
+                <Field label="Description">
+                  <TextArea rows={3} value={draftConfig.aboutPage?.snapshot?.description || ""} onChange={(e) => updateAboutPageSection("snapshot", "description", e.target.value)} />
+                </Field>
+                <Field label="Mission title">
+                  <TextInput value={draftConfig.aboutPage?.snapshot?.missionTitle || ""} onChange={(e) => updateAboutPageSection("snapshot", "missionTitle", e.target.value)} />
+                </Field>
+                <div className="space-y-3">
+                  <p className="text-sm font-semibold text-foreground">Stats</p>
+                  {(draftConfig.aboutPage?.snapshot?.stats ?? []).map((stat, index) => (
+                    <div key={index} className="grid gap-3 sm:grid-cols-2 rounded-2xl border border-border bg-background p-3">
+                      <Field label={`Stat ${index + 1} value`}>
+                        <TextInput
+                          value={stat.value || ""}
+                          onChange={(e) => {
+                            const next = [...(draftConfig.aboutPage?.snapshot?.stats ?? [])];
+                            next[index] = { ...next[index], value: e.target.value };
+                            updateAboutPageSection("snapshot", "stats", next);
+                          }}
+                        />
+                      </Field>
+                      <Field label={`Stat ${index + 1} label`}>
+                        <TextInput
+                          value={stat.label || ""}
+                          onChange={(e) => {
+                            const next = [...(draftConfig.aboutPage?.snapshot?.stats ?? [])];
+                            next[index] = { ...next[index], label: e.target.value };
+                            updateAboutPageSection("snapshot", "stats", next);
+                          }}
+                        />
+                      </Field>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Close / CTA block</h3>
+                <Field label="Title">
                   <TextInput value={draftConfig.aboutPage?.close?.title || ""} onChange={(e) => updateAboutPageSection("close", "title", e.target.value)} />
                 </Field>
-                <Field label="Close body">
+                <Field label="Description">
+                  <TextArea rows={3} value={draftConfig.aboutPage?.close?.description || ""} onChange={(e) => updateAboutPageSection("close", "description", e.target.value)} />
+                </Field>
+                <Field label="Body">
                   <TextArea rows={4} value={draftConfig.aboutPage?.close?.body || ""} onChange={(e) => updateAboutPageSection("close", "body", e.target.value)} />
                 </Field>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <Field label="CTA label">
+                    <TextInput value={draftConfig.aboutPage?.close?.ctaLabel || ""} onChange={(e) => updateAboutPageSection("close", "ctaLabel", e.target.value)} />
+                  </Field>
+                  <Field label="CTA link">
+                    <TextInput value={draftConfig.aboutPage?.close?.ctaHref || ""} onChange={(e) => updateAboutPageSection("close", "ctaHref", e.target.value)} />
+                  </Field>
+                </div>
                 <ImageField
                   label="Close image"
                   value={draftConfig.aboutPage?.close?.image || ""}
@@ -1840,17 +2063,23 @@ export default function LandingPageManager() {
               </div>
             </div>
             <div className="grid gap-4 lg:grid-cols-2">
-              {draftConfig.profile.values.map((value, index) => (
-                <Field key={index} label={`Value ${index + 1}`}>
-                  <TextInput
-                    value={value}
-                    onChange={(e) => {
-                      const next = [...draftConfig.profile.values];
-                      next[index] = e.target.value;
-                      updateProfile("values", next);
-                    }}
-                  />
-                </Field>
+              {(draftConfig.profile?.values ?? []).map((value, index) => (
+                <div key={index} className="space-y-3 rounded-2xl border border-border bg-muted/40 p-4">
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">Value {index + 1}</p>
+                  <Field label="Title">
+                    <TextInput
+                      value={typeof value === "object" ? (value.title ?? "") : value}
+                      onChange={(e) => updateProfileValue(index, "title", e.target.value)}
+                    />
+                  </Field>
+                  <Field label="Description">
+                    <TextArea
+                      rows={3}
+                      value={typeof value === "object" ? (value.description ?? "") : ""}
+                      onChange={(e) => updateProfileValue(index, "description", e.target.value)}
+                    />
+                  </Field>
+                </div>
               ))}
             </div>
           </div>
@@ -2247,7 +2476,7 @@ export default function LandingPageManager() {
         <SectionCard
           id="background-page"
           title="Background Page"
-          description="Edit the public Background page content."
+          description="Edit the public Background page hero, badges, and CTAs."
           onSave={() => requestSave(async () => {
             setConfig((current) => ({ ...current, backgroundPage: draftConfig.backgroundPage }));
             toast.success("Background page saved!");
@@ -2255,12 +2484,40 @@ export default function LandingPageManager() {
           saveLabel="Update Background Page"
         >
           <div className="space-y-6">
-            <Field label="Hero title">
-              <TextInput value={draftConfig.backgroundPage?.hero?.title || ""} onChange={(e) => updateBackgroundPage("hero", "title", e.target.value)} />
-            </Field>
-            <Field label="Hero description">
-              <TextArea rows={4} value={draftConfig.backgroundPage?.hero?.description || ""} onChange={(e) => updateBackgroundPage("hero", "description", e.target.value)} />
-            </Field>
+            <div className="grid gap-4 xl:grid-cols-2">
+              <Field label="Hero title">
+                <TextInput value={draftConfig.backgroundPage?.hero?.title || ""} onChange={(e) => updateBackgroundPage("hero", "title", e.target.value)} />
+              </Field>
+              <Field label="Hero description">
+                <TextArea rows={4} value={draftConfig.backgroundPage?.hero?.description || ""} onChange={(e) => updateBackgroundPage("hero", "description", e.target.value)} />
+              </Field>
+              <Field label="Badge eyebrow">
+                <TextInput value={draftConfig.backgroundPage?.hero?.badgeEyebrow || ""} onChange={(e) => updateBackgroundPage("hero", "badgeEyebrow", e.target.value)} />
+              </Field>
+              <Field label="Badge description">
+                <TextArea rows={3} value={draftConfig.backgroundPage?.hero?.badgeDescription || ""} onChange={(e) => updateBackgroundPage("hero", "badgeDescription", e.target.value)} />
+              </Field>
+            </div>
+            <div className="grid gap-4 xl:grid-cols-2">
+              <div className="space-y-3 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-base font-bold text-foreground">Primary CTA</h3>
+                <Field label="Button label">
+                  <TextInput value={draftConfig.backgroundPage?.hero?.primaryCtaLabel || ""} onChange={(e) => updateBackgroundPage("hero", "primaryCtaLabel", e.target.value)} />
+                </Field>
+                <Field label="Button link">
+                  <TextInput value={draftConfig.backgroundPage?.hero?.primaryCtaHref || ""} onChange={(e) => updateBackgroundPage("hero", "primaryCtaHref", e.target.value)} />
+                </Field>
+              </div>
+              <div className="space-y-3 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-base font-bold text-foreground">Secondary CTA</h3>
+                <Field label="Button label">
+                  <TextInput value={draftConfig.backgroundPage?.hero?.secondaryCtaLabel || ""} onChange={(e) => updateBackgroundPage("hero", "secondaryCtaLabel", e.target.value)} />
+                </Field>
+                <Field label="Button link">
+                  <TextInput value={draftConfig.backgroundPage?.hero?.secondaryCtaHref || ""} onChange={(e) => updateBackgroundPage("hero", "secondaryCtaHref", e.target.value)} />
+                </Field>
+              </div>
+            </div>
             <ImageField
               label="Hero image"
               value={draftConfig.backgroundPage?.hero?.image || ""}
@@ -2563,6 +2820,120 @@ export default function LandingPageManager() {
                       }
                     />
                   </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          id="approach-page"
+          title="Approach Page"
+          description="Edit the public Approach page — hero, how-we-work text, 4-step process cards, working style, and deliverables."
+          onSave={() => requestSave(async () => {
+            setConfig((current) => ({ ...current, approachPage: draftConfig.approachPage }));
+            toast.success("Approach page saved!");
+          }, "Approach Page")}
+          saveLabel="Update Approach Page"
+        >
+          <div className="space-y-6">
+            <div className="grid gap-4 xl:grid-cols-2">
+              <Field label="Hero title">
+                <TextInput value={draftConfig.approachPage?.hero?.title || ""} onChange={(e) => updateApproachPage("hero", "title", e.target.value)} />
+              </Field>
+              <Field label="Hero description">
+                <TextArea rows={4} value={draftConfig.approachPage?.hero?.description || ""} onChange={(e) => updateApproachPage("hero", "description", e.target.value)} />
+              </Field>
+              <Field label="Badge eyebrow">
+                <TextInput value={draftConfig.approachPage?.hero?.badgeEyebrow || ""} onChange={(e) => updateApproachPage("hero", "badgeEyebrow", e.target.value)} />
+              </Field>
+              <Field label="Badge description">
+                <TextArea rows={3} value={draftConfig.approachPage?.hero?.badgeDescription || ""} onChange={(e) => updateApproachPage("hero", "badgeDescription", e.target.value)} />
+              </Field>
+              <Field label="Primary CTA label">
+                <TextInput value={draftConfig.approachPage?.hero?.primaryCtaLabel || ""} onChange={(e) => updateApproachPage("hero", "primaryCtaLabel", e.target.value)} />
+              </Field>
+              <Field label="Primary CTA link">
+                <TextInput value={draftConfig.approachPage?.hero?.primaryCtaHref || ""} onChange={(e) => updateApproachPage("hero", "primaryCtaHref", e.target.value)} />
+              </Field>
+              <Field label="Secondary CTA label">
+                <TextInput value={draftConfig.approachPage?.hero?.secondaryCtaLabel || ""} onChange={(e) => updateApproachPage("hero", "secondaryCtaLabel", e.target.value)} />
+              </Field>
+              <Field label="Secondary CTA link">
+                <TextInput value={draftConfig.approachPage?.hero?.secondaryCtaHref || ""} onChange={(e) => updateApproachPage("hero", "secondaryCtaHref", e.target.value)} />
+              </Field>
+            </div>
+
+            <div className="grid gap-4 xl:grid-cols-2">
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">How OHI works</h3>
+                <Field label="Section title">
+                  <TextInput value={draftConfig.approachPage?.howWeWork?.title || ""} onChange={(e) => updateApproachPage("howWeWork", "title", e.target.value)} />
+                </Field>
+                <Field label="Section description">
+                  <TextArea rows={3} value={draftConfig.approachPage?.howWeWork?.description || ""} onChange={(e) => updateApproachPage("howWeWork", "description", e.target.value)} />
+                </Field>
+                <Field label="Body paragraph 1">
+                  <TextArea rows={4} value={draftConfig.approachPage?.howWeWork?.body1 || ""} onChange={(e) => updateApproachPage("howWeWork", "body1", e.target.value)} />
+                </Field>
+                <Field label="Body paragraph 2">
+                  <TextArea rows={4} value={draftConfig.approachPage?.howWeWork?.body2 || ""} onChange={(e) => updateApproachPage("howWeWork", "body2", e.target.value)} />
+                </Field>
+              </div>
+
+              <div className="space-y-4 rounded-2xl border border-border bg-muted/40 p-4">
+                <h3 className="text-lg font-bold text-foreground">Working style</h3>
+                <Field label="Label">
+                  <TextInput value={draftConfig.approachPage?.workingStyle?.label || ""} onChange={(e) => updateApproachPage("workingStyle", "label", e.target.value)} />
+                </Field>
+                <Field label="Title">
+                  <TextInput value={draftConfig.approachPage?.workingStyle?.title || ""} onChange={(e) => updateApproachPage("workingStyle", "title", e.target.value)} />
+                </Field>
+                <Field label="Description">
+                  <TextArea rows={4} value={draftConfig.approachPage?.workingStyle?.description || ""} onChange={(e) => updateApproachPage("workingStyle", "description", e.target.value)} />
+                </Field>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <p className="text-sm font-semibold text-foreground">4-Step process cards</p>
+              <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-4">
+                {(draftConfig.approachPage?.steps ?? []).map((step, index) => (
+                  <div key={index} className="space-y-3 rounded-2xl border border-border bg-muted/40 p-4">
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">Step 0{index + 1}</p>
+                    <Field label="Title">
+                      <TextInput value={step.title || ""} onChange={(e) => updateApproachPageStep(index, "title", e.target.value)} />
+                    </Field>
+                    <Field label="Description">
+                      <TextArea rows={3} value={step.description || ""} onChange={(e) => updateApproachPageStep(index, "description", e.target.value)} />
+                    </Field>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-3 rounded-2xl border border-border bg-muted/40 p-4">
+              <h3 className="text-lg font-bold text-foreground">Deliverables</h3>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Field label="Section label">
+                  <TextInput value={draftConfig.approachPage?.deliverables?.label || ""} onChange={(e) => updateApproachPage("deliverables", "label", e.target.value)} />
+                </Field>
+                <Field label="CTA label">
+                  <TextInput value={draftConfig.approachPage?.deliverables?.ctaLabel || ""} onChange={(e) => updateApproachPage("deliverables", "ctaLabel", e.target.value)} />
+                </Field>
+                <Field label="CTA link">
+                  <TextInput value={draftConfig.approachPage?.deliverables?.ctaHref || ""} onChange={(e) => updateApproachPage("deliverables", "ctaHref", e.target.value)} />
+                </Field>
+              </div>
+              <div className="space-y-2 mt-2">
+                <p className="text-sm font-semibold text-foreground">Deliverable items</p>
+                {(draftConfig.approachPage?.deliverables?.items ?? []).map((item, index) => (
+                  <TextInput
+                    key={index}
+                    value={item || ""}
+                    onChange={(e) => updateApproachPageDeliverableItem(index, e.target.value)}
+                    placeholder={`Deliverable ${index + 1}`}
+                  />
                 ))}
               </div>
             </div>

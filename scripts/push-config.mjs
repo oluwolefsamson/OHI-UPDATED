@@ -105,7 +105,7 @@ const newConfig = {
       ctaHref: "/documentary",
     },
     programmes: {
-      title: "Proof you can watch.",
+      title: "OUR PROOF",
       eyebrow: "Our work",
       subline: "Selected films and showcases produced for institutions across the continent.",
       items: [
@@ -295,6 +295,18 @@ const newConfig = {
 };
 
 async function pushConfig() {
+  console.log("Signing in as admin...");
+
+  const { error: authError } = await supabase.auth.signInWithPassword({
+    email: "admin@olympianhouseintl.com",
+    password: "OHI2026",
+  });
+
+  if (authError) {
+    console.error("Auth failed:", authError.message);
+    process.exit(1);
+  }
+
   console.log("Pushing updated config to Supabase...");
 
   const { error } = await supabase
@@ -306,6 +318,7 @@ async function pushConfig() {
     process.exit(1);
   }
 
+  await supabase.auth.signOut();
   console.log("Config pushed successfully. Reload the website to see the changes.");
 }
 

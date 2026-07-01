@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ChevronDown, Play } from "lucide-react";
+import { ArrowRight, ChevronDown, Play, CalendarDays } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLandingPageConfig } from "../../context/LandingPageConfigContext";
 import { landingPageDefaults } from "../../data/landingPageDefaults";
@@ -100,23 +100,33 @@ function Home() {
       image: gallery.items?.[8]?.image ?? heroImages.hero5,
     },
   ];
-  const newsCards = [
+  const defaultNewsCards = [
     {
+      slug: "virtual-tour-heritage-sites",
       title: "OHI Launches Virtual Tour of Nigerian Heritage Sites on Google Arts & Culture Nigeria",
-      image: gallery.items?.[0]?.image ?? heroImages.hero1,
-      date: "May 2026",
+      date: "June 5, 2023",
+      categories: ["Business", "Creative", "Strategy"],
+      description: "We at Olympian House International take pride in creating videos that are full of smiles and fun, while still producing the be...",
     },
     {
-      title: "OHI Equips Media Professionals with Documentary Storytelling Skills",
-      image: gallery.items?.[1]?.image ?? heroImages.hero2,
-      date: "May 2026",
+      slug: "video-awareness-market-leads",
+      title: "Why is video one of the best ways of creating awareness and generating market leads?",
+      date: "February 8, 2023",
+      categories: ["Business", "Creative", "Strategy"],
+      description: "Video is a powerful tool for marketing your business, product or service. It can help you reach a large and diverse audience, convey...",
     },
     {
-      title: "OHI Reports on UNESCO WHV 2024: A Journey of Conservation, Heritage and Hope",
-      image: gallery.items?.[2]?.image ?? heroImages.hero3,
-      date: "May 2026",
+      slug: "corporate-video-importance",
+      title: "Why is a company's corporate video important?",
+      date: "November 5, 2022",
+      categories: ["Business", "Creative", "Strategy"],
+      description: "A company cooperates video is a powerful tool to showcase your brand, values, products, and services to your potential...",
     },
   ];
+  const newsCards = (homePage.news?.cards ?? defaultNewsCards).map((card, index) => ({
+    ...card,
+    image: gallery.items?.[index]?.image ?? [heroImages.hero1, heroImages.hero2, heroImages.hero3][index] ?? heroImages.hero1,
+  }));
 
   const staggerContainer = {
     hidden: {},
@@ -206,7 +216,7 @@ function Home() {
 
       <section
         id="conviction-strip"
-        className="py-12 sm:py-14"
+        className="py-24 sm:py-36"
         style={{ backgroundImage: "url('/side-blue.png')", backgroundSize: "cover", backgroundPosition: "center" }}
       >
         <div className="container">
@@ -218,7 +228,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="about" className="py-16 sm:py-20 bg-white">
+      <section id="about" className="py-28 sm:py-36 bg-white">
         <div className="container">
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <Reveal className="overflow-hidden bg-white shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
@@ -231,10 +241,10 @@ function Home() {
             </Reveal>
 
             <Reveal className="max-w-2xl space-y-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#1FA8DD]">
+              <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
                 {homePage.about.eyebrow ?? "Who we are"}
               </p>
-              <UnderlinedHeading as="h2" className="text-2xl font-bold leading-tight tracking-[-0.03em] text-[#2e3135] sm:text-3xl lg:text-[34px]" showBorder={true}>
+              <UnderlinedHeading as="h2" className="text-3xl font-black uppercase tracking-tight leading-none sm:text-4xl lg:text-5xl" textColorClassName="text-[#0d1f2d]" showBorder={true}>
                 {homePage.about.title}
               </UnderlinedHeading>
               <p className="text-sm leading-6 text-[#4e4e4e] sm:text-[15px]">
@@ -261,16 +271,10 @@ function Home() {
         </div>
       </section>
 
-      <section id="ohi-difference" className="py-14 sm:py-16" style={{ backgroundImage: "url('/story.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <section id="ohi-difference" className="py-28 sm:py-36" style={{ backgroundImage: "url('/story.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <Reveal className="mx-auto max-w-3xl text-center text-white">
-            <UnderlinedHeading
-              as="h2"
-              className="text-2xl font-bold tracking-[-0.03em] sm:text-3xl text-white"
-              textColorClassName="text-white"
-              showBorder={false}
-              patternClassName="hidden"
-            >
+            <UnderlinedHeading as="h2" className="text-3xl font-black uppercase tracking-tight leading-none sm:text-4xl lg:text-5xl" textColorClassName="text-white" showBorder={false}>
               {homePage.difference.title}
             </UnderlinedHeading>
             <p className="mt-2 text-sm font-medium text-white/92">
@@ -323,16 +327,12 @@ function Home() {
         </div>
       </section>
 
-      <section id="heritage-collection" className="py-16 sm:py-20 bg-white">
+      <section id="heritage-collection" className="py-28 sm:py-36 bg-white">
         <div className="container">
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <Reveal className="max-w-xl">
-            <UnderlinedHeading
-              as="h2"
-              className="text-2xl font-bold leading-tight tracking-[-0.03em] text-[#2e3135] sm:text-3xl lg:text-[34px]"
-              showBorder={true}
-            >
-                {homePage.heritage.title}
+            <UnderlinedHeading as="h2" className="text-3xl font-black uppercase tracking-tight leading-none sm:text-4xl lg:text-5xl" textColorClassName="text-[#0d1f2d]" showBorder={true}>
+              {homePage.heritage.title}
             </UnderlinedHeading>
               <p className="mt-5 max-w-md text-sm leading-6 text-[#4e4e4e]">
                 {homePage.heritage.description}
@@ -372,6 +372,134 @@ function Home() {
         </div>
       </section>
 
+      <section id="track-record" className="py-28 sm:py-36" style={{ backgroundImage: "url('/story.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+        <div className="container">
+          {/* Section header */}
+          <Reveal className="mb-12">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#f59d21] mb-3">
+              The Proof
+            </p>
+            <h2 className="text-3xl font-black text-white tracking-tight leading-none sm:text-4xl lg:text-5xl xl:text-6xl">
+              Track record
+            </h2>
+          </Reveal>
+
+          <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-start">
+            {/* Stats column */}
+            <Reveal>
+              <div className="divide-y divide-white/15">
+                {[
+                  { value: "100+", label: "Projects delivered across Cameroon and Africa" },
+                  { value: "70+",  label: "Institutional clients served" },
+                  { value: "1M+",  label: "Viewers reached through impact content" },
+                  { value: "95%",  label: "Repeat-client rate" },
+                  { value: "100+", label: "Missions, documentaries & investment showcases" },
+                ].map(({ value, label }) => (
+                  <div key={label} className="flex items-center gap-6 py-5">
+                    <span className="w-28 shrink-0 text-[2.75rem] font-black leading-none text-[#f59d21] sm:text-[3.25rem]">
+                      {value}
+                    </span>
+                    <p className="text-sm font-medium leading-[1.55] text-white/80">{label}</p>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+
+            {/* Photo grid + trusted-by */}
+            <div className="space-y-3">
+              <motion.div
+                className="grid grid-cols-2 gap-2"
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+              >
+                {(gallery.items?.slice(0, 6) ?? []).map((item, i) => (
+                  <motion.div key={item.id ?? i} variants={staggerItem} className="overflow-hidden">
+                    <FallbackImage
+                      src={item.image}
+                      fallback={landingPageDefaults.gallery.items?.[0]?.image}
+                      alt={item.title ?? `Track record ${i + 1}`}
+                      className="h-36 w-full object-cover sm:h-44"
+                    />
+                  </motion.div>
+                ))}
+              </motion.div>
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-5 text-xs leading-[1.8] text-white/80">
+                Trusted by the Cameroon Investment Promotion Agency (API), the World Food Programme, EU Civil Protection &amp; Humanitarian Aid, IFRC, Olam Food Ingredients (OFI), Sun King, and more.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="client-voices" className="py-28 sm:py-36 bg-white">
+        <div className="container">
+          <Reveal className="mb-12">
+            <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
+              Client Voices
+            </p>
+            <UnderlinedHeading as="h2" className="text-3xl font-black uppercase tracking-tight leading-none sm:text-4xl lg:text-5xl" textColorClassName="text-[#0d1f2d]" showBorder={true}>
+              What Partners Say
+            </UnderlinedHeading>
+          </Reveal>
+
+          <motion.div
+            className="grid gap-5 md:grid-cols-3"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            {[
+              {
+                quote: "OHI brought clarity and visual precision to how we communicate our food security programmes across the region. The quality was exceptional.",
+                name: "Communications Lead",
+                org: "World Food Programme",
+                image: gallery.items?.[0]?.image ?? heroImages.hero1,
+              },
+              {
+                quote: "Their team understood the stakes of our humanitarian narrative. The documentary they produced has been screened at multiple EU forums.",
+                name: "Media & Advocacy Officer",
+                org: "EU Civil Protection & Humanitarian Aid",
+                image: gallery.items?.[2]?.image ?? heroImages.hero2,
+              },
+              {
+                quote: "We needed an investment showcase that could speak to global audiences about Cameroon's potential. OHI delivered exactly that — on time and on message.",
+                name: "Senior Investment Advisor",
+                org: "Cameroon Investment Promotion Agency",
+                image: gallery.items?.[4]?.image ?? heroImages.hero3,
+              },
+            ].map((item) => (
+              <motion.article
+                key={item.org}
+                variants={staggerItem}
+                className="flex h-full min-h-[420px] flex-col overflow-hidden border border-[#e5e5e5] bg-white shadow-[0_10px_24px_rgba(15,23,42,0.12)]"
+              >
+                <FallbackImage
+                  src={item.image}
+                  fallback={landingPageDefaults.gallery.items?.[0]?.image}
+                  alt={item.org}
+                  className="h-52 w-full object-cover"
+                />
+                <div className="flex flex-1 flex-col p-5">
+                  <p className="text-[10px] uppercase tracking-[0.22em] text-[#b16a18]">
+                    Partner Testimonial
+                  </p>
+                  <p className="mt-3 text-xs leading-6 text-[#54565a] flex-1">
+                    "{item.quote}"
+                  </p>
+                  <div className="mt-4 pt-4 border-t border-[#f0ece6]">
+                    <p className="text-xs font-semibold text-[#0d1f2d]">{item.name}</p>
+                    <p className="mt-0.5 text-[11px] text-[#e97a2f] font-medium">{item.org}</p>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       <section id="support-ohi" className="py-4 bg-[#f59d21] text-[#3a2413]">
         <div className="container flex flex-wrap items-center justify-center gap-4 text-center">
           <p className="text-[13px] font-semibold">
@@ -388,7 +516,7 @@ function Home() {
 
       <section
         id="turn-programme-into-proof"
-        className="relative overflow-hidden bg-cover bg-center py-16 text-white sm:py-20"
+        className="relative overflow-hidden bg-cover bg-center py-28 text-white sm:py-40"
         style={{
           backgroundImage: "url('/story.png')",
         }}
@@ -411,7 +539,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="leadership-storytellers" className="py-14 sm:py-16 bg-white">
+      <section id="leadership-storytellers" className="py-28 sm:py-36 bg-white">
         <div className="container">
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <Reveal className="overflow-hidden rounded-[10px] bg-white shadow-[0_12px_28px_rgba(15,23,42,0.12)]">
@@ -423,14 +551,10 @@ function Home() {
             </Reveal>
 
             <Reveal className="max-w-xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#d38a31]">
+              <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
                 {homePage.leadership.eyebrow}
               </p>
-              <UnderlinedHeading
-                as="h3"
-                className="mt-3 text-3xl font-bold leading-tight tracking-[-0.04em] text-[#2f3135] sm:text-[38px]"
-                showBorder={true}
-              >
+              <UnderlinedHeading as="h3" className="mt-3 text-3xl font-black uppercase tracking-tight leading-none sm:text-4xl lg:text-5xl" textColorClassName="text-[#0d1f2d]" showBorder={true}>
                 {homePage.leadership.title}
               </UnderlinedHeading>
               <p className="mt-5 max-w-2xl text-base leading-7 text-[#5a5f66]">
@@ -447,27 +571,25 @@ function Home() {
         </div>
       </section>
 
-      <section id="africa-story-banner" className="w-full overflow-hidden p-0 m-0">
-        <img
-          src="/section2.png"
-          alt="Telling Africa's Development Story"
-          className="w-full block object-cover"
-        />
+      <section id="africa-story-banner" className="overflow-hidden p-0 m-0">
+        <div className="container px-0">
+          <img
+            src="/section2.png"
+            alt="Telling Africa's Development Story"
+            className="w-full block object-cover"
+          />
+        </div>
       </section>
 
-      <section className="py-10 sm:py-14 bg-white">
+      <section className="py-28 sm:py-36 bg-white">
         <div className="container">
           <div className="text-center">
             {homePage.programmes.eyebrow && (
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#1FA8DD]">
+              <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
                 {homePage.programmes.eyebrow}
               </p>
             )}
-            <UnderlinedHeading
-              as="h2"
-              className="mt-1 text-center text-2xl font-medium tracking-[-0.03em] text-[#2f3135] sm:text-[28px]"
-              showBorder={true}
-            >
+            <UnderlinedHeading as="h2" className="mt-1 text-center text-3xl font-black uppercase tracking-tight leading-none sm:text-4xl lg:text-5xl" textColorClassName="text-[#0d1f2d]" showBorder={true}>
               {homePage.programmes.title}
             </UnderlinedHeading>
             {homePage.programmes.subline && (
@@ -491,8 +613,8 @@ function Home() {
                     <h3 className="text-sm font-bold leading-5 text-[#a75f1a]">{item.title}</h3>
                     <p className="mt-3 text-xs leading-5 text-[#54565a]">{item.description}</p>
                     <Link
-                      to="/contact"
-                      className="mt-auto inline-flex h-7 items-center justify-center bg-[linear-gradient(180deg,#f58e1b_0%,#d76418_100%)] px-4 text-[11px] font-semibold text-white"
+                      to="/portfolio"
+                      className="mt-auto inline-flex h-10 items-center justify-center bg-[linear-gradient(180deg,#f58e1b_0%,#d76418_100%)] px-4 text-[11px] font-semibold text-white"
                     >
                       Learn More
                     </Link>
@@ -503,10 +625,10 @@ function Home() {
         </div>
       </section>
 
-      <section className="py-12 sm:py-14" style={{ backgroundImage: "url('/story.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <section className="py-28 sm:py-36" style={{ backgroundImage: "url('/story.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <Reveal className="mx-auto max-w-3xl text-center">
-              <h2 className="text-2xl font-bold tracking-[-0.03em] text-white sm:text-[30px]">
+              <h2 className="text-3xl font-black uppercase text-white tracking-tight leading-none sm:text-4xl lg:text-5xl">
               {homePage.storytellers.title}
               </h2>
               <p className="mt-2 text-sm text-white/90">
@@ -557,74 +679,70 @@ function Home() {
         </div>
       </section>
 
-      <section id="news-blog" className="py-14 sm:py-16 bg-white">
+      <section id="news-blog" className="py-28 sm:py-36 bg-white">
         <div className="container">
-          <div className="flex items-end justify-between gap-4">
-            <UnderlinedHeading
-              as="h2"
-              className="text-2xl font-medium tracking-[-0.03em] text-[#2f3135] sm:text-[28px]"
-              showBorder={true}
-            >
-              {homePage.news.title}
-            </UnderlinedHeading>
-            <div className="hidden flex-1 items-center justify-end gap-2 lg:flex">
-              {Array.from({ length: 14 }).map((_, index) => (
-                <span
-                  key={index}
-                  className={`h-[2px] rounded-full ${
-                    index === 8 ? "w-10 bg-[#2f3135]" : "w-5 bg-[#d6c4ad]"
-                  }`}
-                />
-              ))}
+
+          {/* Section header */}
+          <div className="flex items-center justify-between gap-6 mb-10">
+            <div>
+              <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
+                Latest news
+              </p>
+              <h2 className="text-3xl font-black uppercase text-[#0d1f2d] tracking-tight leading-none sm:text-4xl lg:text-5xl">
+                Tips &amp; Articles
+              </h2>
             </div>
+            <Link
+              to="/impact"
+              className="shrink-0 inline-flex items-center justify-center bg-[#e97a2f] px-8 py-3 text-sm font-bold text-white transition hover:bg-[#d96f1f]"
+            >
+              All Posts
+            </Link>
           </div>
 
-          <div className="relative mt-6 overflow-hidden">
-            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-white to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-white to-transparent" />
-
-            <Marquee pauseOnHover className="[--duration:32s] px-0 py-0" repeat={3}>
+          {/* Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {newsCards.map((card, index) => (
-              <article
-                key={card.title}
-                className="w-[280px] overflow-hidden border border-[#ece7df] bg-white shadow-[0_10px_24px_rgba(15,23,42,0.08)]"
-              >
-                <FallbackImage
+              <article key={card.title} className="flex flex-col">
+
+                {/* Image + category overlay */}
+                <div className="relative overflow-hidden rounded-2xl">
+                  <FallbackImage
                     src={homePage.news.images?.[index] ?? card.image}
                     fallback={landingPageDefaults.gallery.items?.[0]?.image}
                     alt={card.title}
-                    className="h-32 w-full object-cover"
-                />
-                  <div className="p-3">
-                    <p className="text-[10px] uppercase tracking-[0.22em] text-[#9b9b9b]">
-                      {card.date}
+                    className="w-full h-60 object-cover"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-white px-5 py-2.5">
+                    <p className="text-sm text-[#6b7280]">
+                      {card.categories.join(", ")}
                     </p>
-                    <h3 className="mt-2 text-sm font-semibold leading-5 text-[#b16a18]">
-                      {card.title}
-                    </h3>
-                    <p className="mt-3 text-[11px] leading-5 text-[#676767]">
-                      {homePage.news.description}
-                    </p>
-                    <Link
-                      to="/about"
-                      className="mt-4 inline-flex text-[11px] font-semibold text-[#b16a18]"
-                    >
-                      More
-                    </Link>
                   </div>
-                </article>
-              ))}
-            </Marquee>
+                </div>
+
+                {/* Card body */}
+                <div className="mt-4 flex flex-col flex-1">
+                  <p className="flex items-center gap-2 text-sm text-[#e97a2f] font-semibold mb-3">
+                    <CalendarDays className="w-4 h-4 shrink-0" />
+                    {card.date}
+                  </p>
+                  <h3 className="text-xl font-bold text-[#0d1f2d] leading-snug mb-3">
+                    {card.title}
+                  </h3>
+                  <p className="text-sm text-[#6b7280] leading-relaxed mb-6 flex-1">
+                    {card.description}
+                  </p>
+                  <Link
+                    to={`/news/${card.slug}`}
+                    className="self-start inline-flex items-center gap-2 rounded border border-[#e97a2f] text-[#e97a2f] px-6 py-2.5 text-sm font-semibold transition hover:bg-[#e97a2f] hover:text-white"
+                  >
+                    Read More &#8594;
+                  </Link>
+                </div>
+              </article>
+            ))}
           </div>
 
-          <div className="mt-6 text-center">
-            <Link
-              to="/impact"
-              className="inline-flex h-8 items-center justify-center bg-[#e97a2f] px-4 text-xs font-semibold text-white transition hover:bg-[#d96f1f]"
-            >
-              View More
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -635,7 +753,7 @@ function Home() {
             backgroundImage: `linear-gradient(rgba(10,10,10,0.2), rgba(10,10,10,0.25)), url(${heroImages.hero5})`,
           }}
         >
-          <div className="container grid gap-6 py-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
+          <div className="container grid gap-6 py-28 sm:py-36 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
             <div className="max-w-xl">
               <h2 className="text-4xl font-black uppercase leading-[0.95] tracking-[-0.05em] text-white sm:text-5xl">
                 This is OHI

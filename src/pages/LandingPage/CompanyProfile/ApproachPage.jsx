@@ -3,56 +3,48 @@ import { ArrowRight, ClipboardList, Handshake, Rocket, WalletCards } from "lucid
 import { Link } from "react-router-dom";
 import ProfilePageShell from "../../../components/LandingPage/Profile/ProfilePageShell";
 import SectionHeader from "../../../components/LandingPage/SectionHeader";
+import { useLandingPageConfig } from "../../../context/LandingPageConfigContext";
+import { landingPageDefaults } from "../../../data/landingPageDefaults";
 import approachVisual from "../../../assets/images/Gallery/gallery-06.jpeg";
 
-const steps = [
-  {
-    title: "Understand",
-    description: "Your objectives, your stakeholders, and the decisions your story must influence.",
-    icon: ClipboardList,
-  },
-  {
-    title: "Strategise",
-    description: "A narrative concept and action plan aligned with your reporting and investment goals.",
-    icon: Handshake,
-  },
-  {
-    title: "Align",
-    description: "A tailored scope and budget matched to your timeline and compliance requirements.",
-    icon: WalletCards,
-  },
-  {
-    title: "Deliver",
-    description: "End-to-end, institution-grade storytelling and production, from field to final cut.",
-    icon: Rocket,
-  },
-];
+const stepIcons = [ClipboardList, Handshake, WalletCards, Rocket];
 
-const deliverables = [
-  "Documentary films and mission coverage",
-  "Visibility content for programmes and institutions",
-  "Testimonial stories and community-focused edits",
-  "Campaign-ready outputs for digital channels",
-  "Stakeholder communication assets for reporting and presentations",
+const defaultSteps = [
+  { title: "Understand", description: "Your objectives, your stakeholders, and the decisions your story must influence." },
+  { title: "Strategise", description: "A narrative concept and action plan aligned with your reporting and investment goals." },
+  { title: "Align", description: "A tailored scope and budget matched to your timeline and compliance requirements." },
+  { title: "Deliver", description: "End-to-end, institution-grade storytelling and production, from field to final cut." },
 ];
 
 const ApproachPage = () => {
+  const { config } = useLandingPageConfig();
+  const approachPage = config.approachPage ?? landingPageDefaults.approachPage;
+  const hero = approachPage.hero ?? landingPageDefaults.approachPage.hero;
+  const howWeWork = approachPage.howWeWork ?? landingPageDefaults.approachPage.howWeWork;
+  const steps = (approachPage.steps ?? defaultSteps).map((step, i) => ({
+    ...step,
+    icon: stepIcons[i] ?? Rocket,
+  }));
+  const workingStyle = approachPage.workingStyle ?? landingPageDefaults.approachPage.workingStyle;
+  const deliverables = approachPage.deliverables ?? landingPageDefaults.approachPage.deliverables;
+  const deliverableItems = deliverables.items ?? [];
+
   return (
     <ProfilePageShell
-      title="Our Approach"
+      title={hero.title ?? "Our Approach"}
       heroImage={approachVisual}
       heroImageAlt="Production workflow visual"
-      description="We give your programme the visibility it deserves, the viability it needs, and the credibility it demands."
+      description={hero.description ?? "We give your programme the visibility it deserves, the viability it needs, and the credibility it demands."}
       descriptionClassName="text-white"
-      primaryCta={{ label: "View Portfolio", href: "/portfolio" }}
-      secondaryCta={{ label: "Contact Us", href: "/contact" }}
+      primaryCta={{ label: hero.primaryCtaLabel ?? "View Portfolio", href: hero.primaryCtaHref ?? "/portfolio" }}
+      secondaryCta={{ label: hero.secondaryCtaLabel ?? "Contact Us", href: hero.secondaryCtaHref ?? "/contact" }}
       heroBadge={
         <div className="space-y-1">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
-            OHI profile
+            {hero.badgeEyebrow ?? "OHI profile"}
           </p>
           <p className="text-sm leading-6 text-white/80">
-            Strategic visibility for development, investment, and impact communication.
+            {hero.badgeDescription ?? "Strategic visibility for development, investment, and impact communication."}
           </p>
         </div>
       }
@@ -61,8 +53,8 @@ const ApproachPage = () => {
       <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/white-bg2.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <SectionHeader
-            title="How OHI works"
-            description="Each project is designed to be practical for DFIs, governments, and institutions that need professional communication support without unnecessary complexity."
+            title={howWeWork.title ?? "How OHI works"}
+            description={howWeWork.description ?? "Each project is designed to be practical for DFIs, governments, and institutions."}
             className="max-w-4xl"
           />
 
@@ -72,10 +64,10 @@ const ApproachPage = () => {
                 How we work
               </p>
               <p className="mt-4 text-base leading-8 text-[#4e5a67]">
-                Each project is designed to be practical for DFIs, governments, and institutions that need professional communication support without unnecessary complexity. We start by understanding your objectives, your stakeholders, and the decisions your story must influence.
+                {howWeWork.body1 ?? "Each project is designed to be practical for DFIs, governments, and institutions that need professional communication support without unnecessary complexity. We start by understanding your objectives, your stakeholders, and the decisions your story must influence."}
               </p>
               <p className="mt-4 text-base leading-8 text-[#4e5a67]">
-                From there, we shape a narrative concept and action plan, align on scope and budget, and deliver institution-grade storytelling from field to final cut — keeping every stage aligned with your reporting and investment goals.
+                {howWeWork.body2 ?? "From there, we shape a narrative concept and action plan, align on scope and budget, and deliver institution-grade storytelling from field to final cut — keeping every stage aligned with your reporting and investment goals."}
               </p>
             </div>
 
@@ -118,22 +110,22 @@ const ApproachPage = () => {
         <div className="container grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="bg-[#0a0c12] p-6 text-white shadow-[0_10px_28px_rgba(15,23,42,0.12)] sm:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#F07F1A]">
-              Working style
+              {workingStyle.label ?? "Working style"}
             </p>
             <h3 className="mt-4 text-2xl font-bold tracking-[-0.03em] text-white">
-              Aligned with institutional and DFI standards
+              {workingStyle.title ?? "Aligned with institutional and DFI standards"}
             </h3>
             <p className="mt-4 text-sm leading-7 text-white/80">
-              The profile notes a project management approach that aligns with communication standards expected by development partners, DFIs, and institutional teams.
+              {workingStyle.description ?? "The profile notes a project management approach that aligns with communication standards expected by development partners, DFIs, and institutional teams."}
             </p>
           </div>
 
           <div className="bg-white p-6 shadow-[0_10px_28px_rgba(15,23,42,0.08)] sm:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#1FA8DD]">
-              Deliverables
+            <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
+              {deliverables.label ?? "Deliverables"}
             </p>
             <div className="mt-5 space-y-2">
-              {deliverables.map((item) => (
+              {deliverableItems.map((item) => (
                 <div key={item} className="bg-[#f8f9fb] px-4 py-3 text-sm leading-6 text-[#4e5a67]">
                   {item}
                 </div>
@@ -141,10 +133,10 @@ const ApproachPage = () => {
             </div>
             <div className="mt-6">
               <Link
-                to="/services"
+                to={deliverables.ctaHref ?? "/services"}
                 className="inline-flex h-11 items-center gap-2 bg-[#F07F1A] px-6 text-sm font-bold text-white transition hover:bg-[#d96d10]"
               >
-                View all services <ArrowRight className="h-4 w-4" />
+                {deliverables.ctaLabel ?? "View all services"} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>

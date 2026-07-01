@@ -7,9 +7,9 @@ const SectionHeader = ({
   description,
   className = "",
   align = "center",
-  showPattern = true,
+  showPattern,
   showBorder = true,
-  textColorClassName = "text-[#173145]",
+  textColorClassName = "text-[#0d1f2d]",
   descriptionClassName = "text-[#4e5a67]",
 }) => {
   const alignClassName = align === "start" ? "text-left" : "text-center";
@@ -18,16 +18,14 @@ const SectionHeader = ({
   return (
     <Reveal className={`mx-auto max-w-3xl ${alignClassName} ${className}`.trim()}>
       <UnderlinedHeading
-        className="text-3xl font-semibold tracking-[-0.03em] text-[#173145] sm:text-4xl"
-        textClassName="font-display"
+        className="text-5xl font-black uppercase tracking-tight leading-none"
         textColorClassName={textColorClassName}
-        patternClassName={showPattern ? "" : "hidden"}
         showBorder={showBorder}
       >
         {title}
       </UnderlinedHeading>
       {description ? (
-        <p className={`font-body ${descriptionAlignClassName} mt-4 max-w-2xl text-base leading-7 sm:text-lg ${descriptionClassName}`.trim()}>
+        <p className={`${descriptionAlignClassName} mt-4 max-w-2xl text-base leading-7 sm:text-lg ${descriptionClassName}`.trim()}>
           {description}
         </p>
       ) : null}

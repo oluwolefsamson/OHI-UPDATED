@@ -18,7 +18,7 @@ const categories = [
 ];
 
 const LogoCard = ({ name, src }) => (
-  <div className="mx-1 flex h-[80px] w-28 shrink-0 items-center justify-center bg-[#3a4a6b]/60 p-3 transition duration-300 hover:bg-[#3a4a6b]/90 sm:mx-2 sm:h-[130px] sm:w-44 sm:p-5">
+  <div className="mx-1 flex h-[80px] w-28 shrink-0 items-center justify-center bg-[#f3f4f6] p-3 transition duration-300 hover:bg-[#e5e7eb] sm:mx-2 sm:h-[130px] sm:w-44 sm:p-5">
     <img
       src={src}
       alt={name}
@@ -48,21 +48,21 @@ const LogoMarquee = ({ logos }) => {
 const CategorySection = ({ label, logos }) => (
   <div className="mb-14">
     <div className="mb-7 flex items-center gap-5">
-      <h2 className="shrink-0 text-xl font-bold text-white">{label}</h2>
+      <h2 className="shrink-0 text-xl font-bold text-[#0a1628]">{label}</h2>
       <div className="h-[2px] flex-1 bg-[#f59d21]" />
     </div>
     <div className="relative overflow-hidden">
       <LogoMarquee logos={logos} />
 
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#0a1628] to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#0a1628] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white to-transparent" />
     </div>
   </div>
 );
 
 const Supporters = () => {
   return (
-    <section className="my-10 py-16" style={{ backgroundColor: "#0a1628" }}>
+    <section className="my-10 py-16 bg-white">
       <div className="container">
         {categories.map((cat) => (
           <CategorySection key={cat.label} label={cat.label} logos={cat.logos} />

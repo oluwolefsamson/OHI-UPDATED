@@ -120,10 +120,10 @@ const BackgroundPage = () => {
       <section className="py-16 sm:py-20" style={{ backgroundImage: "url('/story.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container grid gap-6 lg:grid-cols-2">
           <div className="bg-white p-6 shadow-[0_4px_14px_rgba(15,23,42,0.06)] sm:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1FA8DD]">
+            <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
               Our foundation
             </p>
-            <h3 className="mt-4 text-xl font-bold tracking-[-0.02em] text-[#2e3135]">
+            <h3 className="mt-4 text-5xl font-black uppercase text-[#0d1f2d] tracking-tight leading-none">
               Founded on conviction
             </h3>
             <p className="mt-4 text-sm leading-7 text-[#4e5a67]">
