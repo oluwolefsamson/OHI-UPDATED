@@ -886,6 +886,9 @@ export default function LandingPageManager() {
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {[
             "Home hero copy, CTAs, stats, and images",
+            "Home conviction strip, track record stats, and client testimonials",
+            "Home closing CTA and \"This is OHI\" video section stats",
+            "Home storyteller cards — name, role, and photo",
             "Home news cards — title, date, categories, description",
             "About page copy, image, and overlay card",
             "Why OHI cards, links, and icons",
@@ -935,6 +938,12 @@ export default function LandingPageManager() {
           </div>
         </SectionCard>
 
+        <SectionCard id="home-conviction-strip" title="Conviction strip" description="Edit the bold statement banner shown right below the hero." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("Conviction strip saved!"); }, "Conviction strip")} saveLabel="Update Section">
+          <div className="space-y-4">
+            <Field label="Statement"><TextArea rows={3} value={draftConfig.homePage?.convictionStrip?.text || ""} onChange={(e) => updateHomePage("convictionStrip", "text", e.target.value)} /></Field>
+          </div>
+        </SectionCard>
+
         <SectionCard id="home-about" title="Olympian House International" description="Edit the homepage introduction block." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("About section saved!"); }, "Olympian House International")} saveLabel="Update Section">
           <div className="space-y-4">
             <Field label="Title"><TextInput value={draftConfig.homePage?.about?.title || ""} onChange={(e) => updateHomePage("about", "title", e.target.value)} /></Field>
@@ -962,6 +971,40 @@ export default function LandingPageManager() {
                   <Field label={`Card ${index + 1} title`}><TextInput value={card.title || ""} onChange={(e) => updateHomePageArrayItem("difference", "cards", index, "title", e.target.value)} /></Field>
                   <Field label={`Card ${index + 1} description`}><TextArea rows={4} value={card.description || ""} onChange={(e) => updateHomePageArrayItem("difference", "cards", index, "description", e.target.value)} /></Field>
                   <ImageField label={`Card ${index + 1} image`} value={card.image || ""} onChange={(e) => handleImageUpload(e, (value) => updateHomePageArrayItem("difference", "cards", index, "image", value))} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </SectionCard>
+
+        <SectionCard id="home-track-record" title="Track record" description="Edit the proof/stats block and trusted-by line." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("Track record saved!"); }, "Track record")} saveLabel="Update Section">
+          <div className="space-y-4">
+            <Field label="Eyebrow"><TextInput value={draftConfig.homePage?.trackRecord?.eyebrow || ""} onChange={(e) => updateHomePage("trackRecord", "eyebrow", e.target.value)} /></Field>
+            <Field label="Title"><TextInput value={draftConfig.homePage?.trackRecord?.title || ""} onChange={(e) => updateHomePage("trackRecord", "title", e.target.value)} /></Field>
+            <div className="grid gap-4 lg:grid-cols-2">
+              {(draftConfig.homePage?.trackRecord?.stats || []).map((stat, index) => (
+                <div key={index} className="rounded-2xl border border-border bg-muted/40 p-4">
+                  <Field label={`Stat ${index + 1} value`}><TextInput value={stat.value || ""} onChange={(e) => updateHomePageArrayItem("trackRecord", "stats", index, "value", e.target.value)} /></Field>
+                  <Field label={`Stat ${index + 1} label`}><TextInput value={stat.label || ""} onChange={(e) => updateHomePageArrayItem("trackRecord", "stats", index, "label", e.target.value)} /></Field>
+                </div>
+              ))}
+            </div>
+            <Field label="Trusted-by line"><TextArea rows={3} value={draftConfig.homePage?.trackRecord?.trustedByText || ""} onChange={(e) => updateHomePage("trackRecord", "trustedByText", e.target.value)} /></Field>
+          </div>
+        </SectionCard>
+
+        <SectionCard id="home-testimonials" title="Client Voices" description="Edit the partner testimonial cards." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("Client Voices saved!"); }, "Client Voices")} saveLabel="Update Section">
+          <div className="space-y-4">
+            <Field label="Eyebrow"><TextInput value={draftConfig.homePage?.testimonials?.eyebrow || ""} onChange={(e) => updateHomePage("testimonials", "eyebrow", e.target.value)} /></Field>
+            <Field label="Title"><TextInput value={draftConfig.homePage?.testimonials?.title || ""} onChange={(e) => updateHomePage("testimonials", "title", e.target.value)} /></Field>
+            <div className="grid gap-4 lg:grid-cols-3">
+              {(draftConfig.homePage?.testimonials?.items || []).map((item, index) => (
+                <div key={index} className="space-y-3 rounded-2xl border border-border bg-muted/40 p-4">
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">Testimonial {index + 1}</p>
+                  <Field label="Quote"><TextArea rows={4} value={item.quote || ""} onChange={(e) => updateHomePageArrayItem("testimonials", "items", index, "quote", e.target.value)} /></Field>
+                  <Field label="Name"><TextInput value={item.name || ""} onChange={(e) => updateHomePageArrayItem("testimonials", "items", index, "name", e.target.value)} /></Field>
+                  <Field label="Organisation"><TextInput value={item.org || ""} onChange={(e) => updateHomePageArrayItem("testimonials", "items", index, "org", e.target.value)} /></Field>
+                  <ImageField label="Photo" value={item.image || ""} onChange={(e) => handleImageUpload(e, (value) => updateHomePageArrayItem("testimonials", "items", index, "image", value))} />
                 </div>
               ))}
             </div>
@@ -1019,11 +1062,25 @@ export default function LandingPageManager() {
                 handleImageUpload(e, (value) => updateHomePage("storytellers", "image", value))
               }
             />
+            <div className="space-y-3">
+              <p className="text-sm font-semibold text-foreground">Storyteller cards</p>
+              <div className="grid gap-4 lg:grid-cols-2">
+                {(draftConfig.homePage?.storytellers?.items || []).map((item, index) => (
+                  <div key={index} className="space-y-3 rounded-2xl border border-border bg-muted/40 p-4">
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">Storyteller {index + 1}</p>
+                    <Field label="Name"><TextInput value={item.name || ""} onChange={(e) => updateHomePageArrayItem("storytellers", "items", index, "name", e.target.value)} /></Field>
+                    <Field label="Role"><TextInput value={item.role || ""} onChange={(e) => updateHomePageArrayItem("storytellers", "items", index, "role", e.target.value)} /></Field>
+                    <ImageField label="Photo" value={item.image || ""} onChange={(e) => handleImageUpload(e, (value) => updateHomePageArrayItem("storytellers", "items", index, "image", value))} />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </SectionCard>
 
         <SectionCard id="home-news" title="News & Blog" description="Edit the homepage news block text and article cards." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("News section saved!"); }, "News & Blog")} saveLabel="Update Section">
           <div className="space-y-4">
+            <Field label="Eyebrow"><TextInput value={draftConfig.homePage?.news?.eyebrow || ""} onChange={(e) => updateHomePage("news", "eyebrow", e.target.value)} /></Field>
             <Field label="Title"><TextInput value={draftConfig.homePage?.news?.title || ""} onChange={(e) => updateHomePage("news", "title", e.target.value)} /></Field>
             <Field label="Description"><TextArea rows={4} value={draftConfig.homePage?.news?.description || ""} onChange={(e) => updateHomePage("news", "description", e.target.value)} /></Field>
             <div className="rounded-2xl border border-dashed border-border bg-background p-4">
@@ -1063,6 +1120,30 @@ export default function LandingPageManager() {
             <Field label="Description"><TextArea rows={4} value={draftConfig.homePage?.supporters?.description || ""} onChange={(e) => updateHomePage("supporters", "description", e.target.value)} /></Field>
             <Field label="Button label"><TextInput value={draftConfig.homePage?.supporters?.ctaLabel || ""} onChange={(e) => updateHomePage("supporters", "ctaLabel", e.target.value)} /></Field>
             <Field label="Button link"><TextInput value={draftConfig.homePage?.supporters?.ctaHref || ""} onChange={(e) => updateHomePage("supporters", "ctaHref", e.target.value)} /></Field>
+          </div>
+        </SectionCard>
+
+        <SectionCard id="home-final-cta" title="Closing call-to-action" description="Edit the 'Let's tell the story' banner near the bottom of the homepage." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("Closing CTA saved!"); }, "Closing call-to-action")} saveLabel="Update Section">
+          <div className="space-y-4">
+            <Field label="Title"><TextInput value={draftConfig.homePage?.finalCta?.title || ""} onChange={(e) => updateHomePage("finalCta", "title", e.target.value)} /></Field>
+            <Field label="Description"><TextArea rows={3} value={draftConfig.homePage?.finalCta?.description || ""} onChange={(e) => updateHomePage("finalCta", "description", e.target.value)} /></Field>
+            <Field label="Button label"><TextInput value={draftConfig.homePage?.finalCta?.ctaLabel || ""} onChange={(e) => updateHomePage("finalCta", "ctaLabel", e.target.value)} /></Field>
+            <Field label="Button link"><TextInput value={draftConfig.homePage?.finalCta?.ctaHref || ""} onChange={(e) => updateHomePage("finalCta", "ctaHref", e.target.value)} /></Field>
+          </div>
+        </SectionCard>
+
+        <SectionCard id="home-video-section" title="This is OHI" description="Edit the video preview block and its stats strip near the end of the homepage." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("This is OHI section saved!"); }, "This is OHI")} saveLabel="Update Section">
+          <div className="space-y-4">
+            <Field label="Title"><TextInput value={draftConfig.homePage?.videoSection?.title || ""} onChange={(e) => updateHomePage("videoSection", "title", e.target.value)} /></Field>
+            <Field label="Description"><TextArea rows={3} value={draftConfig.homePage?.videoSection?.description || ""} onChange={(e) => updateHomePage("videoSection", "description", e.target.value)} /></Field>
+            <div className="grid gap-4 lg:grid-cols-2">
+              {(draftConfig.homePage?.videoSection?.stats || []).map((stat, index) => (
+                <div key={index} className="rounded-2xl border border-border bg-muted/40 p-4">
+                  <Field label={`Stat ${index + 1} value`}><TextInput value={stat.value || ""} onChange={(e) => updateHomePageArrayItem("videoSection", "stats", index, "value", e.target.value)} /></Field>
+                  <Field label={`Stat ${index + 1} label`}><TextInput value={stat.label || ""} onChange={(e) => updateHomePageArrayItem("videoSection", "stats", index, "label", e.target.value)} /></Field>
+                </div>
+              ))}
+            </div>
           </div>
         </SectionCard>
 

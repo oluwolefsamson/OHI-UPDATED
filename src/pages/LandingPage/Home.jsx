@@ -77,28 +77,10 @@ function Home() {
       href: "/impact",
     },
   ];
-  const storytellers = [
-    {
-      name: "Collins Nkom",
-      role: "African storyteller",
-      image: gallery.items?.[5]?.image ?? heroImages.hero1,
-    },
-    {
-      name: "Svenja Kruger",
-      role: "African storyteller",
-      image: gallery.items?.[6]?.image ?? heroImages.hero2,
-    },
-    {
-      name: "Tiger Firehouse",
-      role: "African storyteller",
-      image: gallery.items?.[7]?.image ?? heroImages.hero3,
-    },
-    {
-      name: "Yared Zeleke",
-      role: "African storyteller",
-      image: gallery.items?.[8]?.image ?? heroImages.hero5,
-    },
-  ];
+  const storytellers = (homePage.storytellers.items ?? []).map((story, index) => ({
+    ...story,
+    image: story.image ?? [gallery.items?.[5]?.image, gallery.items?.[6]?.image, gallery.items?.[7]?.image, gallery.items?.[8]?.image][index] ?? heroImages.hero1,
+  }));
   const defaultNewsCards = [
     {
       slug: "virtual-tour-heritage-sites",
@@ -221,7 +203,7 @@ function Home() {
         <div className="container">
           <Reveal className="mx-auto max-w-3xl text-center">
             <p className="text-2xl leading-snug text-white sm:text-3xl lg:text-[36px]">
-              Africa's development story is worth billions. Most of it is never told well enough to unlock that value.
+              {homePage.convictionStrip.text}
             </p>
           </Reveal>
         </div>
@@ -331,24 +313,18 @@ function Home() {
           {/* Section header */}
           <Reveal className="mb-8">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#f59d21] mb-3">
-              The Proof
+              {homePage.trackRecord.eyebrow}
             </p>
-            <h2 className="text-2xl font-bold text-[#0d1f2d] tracking-[-0.03em] sm:text-3xl">
-              Track record
-            </h2>
+            <UnderlinedHeading as="h2" className="text-2xl font-bold tracking-[-0.03em] sm:text-3xl" textColorClassName="text-[#0d1f2d]" showBorder={true}>
+              {homePage.trackRecord.title}
+            </UnderlinedHeading>
           </Reveal>
 
           <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-start">
             {/* Stats column */}
             <Reveal>
               <div className="divide-y divide-[#e5e5e5]">
-                {[
-                  { value: "100+", label: "Projects delivered across Cameroon and Africa" },
-                  { value: "70+",  label: "Institutional clients served" },
-                  { value: "1M+",  label: "Viewers reached through impact content" },
-                  { value: "95%",  label: "Repeat-client rate" },
-                  { value: "100+", label: "Missions, documentaries & investment showcases" },
-                ].map(({ value, label }) => (
+                {homePage.trackRecord.stats.map(({ value, label }) => (
                   <div key={label} className="flex items-center gap-6 py-5">
                     <span className="w-28 shrink-0 text-[2.75rem] font-black leading-none text-[#f59d21] sm:text-[3.25rem]">
                       {value}
@@ -386,7 +362,7 @@ function Home() {
                 ))}
               </motion.div>
               <div className="bg-[#f7f4ef] border border-[#e5e5e5] p-5 text-xs leading-[1.8] text-[#54565a]">
-                Trusted by the Cameroon Investment Promotion Agency (API), the World Food Programme, EU Civil Protection &amp; Humanitarian Aid, IFRC, Olam Food Ingredients (OFI), Sun King, and more.
+                {homePage.trackRecord.trustedByText}
               </div>
             </div>
           </div>
@@ -397,10 +373,10 @@ function Home() {
         <div className="container">
           <Reveal className="mb-8">
             <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
-              Client Voices
+              {homePage.testimonials.eyebrow}
             </p>
             <UnderlinedHeading as="h2" className="text-2xl font-bold tracking-[-0.03em] sm:text-3xl" textColorClassName="text-[#0d1f2d]" showBorder={true}>
-              What Partners Say
+              {homePage.testimonials.title}
             </UnderlinedHeading>
           </Reveal>
 
@@ -411,26 +387,7 @@ function Home() {
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
           >
-            {[
-              {
-                quote: "OHI brought clarity and visual precision to how we communicate our food security programmes across the region. The quality was exceptional.",
-                name: "Communications Lead",
-                org: "World Food Programme",
-                image: gallery.items?.[0]?.image ?? heroImages.hero1,
-              },
-              {
-                quote: "Their team understood the stakes of our humanitarian narrative. The documentary they produced has been screened at multiple EU forums.",
-                name: "Media & Advocacy Officer",
-                org: "EU Civil Protection & Humanitarian Aid",
-                image: gallery.items?.[2]?.image ?? heroImages.hero2,
-              },
-              {
-                quote: "We needed an investment showcase that could speak to global audiences about Cameroon's potential. OHI delivered exactly that — on time and on message.",
-                name: "Senior Investment Advisor",
-                org: "Cameroon Investment Promotion Agency",
-                image: gallery.items?.[4]?.image ?? heroImages.hero3,
-              },
-            ].map((item) => (
+            {homePage.testimonials.items.map((item) => (
               <motion.article
                 key={item.org}
                 variants={staggerItem}
@@ -484,16 +441,16 @@ function Home() {
         <div className="container">
           <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold leading-tight tracking-[-0.04em] text-white sm:text-4xl lg:text-[44px]">
-              Let's tell the story your impact deserves.
+              {homePage.finalCta.title}
             </h2>
             <p className="mt-4 max-w-lg mx-auto text-base leading-7 text-white/80">
-              Share your programme objectives, and we'll show you what's possible — no commitment.
+              {homePage.finalCta.description}
             </p>
             <Link
-              to="/contact"
+              to={homePage.finalCta.ctaHref ?? "/contact"}
               className="mt-7 inline-flex h-11 items-center justify-center bg-[#F07F1A] px-8 text-sm font-bold text-white shadow-[0_8px_24px_rgba(240,127,26,0.4)] transition hover:bg-[#d96d10]"
             >
-              Start a conversation
+              {homePage.finalCta.ctaLabel ?? "Start a conversation"}
             </Link>
           </Reveal>
         </div>
@@ -606,14 +563,14 @@ function Home() {
             {storytellers.map((story) => (
               <motion.article key={story.name} variants={staggerItem} className="flex h-full min-h-[460px] flex-col overflow-hidden bg-white shadow-[0_12px_24px_rgba(15,23,42,0.14)]">
                   <FallbackImage
-                    src={homePage.storytellers.images?.[storytellers.indexOf(story)] ?? story.image}
+                    src={story.image}
                     fallback={heroSlideFallbacks[0]}
                     alt={story.name}
                     className="h-64 w-full object-cover sm:h-72 lg:h-80"
                   />
                   <div className="flex flex-1 flex-col p-4">
                     <p className="text-[10px] uppercase tracking-[0.22em] text-[#b16a18]">
-                      African storyteller
+                      {story.role}
                     </p>
                     <h3 className="mt-3 text-sm font-semibold text-[#2f3135]">{story.name}</h3>
                     <p className="mt-2 text-[11px] text-[#7b7b7b]">{story.role}</p>
@@ -646,10 +603,10 @@ function Home() {
           <div className="flex items-center justify-between gap-6 mb-8">
             <div>
               <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
-                Latest news
+                {homePage.news.eyebrow}
               </p>
               <h2 className="text-2xl font-bold text-[#0d1f2d] tracking-[-0.03em] sm:text-3xl">
-                Tips &amp; Articles
+                {homePage.news.title}
               </h2>
             </div>
             <Link
@@ -722,11 +679,10 @@ function Home() {
           <div className="container grid gap-6 py-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
             <Reveal x={-30} className="max-w-xl">
               <h2 className="text-4xl font-black uppercase leading-[0.95] tracking-[-0.05em] text-white sm:text-5xl">
-                This is OHI
+                {homePage.videoSection.title}
               </h2>
               <p className="mt-4 max-w-md text-sm leading-6 text-white/82">
-                Strategic visibility for development partners, public institutions,
-                and impact-led organisations.
+                {homePage.videoSection.description}
               </p>
             </Reveal>
 
@@ -753,13 +709,7 @@ function Home() {
         <div className="py-6 bg-[#f59d21]">
           <div className="container">
             <div className="grid gap-4 text-center text-white sm:grid-cols-5">
-              {[
-                ["100+", "Projects delivered"],
-                ["70+", "Institutional clients"],
-                ["1M+", "Viewers reached"],
-                ["95%", "Repeat-client rate"],
-                ["100+", "Missions & showcases"],
-              ].map(([value, label]) => (
+              {homePage.videoSection.stats.map(({ value, label }) => (
                 <div key={label} className="space-y-1">
                   <p className="text-xl font-bold">{value}</p>
                   <p className="text-xs uppercase tracking-[0.18em] text-white/86">{label}</p>

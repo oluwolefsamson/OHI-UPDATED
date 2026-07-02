@@ -66,6 +66,9 @@ export const landingPageDefaults = {
     secondaryCtaHref: "/portfolio",
   },
   homePage: {
+    convictionStrip: {
+      text: "Africa's development story is worth billions. Most of it is never told well enough to unlock that value.",
+    },
     about: {
       eyebrow: "Who we are",
       title: "Founded on a conviction about Africa's story.",
@@ -101,6 +104,46 @@ export const landingPageDefaults = {
         {
           title: "Visibility that converts",
           description: "The content is designed to be useful across reports, web, and outreach.",
+          image: gallery05,
+        },
+      ],
+    },
+    trackRecord: {
+      eyebrow: "The Proof",
+      title: "Track record",
+      stats: [
+        { value: "100+", label: "Projects delivered across Cameroon and Africa" },
+        { value: "70+", label: "Institutional clients served" },
+        { value: "1M+", label: "Viewers reached through impact content" },
+        { value: "95%", label: "Repeat-client rate" },
+        { value: "100+", label: "Missions, documentaries & investment showcases" },
+      ],
+      trustedByText:
+        "Trusted by the Cameroon Investment Promotion Agency (API), the World Food Programme, EU Civil Protection & Humanitarian Aid, IFRC, Olam Food Ingredients (OFI), Sun King, and more.",
+    },
+    testimonials: {
+      eyebrow: "Client Voices",
+      title: "What Partners Say",
+      items: [
+        {
+          quote:
+            "OHI brought clarity and visual precision to how we communicate our food security programmes across the region. The quality was exceptional.",
+          name: "Communications Lead",
+          org: "World Food Programme",
+          image: gallery01,
+        },
+        {
+          quote:
+            "Their team understood the stakes of our humanitarian narrative. The documentary they produced has been screened at multiple EU forums.",
+          name: "Media & Advocacy Officer",
+          org: "EU Civil Protection & Humanitarian Aid",
+          image: gallery03,
+        },
+        {
+          quote:
+            "We needed an investment showcase that could speak to global audiences about Cameroon's potential. OHI delivered exactly that — on time and on message.",
+          name: "Senior Investment Advisor",
+          org: "Cameroon Investment Promotion Agency",
           image: gallery05,
         },
       ],
@@ -146,9 +189,16 @@ export const landingPageDefaults = {
       ctaLabel: "Contact Us",
       ctaHref: "/contact",
       image: gallery12,
+      items: [
+        { name: "Collins Nkom", role: "African storyteller", image: gallery06 },
+        { name: "Svenja Kruger", role: "African storyteller", image: gallery07 },
+        { name: "Tiger Firehouse", role: "African storyteller", image: gallery08 },
+        { name: "Yared Zeleke", role: "African storyteller", image: gallery09 },
+      ],
     },
     news: {
-      title: "News & Blog",
+      eyebrow: "Latest news",
+      title: "Tips & Articles",
       description:
         "OHI continues to shape public-facing documentary communication and heritage documentation for institutional audiences.",
       images: [gallery01, gallery02, gallery03],
@@ -181,6 +231,25 @@ export const landingPageDefaults = {
       description: "Support OHI and connect with the team for partnership or funding.",
       ctaLabel: "Donate Now",
       ctaHref: "/contact",
+    },
+    finalCta: {
+      title: "Let's tell the story your impact deserves.",
+      description:
+        "Share your programme objectives, and we'll show you what's possible — no commitment.",
+      ctaLabel: "Start a conversation",
+      ctaHref: "/contact",
+    },
+    videoSection: {
+      title: "This is OHI",
+      description:
+        "Strategic visibility for development partners, public institutions, and impact-led organisations.",
+      stats: [
+        { value: "100+", label: "Projects delivered" },
+        { value: "70+", label: "Institutional clients" },
+        { value: "1M+", label: "Viewers reached" },
+        { value: "95%", label: "Repeat-client rate" },
+        { value: "100+", label: "Missions & showcases" },
+      ],
     },
   },
   about: {
