@@ -39,7 +39,6 @@ const searchablePages = [
   { label: "Home", path: "/", keywords: ["home", "landing"] },
   { label: "About Section", path: "/#about", keywords: ["about section", "about home"] },
   { label: "OHI Difference", path: "/#ohi-difference", keywords: ["difference", "home difference"] },
-  { label: "Heritage Collection", path: "/#heritage-collection", keywords: ["heritage collection", "google arts"] },
   { label: "Support OHI", path: "/#support-ohi", keywords: ["support", "donate", "support ohi"] },
   { label: "Programme Proof", path: "/#turn-programme-into-proof", keywords: ["proof", "programme", "turn your next programme into proof"] },
   { label: "Leadership and Storytellers", path: "/#leadership-storytellers", keywords: ["leadership", "storytellers"] },

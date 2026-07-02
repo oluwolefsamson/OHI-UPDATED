@@ -140,7 +140,7 @@ const BackgroundPage = () => {
             <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
               Our foundation
             </p>
-            <h3 className="mt-4 text-5xl font-black uppercase text-[#0d1f2d] tracking-tight leading-none">
+            <h3 className="mt-4 text-xl font-bold tracking-[-0.02em] text-[#2e3135]">
               Founded on conviction
             </h3>
             <p className="mt-4 text-sm leading-7 text-[#4e5a67]">

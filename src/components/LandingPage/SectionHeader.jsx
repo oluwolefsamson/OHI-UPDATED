@@ -18,7 +18,7 @@ const SectionHeader = ({
   return (
     <Reveal className={`mx-auto max-w-3xl ${alignClassName} ${className}`.trim()}>
       <UnderlinedHeading
-        className="text-5xl font-black uppercase tracking-tight leading-none"
+        className="text-3xl font-semibold tracking-[-0.03em] sm:text-4xl"
         textColorClassName={textColorClassName}
         showBorder={showBorder}
       >

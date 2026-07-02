@@ -86,7 +86,7 @@ const AboutPage = () => {
               <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
                 {intro.aboutLabel ?? "About OHI"}
               </p>
-              <h2 className="mt-4 text-5xl font-black uppercase text-[#0d1f2d] tracking-tight leading-none">
+              <h2 className="mt-4 text-2xl font-bold tracking-[-0.03em] text-[#2e3135] sm:text-3xl">
                 {intro.title ?? "We turn Africa's development story into strategic visibility"}
               </h2>
               <p className="mt-4 text-sm leading-7 text-[#4e5a67]">
@@ -191,7 +191,7 @@ const AboutPage = () => {
               <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
                 {snapshot.label ?? "OHI at a glance"}
               </p>
-              <h3 className="mt-4 text-5xl font-black uppercase text-[#0d1f2d] tracking-tight leading-none">
+              <h3 className="mt-4 text-2xl font-bold tracking-[-0.03em] text-[#2e3135] sm:text-3xl">
                 {snapshot.title ?? "The core principles that guide OHI"}
               </h3>
               <p className="mt-4 text-sm leading-7 text-[#4e5a67]">

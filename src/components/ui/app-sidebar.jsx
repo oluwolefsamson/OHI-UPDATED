@@ -63,7 +63,6 @@ const sitePages = [
       { title: "About Us", url: "/dashboard/landing-page#home-about", icon: PenSquare },
       { title: "About OHI", url: "/dashboard/landing-page#home-about", icon: PenSquare },
       { title: "OHI Difference", url: "/dashboard/landing-page#home-difference", icon: PartyPopper },
-      { title: "OHI Google Arts & Culture Heritage Collection", url: "/dashboard/landing-page#home-heritage", icon: Images },
       { title: "Leadership and storytellers", url: "/dashboard/landing-page#home-leadership", icon: ShieldCheck },
       { title: "Featured Programmes", url: "/dashboard/landing-page#home-programmes", icon: BriefcaseBusiness },
       { title: "OHI Storytellers", url: "/dashboard/landing-page#home-storytellers", icon: SquareUserRound },

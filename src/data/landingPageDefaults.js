@@ -105,13 +105,6 @@ export const landingPageDefaults = {
         },
       ],
     },
-    heritage: {
-      title: "OHI Google Arts & Culture Heritage Collection",
-      description:
-        "OHI launches a digital heritage collection on Google Arts & Culture as part of the Africa Day celebration.",
-      ctaLabel: "Virtual Tours",
-      ctaHref: "/documentary",
-    },
     leadership: {
       eyebrow: "Leadership and storytellers",
       title: "Leadership and storytellers",

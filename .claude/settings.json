@@ -13,7 +13,27 @@
       "PowerShell(Get-Command msedge, chrome, chromium 2>$null)",
       "Bash(npm init *)",
       "Bash(node -e ' *)",
-      "Bash(npx vite *)"
+      "Bash(npx vite *)",
+      "Bash(git -C \"c:\\\\Users\\\\PC\\\\Desktop\\\\OHI\" log --oneline -10)",
+      "Bash(git -C \"c:\\\\Users\\\\PC\\\\Desktop\\\\OHI\" diff --stat HEAD~5 HEAD)",
+      "Bash(git -C \"c:\\\\Users\\\\PC\\\\Desktop\\\\OHI\" show --stat HEAD)",
+      "Bash(git -C \"c:\\\\Users\\\\PC\\\\Desktop\\\\OHI\" show HEAD -- src/pages/LandingPage/CompanyProfile/AboutPage.jsx src/pages/LandingPage/CompanyProfile/ApproachPage.jsx src/pages/LandingPage/CompanyProfile/BackgroundPage.jsx src/pages/LandingPage/CompanyProfile/CompanyProfile.jsx src/pages/LandingPage/Home.jsx)",
+      "Bash(git -C \"c:\\\\Users\\\\PC\\\\Desktop\\\\OHI\" log -p --follow -- src/components/LandingPage/SectionHeader.jsx)",
+      "Bash(git -C \"c:\\\\Users\\\\PC\\\\Desktop\\\\OHI\" show --stat 628e285)",
+      "Bash(git -C \"c:\\\\Users\\\\PC\\\\Desktop\\\\OHI\" show 628e285 -- src/pages/LandingPage/Home.jsx src/pages/LandingPage/CompanyProfile/ApproachPage.jsx src/pages/LandingPage/CompanyProfile/AboutPage.jsx src/pages/LandingPage/CompanyProfile/BackgroundPage.jsx src/pages/LandingPage/CompanyProfile/CompanyProfile.jsx)",
+      "Bash(git -C \"c:\\\\Users\\\\PC\\\\Desktop\\\\OHI\" show 8bd4f37 --stat)",
+      "Bash(git -C \"c:\\\\Users\\\\PC\\\\Desktop\\\\OHI\" show 002b5c7 --stat)",
+      "Bash(npx eslint *)",
+      "Bash(git version *)",
+      "Bash(git fsck *)",
+      "Bash(cp .git/index .git/index.corrupt.bak)",
+      "Bash(xxd .git/index)",
+      "Bash(rm .git/index)",
+      "Bash(git reset *)",
+      "Bash(rm .git/index.corrupt.bak)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\PC\\Desktop\\OHI\\.git"
     ]
   }
 }

@@ -98,7 +98,7 @@ const CompanyProfile = () => {
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#F07F1A]">
               Documentary focus
             </p>
-            <h2 className="mt-4 text-5xl font-black uppercase text-white tracking-tight leading-none">
+            <h2 className="mt-4 text-2xl font-bold tracking-[-0.03em] text-white sm:text-3xl">
               {difference.title ?? "The OHI difference"}
             </h2>
             <p className="mt-4 text-sm leading-7 text-white/80">
@@ -132,7 +132,7 @@ const CompanyProfile = () => {
             <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
               Profile at a glance
             </p>
-            <h2 className="mt-4 text-5xl font-black uppercase text-[#0d1f2d] tracking-tight leading-none">
+            <h2 className="mt-4 text-2xl font-bold tracking-[-0.03em] text-[#2e3135] sm:text-3xl">
               {overview.title ?? "A documentary that moves from credibility to action"}
             </h2>
             <p className="mt-4 text-sm leading-7 text-[#4e5a67]">

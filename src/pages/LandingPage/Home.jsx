@@ -77,7 +77,6 @@ function Home() {
       href: "/impact",
     },
   ];
-  const heritageItems = gallery.items?.slice(4, 12) ?? [];
   const storytellers = [
     {
       name: "Collins Nkom",
@@ -216,7 +215,7 @@ function Home() {
 
       <section
         id="conviction-strip"
-        className="py-24 sm:py-36"
+        className="py-12 sm:py-14"
         style={{ backgroundImage: "url('/side-blue.png')", backgroundSize: "cover", backgroundPosition: "center" }}
       >
         <div className="container">
@@ -228,7 +227,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="about" className="py-28 sm:py-36 bg-white">
+      <section id="about" className="py-16 sm:py-20 bg-white">
         <div className="container">
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <Reveal className="overflow-hidden bg-white shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
@@ -244,7 +243,7 @@ function Home() {
               <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
                 {homePage.about.eyebrow ?? "Who we are"}
               </p>
-              <UnderlinedHeading as="h2" className="text-3xl font-black uppercase tracking-tight leading-none sm:text-4xl lg:text-5xl" textColorClassName="text-[#0d1f2d]" showBorder={true}>
+              <UnderlinedHeading as="h2" className="text-2xl font-bold leading-tight tracking-[-0.03em] sm:text-3xl lg:text-[34px]" textColorClassName="text-[#0d1f2d]" showBorder={true}>
                 {homePage.about.title}
               </UnderlinedHeading>
               <p className="text-sm leading-6 text-[#4e4e4e] sm:text-[15px]">
@@ -271,10 +270,10 @@ function Home() {
         </div>
       </section>
 
-      <section id="ohi-difference" className="py-28 sm:py-36" style={{ backgroundImage: "url('/story.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <section id="ohi-difference" className="py-14 sm:py-16" style={{ backgroundImage: "url('/story.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <Reveal className="mx-auto max-w-3xl text-center text-white">
-            <UnderlinedHeading as="h2" className="text-3xl font-black uppercase tracking-tight leading-none sm:text-4xl lg:text-5xl" textColorClassName="text-white" showBorder={false}>
+            <UnderlinedHeading as="h2" className="text-2xl font-bold tracking-[-0.03em] sm:text-3xl" textColorClassName="text-white" showBorder={false}>
               {homePage.difference.title}
             </UnderlinedHeading>
             <p className="mt-2 text-sm font-medium text-white/92">
@@ -327,59 +326,14 @@ function Home() {
         </div>
       </section>
 
-      <section id="heritage-collection" className="py-28 sm:py-36 bg-white">
-        <div className="container">
-          <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-            <Reveal className="max-w-xl">
-            <UnderlinedHeading as="h2" className="text-3xl font-black uppercase tracking-tight leading-none sm:text-4xl lg:text-5xl" textColorClassName="text-[#0d1f2d]" showBorder={true}>
-              {homePage.heritage.title}
-            </UnderlinedHeading>
-              <p className="mt-5 max-w-md text-sm leading-6 text-[#4e4e4e]">
-                {homePage.heritage.description}
-              </p>
-              <Link
-                to={homePage.heritage.ctaHref ?? "/documentary"}
-                className="mt-5 inline-flex h-8 items-center justify-center bg-[#e97a2f] px-4 text-xs font-semibold text-white transition hover:bg-[#d96f1f]"
-              >
-                {homePage.heritage.ctaLabel ?? "Virtual Tours"}
-              </Link>
-            </Reveal>
-
-            <motion.div
-              className="grid grid-cols-4 gap-2"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-            >
-              {heritageItems.map((item, index) => (
-                <motion.div
-                  key={item.id ?? item.title ?? index}
-                  variants={staggerItem}
-                  className={`overflow-hidden rounded-[4px] ${
-                    index === 1 || index === 6 ? "row-span-2" : ""
-                  } ${index === 2 ? "col-span-2" : ""}`}
-                >
-                  <img
-                    src={item.image}
-                    alt={item.title ?? `Heritage ${index + 1}`}
-                    className="h-full w-full object-cover"
-                  />
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      <section id="track-record" className="py-28 sm:py-36" style={{ backgroundImage: "url('/story.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <section id="track-record" className="py-16 sm:py-20 bg-white">
         <div className="container">
           {/* Section header */}
-          <Reveal className="mb-12">
+          <Reveal className="mb-8">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#f59d21] mb-3">
               The Proof
             </p>
-            <h2 className="text-3xl font-black text-white tracking-tight leading-none sm:text-4xl lg:text-5xl xl:text-6xl">
+            <h2 className="text-2xl font-bold text-[#0d1f2d] tracking-[-0.03em] sm:text-3xl">
               Track record
             </h2>
           </Reveal>
@@ -387,7 +341,7 @@ function Home() {
           <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-start">
             {/* Stats column */}
             <Reveal>
-              <div className="divide-y divide-white/15">
+              <div className="divide-y divide-[#e5e5e5]">
                 {[
                   { value: "100+", label: "Projects delivered across Cameroon and Africa" },
                   { value: "70+",  label: "Institutional clients served" },
@@ -399,7 +353,7 @@ function Home() {
                     <span className="w-28 shrink-0 text-[2.75rem] font-black leading-none text-[#f59d21] sm:text-[3.25rem]">
                       {value}
                     </span>
-                    <p className="text-sm font-medium leading-[1.55] text-white/80">{label}</p>
+                    <p className="text-sm font-medium leading-[1.55] text-[#4e4e4e]">{label}</p>
                   </div>
                 ))}
               </div>
@@ -408,24 +362,30 @@ function Home() {
             {/* Photo grid + trusted-by */}
             <div className="space-y-3">
               <motion.div
-                className="grid grid-cols-2 gap-2"
+                className="grid grid-cols-4 gap-2"
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.2 }}
               >
                 {(gallery.items?.slice(0, 6) ?? []).map((item, i) => (
-                  <motion.div key={item.id ?? i} variants={staggerItem} className="overflow-hidden">
+                  <motion.div
+                    key={item.id ?? i}
+                    variants={staggerItem}
+                    className={`overflow-hidden rounded-[4px] ${
+                      i === 1 || i === 4 ? "row-span-2" : ""
+                    } ${i === 2 ? "col-span-2" : ""}`}
+                  >
                     <FallbackImage
                       src={item.image}
                       fallback={landingPageDefaults.gallery.items?.[0]?.image}
                       alt={item.title ?? `Track record ${i + 1}`}
-                      className="h-36 w-full object-cover sm:h-44"
+                      className="h-full w-full object-cover"
                     />
                   </motion.div>
                 ))}
               </motion.div>
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-5 text-xs leading-[1.8] text-white/80">
+              <div className="bg-[#f7f4ef] border border-[#e5e5e5] p-5 text-xs leading-[1.8] text-[#54565a]">
                 Trusted by the Cameroon Investment Promotion Agency (API), the World Food Programme, EU Civil Protection &amp; Humanitarian Aid, IFRC, Olam Food Ingredients (OFI), Sun King, and more.
               </div>
             </div>
@@ -433,13 +393,13 @@ function Home() {
         </div>
       </section>
 
-      <section id="client-voices" className="py-28 sm:py-36 bg-white">
+      <section id="client-voices" className="py-16 sm:py-20 bg-white">
         <div className="container">
-          <Reveal className="mb-12">
+          <Reveal className="mb-8">
             <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
               Client Voices
             </p>
-            <UnderlinedHeading as="h2" className="text-3xl font-black uppercase tracking-tight leading-none sm:text-4xl lg:text-5xl" textColorClassName="text-[#0d1f2d]" showBorder={true}>
+            <UnderlinedHeading as="h2" className="text-2xl font-bold tracking-[-0.03em] sm:text-3xl" textColorClassName="text-[#0d1f2d]" showBorder={true}>
               What Partners Say
             </UnderlinedHeading>
           </Reveal>
@@ -516,7 +476,7 @@ function Home() {
 
       <section
         id="turn-programme-into-proof"
-        className="relative overflow-hidden bg-cover bg-center py-28 text-white sm:py-40"
+        className="relative overflow-hidden bg-cover bg-center py-16 text-white sm:py-20"
         style={{
           backgroundImage: "url('/story.png')",
         }}
@@ -539,7 +499,17 @@ function Home() {
         </div>
       </section>
 
-      <section id="leadership-storytellers" className="py-28 sm:py-36 bg-white">
+      <section id="africa-story-banner" className="overflow-hidden p-0 mt-16 sm:mt-24">
+        <div className="container px-0">
+          <img
+            src="/section2.png"
+            alt="Telling Africa's Development Story"
+            className="w-full block object-cover"
+          />
+        </div>
+      </section>
+
+      <section id="leadership-storytellers" className="py-14 sm:py-16 bg-white">
         <div className="container">
           <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
             <Reveal className="overflow-hidden rounded-[10px] bg-white shadow-[0_12px_28px_rgba(15,23,42,0.12)]">
@@ -554,7 +524,7 @@ function Home() {
               <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
                 {homePage.leadership.eyebrow}
               </p>
-              <UnderlinedHeading as="h3" className="mt-3 text-3xl font-black uppercase tracking-tight leading-none sm:text-4xl lg:text-5xl" textColorClassName="text-[#0d1f2d]" showBorder={true}>
+              <UnderlinedHeading as="h3" className="mt-3 text-3xl font-bold leading-tight tracking-[-0.04em] sm:text-[38px]" textColorClassName="text-[#0d1f2d]" showBorder={true}>
                 {homePage.leadership.title}
               </UnderlinedHeading>
               <p className="mt-5 max-w-2xl text-base leading-7 text-[#5a5f66]">
@@ -571,17 +541,7 @@ function Home() {
         </div>
       </section>
 
-      <section id="africa-story-banner" className="overflow-hidden p-0 m-0">
-        <div className="container px-0">
-          <img
-            src="/section2.png"
-            alt="Telling Africa's Development Story"
-            className="w-full block object-cover"
-          />
-        </div>
-      </section>
-
-      <section className="py-28 sm:py-36 bg-white">
+      <section className="py-10 sm:py-14 bg-white">
         <div className="container">
           <div className="text-center">
             {homePage.programmes.eyebrow && (
@@ -589,7 +549,7 @@ function Home() {
                 {homePage.programmes.eyebrow}
               </p>
             )}
-            <UnderlinedHeading as="h2" className="mt-1 text-center text-3xl font-black uppercase tracking-tight leading-none sm:text-4xl lg:text-5xl" textColorClassName="text-[#0d1f2d]" showBorder={true}>
+            <UnderlinedHeading as="h2" className="mt-1 text-center text-2xl font-medium tracking-[-0.03em] sm:text-[28px]" textColorClassName="text-[#0d1f2d]" showBorder={true}>
               {homePage.programmes.title}
             </UnderlinedHeading>
             {homePage.programmes.subline && (
@@ -625,10 +585,10 @@ function Home() {
         </div>
       </section>
 
-      <section className="py-28 sm:py-36" style={{ backgroundImage: "url('/story.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
+      <section className="py-12 sm:py-14" style={{ backgroundImage: "url('/story.png')", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="container">
           <Reveal className="mx-auto max-w-3xl text-center">
-              <h2 className="text-3xl font-black uppercase text-white tracking-tight leading-none sm:text-4xl lg:text-5xl">
+              <h2 className="text-2xl font-bold tracking-[-0.03em] text-white sm:text-[30px]">
               {homePage.storytellers.title}
               </h2>
               <p className="mt-2 text-sm text-white/90">
@@ -679,16 +639,16 @@ function Home() {
         </div>
       </section>
 
-      <section id="news-blog" className="py-28 sm:py-36 bg-white">
+      <section id="news-blog" className="py-14 sm:py-16 bg-white">
         <div className="container">
 
           {/* Section header */}
-          <div className="flex items-center justify-between gap-6 mb-10">
+          <div className="flex items-center justify-between gap-6 mb-8">
             <div>
               <p className="text-[#e97a2f] text-sm font-semibold mb-2 tracking-wide">
                 Latest news
               </p>
-              <h2 className="text-3xl font-black uppercase text-[#0d1f2d] tracking-tight leading-none sm:text-4xl lg:text-5xl">
+              <h2 className="text-2xl font-bold text-[#0d1f2d] tracking-[-0.03em] sm:text-3xl">
                 Tips &amp; Articles
               </h2>
             </div>
@@ -759,7 +719,7 @@ function Home() {
             backgroundImage: `linear-gradient(rgba(10,10,10,0.2), rgba(10,10,10,0.25)), url(${heroImages.hero5})`,
           }}
         >
-          <div className="container grid gap-6 py-28 sm:py-36 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
+          <div className="container grid gap-6 py-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
             <Reveal x={-30} className="max-w-xl">
               <h2 className="text-4xl font-black uppercase leading-[0.95] tracking-[-0.05em] text-white sm:text-5xl">
                 This is OHI

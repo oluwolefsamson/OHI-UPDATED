@@ -968,37 +968,6 @@ export default function LandingPageManager() {
           </div>
         </SectionCard>
 
-        <SectionCard id="home-heritage" title="OHI Google Arts & Culture Heritage Collection" description="Edit the heritage collection block." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("Heritage section saved!"); }, "OHI Google Arts & Culture Heritage Collection")} saveLabel="Update Section">
-          <div className="space-y-4">
-            <Field label="Title"><TextInput value={draftConfig.homePage?.heritage?.title || ""} onChange={(e) => updateHomePage("heritage", "title", e.target.value)} /></Field>
-            <Field label="Description"><TextArea rows={4} value={draftConfig.homePage?.heritage?.description || ""} onChange={(e) => updateHomePage("heritage", "description", e.target.value)} /></Field>
-            <Field label="Button label"><TextInput value={draftConfig.homePage?.heritage?.ctaLabel || ""} onChange={(e) => updateHomePage("heritage", "ctaLabel", e.target.value)} /></Field>
-            <Field label="Button link"><TextInput value={draftConfig.homePage?.heritage?.ctaHref || ""} onChange={(e) => updateHomePage("heritage", "ctaHref", e.target.value)} /></Field>
-            <div className="rounded-2xl border border-dashed border-border bg-background p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                Heritage images
-              </p>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                These images come from the shared Gallery section and are shown here as a preview. Edit the actual images in the Gallery editor below.
-              </p>
-              <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                {(draftConfig.gallery?.items || []).slice(4, 12).map((item, index) => (
-                  <div key={item.title || index} className="overflow-hidden rounded-2xl bg-muted/40 shadow-[0_8px_24px_rgba(15,23,42,0.06)]">
-                    <img
-                      src={item.image || ""}
-                      alt={item.title || `Heritage ${index + 1}`}
-                      className="h-32 w-full object-cover"
-                    />
-                    <div className="p-3">
-                      <p className="text-xs font-medium text-foreground">{item.title || `Heritage ${index + 1}`}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </SectionCard>
-
         <SectionCard id="home-leadership" title="Leadership and storytellers" description="Edit the leadership feature block." onSave={() => requestSave(async () => { setConfig((current) => ({ ...current, homePage: draftConfig.homePage })); toast.success("Leadership section saved!"); }, "Leadership and storytellers")} saveLabel="Update Section">
           <div className="space-y-4">
             <Field label="Eyebrow"><TextInput value={draftConfig.homePage?.leadership?.eyebrow || ""} onChange={(e) => updateHomePage("leadership", "eyebrow", e.target.value)} /></Field>
